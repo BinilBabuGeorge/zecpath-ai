@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Environment variables / secrets
+.env
+
+# Logs
+logs/*.log
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Data (don't commit real candidate data or media)
+data/*
+!data/.gitkeep
