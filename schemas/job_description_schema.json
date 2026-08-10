@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zecpath.ai/schemas/job_description_schema.json",
+  "title": "JobProfile",
+  "description": "Standard structured format for a job description, used by ATS AI Service and Job Posting (Day 1, Phase 1).",
+  "type": "object",
+  "required": ["jobId", "jobTitle", "department", "location", "employmentType", "requiredSkills", "responsibilities"],
+  "properties": {
+    "jobId": { "type": "string" },
+    "jobTitle": { "type": "string" },
+    "department": { "type": "string" },
+    "location": { "type": "string" },
+    "employmentType": {
+      "type": "string",
+      "enum": ["full-time", "part-time", "contract", "internship"]
+    },
+    "experienceRequired": {
+      "type": "object",
+      "properties": {
+        "minYears": { "type": "number", "minimum": 0 },
+        "maxYears": { "type": "number", "minimum": 0 }
+      }
+    },
+    "requiredSkills": {
+      "type": "array",
+      "items": { "$ref": "resume_schema.json#/$defs/SkillObject" },
+      "minItems": 1,
+      "description": "Uses the same SkillObject definition as resume_schema.json so ATS can directly compare the two lists."
+    },
+    "niceToHaveSkills": {
+      "type": "array",
+      "items": { "$ref": "resume_schema.json#/$defs/SkillObject" }
+    },
+    "educationRequired": {
+      "type": "object",
+      "properties": {
+        "degree": { "type": "string" },
+        "fieldOfStudy": { "type": "string" },
+        "mandatory": { "type": "boolean" }
+      }
+    },
+    "responsibilities": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "salaryRange": {
+      "type": "object",
+      "properties": {
+        "min": { "type": "number" },
+        "max": { "type": "number" },
+        "currency": { "type": "string", "default": "INR" }
+      }
+    }
+  }
+}

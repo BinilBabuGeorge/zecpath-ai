@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zecpath.ai/schemas/resume_schema.json",
+  "title": "CandidateProfile",
+  "description": "Standard structured format for a parsed resume, used by ATS AI Service (Day 2, Process 1.0).",
+  "type": "object",
+  "required": ["candidateId", "name", "contact", "currentDesignation", "skills", "experience", "education"],
+  "properties": {
+    "candidateId": {
+      "type": "string",
+      "description": "Unique candidate identifier assigned by the backend."
+    },
+    "name": { "type": "string" },
+    "contact": {
+      "type": "object",
+      "required": ["email"],
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string" },
+        "location": { "type": "string" }
+      }
+    },
+    "currentDesignation": {
+      "type": "string",
+      "description": "Most recent job title, taken from the top of the experience list."
+    },
+    "totalExperienceYears": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Total years of professional experience, derived from experience[] date ranges."
+    },
+    "summary": {
+      "type": "string",
+      "description": "Free-text professional summary, if present on the resume."
+    },
+    "skills": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/SkillObject" },
+      "minItems": 1
+    },
+    "experience": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/ExperienceObject" }
+    },
+    "education": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["degree", "institution", "year"],
+        "properties": {
+          "degree": { "type": "string", "description": "e.g. B.Tech, MBA, B.Com, B.A." },
+          "fieldOfStudy": { "type": "string" },
+          "institution": { "type": "string" },
+          "year": { "type": "integer", "minimum": 1950, "maximum": 2100 }
+        }
+      }
+    },
+    "certifications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string" },
+          "issuer": { "type": "string" },
+          "year": { "type": "integer" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "SkillObject": {
+      "type": "object",
+      "description": "A single skill extracted from a resume or required by a job.",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "description": "Normalized skill name, e.g. 'React.js', 'GST Filing'." },
+        "category": {
+          "type": "string",
+          "enum": ["technical", "tool", "soft", "domain", "certification"],
+          "description": "Broad bucket used for weighting in ATS scoring."
+        },
+        "proficiency": {
+          "type": "string",
+          "enum": ["beginner", "intermediate", "advanced", "expert"]
+        }
+      }
+    },
+    "ExperienceObject": {
+      "type": "object",
+      "description": "A single role held by the candidate.",
+      "required": ["designation", "company", "startDate"],
+      "properties": {
+        "designation": { "type": "string" },
+        "company": { "type": "string" },
+        "startDate": { "type": "string", "format": "date", "description": "YYYY-MM-01 (day defaults to 01)" },
+        "endDate": { "type": ["string", "null"], "format": "date", "description": "null/omitted means current role" },
+        "isCurrent": { "type": "boolean" },
+        "description": { "type": "string" }
+      }
+    }
+  }
+}
