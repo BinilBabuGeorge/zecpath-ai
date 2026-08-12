@@ -1,16 +1,18 @@
 """
-Runs the extraction engine across every sample resume (PDF + DOCX)
-and saves cleaned text + a JSON summary for each into data/extracted/.
+Runs skill_extractor across every sample resume and saves the structured
+skill output (name, group, category, confidence, method) as JSON, plus a
+summary log.
 """
 
 import json
 import logging
+from dataclasses import asdict
 from pathlib import Path
 
-from parsers.resume_extractor import extract_resume
+from parsers.skill_extractor import extract_skills
 
-RAW_DIR = Path("data/raw_resumes")
-OUT_DIR = Path("data/extracted")
+SAMPLE_DIR = Path("data/samples")
+OUT_DIR = Path("data/extracted_skills")
 LOG_DIR = Path("logs")
 
 OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -25,39 +27,36 @@ logging.basicConfig(
         logging.StreamHandler(),
     ],
 )
-logger = logging.getLogger("batch_extract")
+logger = logging.getLogger("skill_batch")
 
 
 def run():
-    files = sorted(RAW_DIR.glob("**/*.pdf")) + sorted(RAW_DIR.glob("**/*.docx"))
-    logger.info("Found %d resume files to process", len(files))
+    files = sorted(SAMPLE_DIR.glob("*.txt"))
+    logger.info("Found %d resumes to extract skills from", len(files))
 
-    total_warnings = 0
     for file_path in files:
-        result = extract_resume(str(file_path))
-        out_stem = f"{file_path.parent.name}_{file_path.stem}"
+        text = file_path.read_text(encoding="utf-8")
+        skills = extract_skills(text)
 
-        # Save cleaned text
-        (OUT_DIR / f"{out_stem}.txt").write_text(result.cleaned_text, encoding="utf-8")
+        by_group = {}
+        for s in skills:
+            by_group.setdefault(s.group, 0)
+            by_group[s.group] += 1
 
-        # Save structured summary
-        summary = {
-            "file_path": result.file_path,
-            "file_type": result.file_type,
-            "line_count": result.line_count,
-            "detected_sections": result.detected_sections,
-            "warnings": result.warnings,
-        }
-        (OUT_DIR / f"{out_stem}.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
+        output = [asdict(s) for s in skills]
+        out_path = OUT_DIR / f"{file_path.stem}_skills.json"
+        out_path.write_text(json.dumps(output, indent=2), encoding="utf-8")
 
-        if result.warnings:
-            total_warnings += len(result.warnings)
-            for w in result.warnings:
-                logger.warning("%s -> %s", file_path.name, w)
-        else:
-            logger.info("%s -> OK, %d sections detected", file_path.name, len(result.detected_sections))
+        method_counts = {}
+        for s in skills:
+            method_counts[s.method] = method_counts.get(s.method, 0) + 1
 
-    logger.info("Done. %d files processed, %d warnings total.", len(files), total_warnings)
+        logger.info(
+            "%s -> %d skills | groups: %s | methods: %s",
+            file_path.name, len(skills), by_group, method_counts,
+        )
+
+    logger.info("Done. Output written to %s/", OUT_DIR)
 
 
 if __name__ == "__main__":
