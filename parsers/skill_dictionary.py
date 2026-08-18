@@ -1,16 +1,11 @@
 """
-Master Skill Dictionary (Day 9)
+Master Skill Dictionary (originally Day 9)
 
 Every known skill, grouped by domain (tech / business / creative), with its
 common synonyms/spelling variants and the Day 4 SkillObject.category it
 maps to.
-
-This is the single source of truth skill_extractor.py matches text against.
-Adding a new skill means adding one entry here -- nothing else in the
-extraction engine needs to change.
 """
 
-# canonical_name: {"synonyms": [...], "group": "tech"|"business"|"creative", "category": <Day 4 SkillObject.category>}
 SKILL_DICTIONARY = {
     # --- Tech: languages & frameworks ---
     "React.js": {"synonyms": ["react", "reactjs", "react.js", "react js"], "group": "tech", "category": "technical"},

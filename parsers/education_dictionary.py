@@ -1,12 +1,5 @@
 """
-Education & Certification Dictionaries (Day 11)
-
-DEGREE_DICTIONARY: every known degree, its synonyms/abbreviations, and its
-level (Diploma / Bachelor's / Master's / Doctorate) -- same pattern as
-Day 9's skill dictionary.
-
-CERT_CATEGORY_KEYWORDS: keyword groups used to tag a certification with a
-relevance category (Cloud/DevOps, Project Management, HR, etc.).
+Education & Certification Dictionaries (originally Day 11)
 """
 
 DEGREE_DICTIONARY = {
