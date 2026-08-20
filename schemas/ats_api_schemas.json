@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zecpath.example.com/schemas/ats-api.json",
+  "title": "Zecpath ATS API - Input/Output Schemas",
+  "description": "Standalone JSON Schema definitions for the core objects the ATS API accepts and returns, usable independently of the OpenAPI document (e.g. for request validation middleware or contract tests). Derived directly from the real Python dataclasses in parsers/ats_scoring_engine.py, parsers/ranking_engine.py, and parsers/fairness_engine.py -- not designed from scratch.",
+  "$defs": {
+
+    "ComponentResult": {
+      "type": "object",
+      "description": "Mirrors ats_scoring_engine.ComponentResult.",
+      "required": ["name", "score", "base_weight", "effective_weight", "contribution", "available"],
+      "properties": {
+        "name": { "type": "string", "enum": ["skill_match", "experience", "education", "semantic"] },
+        "score": { "type": "number", "minimum": 0, "maximum": 100 },
+        "base_weight": { "type": "number", "minimum": 0, "maximum": 1 },
+        "effective_weight": { "type": "number", "minimum": 0, "maximum": 1 },
+        "contribution": { "type": "number" },
+        "available": { "type": "boolean" },
+        "details": { "type": "object" }
+      }
+    },
+
+    "CandidateScore": {
+      "type": "object",
+      "description": "Mirrors ats_scoring_engine.ATSScoreResult plus resume/jd linkage for API context.",
+      "required": ["resume_id", "jd_id", "overall_score", "role_category", "components", "explanation", "missing_data_notes"],
+      "properties": {
+        "resume_id": { "type": "string" },
+        "jd_id": { "type": "string" },
+        "overall_score": { "type": "number", "minimum": 0, "maximum": 100 },
+        "role_category": { "type": "string", "enum": ["tech", "business", "creative", "default"] },
+        "components": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ComponentResult" },
+          "minItems": 1
+        },
+        "explanation": { "type": "string" },
+        "missing_data_notes": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "bias_report": {
+          "oneOf": [
+            { "$ref": "#/$defs/BiasReport" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+
+    "BiasReport": {
+      "type": "object",
+      "description": "Mirrors fairness_engine.BiasReport.",
+      "required": ["pii_fields_detected", "stuffed_skills", "risk_level", "notes"],
+      "properties": {
+        "pii_fields_detected": { "type": "array", "items": { "type": "string" } },
+        "stuffed_skills": { "type": "object" },
+        "risk_level": { "type": "string", "enum": ["low", "medium", "high"] },
+        "notes": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "NormalizedScore": {
+      "type": "object",
+      "description": "Mirrors fairness_engine.NormalizedScore.",
+      "required": ["candidate_id", "raw_score", "normalized_score", "percentile"],
+      "properties": {
+        "candidate_id": { "type": "string" },
+        "raw_score": { "type": "number" },
+        "normalized_score": { "type": "number", "minimum": 0, "maximum": 100 },
+        "percentile": { "type": "number", "minimum": 0, "maximum": 100 }
+      }
+    },
+
+    "RankedCandidateView": {
+      "type": "object",
+      "description": "Mirrors the exact row shape returned by ranking_engine.to_recruiter_view().",
+      "required": ["rank", "candidate", "job", "score", "zone", "role_category", "strongest_factor", "flags"],
+      "properties": {
+        "rank": { "type": "integer", "minimum": 1 },
+        "candidate": { "type": "string" },
+        "job": { "type": "string" },
+        "score": { "type": "number" },
+        "zone": { "type": "string", "enum": ["SHORTLIST", "REVIEW", "REJECT"] },
+        "role_category": { "type": "string" },
+        "strongest_factor": { "type": "string" },
+        "flags": { "type": "string" }
+      }
+    },
+
+    "ScoringJobCreateRequest": {
+      "type": "object",
+      "required": ["jd_id", "resume_ids"],
+      "properties": {
+        "jd_id": { "type": "string" },
+        "resume_ids": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "options": {
+          "type": "object",
+          "properties": {
+            "use_fairness": { "type": "boolean", "default": false },
+            "use_fairness_weights": { "type": "boolean", "default": false },
+            "role_category_override": { "type": "string", "enum": ["tech", "business", "creative", "default"] }
+          }
+        }
+      }
+    },
+
+    "ScoringJobStatus": {
+      "type": "object",
+      "required": ["job_id", "status", "created_at"],
+      "properties": {
+        "job_id": { "type": "string" },
+        "status": { "type": "string", "enum": ["queued", "running", "completed", "failed", "cancelled"] },
+        "created_at": { "type": "string", "format": "date-time" },
+        "started_at": { "type": ["string", "null"], "format": "date-time" },
+        "completed_at": { "type": ["string", "null"], "format": "date-time" },
+        "error": { "type": ["string", "null"] },
+        "results": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/CandidateScore" }
+        }
+      }
+    },
+
+    "ErrorResponse": {
+      "type": "object",
+      "required": ["error"],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": ["code", "message", "request_id"],
+          "properties": {
+            "code": { "type": "string" },
+            "message": { "type": "string" },
+            "details": { "type": "object" },
+            "request_id": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

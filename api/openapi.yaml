@@ -1,0 +1,444 @@
+openapi: 3.0.3
+info:
+  title: Zecpath ATS API
+  description: >
+    REST API exposing the ATS AI pipeline (Days 9-15) to backend systems:
+    resume/JD ingestion, explainable scoring, fairness-adjusted scoring,
+    and candidate ranking/shortlisting. Response schemas are derived
+    directly from the existing Python dataclasses (ATSScoreResult,
+    ComponentResult, RankedCandidate, BiasReport, NormalizedScore) rather
+    than designed from scratch, so the API surface matches what the
+    engine actually returns today.
+  version: "1.0.0"
+servers:
+  - url: https://api.zecpath.example.com/v1
+    description: Production (placeholder -- not yet deployed)
+  - url: http://localhost:8000/v1
+    description: Local development
+
+tags:
+  - name: Resumes
+  - name: Job Descriptions
+  - name: Scoring
+  - name: Ranking
+  - name: System
+
+paths:
+  /resumes:
+    post:
+      tags: [Resumes]
+      summary: Upload a resume
+      description: >
+        Accepts a resume as raw text today (the current parsers work on
+        plain text). PDF/DOC/DOCX upload is defined in the schema for
+        forward compatibility with the PRD's Phase 1 requirement, but
+        text extraction from those formats is NOT YET IMPLEMENTED by the
+        parsing layer -- the API will accept the file, store it, and
+        return status="pending_extraction" until that capability exists.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ResumeUploadRequest'
+      responses:
+        '201':
+          description: Resume accepted and stored
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResumeRecord'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '413':
+          description: File too large
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ErrorResponse' }
+
+  /resumes/{resume_id}:
+    get:
+      tags: [Resumes]
+      summary: Get a resume's stored record and parsed sections
+      parameters:
+        - $ref: '#/components/parameters/ResumeId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ResumeRecord' }
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /jobs:
+    post:
+      tags: [Job Descriptions]
+      summary: Create a job description
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/JobDescriptionCreateRequest' }
+      responses:
+        '201':
+          description: Job description created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/JobDescriptionRecord' }
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /jobs/{jd_id}:
+    get:
+      tags: [Job Descriptions]
+      summary: Get a job description
+      parameters:
+        - $ref: '#/components/parameters/JdId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/JobDescriptionRecord' }
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /scoring-jobs:
+    post:
+      tags: [Scoring]
+      summary: Submit an asynchronous scoring job
+      description: >
+        Scoring requires fitting/reusing a TF-IDF semantic matcher across
+        the resume+JD corpus (Day 12) and running the 4-component ATS
+        engine (Day 13) per candidate, optionally through the fairness
+        pipeline (Day 15). For any non-trivial batch this is too slow for
+        a synchronous request/response cycle, so scoring is job-based:
+        submit here, poll (or receive a webhook from) the job resource
+        below.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ScoringJobCreateRequest' }
+      responses:
+        '202':
+          description: Job accepted and queued
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ScoringJobStatus' }
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /scoring-jobs/{job_id}:
+    get:
+      tags: [Scoring]
+      summary: Get scoring job status and results
+      parameters:
+        - $ref: '#/components/parameters/JobId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ScoringJobStatus' }
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /scoring-jobs/{job_id}/cancel:
+    post:
+      tags: [Scoring]
+      summary: Cancel a queued or running scoring job
+      parameters:
+        - $ref: '#/components/parameters/JobId'
+      responses:
+        '200':
+          description: Job cancelled (or already terminal -- see status)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ScoringJobStatus' }
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Job already completed/failed and cannot be cancelled
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ErrorResponse' }
+
+  /rank:
+    post:
+      tags: [Ranking]
+      summary: Rank and shortlist already-scored candidates
+      description: >
+        Synchronous by design -- ranking (Day 14) and normalization
+        (Day 15) are cheap, deterministic operations on top of scores a
+        scoring job already produced. Does not re-score anything.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/RankRequest' }
+      responses:
+        '200':
+          description: Ranked, zoned candidate list
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/RankResponse' }
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          description: Referenced scoring_job_id not found or not completed
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ErrorResponse' }
+
+  /health:
+    get:
+      tags: [System]
+      summary: Health check
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, enum: [ok] }
+                  version: { type: string }
+
+components:
+  parameters:
+    ResumeId:
+      name: resume_id
+      in: path
+      required: true
+      schema: { type: string }
+    JdId:
+      name: jd_id
+      in: path
+      required: true
+      schema: { type: string }
+    JobId:
+      name: job_id
+      in: path
+      required: true
+      schema: { type: string }
+
+  responses:
+    BadRequest:
+      description: Request failed validation
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+
+  schemas:
+    # ---------------------------------------------------------------
+    # Resumes / JDs
+    # ---------------------------------------------------------------
+    ResumeUploadRequest:
+      type: object
+      required: [file]
+      properties:
+        file:
+          type: string
+          format: binary
+          description: >
+            .txt supported today; .pdf/.doc/.docx accepted by the API
+            contract but not yet extracted by the parsing layer.
+        candidate_label:
+          type: string
+          description: Optional human-readable label (e.g. filename or candidate name), stored but never used in scoring.
+
+    ResumeRecord:
+      type: object
+      required: [resume_id, status, created_at]
+      properties:
+        resume_id: { type: string }
+        status: { type: string, enum: [ready, pending_extraction, failed] }
+        candidate_label: { type: string }
+        sections:
+          type: object
+          description: Present once status=ready. Mirrors section_extractor.extract_resume_sections().
+          properties:
+            skills: { type: string }
+            experience: { type: string }
+            education: { type: string }
+            overall: { type: string }
+        created_at: { type: string, format: date-time }
+
+    JobDescriptionCreateRequest:
+      type: object
+      required: [text]
+      properties:
+        title: { type: string }
+        text: { type: string, description: Raw JD text. }
+        role_category:
+          type: string
+          enum: [tech, business, creative, default]
+          description: Optional override; auto-inferred from JD skills if omitted (see ats_scoring_engine.infer_role_category).
+
+    JobDescriptionRecord:
+      allOf:
+        - $ref: '#/components/schemas/JobDescriptionCreateRequest'
+        - type: object
+          required: [jd_id, created_at]
+          properties:
+            jd_id: { type: string }
+            created_at: { type: string, format: date-time }
+
+    # ---------------------------------------------------------------
+    # Scoring (mirrors ATSScoreResult / ComponentResult exactly)
+    # ---------------------------------------------------------------
+    ScoringJobCreateRequest:
+      type: object
+      required: [jd_id, resume_ids]
+      properties:
+        jd_id: { type: string }
+        resume_ids:
+          type: array
+          items: { type: string }
+          minItems: 1
+        options:
+          type: object
+          properties:
+            use_fairness:
+              type: boolean
+              default: false
+              description: Run resumes through Day 15's normalize+mask+bias-report pipeline before scoring.
+            use_fairness_weights:
+              type: boolean
+              default: false
+              description: Also apply fairness_adjusted_weights (dampened skill_match). Requires use_fairness=true.
+            role_category_override:
+              type: string
+              enum: [tech, business, creative, default]
+
+    ScoringJobStatus:
+      type: object
+      required: [job_id, status, created_at]
+      properties:
+        job_id: { type: string }
+        status: { type: string, enum: [queued, running, completed, failed, cancelled] }
+        created_at: { type: string, format: date-time }
+        started_at: { type: string, format: date-time, nullable: true }
+        completed_at: { type: string, format: date-time, nullable: true }
+        error: { type: string, nullable: true, description: Populated when status=failed. }
+        results:
+          type: array
+          description: Populated when status=completed.
+          items: { $ref: '#/components/schemas/CandidateScore' }
+
+    ComponentResult:
+      type: object
+      description: Mirrors ats_scoring_engine.ComponentResult exactly.
+      required: [name, score, base_weight, effective_weight, contribution, available]
+      properties:
+        name: { type: string, enum: [skill_match, experience, education, semantic] }
+        score: { type: number, minimum: 0, maximum: 100 }
+        base_weight: { type: number, minimum: 0, maximum: 1 }
+        effective_weight: { type: number, minimum: 0, maximum: 1, description: Weight actually used after any missing-data redistribution. }
+        contribution: { type: number, description: score * effective_weight -- points added to overall_score. }
+        available: { type: boolean }
+        details: { type: object, additionalProperties: true }
+
+    BiasReport:
+      type: object
+      description: Mirrors fairness_engine.BiasReport exactly. Only present when the scoring job used options.use_fairness.
+      required: [pii_fields_detected, stuffed_skills, risk_level, notes]
+      properties:
+        pii_fields_detected: { type: array, items: { type: string } }
+        stuffed_skills: { type: object, additionalProperties: { type: integer } }
+        risk_level: { type: string, enum: [low, medium, high] }
+        notes: { type: array, items: { type: string } }
+
+    CandidateScore:
+      type: object
+      description: One resume's result within a completed scoring job. Mirrors ATSScoreResult plus resume/jd linkage.
+      required: [resume_id, jd_id, overall_score, role_category, components, explanation, missing_data_notes]
+      properties:
+        resume_id: { type: string }
+        jd_id: { type: string }
+        overall_score: { type: number, minimum: 0, maximum: 100 }
+        role_category: { type: string, enum: [tech, business, creative, default] }
+        components:
+          type: array
+          items: { $ref: '#/components/schemas/ComponentResult' }
+        explanation: { type: string }
+        missing_data_notes: { type: array, items: { type: string } }
+        bias_report:
+          allOf: [{ $ref: '#/components/schemas/BiasReport' }]
+          nullable: true
+
+    # ---------------------------------------------------------------
+    # Ranking (mirrors ranking_engine.to_recruiter_view + NormalizedScore)
+    # ---------------------------------------------------------------
+    RankRequest:
+      type: object
+      required: [scoring_job_id]
+      properties:
+        scoring_job_id:
+          type: string
+          description: Must reference a scoring job with status=completed.
+        thresholds:
+          type: object
+          description: Optional override of ranking_engine.DEFAULT_THRESHOLDS.
+          properties:
+            shortlist: { type: number }
+            review: { type: number }
+        normalize:
+          type: boolean
+          default: false
+          description: Also run fairness_engine.normalize_scores_batch across the batch.
+
+    RankedCandidateView:
+      type: object
+      description: Mirrors ranking_engine.to_recruiter_view() row exactly.
+      required: [rank, candidate, job, score, zone, role_category, strongest_factor, flags]
+      properties:
+        rank: { type: integer, minimum: 1 }
+        candidate: { type: string, description: resume_id }
+        job: { type: string, description: jd_id }
+        score: { type: number }
+        zone: { type: string, enum: [SHORTLIST, REVIEW, REJECT] }
+        role_category: { type: string }
+        strongest_factor: { type: string }
+        flags: { type: string }
+        normalized_score: { type: number, nullable: true, description: Present only when the request set normalize=true. }
+        percentile: { type: number, nullable: true }
+
+    RankResponse:
+      type: object
+      required: [jd_id, zone_counts, candidates]
+      properties:
+        jd_id: { type: string }
+        zone_counts:
+          type: object
+          properties:
+            shortlist: { type: integer }
+            review: { type: integer }
+            reject: { type: integer }
+        candidates:
+          type: array
+          items: { $ref: '#/components/schemas/RankedCandidateView' }
+
+    # ---------------------------------------------------------------
+    # Errors
+    # ---------------------------------------------------------------
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message, request_id]
+          properties:
+            code: { type: string, description: "Stable machine-readable code, e.g. RESUME_NOT_FOUND, VALIDATION_ERROR." }
+            message: { type: string, description: Human-readable explanation. }
+            details: { type: object, additionalProperties: true, description: Optional field-level validation errors. }
+            request_id: { type: string, description: Correlates to structured logs -- see Integration Flow doc, Error & Logging Standards. }
