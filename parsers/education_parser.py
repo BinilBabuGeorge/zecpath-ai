@@ -105,6 +105,21 @@ def parse_certifications(text: str) -> List[CertificationEntry]:
         if not line:
             continue
 
+        # STABILITY (Day 18): CERTIFICATION_PATTERN requires a literal "("
+        # (the year parenthesis) to match at all -- so a line with none can
+        # never match. Before this check, a long line with many commas and
+        # no "(" (e.g. malformed/noisy resume text with no certifications
+        # section) hit catastrophic backtracking in the regex engine, since
+        # the pattern has two adjacent lazy groups searching for a required
+        # "(" that doesn't exist. Measured directly: one such line took
+        # 3.17 SECONDS in a single re.match() call (see
+        # docs/day18_performance_report.md). This pre-check is a pure
+        # early-exit -- it changes zero matching behavior (verified against
+        # a 64-pair golden-master regression) since CERTIFICATION_PATTERN
+        # could never have matched these lines anyway.
+        if "(" not in line:
+            continue
+
         match = CERTIFICATION_PATTERN.match(line)
         if not match:
             continue

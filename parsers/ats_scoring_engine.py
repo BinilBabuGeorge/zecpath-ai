@@ -80,7 +80,14 @@ def infer_role_category(jd_skills_text: str) -> str:
     """Infer tech/business/creative from the majority skill group found
     in the JD's required-skills text. Falls back to 'default' if no
     skills were recognized at all."""
-    skills = extract_skills(jd_skills_text)
+    return _infer_role_category_from_skills(extract_skills(jd_skills_text))
+
+
+def _infer_role_category_from_skills(skills: List) -> str:
+    """Same logic as infer_role_category, operating on an already-
+    extracted skill list. Split out so score_candidate() can reuse a
+    skill extraction it already has instead of re-running extract_skills
+    on identical JD text a second time (see PERFORMANCE note below)."""
     if not skills:
         return "default"
 
@@ -95,10 +102,7 @@ def infer_role_category(jd_skills_text: str) -> str:
 # Individual component scorers -- each returns (score_0_100, available, details)
 # ---------------------------------------------------------------------------
 
-def _score_skill_match(resume_skills_text: str, jd_skills_text: str) -> tuple:
-    candidate_skills = extract_skills(resume_skills_text)
-    required_skills = extract_skills(jd_skills_text)
-
+def _score_skill_match(candidate_skills: List, required_skills: List) -> tuple:
     if not required_skills:
         return 0.0, False, {"reason": "JD has no recognizable required skills"}
 
@@ -208,12 +212,23 @@ def score_candidate(
     target_title = title_match.group(1).strip() if title_match else "Unknown Role"
 
     if role_category is None:
-        role_category = infer_role_category(jd_sections["skills"])
+        # PERFORMANCE (Day 18, verified in this session): jd_sections["skills"]
+        # was previously passed as raw text to infer_role_category(),
+        # _score_skill_match(), AND used again below for required_skill_names
+        # -- extract_skills() (which includes an expensive difflib fuzzy-match
+        # fallback) ran 3 separate times on the exact same string, every
+        # single score_candidate() call. Extracted once here and reused.
+        # See docs/day18_performance_report.md for the measured before/after.
+        jd_required_skills = extract_skills(jd_sections["skills"])
+        role_category = _infer_role_category_from_skills(jd_required_skills)
+    else:
+        jd_required_skills = extract_skills(jd_sections["skills"])
     base_weights = WEIGHT_PROFILES.get(role_category, WEIGHT_PROFILES["default"])
 
-    required_skill_names = [s.name for s in extract_skills(jd_sections["skills"])]
+    required_skill_names = [s.name for s in jd_required_skills]
+    candidate_skills = extract_skills(resume_sections["skills"])
 
-    skill_score, skill_avail, skill_details = _score_skill_match(resume_sections["skills"], jd_sections["skills"])
+    skill_score, skill_avail, skill_details = _score_skill_match(candidate_skills, jd_required_skills)
     exp_score, exp_avail, exp_details = _score_experience(resume_text, target_title, required_skill_names)
     edu_score, edu_avail, edu_details = _score_education(resume_text, target_fields, target_cert_categories)
     sem_score, sem_avail, sem_details = _score_semantic(resume_sections, jd_sections, matcher)

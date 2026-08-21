@@ -23,15 +23,29 @@ for canonical, info in SKILL_DICTIONARY.items():
     for syn in info["synonyms"]:
         _SYNONYM_LOOKUP[syn.lower()] = canonical
 _SORTED_SYNONYMS = sorted(_SYNONYM_LOOKUP.keys(), key=len, reverse=True)
+_COMBINED_SYNONYM_PATTERN = re.compile(
+    r"(?<!\w)(" + "|".join(re.escape(s) for s in _SORTED_SYNONYMS) + r")(?!\w)"
+)
 
 
 def normalize_for_embedding(text: str) -> str:
+    # PERFORMANCE (Day 18): this used to run one re.sub() pass PER SYNONYM
+    # (143 separate full-text scans, O(N_synonyms * len(text))). Profiling
+    # showed this was the single largest hotspot in scoring -- 37% of total
+    # wall time across a batch scoring run (1.57s of 4.25s cumulative),
+    # almost all inside re.sub/re.escape. Replaced with one precompiled
+    # alternation pattern -- a single O(len(text)) pass. Alternatives stay
+    # ordered longest-first (_SORTED_SYNONYMS is already sorted that way)
+    # so multi-word/longer phrases are still preferred over short
+    # substrings, matching the original sequential-replace semantics.
+    # See docs/day18_performance_report.md for the before/after benchmark.
     lowered = text.lower()
-    for synonym in _SORTED_SYNONYMS:
-        pattern = r"(?<!\w)" + re.escape(synonym) + r"(?!\w)"
-        canonical_token = _SYNONYM_LOOKUP[synonym].replace(".", "").replace(" ", "_")
-        lowered = re.sub(pattern, canonical_token, lowered)
-    return lowered
+    return _COMBINED_SYNONYM_PATTERN.sub(_replace_synonym_match, lowered)
+
+
+def _replace_synonym_match(match: "re.Match") -> str:
+    canonical = _SYNONYM_LOOKUP[match.group(0)]
+    return canonical.replace(".", "").replace(" ", "_")
 
 
 class SemanticMatcher:

@@ -27,10 +27,34 @@ for canonical, info in SKILL_DICTIONARY.items():
     for synonym in info["synonyms"]:
         _SYNONYM_LOOKUP[_normalize_key(synonym)] = canonical
 _SORTED_SYNONYMS = sorted(_SYNONYM_LOOKUP.keys(), key=len, reverse=True)
+# PERFORMANCE (Day 18): _find_exact_matches used to run one re.finditer()
+# pass PER SYNONYM (one full-text scan per entry in _SORTED_SYNONYMS, using
+# a `consumed` bytearray to hand-roll overlap prevention). Profiling showed
+# this was the top hotspot after the Day 18 semantic_matcher fix -- 0.9s
+# cumulative across a 940-call batch. A single precompiled alternation
+# pattern gets the same longest-match-wins, non-overlapping behavior for
+# free from finditer() (a single pattern's matches never overlap by
+# construction), in one O(len(text)) pass instead of N. Alternatives stay
+# ordered longest-first so multi-word/longer synonyms are still preferred
+# over short substrings. See docs/day18_performance_report.md.
+_COMBINED_EXACT_PATTERN = re.compile(
+    r"(?<!\w)(" + "|".join(re.escape(s) for s in _SORTED_SYNONYMS) + r")(?!\w)"
+)
 
 _STACK_LOOKUP = {name.lower(): skills for name, skills in SKILL_STACKS.items()}
 
 FUZZY_MATCH_THRESHOLD = 0.82
+
+# PERFORMANCE (Day 18, verified in this session): _find_fuzzy_matches used to
+# rebuild list(_SYNONYM_LOOKUP.keys()) -- ~150+ entries -- on every single
+# call, just to hand it to difflib.get_close_matches(). _SYNONYM_LOOKUP is a
+# module-level constant that never changes after import, so the list only
+# needs to be built once. Profiling showed _find_fuzzy_matches as the
+# second-largest hotspot after the redundant-extract_skills fix (see
+# docs/day18_performance_report.md); this alone doesn't reduce the O(n*m)
+# difflib comparison cost per fragment, but removes a real per-call
+# list-construction cost sitting in front of it.
+_ALL_KNOWN_TERMS = list(_SYNONYM_LOOKUP.keys())
 
 
 @dataclass
@@ -46,17 +70,11 @@ class ExtractedSkill:
 def _find_exact_matches(text: str) -> Dict[str, List[str]]:
     found: Dict[str, List[str]] = {}
     lowered = text.lower()
-    consumed = bytearray(len(lowered))
 
-    for synonym in _SORTED_SYNONYMS:
-        pattern = r"(?<!\w)" + re.escape(synonym) + r"(?!\w)"
-        for m in re.finditer(pattern, lowered):
-            start, end = m.span()
-            if any(consumed[start:end]):
-                continue
-            consumed[start:end] = bytes([1]) * (end - start)
-            canonical = _SYNONYM_LOOKUP[synonym]
-            found.setdefault(canonical, []).append(m.group())
+    for m in _COMBINED_EXACT_PATTERN.finditer(lowered):
+        matched_text = m.group()
+        canonical = _SYNONYM_LOOKUP[matched_text]
+        found.setdefault(canonical, []).append(matched_text)
 
     return found
 
@@ -76,6 +94,17 @@ def _find_stack_matches(text: str) -> Dict[str, List[str]]:
 
 _TOKEN_SPLIT = re.compile(r"[,\n;|]|(?:\s{2,})")
 
+# STABILITY (Day 18): every real resume in this project's sample dataset
+# produces 15-31 candidate fragments (checked directly, not guessed). Fuzzy
+# matching is O(fragments x dictionary_terms) via difflib -- a resume that
+# is mostly noise (garbled PDF extraction, thousands of tiny junk tokens)
+# can produce thousands of fragments and turn one score_candidate() call
+# into multiple seconds of work. Measured directly: 3000 short garbage
+# fragments took 3.2s for a single resume (see docs/day18_performance_report.md).
+# Capped well above any legitimate resume's fragment count -- 10x the
+# largest real sample -- so this only engages on genuinely pathological input.
+_MAX_FUZZY_FRAGMENTS = 300
+
 
 def _candidate_fragments(text: str) -> List[str]:
     fragments = []
@@ -83,19 +112,20 @@ def _candidate_fragments(text: str) -> List[str]:
         part = part.strip(" -\u2022\t")
         if 2 <= len(part) <= 30:
             fragments.append(part)
+            if len(fragments) >= _MAX_FUZZY_FRAGMENTS:
+                break
     return fragments
 
 
 def _find_fuzzy_matches(text: str, already_found: set) -> Dict[str, List[str]]:
     found: Dict[str, List[str]] = {}
-    all_known_terms = list(_SYNONYM_LOOKUP.keys())
 
     for fragment in _candidate_fragments(text):
         frag_lower = fragment.lower()
         if frag_lower in _SYNONYM_LOOKUP:
             continue
 
-        close = difflib.get_close_matches(frag_lower, all_known_terms, n=1, cutoff=FUZZY_MATCH_THRESHOLD)
+        close = difflib.get_close_matches(frag_lower, _ALL_KNOWN_TERMS, n=1, cutoff=FUZZY_MATCH_THRESHOLD)
         if not close:
             continue
 
