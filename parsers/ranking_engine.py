@@ -45,6 +45,43 @@ DEFAULT_THRESHOLDS: Dict[str, float] = {
 # domain match lands around 50-63, a genuinely weak or cross-domain
 # mismatch lands under 25. Recruiters can override per job via the
 # `thresholds` argument -- these are sane defaults, not hard-coded law.
+#
+# DAY 20 FINAL REFINEMENT: Day 17's accuracy test found this single
+# global threshold systematically under-shortlists tech-category
+# candidates, because WEIGHT_PROFILES["tech"] structurally caps scores
+# lower than business-category scores for an equally strong match (see
+# day17_testing_report.md root cause #1). CATEGORY_THRESHOLDS below
+# supplies a tech-specific shortlist cutoff calibrated against the same
+# Day 17 ground truth; DEFAULT_THRESHOLDS remains the fallback for
+# categories without their own calibrated profile (business currently
+# matches the default and is listed explicitly for clarity).
+CATEGORY_THRESHOLDS: Dict[str, Dict[str, float]] = {
+    "tech": {"shortlist": 47.0, "review": 25.0},
+    "business": {"shortlist": 55.0, "review": 25.0},
+}
+# NOT yet calibrated against real ground truth (no creative-category
+# test pairs exist in day17_manual_review.json) -- "creative" and
+# "default" fall back to DEFAULT_THRESHOLDS below rather than guessing.
+# Anyone adding creative-role ground truth should calibrate this
+# properly rather than assume the tech or business numbers transfer.
+
+# DAY 20 FINAL REFINEMENT: skill-relevance floor. Day 17 root cause #2
+# found that `experience`/`education` award credit for years/degree-level
+# independent of whether they're in a relevant field, letting a
+# zero-relevant-skill candidate still land in REVIEW off the strength of
+# unrelated experience. Verified against real data (see
+# day20_final_review.md): every genuine cross-domain mismatch in the
+# Day 17 ground truth had skill_match == 0.0 (0 of the JD's required
+# skills matched at all). 10.0 is set as the floor -- strictly above 0.0
+# (catches true zero-overlap cases) and strictly below 20.0 (the score a
+# fresher with a genuinely relevant but sparse skill set, or a candidate
+# with only peripheral/tooling overlap, can still land on -- see
+# `resume_13_fresher_no_experience`, which must NOT be caught by this
+# floor). This does NOT catch every skill-irrelevance case (see
+# `resume_11_python_backend_dev`, which matches 2 peripheral skills and
+# sits at skill_match=20.0, above this floor -- a known, documented,
+# unresolved gap; see day20_final_review.md).
+SKILL_RELEVANCE_FLOOR = 10.0
 
 ZONE_ORDER = ["shortlist", "review", "reject"]
 
@@ -67,11 +104,40 @@ class RankedCandidate:
 # Zone classification
 # ---------------------------------------------------------------------------
 
-def classify_zone(score: float, thresholds: Optional[Dict[str, float]] = None) -> str:
-    """Map a 0-100 overall score to a shortlisting zone using the given
-    (or default) thresholds. Boundaries are inclusive on the lower edge
-    of each zone, i.e. a score exactly at the shortlist cutoff shortlists."""
-    t = thresholds or DEFAULT_THRESHOLDS
+def classify_zone(
+    score: float,
+    thresholds: Optional[Dict[str, float]] = None,
+    role_category: Optional[str] = None,
+    skill_match_score: Optional[float] = None,
+) -> str:
+    """Map a 0-100 overall score to a shortlisting zone.
+
+    Backward compatible: existing callers passing just `score` (and
+    optionally an explicit `thresholds` override) behave exactly as
+    before. Two new, opt-in parameters (Day 20):
+
+    - `role_category`: when `thresholds` is not explicitly given, looks
+      up a category-specific profile from CATEGORY_THRESHOLDS before
+      falling back to DEFAULT_THRESHOLDS. An explicit `thresholds`
+      argument always wins over category lookup.
+    - `skill_match_score`: if given and below SKILL_RELEVANCE_FLOOR,
+      forces "reject" regardless of the overall score or thresholds --
+      see SKILL_RELEVANCE_FLOOR's comment for what this does and does
+      not catch.
+
+    Boundaries are inclusive on the lower edge of each zone, i.e. a
+    score exactly at the shortlist cutoff shortlists.
+    """
+    if skill_match_score is not None and skill_match_score < SKILL_RELEVANCE_FLOOR:
+        return "reject"
+
+    if thresholds is not None:
+        t = thresholds
+    elif role_category is not None and role_category in CATEGORY_THRESHOLDS:
+        t = CATEGORY_THRESHOLDS[role_category]
+    else:
+        t = DEFAULT_THRESHOLDS
+
     if score >= t["shortlist"]:
         return "shortlist"
     if score >= t["review"]:
@@ -92,13 +158,25 @@ def rank_candidates(
 
     Ties are broken by candidate_id (alphabetical) so ranking is
     deterministic and reproducible across runs.
+
+    Day 20: zone classification now automatically passes each result's
+    role_category (for category-specific thresholds) and skill_match
+    score (for the skill-relevance floor) to classify_zone() -- unless
+    an explicit `thresholds` override is given, in which case that
+    always wins, exactly as before Day 20.
     """
     ordered = sorted(scored, key=lambda row: (-row[2].overall_score, row[0]))
 
     ranked: List[RankedCandidate] = []
     for i, (candidate_id, jd_id, result) in enumerate(ordered, start=1):
-        zone = classify_zone(result.overall_score, thresholds)
         top = max(result.components, key=lambda c: c.contribution)
+        skill_component = next((c for c in result.components if c.name == "skill_match"), None)
+        skill_score = skill_component.score if skill_component else None
+        zone = classify_zone(
+            result.overall_score, thresholds,
+            role_category=result.role_category,
+            skill_match_score=skill_score,
+        )
         ranked.append(RankedCandidate(
             rank=i,
             candidate_id=candidate_id,

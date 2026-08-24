@@ -127,8 +127,13 @@ def test_precision_recall_f1_perfect_zone_scores_one():
 # ---------------------------------------------------------------------------
 
 @pytest.fixture(scope="module")
-def full_report(tmp_path_factory, matcher, ground_truth):
+def full_report(matcher, ground_truth):
     # Run the real harness end-to-end once and reuse across consistency checks.
+    # (matcher/ground_truth params are unused directly -- they're declared so
+    # pytest resolves them before this fixture, since harness.run() re-derives
+    # its own matcher/ground_truth internally rather than accepting them as
+    # arguments; keeping the dependency explicit here avoids relying on
+    # incidental fixture-resolution ordering.)
     return harness.run()
 
 

@@ -116,9 +116,15 @@ def test_rank_candidates_every_row_has_a_valid_zone(scored_batch):
 
 
 def test_rank_candidates_zone_matches_score_thresholds(scored_batch):
+    # Day 20: rank_candidates() now passes each result's role_category and
+    # skill_match score through to classify_zone() automatically (category-
+    # specific thresholds + skill-relevance floor) -- so the equivalent bare
+    # call must supply the same context to match, not just the raw score.
     ranked = rank_candidates(scored_batch)
     for r in ranked:
-        assert r.zone == classify_zone(r.overall_score)
+        skill_component = next((c for c in r.result.components if c.name == "skill_match"), None)
+        skill_score = skill_component.score if skill_component else None
+        assert r.zone == classify_zone(r.overall_score, role_category=r.role_category, skill_match_score=skill_score)
 
 
 def test_mismatched_candidate_lands_in_reject_or_review_not_shortlist(scored_batch):
