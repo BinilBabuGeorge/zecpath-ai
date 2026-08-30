@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zecpath.example.com/schemas/transcript-schema.json",
+  "title": "Zecpath Voice Transcript Schema",
+  "description": "Structural definitions for CallSession, TranscriptTurn, and NormalizedAnswer -- derived directly from the Python dataclasses in parsers/transcript_schema.py, mirroring the same field names and constraints as schemas/transcript_schema.sql.",
+  "$defs": {
+
+    "NormalizedAnswer": {
+      "type": "object",
+      "required": ["status", "raw_text"],
+      "properties": {
+        "value": {
+          "description": "Type depends on the turn's expected_answer_type: string (free_text/list), boolean (yes_no), number (number), object with amount/unit/immediate (duration), or null (needs_review).",
+          "type": ["string", "boolean", "number", "object", "null"]
+        },
+        "status": { "type": "string", "enum": ["ok", "partial", "needs_review", "not_applicable"] },
+        "raw_text": { "type": "string" },
+        "note": { "type": ["string", "null"] }
+      }
+    },
+
+    "TranscriptTurn": {
+      "type": "object",
+      "required": [
+        "turn_id", "call_id", "candidate_id", "job_id", "question_id",
+        "turn_index", "question_text", "raw_transcript", "asr_confidence",
+        "timestamp", "expected_answer_type"
+      ],
+      "properties": {
+        "turn_id": { "type": "string" },
+        "call_id": { "type": "string" },
+        "candidate_id": { "type": "string" },
+        "job_id": { "type": "string" },
+        "question_id": { "type": "string", "description": "Matches screening_question_bank.ScreeningQuestion.id" },
+        "turn_index": { "type": "integer", "minimum": 0 },
+        "question_text": { "type": "string" },
+        "raw_transcript": { "type": "string" },
+        "asr_confidence": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "expected_answer_type": { "type": "string", "enum": ["free_text", "number", "duration", "yes_no", "list"] },
+        "normalized": {
+          "oneOf": [
+            { "$ref": "#/$defs/NormalizedAnswer" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+
+    "CallSession": {
+      "type": "object",
+      "required": ["call_id", "candidate_id", "job_id", "started_at", "status", "language", "turns"],
+      "properties": {
+        "call_id": { "type": "string" },
+        "candidate_id": { "type": "string" },
+        "job_id": { "type": "string" },
+        "started_at": { "type": "string", "format": "date-time" },
+        "ended_at": { "type": ["string", "null"], "format": "date-time" },
+        "status": { "type": "string", "enum": ["in_progress", "completed", "dropped", "failed"] },
+        "language": { "type": "string" },
+        "turns": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/TranscriptTurn" }
+        }
+      }
+    }
+  }
+}
