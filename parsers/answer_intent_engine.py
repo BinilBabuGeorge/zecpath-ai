@@ -297,14 +297,50 @@ def extract_salary_expectation(text: str) -> Optional[Dict]:
 # 3. Quality gating -- vague / off-topic / missing
 # ---------------------------------------------------------------------------
 
-def _is_vague(text: str) -> bool:
+def _is_vague(text: str, category_scores: Optional[Dict[str, float]] = None) -> bool:
     lowered = text.lower().strip()
     if any(re.search(rf"\b{re.escape(phrase)}\b", lowered) for phrase in _HEDGE_PHRASES):
         return True
-    # A very short answer (1-2 words) that isn't a clean yes/no is too
-    # thin to be a real answer to an open screening question.
+    # A very short answer (1-2 words) that isn't a clean yes/no is
+    # ONLY too thin to be a real answer if it also carries no
+    # recognizable concrete content. Originally this flagged EVERY
+    # short answer as vague regardless of content -- a real bug found
+    # during Day 30 testing: "5 years", "Ten lakhs", "B.Tech CSE",
+    # "Immediately", and "Thirty days" are all complete, confident,
+    # perfectly answerable screening responses that were being
+    # rejected purely for their length. See Day 30's docs for the
+    # false-rejection evidence this fix is based on.
     words = lowered.split()
     if 0 < len(words) <= 2 and lowered not in {"yes", "no", "yeah", "nope"}:
+        if not _looks_like_concrete_short_answer(lowered, category_scores):
+            return True
+    return False
+
+
+# Broader than Day 23/25's strict number-extraction word list --
+# purely for "does this look like a confident, concrete short answer"
+# purposes, not for extracting a precise value. A wider net here is
+# safe: the worst case is a short non-answer slipping through as OK,
+# which downstream (Day 26 completeness scoring) still catches if
+# nothing extractable comes of it.
+_NUMBER_WORDS_BROAD = {
+    "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
+    "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen",
+    "eighteen", "nineteen", "twenty", "thirty", "forty", "fifty", "sixty",
+    "seventy", "eighty", "ninety", "hundred",
+}
+_CONFIDENT_SHORT_ANSWER_WORDS = {"immediately", "immediate", "asap"}
+
+
+def _looks_like_concrete_short_answer(lowered_text: str, category_scores: Optional[Dict[str, float]]) -> bool:
+    if any(ch.isdigit() for ch in lowered_text):
+        return True
+    words = re.findall(r"[a-z']+", lowered_text)
+    if any(w in _NUMBER_WORDS_BROAD for w in words):
+        return True
+    if any(w in _CONFIDENT_SHORT_ANSWER_WORDS for w in words):
+        return True
+    if category_scores and any(s > 0 for s in category_scores.values()):
         return True
     return False
 
@@ -312,7 +348,7 @@ def _is_vague(text: str) -> bool:
 def _assess_quality(text: str, expected_category: str, intent: IntentClassification, is_silent: bool) -> AnswerQuality:
     if is_silent or not text.strip():
         return AnswerQuality.MISSING
-    if _is_vague(text):
+    if _is_vague(text, intent.category_scores):
         return AnswerQuality.VAGUE
 
     expected_score = intent.category_scores.get(expected_category, 0.0)
