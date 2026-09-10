@@ -291,3 +291,22 @@ class ConversationFlowController:
         action = NextAction(FlowAction.POLITE_SKIP, _POLITE_SKIP_MESSAGE, category, state.attempts, reason, structured)
         self._advance()
         return action
+
+    def force_skip_current_category(self, reason: str) -> Optional[NextAction]:
+        """Day 31 addition: a public escape hatch for callers that need
+        to move past the current category WITHOUT a normal turn -- e.g.
+        after an edge-case failure (persistent poor audio) or a caught
+        exception where the current turn's content can't be trusted.
+        Nothing else in this class changes; this is purely additive,
+        reusing the existing _polite_skip() path so the resulting
+        NextAction, message, and action_log entry are indistinguishable
+        from a normal polite skip. Returns None if the call is already
+        complete -- there is nothing to skip.
+        """
+        if self.is_call_complete:
+            return None
+        category = self.current_category
+        state = self._state[category]
+        action = self._polite_skip(category, state, None, reason)
+        self.action_log.append(action)
+        return action
