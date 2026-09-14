@@ -1,0 +1,280 @@
+openapi: 3.0.3
+info:
+  title: Zecpath Screening Call API
+  description: >
+    REST API exposing the screening-call AI pipeline (Days 22-31) to
+    backend systems: live call turn processing, edge-case-aware
+    conversational flow, and the final recruiter-facing report. Response
+    schemas are derived directly from the real dataclasses already
+    shipping (StructuredAnswer, QuestionScore, ScreeningScoreResult,
+    CommunicationProfile, ScreeningReport, TurnOutcome) rather than
+    designed from scratch, so the API surface matches what the engine
+    actually returns today -- same discipline as api/openapi.yaml (the
+    Day 16 ATS API).
+
+    This is a companion to, not a replacement for, api/openapi.yaml --
+    the ATS API and the screening-call API are two separate service
+    boundaries in this project's architecture, matching the two
+    separate phases (Days 1-20 vs. Days 22-31) they expose.
+  version: "1.0.0"
+servers:
+  - url: https://api.zecpath.example.com/v1
+    description: Production (placeholder -- not yet deployed)
+  - url: http://localhost:8000/v1
+    description: Local development
+
+tags:
+  - name: Calls
+  - name: Turns
+  - name: Reports
+  - name: System
+
+paths:
+  /calls:
+    post:
+      tags: [Calls]
+      summary: Start a new screening call
+      description: >
+        Creates a call session and its underlying RobustConversationController
+        (Day 31), defaulting to Day 22's 7 canonical categories unless
+        overridden. Returns immediately with the first question's category
+        -- the actual question TEXT is Day 22's own concern
+        (screening_question_bank.generate_screening_questions()), not
+        returned by this endpoint, which only tracks flow state.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CallCreateRequest' }
+      responses:
+        '201':
+          description: Call created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CallRecord' }
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /calls/{call_id}:
+    get:
+      tags: [Calls]
+      summary: Get a call's current state
+      parameters:
+        - $ref: '#/components/parameters/CallId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CallRecord' }
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /calls/{call_id}/turns:
+    post:
+      tags: [Turns]
+      summary: Submit one candidate turn (a single question-and-answer exchange)
+      description: >
+        Synchronous, not job-based -- unlike the ATS API's async scoring
+        jobs, a live voice call is inherently turn-by-turn and
+        real-time; there is no batch to queue. Mirrors
+        RawSTTResult (Day 24) as the request body and TurnOutcome
+        (Day 31) as the response -- every field here is a real field on
+        those dataclasses today, nothing added for the API alone.
+      parameters:
+        - $ref: '#/components/parameters/CallId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/TurnSubmitRequest' }
+      responses:
+        '200':
+          description: Turn processed -- see action for what the AI should say/do next
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TurnOutcomeResponse' }
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Call already complete -- no more turns can be submitted
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ErrorResponse' }
+
+  /calls/{call_id}/report:
+    get:
+      tags: [Reports]
+      summary: Get the final screening report
+      description: >
+        Available once the call is complete (call_ended=true on the
+        most recent turn). Mirrors ScreeningReport.to_dict() (Day 28)
+        exactly, produced by the full Day 22-31 pipeline
+        (run_screening_call() in parsers/screening_pipeline.py, Day 32).
+      parameters:
+        - $ref: '#/components/parameters/CallId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ScreeningReport' }
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Call not yet complete -- report not available
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ErrorResponse' }
+
+  /health:
+    get:
+      tags: [System]
+      summary: Health check
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, enum: [ok] }
+                  version: { type: string }
+
+components:
+  parameters:
+    CallId:
+      name: call_id
+      in: path
+      required: true
+      schema: { type: string }
+
+  responses:
+    BadRequest:
+      description: Request failed validation
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+
+  schemas:
+    # ---------------------------------------------------------------
+    # Calls
+    # ---------------------------------------------------------------
+    CallCreateRequest:
+      type: object
+      properties:
+        candidate_id: { type: string }
+        job_role: { type: string }
+        categories:
+          type: array
+          items: { type: string }
+          description: >
+            Defaults to Day 22's CATEGORIES (introduction, education,
+            experience, skills, location, salary, notice_period) if
+            omitted.
+        expected_language:
+          type: string
+          default: "en"
+          description: >
+            Day 31's language-mismatch check compares every turn against
+            this. This pipeline is English-only downstream (Day 25's
+            keyword lexicons, Day 27's sentiment lexicon) -- setting
+            this to anything else does not enable processing that
+            language, only changes what a mismatch is measured against.
+
+    CallRecord:
+      type: object
+      required: [call_id, status, current_category, categories, created_at]
+      properties:
+        call_id: { type: string }
+        status: { type: string, enum: [in_progress, complete] }
+        current_category: { type: string, nullable: true, description: "null once status=complete." }
+        categories: { type: array, items: { type: string } }
+        candidate_id: { type: string, nullable: true }
+        job_role: { type: string, nullable: true }
+        created_at: { type: string, format: date-time }
+
+    # ---------------------------------------------------------------
+    # Turns (mirrors RawSTTResult in / TurnOutcome out, exactly)
+    # ---------------------------------------------------------------
+    TurnSubmitRequest:
+      type: object
+      description: Mirrors speech_to_text.RawSTTResult (Day 24) exactly.
+      required: [text, confidence]
+      properties:
+        text: { type: string, nullable: true, description: "Transcribed candidate speech. null/malformed input is handled by Day 31's crash guard, not rejected at the API layer." }
+        confidence: { type: number, minimum: 0, maximum: 1, description: "Day 24's mock STT confidence. Feeds Day 31's poor/unusable-audio detection." }
+        is_silent: { type: boolean, default: false }
+        language: { type: string, default: "en", description: "Whole-utterance language tag. Feeds Day 31's language-mismatch detection -- NOT code-switching aware, see Day 31's docs." }
+
+    TurnOutcomeResponse:
+      type: object
+      description: Mirrors edge_case_handler.TurnOutcome.to_dict() (Day 31) exactly.
+      required: [action, message, edge_case_type, call_ended]
+      properties:
+        action:
+          type: string
+          enum: [retry_audio, clarify_language, safety_fallback_skip, safety_fallback_end_call, crash_guard_skip, passthrough]
+        message: { type: string, description: "What the AI should say next." }
+        edge_case_type: { type: string, enum: [none, poor_audio, language_mismatch] }
+        call_ended: { type: boolean }
+        underlying_action:
+          type: object
+          nullable: true
+          description: "Day 29's NextAction, present only when action=passthrough. See conversation_flow_engine.NextAction.to_dict()."
+        notes: { type: array, items: { type: string } }
+
+    # ---------------------------------------------------------------
+    # Reports (mirrors ScreeningReport.to_dict() exactly, Day 28)
+    # ---------------------------------------------------------------
+    ScreeningReport:
+      type: object
+      description: Mirrors screening_report_generator.ScreeningReport.to_dict() exactly.
+      required: [candidate_id, job_role, generated_at, total_score, communication_strength_score, key_answers, strengths, risks, missing_data, highlights]
+      properties:
+        candidate_id: { type: string, nullable: true }
+        job_role: { type: string, nullable: true }
+        generated_at: { type: string, format: date-time }
+        total_score: { type: number, minimum: 0, maximum: 100 }
+        communication_strength_score: { type: number, minimum: 0, maximum: 100 }
+        key_answers:
+          type: array
+          items:
+            type: object
+            properties:
+              turn_id: { type: string, nullable: true }
+              category: { type: string }
+              quality: { type: string, enum: [ok, vague, off_topic, missing] }
+              weighted_total: { type: number, nullable: true }
+              raw_text_preview: { type: string }
+        strengths: { type: array, items: { type: string } }
+        risks: { type: array, items: { type: string } }
+        missing_data: { type: array, items: { type: string } }
+        highlights:
+          type: object
+          properties:
+            salary_expectation: { type: array, items: { type: object, additionalProperties: true } }
+            availability: { type: array, items: { type: object, additionalProperties: true } }
+            confirmed_skills: { type: array, items: { type: string } }
+
+    # ---------------------------------------------------------------
+    # Errors -- identical shape to api/openapi.yaml's ErrorResponse
+    # ---------------------------------------------------------------
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message, request_id]
+          properties:
+            code: { type: string, description: "Stable machine-readable code, e.g. CALL_NOT_FOUND, CALL_ALREADY_COMPLETE." }
+            message: { type: string }
+            details: { type: object, additionalProperties: true }
+            request_id: { type: string }

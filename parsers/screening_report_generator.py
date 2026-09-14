@@ -218,9 +218,17 @@ def _build_missing_data(answers: List[StructuredAnswer]) -> List[str]:
     for a in answers:
         if a.quality == AnswerQuality.MISSING:
             missing.append(f"No answer given for '{a.question_category}' ({a.turn_id}).")
-        for note in a.notes:
-            if "could not" in note.lower() or "could not extract" in note.lower() or "not found" in note.lower():
+            # Day 32 addition: surface the answer's own notes verbatim too --
+            # a genuine silence (Day 25/29's default note) and an edge-case
+            # skip (Day 31's specific reason, via Day 32's pipeline) read
+            # very differently to a recruiter, and both are real information
+            # this generic line alone was previously discarding.
+            for note in a.notes:
                 missing.append(f"'{a.question_category}' ({a.turn_id}): {note}")
+        else:
+            for note in a.notes:
+                if "could not" in note.lower() or "could not extract" in note.lower() or "not found" in note.lower():
+                    missing.append(f"'{a.question_category}' ({a.turn_id}): {note}")
     return missing
 
 
