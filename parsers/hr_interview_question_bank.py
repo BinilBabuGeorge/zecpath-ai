@@ -255,16 +255,18 @@ class InterviewQuestionState:
     response_captured: bool = False
     follow_up_asked: bool = False
     follow_up_text: Optional[str] = None
+    follow_up_type: Optional[str] = None   # Day 34 addition: which trigger type was used (clarification/deepening/example_based), for state tracking and repetition-prevention
 
     def capture_response(self, text: str) -> None:
         self.response_text = text
         self.response_captured = True
 
-    def record_follow_up(self, follow_up_text: str) -> None:
+    def record_follow_up(self, follow_up_text: str, follow_up_type: Optional[str] = None) -> None:
         if not self.follow_up_eligible:
             raise ValueError(f"Question {self.question_id} is not eligible for a follow-up.")
         self.follow_up_asked = True
         self.follow_up_text = follow_up_text
+        self.follow_up_type = follow_up_type
 
 
 @dataclass
