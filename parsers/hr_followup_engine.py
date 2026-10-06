@@ -55,6 +55,7 @@ from typing import Dict, List, Optional
 
 from parsers.conversation_flow_engine import detect_repeated_answer
 from parsers.hr_interview_question_bank import InterviewQuestionState, InterviewSession
+from parsers.transcript_schema import _WORD_NUMBERS, _APPROXIMATE_WORD_NUMBERS
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -82,6 +83,43 @@ _CONCRETE_EXAMPLE_MARKERS = [
     "there was a situation", "a time when", "i recall",
 ]
 
+# Day 42 fix (Optimization & Stability) -- Day 40's HR interview
+# simulation found a real false negative here: a genuine, specific
+# personal narrative told WITHOUT a stock phrase like "for example"
+# (e.g. "So, um, I started as an intern, and then... I became a
+# full-time developer") was classified THIN, the same tag a genuinely
+# vague answer gets, purely because it used ordinary storytelling
+# language instead of one of the marker phrases above. Two new,
+# still-deterministic signals close that gap without touching the
+# VAGUE path at all:
+#   1. Narrative transition language -- phrases that signal the
+#      candidate is walking through a real sequence of events
+#      ("started as", "then I", "after that", "eventually"...),
+#      regardless of whether they also used a formal example marker.
+#   2. A specific quantity tied to a concrete unit ("three years",
+#      "two teammates") -- a generic, padded answer almost never
+#      includes a specific number; a real account often does.
+# Neither signal touches is_vague_behavioral_answer() -- a hedge-heavy
+# answer is still VAGUE regardless of narrative structure. This only
+# changes which non-vague answers get credited as concrete.
+_NARRATIVE_TRANSITION_MARKERS = [
+    "started as", "started out", "then i", "and then i", "after that", "eventually",
+    "that's when", "that is when", "ended up", "turned into", "began as", "from there",
+    "so i started", "so i began",
+]
+
+# Reuses Day 16's word-number vocabulary (transcript_schema's
+# _WORD_NUMBERS / _APPROXIMATE_WORD_NUMBERS) rather than maintaining a
+# second, separate spelled-out-number list -- so "three years" is
+# recognized the same way "3 years" is.
+_QUANTITY_WORD_ALTERNATION = "|".join(
+    sorted(set(_WORD_NUMBERS) | set(_APPROXIMATE_WORD_NUMBERS), key=len, reverse=True)
+)
+_SPECIFIC_QUANTITY_RE = re.compile(
+    r"\b(\d+|" + _QUANTITY_WORD_ALTERNATION
+    + r")\s*(of\s+)?(year|years|month|months|week|weeks|day|days|teammate|teammates|people|person|project|projects|time|times)\b"
+)
+
 
 class BehavioralAnswerQuality(str, Enum):
     MISSING = "missing"
@@ -103,7 +141,13 @@ class FollowUpType(str, Enum):
 
 def has_concrete_example(text: str) -> bool:
     lowered = text.lower()
-    return any(marker in lowered for marker in _CONCRETE_EXAMPLE_MARKERS)
+    if any(marker in lowered for marker in _CONCRETE_EXAMPLE_MARKERS):
+        return True
+    if any(marker in lowered for marker in _NARRATIVE_TRANSITION_MARKERS):
+        return True
+    if _SPECIFIC_QUANTITY_RE.search(lowered):
+        return True
+    return False
 
 
 def is_vague_behavioral_answer(text: str) -> bool:
