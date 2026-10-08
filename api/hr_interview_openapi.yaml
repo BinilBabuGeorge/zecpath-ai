@@ -1,0 +1,603 @@
+openapi: 3.0.3
+info:
+  title: Zecpath HR Interview API
+  description: >
+    REST API exposing the HR-interview AI pipeline (Days 33-43) to
+    backend systems: the behavioral/situational interview itself,
+    follow-up logic, communication/confidence/aptitude scoring, the
+    combined HR score, the recruiter-facing summary, the cross-round
+    unified hiring-fit score, and a transcript demographic-disclosure
+    scrubber. Response schemas are derived directly from the real
+    Python dataclasses already shipping, the same discipline as
+    api/openapi.yaml (the Day 16 ATS API) and
+    api/screening_openapi.yaml (the Day 22 screening-call API) -- this
+    is a third companion file, not a replacement for either, matching
+    the project's third service boundary (Days 33-43) alongside ATS
+    (Days 1-20) and screening (Days 22-32).
+
+    VERIFICATION NOTE, stated honestly: the schemas for
+    InterviewSession/InterviewQuestionState (Day 33) and
+    FollowUpDecision (Day 34), and the UnifiedCandidateScore (Day 41)
+    and demographic-scrubber (Day 43) sections, were checked directly
+    against live source in this environment and mirror those
+    dataclasses exactly. The schemas for communication scoring
+    (Day 35), confidence/stress (Day 36), the combined HR score
+    (Day 37), aptitude (Day 38), and the summary report (Day 39) were
+    reconstructed from each day's own documented field names and
+    JSON-report samples from earlier sessions -- NOT re-verified
+    against live source in this environment, because those files
+    aren't present here (see Days 41-43's own notes for why). Each
+    such schema below is marked "reconstructed, not re-verified".
+    Diff these against your actual dataclasses before treating this
+    spec as a binding contract for those five.
+  version: "1.0.0"
+servers:
+  - url: https://api.zecpath.example.com/v1
+    description: Production (placeholder -- not yet deployed)
+  - url: http://localhost:8000/v1
+    description: Local development
+
+tags:
+  - name: HR Interviews
+  - name: Follow-ups
+  - name: Scoring
+  - name: Aptitude
+  - name: Reports
+  - name: Unified
+  - name: Compliance
+  - name: System
+
+paths:
+  /hr-interviews:
+    post:
+      tags: [HR Interviews]
+      summary: Start a new HR interview session
+      description: >
+        Mirrors InterviewSession.start() (Day 33) exactly -- generates
+        the question set for the given experience_level/role_type and
+        returns the session with the first question active.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/HRInterviewCreateRequest' }
+      responses:
+        '201':
+          description: Session created, first question active
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/HRInterviewSession' }
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /hr-interviews/{session_id}:
+    get:
+      tags: [HR Interviews]
+      summary: Get a session's current state
+      parameters:
+        - $ref: '#/components/parameters/SessionId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/HRInterviewSession' }
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /hr-interviews/{session_id}/responses:
+    post:
+      tags: [HR Interviews]
+      summary: Submit a response to the current question
+      description: >
+        Mirrors InterviewSession.submit_response() (Day 33) followed by
+        hr_followup_engine.decide_follow_up() (Day 34) when the
+        just-answered question is follow_up_eligible. Synchronous --
+        every underlying engine in this pipeline is rule-based text
+        processing, not a model call, so there is no async job pattern
+        here (unlike the ATS API's scoring-jobs).
+      parameters:
+        - $ref: '#/components/parameters/SessionId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ResponseSubmitRequest' }
+      responses:
+        '200':
+          description: Response recorded; follow-up decision and updated session state returned
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ResponseSubmitResult' }
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Session already complete -- no current question to answer
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ErrorResponse' }
+
+  /hr-interviews/{session_id}/score:
+    get:
+      tags: [Scoring]
+      summary: Get the combined HR interview score
+      description: >
+        Reconstructed, not re-verified (see info.description). Mirrors
+        hr_interview_scoring_engine.score_hr_interview() (Day 37) as
+        documented: relevance (Day 34 reused), communication (Day 35),
+        confidence (Day 36), and a consistency penalty, combined via a
+        configurable, role-reasoned weight profile into one
+        overall_hr_score with a full per-answer explainable breakdown.
+        Available once at least one response has been submitted;
+        reflects session state at call time, not only once complete.
+      parameters:
+        - $ref: '#/components/parameters/SessionId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/HRInterviewScoreReport' }
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: No responses submitted yet -- nothing to score
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ErrorResponse' }
+
+  /hr-interviews/{session_id}/summary:
+    get:
+      tags: [Reports]
+      summary: Get the recruiter-facing interview summary
+      description: >
+        Reconstructed, not re-verified (see info.description). Mirrors
+        interview_summary_generator.generate_interview_summary()
+        (Day 39): strengths/weaknesses, a cultural-fit indicator, risk
+        flags with evidence, and a template-generated (NOT model-
+        generated -- see Day 39's own documentation) natural-language
+        narrative. Optionally blends in an aptitude_session_id's score
+        if one is linked.
+      parameters:
+        - $ref: '#/components/parameters/SessionId'
+        - name: aptitude_session_id
+          in: query
+          required: false
+          schema: { type: string }
+          description: If provided, blends that aptitude session's score into the summary per Day 39's 70/30 HR/aptitude weighting.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/InterviewSummaryReport' }
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /aptitude-sessions:
+    post:
+      tags: [Aptitude]
+      summary: Start a new aptitude/reasoning session
+      description: >
+        Reconstructed, not re-verified (see info.description). Mirrors
+        aptitude_logic_engine.AptitudeSession.start() (Day 38) -- the
+        fixed 6-question bank (3 logical-reasoning, 3 situational-
+        judgment), not configurable per request.
+      responses:
+        '201':
+          description: Session created, first question active
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AptitudeSession' }
+
+  /aptitude-sessions/{session_id}/responses:
+    post:
+      tags: [Aptitude]
+      summary: Submit a response to the current aptitude question
+      parameters:
+        - $ref: '#/components/parameters/SessionId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ResponseSubmitRequest' }
+      responses:
+        '200':
+          description: Response recorded; updated session state returned
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AptitudeSession' }
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Session already complete
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ErrorResponse' }
+
+  /aptitude-sessions/{session_id}/score:
+    get:
+      tags: [Aptitude]
+      summary: Get the aptitude score
+      description: >
+        Reconstructed, not re-verified (see info.description). Mirrors
+        aptitude_logic_engine.build_aptitude_profile() (Day 38):
+        per-question matched/missing ideal-answer elements, a logical-
+        reasoning score, a reused Day-35 clarity score, and category
+        averages.
+      parameters:
+        - $ref: '#/components/parameters/SessionId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AptitudeProfile' }
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /unified-score:
+    post:
+      tags: [Unified]
+      summary: Compute the cross-round unified hiring-fit score
+      description: >
+        Verified against live source. Mirrors
+        unified_scoring_engine.compute_unified_score() (Day 41)
+        exactly: combines the ATS round's overall_score, the screening
+        round's total_score, and this session's HR interview score
+        (pulled server-side from the HR score endpoint above if
+        hr_session_id is given, or supplied directly) with a
+        role-reasoned weight profile. Missing rounds have their weight
+        proportionally redistributed, never silently zeroed.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/UnifiedScoreRequest' }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/UnifiedCandidateScore' }
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /transcripts/scrub:
+    post:
+      tags: [Compliance]
+      summary: Detect and mask first-person demographic self-disclosures in free text
+      description: >
+        Verified against live source. Mirrors
+        transcript_demographic_scrubber.mask_demographic_disclosures()
+        (Day 43) exactly. Stateless utility endpoint -- intended to run
+        on a response's text before it's stored, not wired into the
+        session endpoints above yet (see Day 43's own "not done here"
+        note).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [text]
+              properties:
+                text: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ScrubResult' }
+
+  /health:
+    get:
+      tags: [System]
+      summary: Health check
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, enum: [ok] }
+                  version: { type: string }
+
+components:
+  parameters:
+    SessionId:
+      name: session_id
+      in: path
+      required: true
+      schema: { type: string }
+
+  responses:
+    BadRequest:
+      description: Request failed validation
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+
+  schemas:
+    # ---------------------------------------------------------------
+    # HR Interview sessions -- mirrors InterviewSession /
+    # InterviewQuestionState (Day 33) exactly, verified against live source
+    # ---------------------------------------------------------------
+    HRInterviewCreateRequest:
+      type: object
+      required: [experience_level, role_type]
+      properties:
+        experience_level: { type: string, enum: [fresher, experienced] }
+        role_type: { type: string, enum: [technical, non_technical] }
+        candidate_id: { type: string, nullable: true, description: Opaque label, stored but never used in scoring -- same convention as the ATS API's candidate_label. }
+        lang: { type: string, default: "en" }
+
+    InterviewQuestionState:
+      type: object
+      description: Mirrors hr_interview_question_bank.InterviewQuestionState exactly.
+      required: [question_id, category, phase, follow_up_eligible, response_captured, follow_up_asked]
+      properties:
+        question_id: { type: string }
+        category: { type: string, enum: [self_introduction, career_journey, strengths_weaknesses, teamwork_culture_fit] }
+        phase: { type: string, enum: [introduction, core_hr, role_based_evaluation, closing] }
+        follow_up_eligible: { type: boolean }
+        response_text: { type: string, nullable: true }
+        response_captured: { type: boolean }
+        follow_up_asked: { type: boolean }
+        follow_up_text: { type: string, nullable: true }
+        follow_up_type: { type: string, nullable: true, enum: [clarification, deepening, example_based, null] }
+
+    HRInterviewSession:
+      type: object
+      required: [session_id, experience_level, role_type, questions, is_complete]
+      properties:
+        session_id: { type: string }
+        experience_level: { type: string, enum: [fresher, experienced] }
+        role_type: { type: string, enum: [technical, non_technical] }
+        questions:
+          type: array
+          items: { $ref: '#/components/schemas/InterviewQuestionState' }
+        current_question_id: { type: string, nullable: true, description: "null once is_complete=true." }
+        is_complete: { type: boolean }
+        created_at: { type: string, format: date-time }
+
+    ResponseSubmitRequest:
+      type: object
+      required: [text]
+      properties:
+        text: { type: string }
+        is_silent: { type: boolean, default: false, description: "Passed through to decide_follow_up()'s is_silent parameter on HR-interview sessions." }
+
+    # ---------------------------------------------------------------
+    # Follow-up decision -- mirrors hr_followup_engine.FollowUpDecision
+    # (Day 34) exactly, verified against live source
+    # ---------------------------------------------------------------
+    FollowUpDecision:
+      type: object
+      description: Mirrors hr_followup_engine.FollowUpDecision.to_dict() exactly.
+      required: [should_follow_up, answer_quality, reason]
+      properties:
+        should_follow_up: { type: boolean }
+        follow_up_type: { type: string, nullable: true, enum: [clarification, deepening, example_based, null] }
+        follow_up_text: { type: string, nullable: true }
+        answer_quality: { type: string, enum: [missing, vague, thin, confident] }
+        reason: { type: string }
+
+    ResponseSubmitResult:
+      type: object
+      required: [session, follow_up]
+      properties:
+        session: { $ref: '#/components/schemas/HRInterviewSession' }
+        follow_up:
+          allOf: [{ $ref: '#/components/schemas/FollowUpDecision' }]
+          nullable: true
+          description: "null when the just-answered question was not follow_up_eligible."
+
+    # ---------------------------------------------------------------
+    # HR score -- reconstructed from Day 37's documented scope,
+    # NOT re-verified against live source in this environment
+    # ---------------------------------------------------------------
+    AnswerScoreBreakdown:
+      type: object
+      description: Reconstructed from Day 37's hr_interview_scoring_engine.AnswerScoreBreakdown -- not re-verified.
+      required: [question_id, category, relevance_quality, relevance_score, communication_score, confidence_score, weighted_positive_component]
+      properties:
+        question_id: { type: string }
+        category: { type: string }
+        relevance_quality: { type: string, enum: [missing, vague, thin, confident] }
+        relevance_score: { type: number, minimum: 0, maximum: 100 }
+        communication_score: { type: number, minimum: 0, maximum: 100 }
+        confidence_score: { type: number, minimum: 0, maximum: 100 }
+        weighted_positive_component: { type: number, minimum: 0, maximum: 100 }
+
+    HRInterviewScoreReport:
+      type: object
+      description: Reconstructed from Day 37's HRInterviewScoreReport.to_dict() -- not re-verified.
+      required: [overall_hr_score, weights_used, num_questions_answered, component_averages, consistency, answer_breakdowns]
+      properties:
+        overall_hr_score: { type: number, minimum: 0, maximum: 100 }
+        weights_used:
+          type: object
+          properties:
+            relevance: { type: number }
+            communication: { type: number }
+            confidence: { type: number }
+            consistency: { type: number }
+        num_questions_answered: { type: integer }
+        component_averages:
+          type: object
+          properties:
+            avg_relevance: { type: number }
+            avg_communication: { type: number }
+            avg_confidence: { type: number }
+        consistency:
+          type: object
+          properties:
+            swing_count: { type: integer }
+            mixed_sentiment_count: { type: integer }
+            issue_rate: { type: number }
+            consistency_penalty: { type: number }
+            findings: { type: array, items: { type: string } }
+        answer_breakdowns:
+          type: array
+          items: { $ref: '#/components/schemas/AnswerScoreBreakdown' }
+
+    # ---------------------------------------------------------------
+    # Summary report -- reconstructed from Day 39's documented scope,
+    # NOT re-verified against live source
+    # ---------------------------------------------------------------
+    InterviewSummaryReport:
+      type: object
+      description: Reconstructed from Day 39's InterviewSummaryReport.to_dict() -- not re-verified.
+      required: [combined_overall_score, performance_band, hr_score, strengths, weaknesses, cultural_fit, risk_flags]
+      properties:
+        combined_overall_score: { type: number, minimum: 0, maximum: 100 }
+        performance_band: { type: string, enum: [Strong, Good, Moderate, Weak] }
+        hr_score: { type: number }
+        aptitude_score: { type: number, nullable: true }
+        strengths:
+          type: array
+          items:
+            type: object
+            properties: { component: { type: string }, score: { type: number }, note: { type: string } }
+        weaknesses:
+          type: array
+          items:
+            type: object
+            properties: { component: { type: string }, score: { type: number }, note: { type: string } }
+        cultural_fit:
+          type: object
+          properties:
+            score: { type: number, nullable: true }
+            band: { type: string, enum: ["positive indicator", "neutral", "needs attention", "no signal"] }
+            note: { type: string }
+        risk_flags:
+          type: array
+          items:
+            type: object
+            properties: { label: { type: string }, detail: { type: string } }
+        narrative_text: { type: string, description: "to_narrative()'s output -- template-generated, not model-generated." }
+
+    # ---------------------------------------------------------------
+    # Aptitude -- reconstructed from Day 38's documented scope,
+    # NOT re-verified against live source
+    # ---------------------------------------------------------------
+    AptitudeSession:
+      type: object
+      description: Reconstructed from Day 38's AptitudeSession -- not re-verified.
+      required: [session_id, is_complete]
+      properties:
+        session_id: { type: string }
+        current_question_id: { type: string, nullable: true }
+        is_complete: { type: boolean }
+
+    AptitudeAnswerEvaluation:
+      type: object
+      description: Reconstructed from Day 38's AptitudeAnswerEvaluation -- not re-verified.
+      properties:
+        question_id: { type: string }
+        question_type: { type: string, enum: [logical_reasoning, situational_judgment] }
+        overall_aptitude_score: { type: number, minimum: 0, maximum: 100 }
+        matched_elements: { type: array, items: { type: string } }
+        missing_elements: { type: array, items: { type: string } }
+
+    AptitudeProfile:
+      type: object
+      description: Reconstructed from Day 38's AptitudeProfile.to_dict() -- not re-verified.
+      required: [overall_aptitude_score, logical_reasoning_avg, situational_judgment_avg, answer_evaluations]
+      properties:
+        overall_aptitude_score: { type: number, minimum: 0, maximum: 100 }
+        logical_reasoning_avg: { type: number }
+        situational_judgment_avg: { type: number }
+        answer_evaluations:
+          type: array
+          items: { $ref: '#/components/schemas/AptitudeAnswerEvaluation' }
+
+    # ---------------------------------------------------------------
+    # Unified score -- mirrors unified_scoring_engine (Day 41) exactly,
+    # verified against live source
+    # ---------------------------------------------------------------
+    UnifiedScoreRequest:
+      type: object
+      properties:
+        candidate_id: { type: string, nullable: true }
+        role_type: { type: string, enum: [technical, non_technical], default: technical }
+        ats_score: { type: number, nullable: true, minimum: 0, maximum: 100 }
+        screening_score: { type: number, nullable: true, minimum: 0, maximum: 100 }
+        hr_session_id: { type: string, nullable: true, description: "If given, the server fetches this session's overall_hr_score instead of requiring hr_interview_score directly." }
+        hr_interview_score: { type: number, nullable: true, minimum: 0, maximum: 100 }
+        weights:
+          type: object
+          nullable: true
+          description: Optional RoundWeights override; must sum to 1.0 (server validates, 400 on failure).
+          properties:
+            ats: { type: number }
+            screening: { type: number }
+            hr_interview: { type: number }
+
+    ComponentContribution:
+      type: object
+      description: Mirrors unified_scoring_engine.ComponentContribution exactly.
+      required: [round_name, included, base_weight, effective_weight, contribution]
+      properties:
+        round_name: { type: string, enum: [ats, screening, hr_interview] }
+        raw_score: { type: number, nullable: true }
+        base_weight: { type: number }
+        effective_weight: { type: number }
+        contribution: { type: number }
+        included: { type: boolean }
+
+    UnifiedCandidateScore:
+      type: object
+      description: Mirrors unified_scoring_engine.UnifiedCandidateScore.to_dict() exactly.
+      required: [candidate_id, role_type, hiring_fit_percentage, decision, weights_used, missing_rounds, contributions]
+      properties:
+        candidate_id: { type: string, nullable: true }
+        role_type: { type: string, enum: [technical, non_technical] }
+        hiring_fit_percentage: { type: number, minimum: 0, maximum: 100 }
+        decision: { type: string, enum: [selected, hold, rejected] }
+        weights_used:
+          type: object
+          properties: { ats: { type: number }, screening: { type: number }, hr_interview: { type: number } }
+        missing_rounds: { type: array, items: { type: string, enum: [ats, screening, hr_interview] } }
+        contributions:
+          type: array
+          items: { $ref: '#/components/schemas/ComponentContribution' }
+
+    # ---------------------------------------------------------------
+    # Transcript scrubbing -- mirrors
+    # transcript_demographic_scrubber (Day 43) exactly, verified
+    # ---------------------------------------------------------------
+    ScrubResult:
+      type: object
+      description: Mirrors mask_demographic_disclosures() return shape exactly -- (masked_text, categories_detected) as an object.
+      required: [masked_text, categories_detected]
+      properties:
+        masked_text: { type: string }
+        categories_detected:
+          type: array
+          items: { type: string, enum: [Age, "Gender identity", Religion, "Marital/family status", "Nationality/origin", Disability] }
+
+    # ---------------------------------------------------------------
+    # Errors -- identical shape to api/openapi.yaml and
+    # api/screening_openapi.yaml's ErrorResponse
+    # ---------------------------------------------------------------
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message, request_id]
+          properties:
+            code: { type: string, description: "Stable machine-readable code, e.g. SESSION_NOT_FOUND, SESSION_ALREADY_COMPLETE, NO_RESPONSES_SUBMITTED." }
+            message: { type: string }
+            details: { type: object, additionalProperties: true }
+            request_id: { type: string }
