@@ -78,9 +78,29 @@ _VAGUE_HEDGE_PHRASES = [
 # sense, and a short-but-specific one shouldn't be penalized just for
 # brevity.
 _CONCRETE_EXAMPLE_MARKERS = [
-    "for example", "for instance", "one time", "once,", "when i", "i remember",
+    "for example", "for instance", "one time", "once,", "i remember",
     "in my previous role", "in my last job", "specifically", "let me give an example",
     "there was a situation", "a time when", "i recall",
+]
+
+# Day 47 fix (discovered while reusing has_concrete_example() for
+# technical-answer "real-world applicability" scoring): "when i" and
+# "then i", checked as plain substrings above/below, silently matched
+# INSIDE ordinary words and phrases with no first-person recollection
+# at all -- "when it changes", "when is the deadline", "then it
+# fails", "then is the right time" all contain the literal substring
+# "when i"/"then i" even though none of them are a candidate
+# recounting something that happened to them. This was mostly
+# invisible for behavioral HR answers (where "when it"/"then it" are
+# rare), but fires constantly in ordinary technical explanations
+# ("then it returns null", "when it changes state") -- exactly the
+# text this signal now also runs over. Fixed narrowly, with a word-
+# boundary requirement, for just these two short/ambiguous markers;
+# every other marker above is an unambiguous multi-word phrase and is
+# left on the simple substring check that already works correctly for
+# it.
+_WORD_BOUNDARY_CONCRETE_MARKERS = [
+    re.compile(r"\bwhen i\b"), re.compile(r"\bthen i\b"),
 ]
 
 # Day 42 fix (Optimization & Stability) -- Day 40's HR interview
@@ -103,10 +123,13 @@ _CONCRETE_EXAMPLE_MARKERS = [
 # answer is still VAGUE regardless of narrative structure. This only
 # changes which non-vague answers get credited as concrete.
 _NARRATIVE_TRANSITION_MARKERS = [
-    "started as", "started out", "then i", "and then i", "after that", "eventually",
+    "started as", "started out", "and then i", "after that", "eventually",
     "that's when", "that is when", "ended up", "turned into", "began as", "from there",
     "so i started", "so i began",
 ]
+# "then i" moved to _WORD_BOUNDARY_CONCRETE_MARKERS above -- see the
+# Day 47 fix note there for why the plain-substring version of this
+# one specifically needed a word boundary.
 
 # Reuses Day 16's word-number vocabulary (transcript_schema's
 # _WORD_NUMBERS / _APPROXIMATE_WORD_NUMBERS) rather than maintaining a
@@ -144,6 +167,8 @@ def has_concrete_example(text: str) -> bool:
     if any(marker in lowered for marker in _CONCRETE_EXAMPLE_MARKERS):
         return True
     if any(marker in lowered for marker in _NARRATIVE_TRANSITION_MARKERS):
+        return True
+    if any(pattern.search(lowered) for pattern in _WORD_BOUNDARY_CONCRETE_MARKERS):
         return True
     if _SPECIFIC_QUANTITY_RE.search(lowered):
         return True
