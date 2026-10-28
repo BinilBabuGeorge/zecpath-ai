@@ -97,14 +97,26 @@ def test_onsite_alone_still_vague_not_overcorrected():
 
 
 # ---------------------------------------------------------------------------
-# The one honestly-documented remaining gap -- a bare place name has
-# no digit, number-word, category-keyword hit, or confident-word
-# match, so it is still (correctly, per this project's stated scope)
-# flagged vague without a location gazetteer this project doesn't have
+# The gap Day 30 documented -- a bare place name has no digit, number-word,
+# category-keyword hit or confident-word match -- CLOSED on Day 54 without a
+# gazetteer: for a location question, a short alphabetic answer built from
+# non-"non-answer" words is accepted. This test used to assert the gap
+# (Bengaluru -> VAGUE); it now asserts the fix and the documented trade-off.
 # ---------------------------------------------------------------------------
 
-def test_bare_city_name_still_vague_documented_gap():
-    assert _quality("Bengaluru", "location") == AnswerQuality.VAGUE
+def test_bare_city_name_is_now_accepted_day54():
+    assert _quality("Bengaluru", "location") == AnswerQuality.OK
+    assert _quality("Thrissur Kerala", "location") == AnswerQuality.OK
+
+
+def test_bare_place_rule_applies_only_to_location_questions():
+    assert _quality("Bengaluru", "experience") == AnswerQuality.VAGUE
+
+
+def test_known_tradeoff_nonsense_word_for_location_is_accepted_day54():
+    # Without a gazetteer a made-up word cannot be told from an unfamiliar town. Accepted and
+    # documented; Day 26's completeness scoring downstream still catches content-free answers.
+    assert _quality("Banana", "location") == AnswerQuality.OK
 
 
 # ---------------------------------------------------------------------------

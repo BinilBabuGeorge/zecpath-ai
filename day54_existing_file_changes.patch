@@ -1,0 +1,244 @@
+diff --git a/parsers/answer_intent_engine.py b/parsers/answer_intent_engine.py
+--- a/parsers/answer_intent_engine.py	2026-10-26 10:54:12.666961277 +0000
++++ b/parsers/answer_intent_engine.py	2026-10-26 10:54:12.678071084 +0000
+@@ -86,7 +86,16 @@
+ _CATEGORY_KEYWORDS: Dict[str, List[str]] = {
+     "introduction": ["myself", "about me", "my name is", "i am a", "i'm a", "background"],
+     "education": ["degree", "b\\.?tech", "bachelor", "master", "college", "university",
+-                  "diploma", "cgpa", "percentage", "graduate", "graduated"],
++                  "diploma", "cgpa", "percentage", "graduate", "graduated",
++                  # Day 54: degree abbreviations. Day 32 documented that "B.Sc IT" was scored
++                  # vague because only "b.tech" was recognised; probing wider showed the same
++                  # for M.Sc, B.Com, MBA, BCA, MCA, PhD and others. Only UNAMBIGUOUS forms
++                  # are added. Undotted "BE" (the English word "be") and "BA" are
++                  # deliberately NOT added -- a documented remaining gap, not an oversight.
++                  "m\\.?tech", "b\\.?sc", "m\\.?sc", "b\\.?com", "m\\.?com", "b\\.e", "m\\.e",
++                  "bca", "mca", "bba", "mba", "ph\\.?d", "mbbs", "llb", "llm", "b\\.?pharm",
++                  "m\\.?pharm", "b\\.?arch", "post\\s?graduate", "under\\s?graduate",
++                  "higher secondary", "high school", "hsc", "ssc"],
+     "experience": ["experience", "worked", "working", "previous company", "current company",
+                    "current role", "my role", "responsibilities", "years in"],
+     "location": ["live in", "based in", "currently in", "relocate", "relocating", "my location", "my city"],
+@@ -297,7 +306,8 @@
+ # 3. Quality gating -- vague / off-topic / missing
+ # ---------------------------------------------------------------------------
+ 
+-def _is_vague(text: str, category_scores: Optional[Dict[str, float]] = None) -> bool:
++def _is_vague(text: str, category_scores: Optional[Dict[str, float]] = None,
++              expected_category: Optional[str] = None) -> bool:
+     lowered = text.lower().strip()
+     if any(re.search(rf"\b{re.escape(phrase)}\b", lowered) for phrase in _HEDGE_PHRASES):
+         return True
+@@ -312,7 +322,7 @@
+     # false-rejection evidence this fix is based on.
+     words = lowered.split()
+     if 0 < len(words) <= 2 and lowered not in {"yes", "no", "yeah", "nope"}:
+-        if not _looks_like_concrete_short_answer(lowered, category_scores):
++        if not _looks_like_concrete_short_answer(lowered, category_scores, expected_category):
+             return True
+     return False
+ 
+@@ -332,9 +342,42 @@
+ _CONFIDENT_SHORT_ANSWER_WORDS = {"immediately", "immediate", "asap"}
+ 
+ 
+-def _looks_like_concrete_short_answer(lowered_text: str, category_scores: Optional[Dict[str, float]]) -> bool:
++# Day 54: words that can never be (part of) a place name. A bare place name carries no
++# category vocabulary, so for a LOCATION question a short alphabetic answer is accepted as
++# concrete -- UNLESS it is built from non-answer words. A stoplist is used instead of a city
++# gazetteer on purpose: a gazetteer would accept the cities someone thought to list and
++# reject every smaller town (an unfair, uneven rule), whereas this treats all place names alike.
++# Trade-off (documented, benchmarked): a nonsense word like "Banana" now passes; Day 26's
++# completeness scoring downstream still catches content-free answers.
++_NON_PLACE_TOKENS = {
++    "yes", "no", "yeah", "yep", "nope", "nah", "ok", "okay", "sure", "fine", "maybe", "perhaps",
++    "depends", "hmm", "hm", "um", "umm", "uh", "idk", "dunno", "whatever", "skip", "pass", "later",
++    "none", "nothing", "nil", "na", "idea", "unsure", "unknown", "anything", "something", "somewhere",
++    "sorry", "pardon", "what", "why", "how", "repeat", "again", "know", "not", "dont", "don't",
++    # Work-mode / flexibility words answer "how do you want to work", not "where are you located".
++    # Day 30 decided this deliberately ("remote/hybrid/onsite alone must stay vague") and its tests
++    # pin it; Day 54's first draft of this rule wrongly accepted them and those tests caught it.
++    "remote", "hybrid", "onsite", "on-site", "wfh", "office", "home", "anywhere", "flexible",
++    "relocate", "relocating",
++}
++_PLACE_SHAPE = re.compile(r"^[a-z][a-z .,'\-]*$")
++
++
++def _looks_like_place_name(lowered_text: str) -> bool:
++    if not _PLACE_SHAPE.match(lowered_text):
++        return False
++    tokens = re.findall(r"[a-z]+(?:['\-][a-z]+)*", lowered_text)
++    if not 1 <= len(tokens) <= 3:
++        return False
++    return not any(t in _NON_PLACE_TOKENS for t in tokens)
++
++
++def _looks_like_concrete_short_answer(lowered_text: str, category_scores: Optional[Dict[str, float]],
++                                      expected_category: Optional[str] = None) -> bool:
+     if any(ch.isdigit() for ch in lowered_text):
+         return True
++    if expected_category == "location" and _looks_like_place_name(lowered_text):
++        return True
+     words = re.findall(r"[a-z']+", lowered_text)
+     if any(w in _NUMBER_WORDS_BROAD for w in words):
+         return True
+@@ -348,7 +391,7 @@
+ def _assess_quality(text: str, expected_category: str, intent: IntentClassification, is_silent: bool) -> AnswerQuality:
+     if is_silent or not text.strip():
+         return AnswerQuality.MISSING
+-    if _is_vague(text, intent.category_scores):
++    if _is_vague(text, intent.category_scores, expected_category):
+         return AnswerQuality.VAGUE
+ 
+     expected_score = intent.category_scores.get(expected_category, 0.0)
+diff --git a/parsers/cross_round_aggregation_engine.py b/parsers/cross_round_aggregation_engine.py
+--- a/parsers/cross_round_aggregation_engine.py	2026-10-26 10:54:12.672761967 +0000
++++ b/parsers/cross_round_aggregation_engine.py	2026-10-26 10:54:12.683383208 +0000
+@@ -192,11 +192,22 @@
+     return RoundResult(name, None, note=note)
+ 
+ 
+-def round_from_ats(result: Optional["ATSScoreResult"]) -> RoundResult:
++def round_from_ats(result: Optional["ATSScoreResult"], ats_scale: str = "raw") -> RoundResult:
++    """`ats_scale="raw"` (default, unchanged since Day 51) uses the ATS score as is.
++    `ats_scale="zone_aligned"` (Day 54) maps it onto the common scale using the ATS's own zone cutoffs: the
++    ATS engine's scores structurally top out near 50-60, so raw they are NOT comparable with the other rounds
++    (see parsers/scoring_calibration.py for the measurement and the fix)."""
++    if ats_scale not in ("raw", "zone_aligned"):
++        raise ValueError("ats_scale must be 'raw' or 'zone_aligned'.")
+     if result is None:
+         return _no_evidence("ats", "No ATS result provided.")
+     if not any(getattr(c, "available", False) for c in result.components):
+         return _no_evidence("ats", "ATS result has no available component, so its score is not evidence.")
++    if ats_scale == "zone_aligned":
++        from parsers.scoring_calibration import align_ats_score, describe_alignment    # lazy: keeps this module light
++        skill = next((c.score for c in result.components if c.name == "skill_match" and c.available), None)
++        return RoundResult("ats", align_ats_score(result.overall_score, result.role_category, skill),
++                           note=f"ATS role category: {result.role_category}. " + describe_alignment(result.overall_score, result.role_category, skill))
+     return RoundResult("ats", result.overall_score, note=f"ATS role category: {result.role_category}")
+ 
+ 
+@@ -524,10 +535,11 @@
+ 
+ 
+ def compute_from_round_outputs(
+-    ats=None, screening=None, hr=None, technical=None, machine_test=None, **kwargs,
++    ats=None, screening=None, hr=None, technical=None, machine_test=None, ats_scale: str = "raw", **kwargs,
+ ) -> CrossRoundCandidateScore:
+-    """Convenience: pass the earlier engines' own result objects (or None) and the adapters judge their evidence."""
+-    rounds = [round_from_ats(ats), round_from_screening(screening), round_from_hr(hr),
++    """Convenience: pass the earlier engines' own result objects (or None) and the adapters judge their evidence.
++    `ats_scale` is "raw" (default) or "zone_aligned" (Day 54) -- see `round_from_ats`."""
++    rounds = [round_from_ats(ats, ats_scale), round_from_screening(screening), round_from_hr(hr),
+               round_from_technical(technical), round_from_machine_test(machine_test)]
+     return compute_cross_round_score(rounds, **kwargs)
+ 
+diff --git a/parsers/semantic_matcher.py b/parsers/semantic_matcher.py
+--- a/parsers/semantic_matcher.py	2026-10-26 10:54:12.669361275 +0000
++++ b/parsers/semantic_matcher.py	2026-10-26 10:54:12.680571059 +0000
+@@ -9,11 +9,12 @@
+ from __future__ import annotations
+ 
+ import re
++import threading
++from collections import OrderedDict
+ from dataclasses import dataclass, field
+ from typing import Dict, List
+ 
+ from sklearn.feature_extraction.text import TfidfVectorizer
+-from sklearn.metrics.pairwise import cosine_similarity
+ 
+ from parsers.skill_dictionary import SKILL_DICTIONARY
+ 
+@@ -48,21 +49,52 @@
+     return canonical.replace(".", "").replace(" ", "_")
+ 
+ 
++# PERFORMANCE (Day 54): scoring one job description against many resumes embedded the SAME job text
++# again for every resume, and each comparison paid sklearn's cosine_similarity input validation on
++# vectors that are already unit length. Profiling the 64-pair sample batch showed ~75% of ATS scoring
++# time in this class. Two changes, both verified to give bit-identical rounded scores on every pair
++# (tests/test_day54_semantic_matcher_equivalence.py compares against sklearn's own cosine):
++#   1. embed() memoises by text in a bounded LRU cache (the vectorizer is fitted once, so a vector is a
++#      pure function of its text);
++#   2. similarity() takes the dot product directly. TfidfVectorizer's default norm='l2' makes every
++#      vector unit length, so cosine similarity IS the dot product.
++EMBED_CACHE_SIZE = 1024
++
++
+ class SemanticMatcher:
+-    def __init__(self, corpus: List[str], normalize: bool = True):
++    def __init__(self, corpus: List[str], normalize: bool = True, cache_size: int = EMBED_CACHE_SIZE):
+         self.normalize = normalize
+         prepared = [normalize_for_embedding(t) if normalize else t for t in corpus]
+         self.vectorizer = TfidfVectorizer(stop_words="english", ngram_range=(1, 2))
+         self.vectorizer.fit(prepared)
++        self._cache_size = max(0, int(cache_size))
++        self._cache: "OrderedDict[str, object]" = OrderedDict()
++        self._lock = threading.Lock()
++        self.cache_hits = 0
++        self.cache_misses = 0
+ 
+     def embed(self, text: str):
++        if self._cache_size:
++            with self._lock:
++                cached = self._cache.get(text)
++                if cached is not None:
++                    self._cache.move_to_end(text)
++                    self.cache_hits += 1
++                    return cached
+         prepared = normalize_for_embedding(text) if self.normalize else text
+-        return self.vectorizer.transform([prepared])
++        vector = self.vectorizer.transform([prepared])
++        if self._cache_size:
++            with self._lock:
++                self.cache_misses += 1
++                self._cache[text] = vector
++                if len(self._cache) > self._cache_size:
++                    self._cache.popitem(last=False)
++        return vector
+ 
+     def similarity(self, text_a: str, text_b: str) -> float:
+         vec_a = self.embed(text_a)
+         vec_b = self.embed(text_b)
+-        score = cosine_similarity(vec_a, vec_b)[0][0]
++        score = vec_a.multiply(vec_b).sum()      # unit-length vectors: cosine similarity == dot product
+         return round(float(score), 4)
+ 
+ 
+diff --git a/tests/test_day30_false_rejection_fix.py b/tests/test_day30_false_rejection_fix.py
+--- a/tests/test_day30_false_rejection_fix.py	2026-10-26 10:54:12.675217993 +0000
++++ b/tests/test_day30_false_rejection_fix.py	2026-10-26 10:54:12.685668094 +0000
+@@ -97,14 +97,26 @@
+ 
+ 
+ # ---------------------------------------------------------------------------
+-# The one honestly-documented remaining gap -- a bare place name has
+-# no digit, number-word, category-keyword hit, or confident-word
+-# match, so it is still (correctly, per this project's stated scope)
+-# flagged vague without a location gazetteer this project doesn't have
++# The gap Day 30 documented -- a bare place name has no digit, number-word,
++# category-keyword hit or confident-word match -- CLOSED on Day 54 without a
++# gazetteer: for a location question, a short alphabetic answer built from
++# non-"non-answer" words is accepted. This test used to assert the gap
++# (Bengaluru -> VAGUE); it now asserts the fix and the documented trade-off.
+ # ---------------------------------------------------------------------------
+ 
+-def test_bare_city_name_still_vague_documented_gap():
+-    assert _quality("Bengaluru", "location") == AnswerQuality.VAGUE
++def test_bare_city_name_is_now_accepted_day54():
++    assert _quality("Bengaluru", "location") == AnswerQuality.OK
++    assert _quality("Thrissur Kerala", "location") == AnswerQuality.OK
++
++
++def test_bare_place_rule_applies_only_to_location_questions():
++    assert _quality("Bengaluru", "experience") == AnswerQuality.VAGUE
++
++
++def test_known_tradeoff_nonsense_word_for_location_is_accepted_day54():
++    # Without a gazetteer a made-up word cannot be told from an unfamiliar town. Accepted and
++    # documented; Day 26's completeness scoring downstream still catches content-free answers.
++    assert _quality("Banana", "location") == AnswerQuality.OK
+ 
+ 
+ # ---------------------------------------------------------------------------

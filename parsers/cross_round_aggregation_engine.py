@@ -192,11 +192,22 @@ def _no_evidence(name: str, note: str) -> RoundResult:
     return RoundResult(name, None, note=note)
 
 
-def round_from_ats(result: Optional["ATSScoreResult"]) -> RoundResult:
+def round_from_ats(result: Optional["ATSScoreResult"], ats_scale: str = "raw") -> RoundResult:
+    """`ats_scale="raw"` (default, unchanged since Day 51) uses the ATS score as is.
+    `ats_scale="zone_aligned"` (Day 54) maps it onto the common scale using the ATS's own zone cutoffs: the
+    ATS engine's scores structurally top out near 50-60, so raw they are NOT comparable with the other rounds
+    (see parsers/scoring_calibration.py for the measurement and the fix)."""
+    if ats_scale not in ("raw", "zone_aligned"):
+        raise ValueError("ats_scale must be 'raw' or 'zone_aligned'.")
     if result is None:
         return _no_evidence("ats", "No ATS result provided.")
     if not any(getattr(c, "available", False) for c in result.components):
         return _no_evidence("ats", "ATS result has no available component, so its score is not evidence.")
+    if ats_scale == "zone_aligned":
+        from parsers.scoring_calibration import align_ats_score, describe_alignment    # lazy: keeps this module light
+        skill = next((c.score for c in result.components if c.name == "skill_match" and c.available), None)
+        return RoundResult("ats", align_ats_score(result.overall_score, result.role_category, skill),
+                           note=f"ATS role category: {result.role_category}. " + describe_alignment(result.overall_score, result.role_category, skill))
     return RoundResult("ats", result.overall_score, note=f"ATS role category: {result.role_category}")
 
 
@@ -524,10 +535,11 @@ def compute_cross_round_score(
 
 
 def compute_from_round_outputs(
-    ats=None, screening=None, hr=None, technical=None, machine_test=None, **kwargs,
+    ats=None, screening=None, hr=None, technical=None, machine_test=None, ats_scale: str = "raw", **kwargs,
 ) -> CrossRoundCandidateScore:
-    """Convenience: pass the earlier engines' own result objects (or None) and the adapters judge their evidence."""
-    rounds = [round_from_ats(ats), round_from_screening(screening), round_from_hr(hr),
+    """Convenience: pass the earlier engines' own result objects (or None) and the adapters judge their evidence.
+    `ats_scale` is "raw" (default) or "zone_aligned" (Day 54) -- see `round_from_ats`."""
+    rounds = [round_from_ats(ats, ats_scale), round_from_screening(screening), round_from_hr(hr),
               round_from_technical(technical), round_from_machine_test(machine_test)]
     return compute_cross_round_score(rounds, **kwargs)
 

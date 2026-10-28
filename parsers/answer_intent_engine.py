@@ -86,7 +86,16 @@ class AnswerQuality(str, Enum):
 _CATEGORY_KEYWORDS: Dict[str, List[str]] = {
     "introduction": ["myself", "about me", "my name is", "i am a", "i'm a", "background"],
     "education": ["degree", "b\\.?tech", "bachelor", "master", "college", "university",
-                  "diploma", "cgpa", "percentage", "graduate", "graduated"],
+                  "diploma", "cgpa", "percentage", "graduate", "graduated",
+                  # Day 54: degree abbreviations. Day 32 documented that "B.Sc IT" was scored
+                  # vague because only "b.tech" was recognised; probing wider showed the same
+                  # for M.Sc, B.Com, MBA, BCA, MCA, PhD and others. Only UNAMBIGUOUS forms
+                  # are added. Undotted "BE" (the English word "be") and "BA" are
+                  # deliberately NOT added -- a documented remaining gap, not an oversight.
+                  "m\\.?tech", "b\\.?sc", "m\\.?sc", "b\\.?com", "m\\.?com", "b\\.e", "m\\.e",
+                  "bca", "mca", "bba", "mba", "ph\\.?d", "mbbs", "llb", "llm", "b\\.?pharm",
+                  "m\\.?pharm", "b\\.?arch", "post\\s?graduate", "under\\s?graduate",
+                  "higher secondary", "high school", "hsc", "ssc"],
     "experience": ["experience", "worked", "working", "previous company", "current company",
                    "current role", "my role", "responsibilities", "years in"],
     "location": ["live in", "based in", "currently in", "relocate", "relocating", "my location", "my city"],
@@ -297,7 +306,8 @@ def extract_salary_expectation(text: str) -> Optional[Dict]:
 # 3. Quality gating -- vague / off-topic / missing
 # ---------------------------------------------------------------------------
 
-def _is_vague(text: str, category_scores: Optional[Dict[str, float]] = None) -> bool:
+def _is_vague(text: str, category_scores: Optional[Dict[str, float]] = None,
+              expected_category: Optional[str] = None) -> bool:
     lowered = text.lower().strip()
     if any(re.search(rf"\b{re.escape(phrase)}\b", lowered) for phrase in _HEDGE_PHRASES):
         return True
@@ -312,7 +322,7 @@ def _is_vague(text: str, category_scores: Optional[Dict[str, float]] = None) -> 
     # false-rejection evidence this fix is based on.
     words = lowered.split()
     if 0 < len(words) <= 2 and lowered not in {"yes", "no", "yeah", "nope"}:
-        if not _looks_like_concrete_short_answer(lowered, category_scores):
+        if not _looks_like_concrete_short_answer(lowered, category_scores, expected_category):
             return True
     return False
 
@@ -332,8 +342,41 @@ _NUMBER_WORDS_BROAD = {
 _CONFIDENT_SHORT_ANSWER_WORDS = {"immediately", "immediate", "asap"}
 
 
-def _looks_like_concrete_short_answer(lowered_text: str, category_scores: Optional[Dict[str, float]]) -> bool:
+# Day 54: words that can never be (part of) a place name. A bare place name carries no
+# category vocabulary, so for a LOCATION question a short alphabetic answer is accepted as
+# concrete -- UNLESS it is built from non-answer words. A stoplist is used instead of a city
+# gazetteer on purpose: a gazetteer would accept the cities someone thought to list and
+# reject every smaller town (an unfair, uneven rule), whereas this treats all place names alike.
+# Trade-off (documented, benchmarked): a nonsense word like "Banana" now passes; Day 26's
+# completeness scoring downstream still catches content-free answers.
+_NON_PLACE_TOKENS = {
+    "yes", "no", "yeah", "yep", "nope", "nah", "ok", "okay", "sure", "fine", "maybe", "perhaps",
+    "depends", "hmm", "hm", "um", "umm", "uh", "idk", "dunno", "whatever", "skip", "pass", "later",
+    "none", "nothing", "nil", "na", "idea", "unsure", "unknown", "anything", "something", "somewhere",
+    "sorry", "pardon", "what", "why", "how", "repeat", "again", "know", "not", "dont", "don't",
+    # Work-mode / flexibility words answer "how do you want to work", not "where are you located".
+    # Day 30 decided this deliberately ("remote/hybrid/onsite alone must stay vague") and its tests
+    # pin it; Day 54's first draft of this rule wrongly accepted them and those tests caught it.
+    "remote", "hybrid", "onsite", "on-site", "wfh", "office", "home", "anywhere", "flexible",
+    "relocate", "relocating",
+}
+_PLACE_SHAPE = re.compile(r"^[a-z][a-z .,'\-]*$")
+
+
+def _looks_like_place_name(lowered_text: str) -> bool:
+    if not _PLACE_SHAPE.match(lowered_text):
+        return False
+    tokens = re.findall(r"[a-z]+(?:['\-][a-z]+)*", lowered_text)
+    if not 1 <= len(tokens) <= 3:
+        return False
+    return not any(t in _NON_PLACE_TOKENS for t in tokens)
+
+
+def _looks_like_concrete_short_answer(lowered_text: str, category_scores: Optional[Dict[str, float]],
+                                      expected_category: Optional[str] = None) -> bool:
     if any(ch.isdigit() for ch in lowered_text):
+        return True
+    if expected_category == "location" and _looks_like_place_name(lowered_text):
         return True
     words = re.findall(r"[a-z']+", lowered_text)
     if any(w in _NUMBER_WORDS_BROAD for w in words):
@@ -348,7 +391,7 @@ def _looks_like_concrete_short_answer(lowered_text: str, category_scores: Option
 def _assess_quality(text: str, expected_category: str, intent: IntentClassification, is_silent: bool) -> AnswerQuality:
     if is_silent or not text.strip():
         return AnswerQuality.MISSING
-    if _is_vague(text, intent.category_scores):
+    if _is_vague(text, intent.category_scores, expected_category):
         return AnswerQuality.VAGUE
 
     expected_score = intent.category_scores.get(expected_category, 0.0)
