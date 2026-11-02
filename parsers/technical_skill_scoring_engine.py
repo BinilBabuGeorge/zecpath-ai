@@ -51,7 +51,8 @@ rescaling step bolted on afterward.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+import re
+from dataclasses import dataclass, field, replace
 from enum import Enum
 from typing import Dict, List, Optional
 
@@ -345,6 +346,29 @@ def classify_shallow_vs_deep(overall_score: float) -> ShallowDeepClassification:
 # Per-answer evaluation -- explainable breakdown
 # ---------------------------------------------------------------------------
 
+# Day 57 (Day 56 finding F2): the rubric is matched on phrases, so a list of the right words scored as well as an
+# explanation (a keyword list 53.0 vs a correct plain-words answer 43.5 in the Day 56 probe). Real speech and prose
+# contain function words ("the", "is", "and", "so that"); a bare list of terms contains almost none. An answer of
+# at least _MIN_TOKENS_FOR_LIST_CHECK words with fewer than _MIN_FUNCTION_WORD_RATIO of them function words is treated as
+# a term list: it keeps only _KEYWORD_LIST_CREDIT of its accuracy and depth credit, because it demonstrates recall of
+# vocabulary, not understanding. LIMITS: this does not detect a fluent but WRONG answer, and it does not credit a
+# correct answer worded without the rubric phrases; both remain open (see the Day 57 report).
+_FUNCTION_WORDS = frozenset(
+    "a an the and or but so if then because of to in on at for with by from as is are was were be been it its this that these those "
+    "i you we they he she my your our their can could will would should may might do does did have has had not no which when while "
+    "than also just into over under about there here what how why who whom".split())
+_MIN_TOKENS_FOR_LIST_CHECK = 8
+_MIN_FUNCTION_WORD_RATIO = 0.10
+_KEYWORD_LIST_CREDIT = 0.25
+
+
+def looks_like_keyword_list(text: str) -> bool:
+    tokens = re.findall(r"[a-z']+", (text or "").lower())
+    if len(tokens) < _MIN_TOKENS_FOR_LIST_CHECK:
+        return False
+    return sum(t in _FUNCTION_WORDS for t in tokens) / len(tokens) < _MIN_FUNCTION_WORD_RATIO
+
+
 @dataclass
 class TechnicalAnswerEvaluation:
     question_id: str
@@ -357,9 +381,11 @@ class TechnicalAnswerEvaluation:
     real_world: RealWorldApplicabilityResult
     overall_technical_score: float
     classification: ShallowDeepClassification
+    keyword_list: bool = False        # Day 57: the answer looked like a bare list of terms; accuracy/depth credit was cut
 
     def to_dict(self) -> Dict:
         return {
+            "keyword_list": self.keyword_list,
             "question_id": self.question_id, "domain": self.domain, "tier": self.tier, "skill_tags": self.skill_tags,
             "overall_technical_score": self.overall_technical_score, "classification": self.classification.value,
             "accuracy": {"score": self.accuracy.accuracy_score, "coverage_ratio": self.accuracy.coverage_ratio,
@@ -373,6 +399,10 @@ class TechnicalAnswerEvaluation:
 def evaluate_technical_answer(text: str, question_id: str, domain: str, tier: DifficultyTier, skill_tags: List[str]) -> TechnicalAnswerEvaluation:
     accuracy = assess_accuracy(text, question_id)
     depth = assess_depth(text, tier)
+    keyword_list = looks_like_keyword_list(text)
+    if keyword_list:
+        accuracy = replace(accuracy, accuracy_score=round(accuracy.accuracy_score * _KEYWORD_LIST_CREDIT, 1))
+        depth = replace(depth, depth_score=round(depth.depth_score * _KEYWORD_LIST_CREDIT, 1))
     reasoning = assess_logical_reasoning(text)
     real_world = assess_real_world_applicability(text)
 
@@ -385,7 +415,7 @@ def evaluate_technical_answer(text: str, question_id: str, domain: str, tier: Di
     return TechnicalAnswerEvaluation(
         question_id=question_id, domain=domain, tier=tier.value, skill_tags=skill_tags,
         accuracy=accuracy, depth=depth, logical_reasoning=reasoning, real_world=real_world,
-        overall_technical_score=overall, classification=classification,
+        overall_technical_score=overall, classification=classification, keyword_list=keyword_list,
     )
 
 

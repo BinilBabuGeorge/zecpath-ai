@@ -67,6 +67,7 @@ _POOR_AUDIO_CONFIDENCE_THRESHOLD = 0.4     # below this: too unreliable to score
 _UNUSABLE_AUDIO_CONFIDENCE_THRESHOLD = 0.15  # below this: essentially no signal at all
 _MAX_EDGE_CASE_ATTEMPTS_PER_CATEGORY = 2    # retries before giving up on THIS question
 _MAX_CONSECUTIVE_EDGE_CASES_PER_CALL = 3    # consecutive edge-case turns before ending the call
+_MAX_CONSECUTIVE_SILENT_TURNS = 6           # Day 57: silent turns in a row before the call is ended (two questions' worth)
 _EXPECTED_LANGUAGE = "en"                   # this project's entire pipeline is English-only
 
 
@@ -145,6 +146,7 @@ class RobustConversationController:
         self._expected_language = expected_language
         self._edge_state: Dict[str, _EdgeCaseState] = {c: _EdgeCaseState() for c in self._flow.categories}
         self._consecutive_edge_cases = 0
+        self._consecutive_silent = 0
         self.call_ended_early = False
         self.outcome_log: List[TurnOutcome] = []
 
@@ -176,6 +178,16 @@ class RobustConversationController:
             action = self._flow.process_turn("", is_silent=True)  # Day 29's own END_CALL path
             return TurnOutcome(EdgeCaseAction.PASSTHROUGH, action.message, EdgeCaseType.NONE,
                                 call_ended=True, underlying_action=action)
+
+        # Day 57: silence passes through to Day 29 (which retries, then skips the question), so a dead line or a
+        # voicemail used to be walked through ALL questions -- about 21 prompts of "Are you still there?". Silence
+        # resets the edge-case streak by design, so it needs its own counter.
+        if raw.is_silent or not (raw.text or "").strip():
+            self._consecutive_silent += 1
+            if self._consecutive_silent >= _MAX_CONSECUTIVE_SILENT_TURNS:
+                return self._safety_end_call(f"{self._consecutive_silent} consecutive silent turns -- likely a dead line or voicemail")
+        else:
+            self._consecutive_silent = 0
 
         category = self._flow.current_category
 

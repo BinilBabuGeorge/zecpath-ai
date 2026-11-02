@@ -22,6 +22,19 @@ from docx import Document
 
 SUPPORTED_EXTENSIONS = {".pdf", ".docx"}
 
+
+class ResumeUploadError(ValueError):
+    """A resume file could not be read. Subclasses ValueError so existing `except ValueError` code keeps working.
+    `code` is a stable machine-readable reason; `str(error)` is a message safe to show a candidate.
+
+    Codes: unsupported_type | file_not_found | empty_file | corrupt_file
+    (Day 57: before this, a corrupt PDF raised pdfminer's own exception, a corrupt DOCX raised BadZipFile and a missing
+    file raised FileNotFoundError -- three different types leaking library internals to callers.)"""
+
+    def __init__(self, code: str, message: str) -> None:
+        super().__init__(message)
+        self.code = code
+
 # Section headings we expect to see on a resume (used to normalize casing/format)
 KNOWN_SECTIONS = ["Summary", "Skills", "Experience", "Education", "Certifications"]
 
@@ -38,6 +51,11 @@ class ExtractionResult:
     line_count: int
     detected_sections: List[str] = field(default_factory=list)
     warnings: List[str] = field(default_factory=list)
+
+    @property
+    def has_text(self) -> bool:
+        """False for a readable file with nothing in it (blank, or a scanned image with no text layer)."""
+        return bool(self.cleaned_text.strip())
 
 
 # ---------------------------------------------------------------------------
@@ -77,13 +95,21 @@ def extract_raw_text(file_path: str) -> str:
     ext = path.suffix.lower()
 
     if ext not in SUPPORTED_EXTENSIONS:
-        raise ValueError(f"Unsupported file type '{ext}'. Supported: {SUPPORTED_EXTENSIONS}")
+        hint = " Please save the resume as DOCX or PDF." if ext in {".doc", ".rtf", ".odt", ".txt", ".pages"} else ""
+        raise ResumeUploadError("unsupported_type", f"Unsupported file type '{ext}'. Supported: {SUPPORTED_EXTENSIONS}.{hint}")
+    if not path.is_file():
+        raise ResumeUploadError("file_not_found", "The resume file was not found.")
+    if path.stat().st_size == 0:
+        raise ResumeUploadError("empty_file", "The resume file is empty (0 bytes).")
 
-    if ext == ".pdf":
-        return _read_pdf(path)
-    if ext == ".docx":
+    try:
+        if ext == ".pdf":
+            return _read_pdf(path)
         return _read_docx(path)
-    raise AssertionError("unreachable")  # SUPPORTED_EXTENSIONS guards this
+    except ResumeUploadError:
+        raise
+    except Exception as exc:                      # library-specific errors (pdfminer, zipfile, lxml...) are not the caller's concern
+        raise ResumeUploadError("corrupt_file", f"The {ext.lstrip('.').upper()} file could not be read; it may be corrupt or password-protected.") from exc
 
 
 # ---------------------------------------------------------------------------
@@ -118,20 +144,14 @@ def _normalize_bullets(text: str) -> str:
     return "\n".join(normalized)
 
 
-def _normalize_section_headings(text: str) -> str:
-    """Standardize known section headings to 'Title Case:' regardless of how
-    they were capitalized or punctuated in the source file."""
-    lines = text.split("\n")
-    normalized = []
-    for line in lines:
-        stripped = line.strip().rstrip(":")
-        matched = None
-        for section in KNOWN_SECTIONS:
-            if stripped.lower() == section.lower():
-                matched = section
-                break
-        normalized.append(f"{matched}:" if matched else line)
-    return "\n".join(normalized)
+def normalize_section_headings(text: str) -> str:
+    """Standardize known section headings (and their common synonyms, Day 57) to 'Title Case:' regardless of how
+    they were capitalized or punctuated in the source file. The alias tables live in section_extractor."""
+    from parsers.section_extractor import RESUME_ALIASES, normalize_headings
+    return normalize_headings(text, KNOWN_SECTIONS, RESUME_ALIASES)
+
+
+_normalize_section_headings = normalize_section_headings        # the original private name stays valid
 
 
 def _remove_noise(text: str) -> str:

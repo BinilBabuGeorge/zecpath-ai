@@ -79,6 +79,12 @@ def experience_years_to_tier(years: float) -> DifficultyTier:
     the brief specifies. Non-integer years (e.g. 2.5) are handled by
     the natural <= boundary rule rather than requiring the caller to
     round first."""
+    # Day 57: NaN fails every comparison below, so it used to fall through to ADVANCED -- the hardest questions for a
+    # candidate whose experience was unknown. Reject anything that is not a real, finite, non-negative number.
+    if isinstance(years, bool) or not isinstance(years, (int, float)):
+        raise TypeError(f"years of experience must be a number, got {type(years).__name__}")
+    if years != years or years in (float("inf"), float("-inf")):
+        raise ValueError(f"years of experience must be a finite number, got {years}")
     if years < 0:
         raise ValueError(f"years of experience cannot be negative, got {years}")
     if years <= 2:
@@ -234,6 +240,9 @@ class TechnicalQuestionState:
     response_captured: bool = False
 
     def capture_response(self, text: str) -> None:
+        # Day 57: a None / non-text answer used to be stored silently and only surfaced as a crash (or a zero) later.
+        if not isinstance(text, str):
+            raise TypeError(f"An interview answer must be text, got {type(text).__name__}.")
         self.response_text = text
         self.response_captured = True
 
@@ -248,6 +257,12 @@ class TechnicalInterviewSession:
 
     @classmethod
     def start(cls, domain: TechnicalDomain, years_of_experience: float) -> "TechnicalInterviewSession":
+        # Day 57: an unknown domain used to surface as a bare KeyError from the question lookup. Accept the enum or its
+        # string value ("mern"), and refuse anything else with the valid choices.
+        try:
+            domain = TechnicalDomain(domain)
+        except ValueError:
+            raise ValueError(f"Unknown technical domain {domain!r}. Valid domains: {[d.value for d in TechnicalDomain]}") from None
         tier = experience_years_to_tier(years_of_experience)
         tiered = get_tiered_questions(domain, tier)
         conceptual = [q for q in tiered if q.question_type == TechnicalQuestionType.CONCEPTUAL]

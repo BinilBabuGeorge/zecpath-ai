@@ -94,6 +94,21 @@ _RELEVANCE_SCORE_BY_QUALITY = {
 }
 
 
+# Day 57: an answer of fewer words than this carries no evidence about the person. Before this gate, six one-word
+# "yes" answers scored 73.3 -- above the 70 selection band and only three points below six thoughtful answers (76.3):
+# "yes" was 'thin' (relevance 60), fluent enough (communication 65) and perfectly unhedged (confidence 100).
+# Availability / joining questions are exempt: "Immediately." is a complete answer to them (Day 30 made the same
+# point for screening).
+_MIN_SUBSTANTIVE_WORDS = 4
+_NON_SUBSTANTIVE_CAPS = {"relevance": 20.0, "communication": 30.0, "confidence": 30.0}
+
+
+def _is_non_substantive(text: str, category: Optional[str]) -> bool:
+    if category and "availability" in category.lower():
+        return False
+    return 0 < len(text.split()) < _MIN_SUBSTANTIVE_WORDS
+
+
 def _clamp(value: float, low: float = 0.0, high: float = 100.0) -> float:
     return max(low, min(high, value))
 
@@ -140,6 +155,7 @@ class AnswerScoreBreakdown:
     communication_score: float      # from Day 35
     confidence_score: float         # from Day 36
     weighted_positive_component: float   # relevance/communication/confidence combined, renormalized to 0-100
+    non_substantive: bool = False        # Day 57: too few words to carry evidence; component scores were capped
 
     def to_dict(self) -> Dict:
         return {
@@ -150,6 +166,7 @@ class AnswerScoreBreakdown:
             "communication_score": self.communication_score,
             "confidence_score": self.confidence_score,
             "weighted_positive_component": self.weighted_positive_component,
+            "non_substantive": self.non_substantive,
         }
 
 
@@ -158,6 +175,11 @@ def _score_answer(q: InterviewQuestionState, weights: WeightConfig) -> AnswerSco
     relevance_score = _RELEVANCE_SCORE_BY_QUALITY[quality]
     communication_score = evaluate_answer_communication(q.response_text, question_id=q.question_id, category=q.category).communication_score
     confidence_score = evaluate_answer_confidence(q.response_text, question_id=q.question_id, category=q.category).behavioral_confidence_score
+    non_substantive = _is_non_substantive(q.response_text or "", q.category)
+    if non_substantive:
+        relevance_score = min(relevance_score, _NON_SUBSTANTIVE_CAPS["relevance"])
+        communication_score = min(communication_score, _NON_SUBSTANTIVE_CAPS["communication"])
+        confidence_score = min(confidence_score, _NON_SUBSTANTIVE_CAPS["confidence"])
 
     weighted_sum = relevance_score * weights.relevance + communication_score * weights.communication + confidence_score * weights.confidence
     weighted_positive_component = round(weighted_sum / weights.positive_component_total, 1) if weights.positive_component_total else 0.0
@@ -166,6 +188,7 @@ def _score_answer(q: InterviewQuestionState, weights: WeightConfig) -> AnswerSco
         question_id=q.question_id, category=q.category, relevance_quality=quality.value,
         relevance_score=relevance_score, communication_score=communication_score,
         confidence_score=confidence_score, weighted_positive_component=weighted_positive_component,
+        non_substantive=non_substantive,
     )
 
 

@@ -183,6 +183,11 @@ class ConversationFlowController:
 
     def __init__(self, categories: Optional[List[str]] = None):
         self.categories: List[str] = list(categories) if categories is not None else list(CATEGORIES)
+        # Day 57: an unknown category used to be accepted silently and only blew up (or was swallowed by the crash
+        # guard) mid-call, when a question had to be phrased for it. Refuse it up front, with the valid names.
+        unknown = [c for c in self.categories if c not in _SIMPLIFIED_RESTATEMENT]
+        if unknown:
+            raise ValueError(f"Unknown screening categories: {unknown}. Valid categories: {list(CATEGORIES)}")
         self._index: int = 0
         self._state: Dict[str, _CategoryState] = {c: _CategoryState() for c in self.categories}
         self._all_raw_texts: List[Tuple[str, str]] = []   # (category, text) across the WHOLE call

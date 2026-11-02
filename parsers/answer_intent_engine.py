@@ -372,10 +372,19 @@ def _looks_like_place_name(lowered_text: str) -> bool:
     return not any(t in _NON_PLACE_TOKENS for t in tokens)
 
 
+# Day 57: categories whose natural answer can be a bare number ("5", "1200000", "30", "2020").
+_NUMERIC_ANSWER_CATEGORIES = {"experience", "salary", "notice_period", "availability", "education"}   # the notice-period question is named "availability" inside the engine
+
+
 def _looks_like_concrete_short_answer(lowered_text: str, category_scores: Optional[Dict[str, float]],
                                       expected_category: Optional[str] = None) -> bool:
     if any(ch.isdigit() for ch in lowered_text):
-        return True
+        # Day 57: digits alone ("12345 67890") used to count as a concrete answer to EVERY question, so a call of
+        # nothing but digit strings scored 60.7 and was never re-asked. Digits are concrete when there is also a
+        # word ("5 years", "B.Tech 2020", "Python3"), or when the question is one a bare number can answer.
+        has_letters = any(ch.isalpha() for ch in lowered_text)
+        if has_letters or expected_category is None or expected_category in _NUMERIC_ANSWER_CATEGORIES:
+            return True
     if expected_category == "location" and _looks_like_place_name(lowered_text):
         return True
     words = re.findall(r"[a-z']+", lowered_text)
@@ -388,11 +397,20 @@ def _looks_like_concrete_short_answer(lowered_text: str, category_scores: Option
     return False
 
 
+# Day 57: a self-introduction is an answer about the person, so it naturally mentions role, city, school and
+# employer. Those mentions used to make a good introduction look like an answer to a DIFFERENT question (4 of the 8
+# scripted introductions in the Day 56 simulation were re-asked). A first-person self-description is the evidence
+# that matters for this question.
+_SELF_INTRO_MARKER = re.compile(r"\b(?:i['\u2019]?m|i am|my name|this is|myself|let me introduce)\b", re.IGNORECASE)
+
+
 def _assess_quality(text: str, expected_category: str, intent: IntentClassification, is_silent: bool) -> AnswerQuality:
     if is_silent or not text.strip():
         return AnswerQuality.MISSING
     if _is_vague(text, intent.category_scores, expected_category):
         return AnswerQuality.VAGUE
+    if expected_category == "introduction" and _SELF_INTRO_MARKER.search(text):
+        return AnswerQuality.OK
 
     expected_score = intent.category_scores.get(expected_category, 0.0)
     if expected_score == 0.0:

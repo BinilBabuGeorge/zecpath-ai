@@ -272,8 +272,15 @@ def evaluate_eligibility(
         reasons.append(f"Custom min_ats_score={rules.min_ats_score} applied (overrides category-aware default threshold)")
     else:
         skill_component = next((c for c in result.components if c.name == "skill_match"), None)
-        skill_score = skill_component.score if skill_component else None
+        skill_available = bool(skill_component and getattr(skill_component, "available", True))
+        skill_score = skill_component.score if skill_available else None
         zone = classify_zone(result.overall_score, role_category=result.role_category, skill_match_score=skill_score)
+        if zone == "reject" and not skill_available:
+            # Day 57: with no comparable skills (an unparseable job description) the low score reflects missing structure,
+            # not a mismatch; a REJECT needs skill evidence, so a person reviews instead. Same stance as
+            # cross_round_aggregation_engine.ats_zone_of.
+            zone = "review"
+            reasons.append("No skills could be compared (missing requirements or skills section), so the ATS score cannot support a rejection.")
 
     tag_map = {"shortlist": "ELIGIBLE", "review": "REVIEW", "reject": "REJECTED"}
     tag = tag_map[zone]

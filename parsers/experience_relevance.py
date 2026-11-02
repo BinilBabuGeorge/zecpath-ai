@@ -13,7 +13,7 @@ from dataclasses import dataclass, field
 from datetime import date
 from typing import List, Optional
 
-from parsers.experience_parser import ExperienceEntry
+from parsers.experience_parser import ExperienceEntry, today as _reference_today
 from parsers.skill_extractor import extract_skills
 
 ROLE_SYNONYM_PATTERNS = [
@@ -40,7 +40,7 @@ def title_similarity(title_a: str, title_b: str) -> float:
 
 
 def _recency_weight(entry: ExperienceEntry, today: Optional[date] = None) -> float:
-    today = today or date.today()
+    today = today or _reference_today()
     if entry.is_current:
         return 1.0
     years_since_ended = max(0.0, (today - entry.end_date).days / 365.25)

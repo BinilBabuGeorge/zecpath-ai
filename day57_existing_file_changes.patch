@@ -1,0 +1,1335 @@
+--- a/ats_engine/service.py
++++ b/ats_engine/service.py
+@@ -1,31 +1,94 @@
+ """
+ ATS AI Service (Day 2 Process 1.0)
+-Input:  resume file + job requirements
+-Output: structured candidate profile + ATS score
++Input:  resume text + job description (or, legacy, a list of required keywords)
++Output: ATS score, zone, and per-component breakdown
++
++DAY 57: this service used to be a Day 2 placeholder that counted keyword matches, so the number it returned had nothing in
++common with the ATS engine the rest of the project uses. It is now wired to the real engine (`parsers.ats_scoring_engine`).
++
++TWO MODES, reported in `scoring_mode` so a caller can never confuse them:
++  * "ats_engine"       -- `job_description` given: the real ATS score (0-100, raw scale) and zone.
++  * "keyword_coverage" -- only `job_requirements` given: the original percentage of listed keywords found. DEPRECATED, kept so
++                          existing callers keep working; it is NOT comparable with an ats_engine score.
++
++SCORE STABILITY: the real engine's TF-IDF vocabulary is fitted on a corpus, and the score depends on it (measured: fitting on
++the job description alone moves a score by up to 5.5 points; fitting on resume + job description moves it by at most 0.8
++against a 20-document corpus). Per request the vocabulary is therefore fitted on exactly the resume and job description given,
++so the same pair always scores the same regardless of earlier requests. Pass `matcher=` to use a shared corpus for batch work.
+ """
+ 
+-from typing import Any, Dict
++from typing import Any, Dict, Optional
+ 
+-from utils.base_service import BaseAIService
++from utils.base_service import BaseAIService, MAX_ITEMS, ServiceInputError
+ 
+ 
+ class ATSService(BaseAIService):
+     service_name = "ats_ai_service"
+ 
+-    def process(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+-        resume_text = payload.get("resume_text", "")
+-        job_requirements = payload.get("job_requirements", [])
++    def __init__(self, matcher: Optional[Any] = None) -> None:
++        super().__init__()
++        self._matcher = matcher
+ 
+-        self.logger.info("Scoring resume against %d requirements", len(job_requirements))
+-
+-        # TODO: replace with real NLP parsing & scoring logic
+-        matched_keywords = [kw for kw in job_requirements if kw.lower() in resume_text.lower()]
+-        score = round(100 * len(matched_keywords) / max(len(job_requirements), 1), 2)
++    def process(self, payload: Dict[str, Any]) -> Dict[str, Any]:
++        resume_text = self._get_text(payload, "resume_text", required=False, allow_empty=True) or ""
++        job_description = self._get_text(payload, "job_description", required=False)
++        requirements = self._get_list(payload, "job_requirements")
++
++        if job_description is not None:
++            return self._score_with_engine(resume_text, job_description)
++        if requirements is not None:
++            return self._keyword_coverage(resume_text, requirements)
++        raise ServiceInputError("missing_field", "Provide 'job_description' (real ATS scoring) or 'job_requirements' (deprecated keyword coverage).", "job_description")
++
++    # -- real ATS ---------------------------------------------------------------------------------
++    def _score_with_engine(self, resume_text: str, job_description: str) -> Dict[str, Any]:
++        from parsers.ats_scoring_engine import score_candidate
++        from parsers.cross_round_aggregation_engine import ats_zone_of
++        from parsers.resume_extractor import normalize_section_headings
++        from parsers.semantic_matcher import SemanticMatcher
++
++        self.logger.info("Scoring resume (%d chars) against a job description (%d chars)", len(resume_text), len(job_description))
++        warnings = []
++        if not resume_text.strip():
++            warnings.append("The resume text is empty, so there is nothing to score.")
++        # Uploaded files are heading-normalised at extraction; resume text sent straight to the API must be too, or a
++        # resume headed "Technical Skills" is scored as having none (Day 57).
++        resume_text = normalize_section_headings(resume_text)
++        try:
++            matcher = self._matcher or SemanticMatcher([resume_text or " ", job_description])
++            result = score_candidate(resume_text, job_description, matcher)
++        except ValueError as exc:
++            if "vocabulary" in str(exc):          # scikit-learn: the texts hold nothing but stop words / symbols
++                raise ServiceInputError("invalid_input", "The job description has no usable words to compare against.", "job_description") from exc
++            raise
++        if not any(c.name == "skill_match" and getattr(c, "available", False) for c in result.components):
++            warnings.append("No skills could be compared (the job description has no recognisable requirements section, or the resume lists no skills), "
++                            "so the score reflects missing structure rather than a mismatch and the zone is capped at 'review'.")
++        response = self._base_response()
++        response.update({
++            "scoring_mode": "ats_engine",
++            "ats_score": round(result.overall_score, 2),
++            "zone": ats_zone_of(result),
++            "role_category": result.role_category,
++            "components": [{"name": c.name, "score": round(c.score, 2) if c.score is not None else None, "available": bool(getattr(c, "available", True))}
++                          for c in result.components],
++            "warnings": warnings,
++        })
++        return response
+ 
++    # -- deprecated keyword coverage --------------------------------------------------------------
++    def _keyword_coverage(self, resume_text: str, requirements: list) -> Dict[str, Any]:
++        if any(not isinstance(r, str) for r in requirements):
++            raise ServiceInputError("invalid_input", "'job_requirements' must be a list of text items.", "job_requirements")
++        self.logger.info("Keyword coverage of resume against %d requirements (deprecated mode)", len(requirements))
++        matched_keywords = [kw for kw in requirements if kw.lower() in resume_text.lower()]
++        score = round(100 * len(matched_keywords) / max(len(requirements), 1), 2)
+         response = self._base_response()
+         response.update({
++            "scoring_mode": "keyword_coverage",
+             "matched_keywords": matched_keywords,
+             "ats_score": score,
++            "warnings": ["Deprecated mode: this is the percentage of listed keywords found, NOT an ATS engine score. Send 'job_description' for the real score."],
+         })
+         return response
+ 
+@@ -33,6 +96,6 @@
+ if __name__ == "__main__":
+     demo_payload = {
+         "resume_text": "Experienced MERN stack developer skilled in React and Node.js",
+-        "job_requirements": ["React", "Node.js", "MongoDB"],
++        "job_description": "We need a MERN developer with React, Node.js and MongoDB experience.",
+     }
+-    print(ATSService().process(demo_payload))
++    print(ATSService().run(demo_payload))
+--- a/interview_ai/service.py
++++ b/interview_ai/service.py
+@@ -1,32 +1,97 @@
+ """
+ Interview Intelligence Service (Day 2 Process 3.0)
+-Input:  candidate profile, job role, interview type, prior scores
+-Output: interview transcript, skill/communication/negotiation scores
++Input:  interview type, the candidate's answers, and the context needed to pick questions
++Output: interview scores (HR or technical)
++
++DAY 57: this service used to return a placeholder transcript and scores of 0 for any request. It now scores the answers it is
++given with the real engines (`hr`: Day 37 scoring; `technical`: Day 47 scoring). With no answers it reports
++`interview_status: "not_started"` and null scores instead of a fake zero.
++
++`machine_test` and `final` interviews have their own engines but no service wiring yet; they return the error code
++`unsupported_value` rather than a placeholder that looks like a result.
+ """
+ 
+ from typing import Any, Dict
+ 
+-from utils.base_service import BaseAIService
++from utils.base_service import BaseAIService, ServiceInputError
++
++SUPPORTED_TYPES = ("hr", "technical")
+ 
+ 
+ class InterviewIntelligenceService(BaseAIService):
+     service_name = "interview_intelligence_service"
+ 
+     def process(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+-        interview_type = payload.get("interview_type", "hr")  # hr | technical | machine_test | final
++        interview_type = self._get_choice(payload, "interview_type", SUPPORTED_TYPES, default="hr")
++        answers = self._get_list(payload, "answers") or []
++        for i, a in enumerate(answers):
++            if not isinstance(a, str):
++                raise ServiceInputError("invalid_input", f"answers[{i}] must be text, got {type(a).__name__}.", f"answers[{i}]")
++            if len(a) > 20_000:
++                raise ServiceInputError("too_large", f"answers[{i}] is {len(a)} characters; the limit is 20000.", f"answers[{i}]")
++        self.logger.info("Scoring %s interview (%d answers)", interview_type, len(answers))
++        return self._hr(payload, answers) if interview_type == "hr" else self._technical(payload, answers)
++
++    def _hr(self, payload: Dict[str, Any], answers: list) -> Dict[str, Any]:
++        from parsers.hr_interview_question_bank import ExperienceLevel, InterviewSession, RoleType
++        from parsers.hr_interview_scoring_engine import score_hr_interview
+ 
+-        self.logger.info("Running %s interview", interview_type)
++        role = RoleType(self._get_choice(payload, "role_type", [r.value for r in RoleType], default="technical"))
++        level = ExperienceLevel(self._get_choice(payload, "experience_level", [e.value for e in ExperienceLevel], default="experienced"))
++        response = self._base_response()
++        response["interview_type"] = "hr"
++        if not any(a.strip() for a in answers):
++            response.update({"interview_status": "not_started", "hr_score": None, "communication_score": None, "technical_score": None,
++                             "answers_scored": 0, "answers_ignored": len(answers), "warnings": ["No answers were supplied, so there is nothing to score."]})
++            return response
++        session = InterviewSession.start(level, role)
++        used = 0
++        for a in answers:
++            if session.is_complete:
++                break
++            session.submit_response(a)
++            used += 1
++        report = score_hr_interview(session)
++        response.update({
++            "interview_status": "scored", "hr_score": round(report.overall_hr_score, 2),
++            "communication_score": round(report.avg_communication, 2), "technical_score": None,
++            "relevance_score": round(report.avg_relevance, 2), "confidence_score": round(report.avg_confidence, 2),
++            "answers_scored": report.num_questions_answered, "answers_ignored": len(answers) - used,
++            "non_substantive_answers": sum(1 for b in report.answer_breakdowns if b.non_substantive),
++            "warnings": ([f"{len(answers) - used} answer(s) beyond the number of questions were ignored."] if len(answers) > used else []),
++        })
++        return response
+ 
+-        # TODO: plug in adaptive question generation + real scoring model
++    def _technical(self, payload: Dict[str, Any], answers: list) -> Dict[str, Any]:
++        from parsers.technical_interview_question_bank import TechnicalDomain, TechnicalInterviewSession
++        from parsers.technical_skill_scoring_engine import build_technical_evaluation_report
++
++        domain = self._get_choice(payload, "domain", [d.value for d in TechnicalDomain], default="mern")
++        years = payload.get("experience_years")
++        if years is None:
++            raise ServiceInputError("missing_field", "'experience_years' is required for a technical interview (it selects the question tier).", "experience_years")
+         response = self._base_response()
++        response["interview_type"] = "technical"
++        session = TechnicalInterviewSession.start(TechnicalDomain(domain), years)      # validates years (finite, >= 0, a number)
++        response["tier"] = session.tier.value
++        if not any(a.strip() for a in answers):
++            response.update({"interview_status": "not_started", "technical_score": None, "communication_score": None,
++                             "answers_scored": 0, "answers_ignored": len(answers), "warnings": ["No answers were supplied, so there is nothing to score."]})
++            return response
++        used = 0
++        for a in answers:
++            if session.is_complete:
++                break
++            session.submit_response(a)
++            used += 1
++        report = build_technical_evaluation_report(session)
+         response.update({
+-            "interview_type": interview_type,
+-            "transcript": "[placeholder transcript]",
+-            "communication_score": 0,
+-            "technical_score": 0,
++            "interview_status": "scored", "technical_score": round(report.overall_score, 2), "communication_score": None,
++            "answers_scored": used, "answers_ignored": len(answers) - used,
++            "warnings": ([f"{len(answers) - used} answer(s) beyond the number of questions were ignored."] if len(answers) > used else []),
+         })
+         return response
+ 
+ 
+ if __name__ == "__main__":
+-    print(InterviewIntelligenceService().process({"interview_type": "hr"}))
++    print(InterviewIntelligenceService().run({"interview_type": "hr"}))
+--- a/parsers/answer_intent_engine.py
++++ b/parsers/answer_intent_engine.py
+@@ -372,10 +372,19 @@
+     return not any(t in _NON_PLACE_TOKENS for t in tokens)
+ 
+ 
++# Day 57: categories whose natural answer can be a bare number ("5", "1200000", "30", "2020").
++_NUMERIC_ANSWER_CATEGORIES = {"experience", "salary", "notice_period", "availability", "education"}   # the notice-period question is named "availability" inside the engine
++
++
+ def _looks_like_concrete_short_answer(lowered_text: str, category_scores: Optional[Dict[str, float]],
+                                       expected_category: Optional[str] = None) -> bool:
+     if any(ch.isdigit() for ch in lowered_text):
+-        return True
++        # Day 57: digits alone ("12345 67890") used to count as a concrete answer to EVERY question, so a call of
++        # nothing but digit strings scored 60.7 and was never re-asked. Digits are concrete when there is also a
++        # word ("5 years", "B.Tech 2020", "Python3"), or when the question is one a bare number can answer.
++        has_letters = any(ch.isalpha() for ch in lowered_text)
++        if has_letters or expected_category is None or expected_category in _NUMERIC_ANSWER_CATEGORIES:
++            return True
+     if expected_category == "location" and _looks_like_place_name(lowered_text):
+         return True
+     words = re.findall(r"[a-z']+", lowered_text)
+@@ -388,11 +397,20 @@
+     return False
+ 
+ 
++# Day 57: a self-introduction is an answer about the person, so it naturally mentions role, city, school and
++# employer. Those mentions used to make a good introduction look like an answer to a DIFFERENT question (4 of the 8
++# scripted introductions in the Day 56 simulation were re-asked). A first-person self-description is the evidence
++# that matters for this question.
++_SELF_INTRO_MARKER = re.compile(r"\b(?:i['\u2019]?m|i am|my name|this is|myself|let me introduce)\b", re.IGNORECASE)
++
++
+ def _assess_quality(text: str, expected_category: str, intent: IntentClassification, is_silent: bool) -> AnswerQuality:
+     if is_silent or not text.strip():
+         return AnswerQuality.MISSING
+     if _is_vague(text, intent.category_scores, expected_category):
+         return AnswerQuality.VAGUE
++    if expected_category == "introduction" and _SELF_INTRO_MARKER.search(text):
++        return AnswerQuality.OK
+ 
+     expected_score = intent.category_scores.get(expected_category, 0.0)
+     if expected_score == 0.0:
+--- a/parsers/conversation_flow_engine.py
++++ b/parsers/conversation_flow_engine.py
+@@ -183,6 +183,11 @@
+ 
+     def __init__(self, categories: Optional[List[str]] = None):
+         self.categories: List[str] = list(categories) if categories is not None else list(CATEGORIES)
++        # Day 57: an unknown category used to be accepted silently and only blew up (or was swallowed by the crash
++        # guard) mid-call, when a question had to be phrased for it. Refuse it up front, with the valid names.
++        unknown = [c for c in self.categories if c not in _SIMPLIFIED_RESTATEMENT]
++        if unknown:
++            raise ValueError(f"Unknown screening categories: {unknown}. Valid categories: {list(CATEGORIES)}")
+         self._index: int = 0
+         self._state: Dict[str, _CategoryState] = {c: _CategoryState() for c in self.categories}
+         self._all_raw_texts: List[Tuple[str, str]] = []   # (category, text) across the WHOLE call
+--- a/parsers/cross_round_aggregation_engine.py
++++ b/parsers/cross_round_aggregation_engine.py
+@@ -192,6 +192,38 @@
+     return RoundResult(name, None, note=note)
+ 
+ 
++def ats_zone_of(result: "ATSScoreResult") -> str:
++    """The ATS zone ('shortlist' | 'review' | 'reject') exactly as eligibility_engine derives it: the category thresholds
++    PLUS the skill-relevance floor. One definition, shared by the aggregator, the API service and the simulation."""
++    from parsers.ranking_engine import classify_zone                 # lazy: keeps this module light
++    skill = next((c.score for c in result.components if c.name == "skill_match" and getattr(c, "available", False)), None)
++    zone = classify_zone(result.overall_score, role_category=result.role_category, skill_match_score=skill)
++    zone = str(getattr(zone, "value", zone)).lower()
++    # Day 57: when no skills could be compared (the job description has no recognisable requirements, or the resume no
++    # skills), the engine's low score reflects missing structure, not a mismatch. A REJECT needs skill evidence; without it
++    # the honest answer is REVIEW ("a person should look"), the same stance Day 52 takes on thin evidence.
++    if zone == "reject" and skill is None:
++        return "review"
++    return zone
++
++
++def zone_review_reasons(zone: str) -> List[str]:
++    if zone == "reject":
++        return ["ATS zone is REJECT: the resume does not match this role, so interview strength alone should not select the candidate."]
++    if zone == "review":
++        return ["ATS zone is REVIEW: a recruiter should confirm the resume fit before this candidate is selected."]
++    return []
++
++
++def _ats_zone_review_reasons(result: "ATSScoreResult") -> List[str]:
++    """Day 57 (Day 56 finding F1): the ATS zone used to be invisible to the decision. A resume the ATS REJECTED (and a human
++    had rejected) could be recommended for selection on strong interviews alone -- 69.0 on the raw scale, 74.5 on the
++    zone-aligned one. A non-shortlist zone is now a review reason; the Day 52 engine's existing R4 rule then blocks SELECTED
++    and holds the candidate for a person, with the reason in the trace. The zone is derived exactly as eligibility_engine
++    derives it (category thresholds plus the skill-relevance floor)."""
++    return zone_review_reasons(ats_zone_of(result))
++
++
+ def round_from_ats(result: Optional["ATSScoreResult"], ats_scale: str = "raw") -> RoundResult:
+     """`ats_scale="raw"` (default, unchanged since Day 51) uses the ATS score as is.
+     `ats_scale="zone_aligned"` (Day 54) maps it onto the common scale using the ATS's own zone cutoffs: the
+@@ -207,8 +239,9 @@
+         from parsers.scoring_calibration import align_ats_score, describe_alignment    # lazy: keeps this module light
+         skill = next((c.score for c in result.components if c.name == "skill_match" and c.available), None)
+         return RoundResult("ats", align_ats_score(result.overall_score, result.role_category, skill),
++                           review_reasons=_ats_zone_review_reasons(result),
+                            note=f"ATS role category: {result.role_category}. " + describe_alignment(result.overall_score, result.role_category, skill))
+-    return RoundResult("ats", result.overall_score, note=f"ATS role category: {result.role_category}")
++    return RoundResult("ats", result.overall_score, review_reasons=_ats_zone_review_reasons(result), note=f"ATS role category: {result.role_category}")
+ 
+ 
+ def round_from_screening(result: Optional["ScreeningScoreResult"]) -> RoundResult:
+--- a/parsers/edge_case_handler.py
++++ b/parsers/edge_case_handler.py
+@@ -67,6 +67,7 @@
+ _UNUSABLE_AUDIO_CONFIDENCE_THRESHOLD = 0.15  # below this: essentially no signal at all
+ _MAX_EDGE_CASE_ATTEMPTS_PER_CATEGORY = 2    # retries before giving up on THIS question
+ _MAX_CONSECUTIVE_EDGE_CASES_PER_CALL = 3    # consecutive edge-case turns before ending the call
++_MAX_CONSECUTIVE_SILENT_TURNS = 6           # Day 57: silent turns in a row before the call is ended (two questions' worth)
+ _EXPECTED_LANGUAGE = "en"                   # this project's entire pipeline is English-only
+ 
+ 
+@@ -145,6 +146,7 @@
+         self._expected_language = expected_language
+         self._edge_state: Dict[str, _EdgeCaseState] = {c: _EdgeCaseState() for c in self._flow.categories}
+         self._consecutive_edge_cases = 0
++        self._consecutive_silent = 0
+         self.call_ended_early = False
+         self.outcome_log: List[TurnOutcome] = []
+ 
+@@ -177,6 +179,16 @@
+             return TurnOutcome(EdgeCaseAction.PASSTHROUGH, action.message, EdgeCaseType.NONE,
+                                 call_ended=True, underlying_action=action)
+ 
++        # Day 57: silence passes through to Day 29 (which retries, then skips the question), so a dead line or a
++        # voicemail used to be walked through ALL questions -- about 21 prompts of "Are you still there?". Silence
++        # resets the edge-case streak by design, so it needs its own counter.
++        if raw.is_silent or not (raw.text or "").strip():
++            self._consecutive_silent += 1
++            if self._consecutive_silent >= _MAX_CONSECUTIVE_SILENT_TURNS:
++                return self._safety_end_call(f"{self._consecutive_silent} consecutive silent turns -- likely a dead line or voicemail")
++        else:
++            self._consecutive_silent = 0
++
+         category = self._flow.current_category
+ 
+         # Priority: unusable/poor audio is checked before language,
+--- a/parsers/eligibility_engine.py
++++ b/parsers/eligibility_engine.py
+@@ -272,8 +272,15 @@
+         reasons.append(f"Custom min_ats_score={rules.min_ats_score} applied (overrides category-aware default threshold)")
+     else:
+         skill_component = next((c for c in result.components if c.name == "skill_match"), None)
+-        skill_score = skill_component.score if skill_component else None
++        skill_available = bool(skill_component and getattr(skill_component, "available", True))
++        skill_score = skill_component.score if skill_available else None
+         zone = classify_zone(result.overall_score, role_category=result.role_category, skill_match_score=skill_score)
++        if zone == "reject" and not skill_available:
++            # Day 57: with no comparable skills (an unparseable job description) the low score reflects missing structure,
++            # not a mismatch; a REJECT needs skill evidence, so a person reviews instead. Same stance as
++            # cross_round_aggregation_engine.ats_zone_of.
++            zone = "review"
++            reasons.append("No skills could be compared (missing requirements or skills section), so the ATS score cannot support a rejection.")
+ 
+     tag_map = {"shortlist": "ELIGIBLE", "review": "REVIEW", "reject": "REJECTED"}
+     tag = tag_map[zone]
+--- a/parsers/experience_parser.py
++++ b/parsers/experience_parser.py
+@@ -9,20 +9,49 @@
+ from __future__ import annotations
+ 
+ import re
++from contextlib import contextmanager
+ from dataclasses import dataclass, field
+ from datetime import date
+-from typing import List, Optional, Tuple
++from typing import Iterator, List, Optional, Tuple
+ 
+ MONTHS = {
+     "jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
+     "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12,
+ }
+ 
++# Day 57: a date may be "Mon YYYY" OR a bare "YYYY" (the old pattern silently dropped "2019 - 2022", so such a job
++# counted as 0 years); the separator may be a hyphen, en dash, em dash or "to"; "Present" has common synonyms.
++_DATE = r"(?:[A-Za-z]{3,9}\.?\s*)?\d{4}"
++_PRESENT = r"Present|Current|Ongoing|Now|Till\s*date|Till\s*now"
+ ENTRY_PATTERN = re.compile(
+     r"^-?\s*(?P<title>[^,]+),\s*(?P<company>[^(]+?)\s*"
+-    r"\((?P<start>[A-Za-z]{3,9}\.?\s*\d{4})\s*[-\u2013]\s*(?P<end>Present|[A-Za-z]{3,9}\.?\s*\d{4})\)\s*$",
++    rf"\((?P<start>{_DATE})\s*(?:[-\u2013\u2014]|\bto\b)\s*(?P<end>{_PRESENT}|{_DATE})\)\s*$",
+     re.IGNORECASE,
+ )
++_PRESENT_RE = re.compile(rf"^(?:{_PRESENT})$", re.IGNORECASE)
++
++# Day 57: a person is not credited with a career longer than this (a typo like "1900" must not become 126 years).
++MAX_PLAUSIBLE_CAREER_YEARS = 60
++
++# Day 57: the reference date for "Present". Defaults to the real today; set it to make results reproducible
++# (the experience result for a resume that says "Present" otherwise changes with the calendar -- Day 56 finding F4).
++_REFERENCE_DATE: Optional[date] = None
++
++
++def today() -> date:
++    """The date that "Present" means. The real today unless `reference_date()` is in force."""
++    return _REFERENCE_DATE or date.today()
++
++
++@contextmanager
++def reference_date(as_of: Optional[date]) -> Iterator[None]:
++    """Pin what "Present" means, for the duration of the block. Not thread-safe by design (a module-level setting)."""
++    global _REFERENCE_DATE
++    previous, _REFERENCE_DATE = _REFERENCE_DATE, as_of
++    try:
++        yield
++    finally:
++        _REFERENCE_DATE = previous
+ 
+ OTHER_SECTION_HEADINGS = {"skills", "education", "certifications", "projects"}
+ EXPERIENCE_HEADINGS = {"experience", "work experience", "professional experience"}
+@@ -46,7 +75,7 @@
+     @property
+     def end_date(self) -> date:
+         if self.is_current:
+-            return date.today().replace(day=1)
++            return today().replace(day=1)
+         return date(self.end_year, self.end_month, 1)
+ 
+     @property
+@@ -61,6 +90,7 @@
+     total_years: float
+     gaps: List[Tuple[date, date]] = field(default_factory=list)
+     overlaps: List[Tuple[ExperienceEntry, ExperienceEntry]] = field(default_factory=list)
++    warnings: List[str] = field(default_factory=list)       # Day 57: entries that were left out, and why
+ 
+ 
+ def _month_diff(d1: date, d2: date) -> int:
+@@ -70,6 +100,8 @@
+ def _parse_month_year(text: str) -> Tuple[int, int]:
+     text = text.strip().rstrip(".")
+     parts = text.split()
++    if len(parts) == 1 and parts[0].isdigit() and len(parts[0]) == 4:
++        return int(parts[0]), 0                    # bare year: month 0 = "unknown", resolved by the caller
+     if len(parts) == 2:
+         month_str, year_str = parts
+         month = MONTHS.get(month_str[:3].lower())
+@@ -100,10 +132,25 @@
+ 
+         match = ENTRY_PATTERN.match(line)
+         if match:
+-            start_year, start_month = _parse_month_year(match.group("start"))
+             end_raw = match.group("end")
+-            is_current = end_raw.strip().lower() == "present"
+-            end_year, end_month = (None, None) if is_current else _parse_month_year(end_raw)
++            is_current = bool(_PRESENT_RE.match(end_raw.strip()))
++            try:
++                start_year, start_month = _parse_month_year(match.group("start"))
++                end_year, end_month = (None, None) if is_current else _parse_month_year(end_raw)
++            except ValueError:
++                # Day 57: a date slot that looks like a date but is not one ("Foo 2020") must not abort the whole
++                # resume; the line is simply not treated as a job entry.
++                if current_entry is not None:
++                    current_entry.description = (current_entry.description + " " + line).strip()
++                continue
++            # Day 57: bare years. Convention: a start year means mid-year (July) and an end year means mid-year
++            # (June), so "2019 - 2022" is 3.0 years; a job inside ONE bare year is credited 6 months (Jul-Dec).
++            if start_month == 0 or end_month == 0:
++                if start_month == 0 and end_month == 0 and start_year == end_year:
++                    start_month, end_month = 7, 12
++                else:
++                    start_month = 7 if start_month == 0 else start_month
++                    end_month = 6 if end_month == 0 else end_month
+ 
+             current_entry = ExperienceEntry(
+                 title=match.group("title").strip(), company=match.group("company").strip(),
+@@ -123,6 +170,25 @@
+     if not entries:
+         return ExperienceSummary(entries=[], total_months=0, total_years=0.0)
+ 
++    # Day 57: leave out entries that cannot be trusted, and SAY so, instead of producing negative or absurd totals.
++    now = today().replace(day=1)
++    horizon = date(max(now.year - MAX_PLAUSIBLE_CAREER_YEARS, 1), 1, 1)
++    usable: List[ExperienceEntry] = []
++    warnings: List[str] = []
++    for e in entries:
++        label = f"{e.title} at {e.company}"
++        if e.start_date > now:
++            warnings.append(f"left out '{label}': it starts in the future ({e.start_date:%b %Y})")
++        elif not e.is_current and e.end_date < e.start_date:
++            warnings.append(f"left out '{label}': the end date is before the start date")
++        elif e.start_date < horizon:
++            warnings.append(f"left out '{label}': started {e.start_date.year}, more than {MAX_PLAUSIBLE_CAREER_YEARS} years ago")
++        else:
++            usable.append(e)
++    if not usable:
++        return ExperienceSummary(entries=[], total_months=0, total_years=0.0, warnings=warnings)
++    entries = usable
++
+     sorted_entries = sorted(entries, key=lambda e: e.start_date)
+ 
+     overlaps: List[Tuple[ExperienceEntry, ExperienceEntry]] = []
+@@ -133,7 +199,7 @@
+ 
+     merged: List[List[date]] = []
+     for entry in sorted_entries:
+-        start, end = entry.start_date, entry.end_date
++        start, end = entry.start_date, min(entry.end_date, now)       # a job cannot run past today
+         if merged and start <= merged[-1][1]:
+             merged[-1][1] = max(merged[-1][1], end)
+         else:
+@@ -150,5 +216,5 @@
+ 
+     return ExperienceSummary(
+         entries=sorted_entries, total_months=total_months,
+-        total_years=round(total_months / 12, 1), gaps=gaps, overlaps=overlaps,
++        total_years=round(total_months / 12, 1), gaps=gaps, overlaps=overlaps, warnings=warnings,
+     )
+--- a/parsers/experience_relevance.py
++++ b/parsers/experience_relevance.py
+@@ -13,7 +13,7 @@
+ from datetime import date
+ from typing import List, Optional
+ 
+-from parsers.experience_parser import ExperienceEntry
++from parsers.experience_parser import ExperienceEntry, today as _reference_today
+ from parsers.skill_extractor import extract_skills
+ 
+ ROLE_SYNONYM_PATTERNS = [
+@@ -40,7 +40,7 @@
+ 
+ 
+ def _recency_weight(entry: ExperienceEntry, today: Optional[date] = None) -> float:
+-    today = today or date.today()
++    today = today or _reference_today()
+     if entry.is_current:
+         return 1.0
+     years_since_ended = max(0.0, (today - entry.end_date).days / 365.25)
+--- a/parsers/hr_interview_question_bank.py
++++ b/parsers/hr_interview_question_bank.py
+@@ -258,6 +258,9 @@
+     follow_up_type: Optional[str] = None   # Day 34 addition: which trigger type was used (clarification/deepening/example_based), for state tracking and repetition-prevention
+ 
+     def capture_response(self, text: str) -> None:
++        # Day 57: a None / non-text answer used to be stored silently and only surfaced as a crash (or a zero) later.
++        if not isinstance(text, str):
++            raise TypeError(f"An interview answer must be text, got {type(text).__name__}.")
+         self.response_text = text
+         self.response_captured = True
+ 
+--- a/parsers/hr_interview_scoring_engine.py
++++ b/parsers/hr_interview_scoring_engine.py
+@@ -94,6 +94,21 @@
+ }
+ 
+ 
++# Day 57: an answer of fewer words than this carries no evidence about the person. Before this gate, six one-word
++# "yes" answers scored 73.3 -- above the 70 selection band and only three points below six thoughtful answers (76.3):
++# "yes" was 'thin' (relevance 60), fluent enough (communication 65) and perfectly unhedged (confidence 100).
++# Availability / joining questions are exempt: "Immediately." is a complete answer to them (Day 30 made the same
++# point for screening).
++_MIN_SUBSTANTIVE_WORDS = 4
++_NON_SUBSTANTIVE_CAPS = {"relevance": 20.0, "communication": 30.0, "confidence": 30.0}
++
++
++def _is_non_substantive(text: str, category: Optional[str]) -> bool:
++    if category and "availability" in category.lower():
++        return False
++    return 0 < len(text.split()) < _MIN_SUBSTANTIVE_WORDS
++
++
+ def _clamp(value: float, low: float = 0.0, high: float = 100.0) -> float:
+     return max(low, min(high, value))
+ 
+@@ -140,6 +155,7 @@
+     communication_score: float      # from Day 35
+     confidence_score: float         # from Day 36
+     weighted_positive_component: float   # relevance/communication/confidence combined, renormalized to 0-100
++    non_substantive: bool = False        # Day 57: too few words to carry evidence; component scores were capped
+ 
+     def to_dict(self) -> Dict:
+         return {
+@@ -150,6 +166,7 @@
+             "communication_score": self.communication_score,
+             "confidence_score": self.confidence_score,
+             "weighted_positive_component": self.weighted_positive_component,
++            "non_substantive": self.non_substantive,
+         }
+ 
+ 
+@@ -158,6 +175,11 @@
+     relevance_score = _RELEVANCE_SCORE_BY_QUALITY[quality]
+     communication_score = evaluate_answer_communication(q.response_text, question_id=q.question_id, category=q.category).communication_score
+     confidence_score = evaluate_answer_confidence(q.response_text, question_id=q.question_id, category=q.category).behavioral_confidence_score
++    non_substantive = _is_non_substantive(q.response_text or "", q.category)
++    if non_substantive:
++        relevance_score = min(relevance_score, _NON_SUBSTANTIVE_CAPS["relevance"])
++        communication_score = min(communication_score, _NON_SUBSTANTIVE_CAPS["communication"])
++        confidence_score = min(confidence_score, _NON_SUBSTANTIVE_CAPS["confidence"])
+ 
+     weighted_sum = relevance_score * weights.relevance + communication_score * weights.communication + confidence_score * weights.confidence
+     weighted_positive_component = round(weighted_sum / weights.positive_component_total, 1) if weights.positive_component_total else 0.0
+@@ -166,6 +188,7 @@
+         question_id=q.question_id, category=q.category, relevance_quality=quality.value,
+         relevance_score=relevance_score, communication_score=communication_score,
+         confidence_score=confidence_score, weighted_positive_component=weighted_positive_component,
++        non_substantive=non_substantive,
+     )
+ 
+ 
+--- a/parsers/pipeline_simulation.py
++++ b/parsers/pipeline_simulation.py
+@@ -61,12 +61,11 @@
+ from datetime import date
+ from pathlib import Path
+ from typing import Any, Dict, Iterator, List, Optional, Tuple
+-from unittest import mock
+ 
+ from parsers import experience_parser, experience_relevance
+ from parsers.answer_intent_engine import extract_experience_years
+ from parsers.ats_scoring_engine import score_candidate
+-from parsers.cross_round_aggregation_engine import compute_from_round_outputs
++from parsers.cross_round_aggregation_engine import ats_zone_of, compute_from_round_outputs
+ from parsers.final_recommendation_engine import decide
+ from parsers.hiring_report_generator import generate_hiring_report
+ from parsers.hr_interview_question_bank import ExperienceLevel, InterviewSession, RoleType
+@@ -94,12 +93,9 @@
+ # --------------------------------------------------------------------------- clock
+ @contextmanager
+ def frozen_today(as_of: date) -> Iterator[None]:
+-    """Pin `date.today()` inside the two modules that read the clock. Reproducible runs; no existing file changed."""
+-    class _Frozen(date):
+-        @classmethod
+-        def today(cls) -> date:
+-            return as_of
+-    with mock.patch.object(experience_parser, "date", _Frozen), mock.patch.object(experience_relevance, "date", _Frozen):
++    """Pin what "Present" means for the experience parser. Since Day 57 this uses the parser's own `reference_date`
++    (before that it patched `date`); behaviour is the same, the mechanism is now a supported API."""
++    with experience_parser.reference_date(as_of):
+         yield
+ 
+ 
+@@ -215,10 +211,8 @@
+ 
+ 
+ def ats_zone(result: Any) -> str:
+-    """The ATS zone exactly as eligibility_engine derives it: category thresholds PLUS the skill-relevance floor."""
+-    comp = next((c for c in result.components if c.name == "skill_match"), None)
+-    z = classify_zone(result.overall_score, role_category=result.role_category, skill_match_score=comp.score if comp else None)
+-    return str(getattr(z, "value", z))
++    """The ATS zone, from the one shared definition (Day 57 moved it to the aggregation engine)."""
++    return ats_zone_of(result)
+ 
+ 
+ def _stated_years(text: str) -> Optional[float]:
+--- a/parsers/resume_extractor.py
++++ b/parsers/resume_extractor.py
+@@ -22,6 +22,19 @@
+ 
+ SUPPORTED_EXTENSIONS = {".pdf", ".docx"}
+ 
++
++class ResumeUploadError(ValueError):
++    """A resume file could not be read. Subclasses ValueError so existing `except ValueError` code keeps working.
++    `code` is a stable machine-readable reason; `str(error)` is a message safe to show a candidate.
++
++    Codes: unsupported_type | file_not_found | empty_file | corrupt_file
++    (Day 57: before this, a corrupt PDF raised pdfminer's own exception, a corrupt DOCX raised BadZipFile and a missing
++    file raised FileNotFoundError -- three different types leaking library internals to callers.)"""
++
++    def __init__(self, code: str, message: str) -> None:
++        super().__init__(message)
++        self.code = code
++
+ # Section headings we expect to see on a resume (used to normalize casing/format)
+ KNOWN_SECTIONS = ["Summary", "Skills", "Experience", "Education", "Certifications"]
+ 
+@@ -39,6 +52,11 @@
+     detected_sections: List[str] = field(default_factory=list)
+     warnings: List[str] = field(default_factory=list)
+ 
++    @property
++    def has_text(self) -> bool:
++        """False for a readable file with nothing in it (blank, or a scanned image with no text layer)."""
++        return bool(self.cleaned_text.strip())
++
+ 
+ # ---------------------------------------------------------------------------
+ # Raw extraction (format-specific readers)
+@@ -77,13 +95,21 @@
+     ext = path.suffix.lower()
+ 
+     if ext not in SUPPORTED_EXTENSIONS:
+-        raise ValueError(f"Unsupported file type '{ext}'. Supported: {SUPPORTED_EXTENSIONS}")
+-
+-    if ext == ".pdf":
+-        return _read_pdf(path)
+-    if ext == ".docx":
++        hint = " Please save the resume as DOCX or PDF." if ext in {".doc", ".rtf", ".odt", ".txt", ".pages"} else ""
++        raise ResumeUploadError("unsupported_type", f"Unsupported file type '{ext}'. Supported: {SUPPORTED_EXTENSIONS}.{hint}")
++    if not path.is_file():
++        raise ResumeUploadError("file_not_found", "The resume file was not found.")
++    if path.stat().st_size == 0:
++        raise ResumeUploadError("empty_file", "The resume file is empty (0 bytes).")
++
++    try:
++        if ext == ".pdf":
++            return _read_pdf(path)
+         return _read_docx(path)
+-    raise AssertionError("unreachable")  # SUPPORTED_EXTENSIONS guards this
++    except ResumeUploadError:
++        raise
++    except Exception as exc:                      # library-specific errors (pdfminer, zipfile, lxml...) are not the caller's concern
++        raise ResumeUploadError("corrupt_file", f"The {ext.lstrip('.').upper()} file could not be read; it may be corrupt or password-protected.") from exc
+ 
+ 
+ # ---------------------------------------------------------------------------
+@@ -118,20 +144,14 @@
+     return "\n".join(normalized)
+ 
+ 
+-def _normalize_section_headings(text: str) -> str:
+-    """Standardize known section headings to 'Title Case:' regardless of how
+-    they were capitalized or punctuated in the source file."""
+-    lines = text.split("\n")
+-    normalized = []
+-    for line in lines:
+-        stripped = line.strip().rstrip(":")
+-        matched = None
+-        for section in KNOWN_SECTIONS:
+-            if stripped.lower() == section.lower():
+-                matched = section
+-                break
+-        normalized.append(f"{matched}:" if matched else line)
+-    return "\n".join(normalized)
++def normalize_section_headings(text: str) -> str:
++    """Standardize known section headings (and their common synonyms, Day 57) to 'Title Case:' regardless of how
++    they were capitalized or punctuated in the source file. The alias tables live in section_extractor."""
++    from parsers.section_extractor import RESUME_ALIASES, normalize_headings
++    return normalize_headings(text, KNOWN_SECTIONS, RESUME_ALIASES)
++
++
++_normalize_section_headings = normalize_section_headings        # the original private name stays valid
+ 
+ 
+ def _remove_noise(text: str) -> str:
+--- a/parsers/section_extractor.py
++++ b/parsers/section_extractor.py
+@@ -10,6 +10,43 @@
+ JD_LABELS = ["About the Role", "Required Skills", "Good to Have", "Education",
+              "Responsibilities", "Salary Range"]
+ 
++# Day 57: only the exact labels above used to be recognised, so the usual wording ("Technical Skills", "Work Experience" on a
++# resume; "Requirements", "Must Have", "Key Responsibilities" in a job description) made a whole section invisible: the same
++# resume scored 14.9 under "Technical Skills" and 50.7 under "Skills". An alias counts only when it is the WHOLE line
++# (case and a trailing colon ignored) -- never a phrase inside a sentence.
++RESUME_ALIASES = {
++    "Summary": ["professional summary", "career summary", "career objective", "objective", "profile", "professional profile", "about me", "summary of qualifications"],
++    "Skills": ["technical skills", "key skills", "core skills", "skills & tools", "skills and tools", "technical proficiency", "technical expertise",
++               "technologies", "tech stack", "core competencies", "areas of expertise", "skills summary", "skill set", "skillset"],
++    "Experience": ["work experience", "professional experience", "employment history", "work history", "career history", "relevant experience",
++                   "professional background", "employment experience"],
++    "Education": ["academic background", "academic qualifications", "educational qualifications", "education & qualifications",
++                  "education and qualifications", "qualifications", "academics", "education details"],
++    "Certifications": ["certificates", "licenses & certifications", "licenses and certifications", "certifications & courses", "professional certifications"],
++}
++JD_ALIASES = {
++    "About the Role": ["job description", "role overview", "overview", "about the job", "job summary", "about this role"],
++    "Required Skills": ["requirements", "key requirements", "required qualifications", "skills required", "must have", "must-have", "must haves",
++                        "what we are looking for", "what we're looking for", "technical requirements", "required experience and skills", "skills & requirements"],
++    "Good to Have": ["nice to have", "nice-to-have", "preferred skills", "preferred qualifications", "bonus skills", "plus points", "desirable", "good to have skills"],
++    "Responsibilities": ["key responsibilities", "roles and responsibilities", "roles & responsibilities", "duties", "what you will do", "what you'll do",
++                         "job responsibilities", "job duties"],
++    "Education": ["educational qualifications", "education & qualifications", "education and qualifications"],
++    "Salary Range": ["compensation", "salary", "pay range", "salary & benefits"],
++}
++
++
++def normalize_headings(text: str, labels: List[str], aliases: Dict[str, List[str]]) -> str:
++    """Rewrite any whole-line heading that is a known label or alias to 'Label:'."""
++    lookup = {a: label for label, names in aliases.items() for a in names}
++    lookup.update({l.lower(): l for l in labels})
++    out = []
++    for line in text.split("\n"):
++        key = line.strip().rstrip(":").strip().lower()
++        label = lookup.get(key)
++        out.append(f"{label}:" if label else line)
++    return "\n".join(out)
++
+ 
+ def _extract_block(text: str, label: str, all_labels: List[str]) -> str:
+     others = [l for l in all_labels if l != label]
+@@ -33,6 +70,7 @@
+     # error-standard design) rather than a stack trace through internals.
+     if not isinstance(text, str):
+         raise TypeError(f"resume text must be a string, got {type(text).__name__}")
++    text = normalize_headings(text, RESUME_LABELS, RESUME_ALIASES)
+     skills = _extract_inline_field(text, "Skills") or _extract_block(text, "Skills", RESUME_LABELS)
+     experience = _extract_block(text, "Experience", RESUME_LABELS)
+     return {"skills": skills, "experience": experience, "overall": text.strip()}
+@@ -41,6 +79,7 @@
+ def extract_jd_sections(text: str) -> Dict[str, str]:
+     if not isinstance(text, str):
+         raise TypeError(f"job description text must be a string, got {type(text).__name__}")
++    text = normalize_headings(text, JD_LABELS, JD_ALIASES)
+     required = _extract_block(text, "Required Skills", JD_LABELS)
+     nice_to_have = _extract_block(text, "Good to Have", JD_LABELS)
+     responsibilities = _extract_block(text, "Responsibilities", JD_LABELS)
+--- a/parsers/technical_interview_question_bank.py
++++ b/parsers/technical_interview_question_bank.py
+@@ -79,6 +79,12 @@
+     the brief specifies. Non-integer years (e.g. 2.5) are handled by
+     the natural <= boundary rule rather than requiring the caller to
+     round first."""
++    # Day 57: NaN fails every comparison below, so it used to fall through to ADVANCED -- the hardest questions for a
++    # candidate whose experience was unknown. Reject anything that is not a real, finite, non-negative number.
++    if isinstance(years, bool) or not isinstance(years, (int, float)):
++        raise TypeError(f"years of experience must be a number, got {type(years).__name__}")
++    if years != years or years in (float("inf"), float("-inf")):
++        raise ValueError(f"years of experience must be a finite number, got {years}")
+     if years < 0:
+         raise ValueError(f"years of experience cannot be negative, got {years}")
+     if years <= 2:
+@@ -234,6 +240,9 @@
+     response_captured: bool = False
+ 
+     def capture_response(self, text: str) -> None:
++        # Day 57: a None / non-text answer used to be stored silently and only surfaced as a crash (or a zero) later.
++        if not isinstance(text, str):
++            raise TypeError(f"An interview answer must be text, got {type(text).__name__}.")
+         self.response_text = text
+         self.response_captured = True
+ 
+@@ -248,6 +257,12 @@
+ 
+     @classmethod
+     def start(cls, domain: TechnicalDomain, years_of_experience: float) -> "TechnicalInterviewSession":
++        # Day 57: an unknown domain used to surface as a bare KeyError from the question lookup. Accept the enum or its
++        # string value ("mern"), and refuse anything else with the valid choices.
++        try:
++            domain = TechnicalDomain(domain)
++        except ValueError:
++            raise ValueError(f"Unknown technical domain {domain!r}. Valid domains: {[d.value for d in TechnicalDomain]}") from None
+         tier = experience_years_to_tier(years_of_experience)
+         tiered = get_tiered_questions(domain, tier)
+         conceptual = [q for q in tiered if q.question_type == TechnicalQuestionType.CONCEPTUAL]
+--- a/parsers/technical_skill_scoring_engine.py
++++ b/parsers/technical_skill_scoring_engine.py
+@@ -51,7 +51,8 @@
+ 
+ from __future__ import annotations
+ 
+-from dataclasses import dataclass, field
++import re
++from dataclasses import dataclass, field, replace
+ from enum import Enum
+ from typing import Dict, List, Optional
+ 
+@@ -345,6 +346,29 @@
+ # Per-answer evaluation -- explainable breakdown
+ # ---------------------------------------------------------------------------
+ 
++# Day 57 (Day 56 finding F2): the rubric is matched on phrases, so a list of the right words scored as well as an
++# explanation (a keyword list 53.0 vs a correct plain-words answer 43.5 in the Day 56 probe). Real speech and prose
++# contain function words ("the", "is", "and", "so that"); a bare list of terms contains almost none. An answer of
++# at least _MIN_TOKENS_FOR_LIST_CHECK words with fewer than _MIN_FUNCTION_WORD_RATIO of them function words is treated as
++# a term list: it keeps only _KEYWORD_LIST_CREDIT of its accuracy and depth credit, because it demonstrates recall of
++# vocabulary, not understanding. LIMITS: this does not detect a fluent but WRONG answer, and it does not credit a
++# correct answer worded without the rubric phrases; both remain open (see the Day 57 report).
++_FUNCTION_WORDS = frozenset(
++    "a an the and or but so if then because of to in on at for with by from as is are was were be been it its this that these those "
++    "i you we they he she my your our their can could will would should may might do does did have has had not no which when while "
++    "than also just into over under about there here what how why who whom".split())
++_MIN_TOKENS_FOR_LIST_CHECK = 8
++_MIN_FUNCTION_WORD_RATIO = 0.10
++_KEYWORD_LIST_CREDIT = 0.25
++
++
++def looks_like_keyword_list(text: str) -> bool:
++    tokens = re.findall(r"[a-z']+", (text or "").lower())
++    if len(tokens) < _MIN_TOKENS_FOR_LIST_CHECK:
++        return False
++    return sum(t in _FUNCTION_WORDS for t in tokens) / len(tokens) < _MIN_FUNCTION_WORD_RATIO
++
++
+ @dataclass
+ class TechnicalAnswerEvaluation:
+     question_id: str
+@@ -357,9 +381,11 @@
+     real_world: RealWorldApplicabilityResult
+     overall_technical_score: float
+     classification: ShallowDeepClassification
++    keyword_list: bool = False        # Day 57: the answer looked like a bare list of terms; accuracy/depth credit was cut
+ 
+     def to_dict(self) -> Dict:
+         return {
++            "keyword_list": self.keyword_list,
+             "question_id": self.question_id, "domain": self.domain, "tier": self.tier, "skill_tags": self.skill_tags,
+             "overall_technical_score": self.overall_technical_score, "classification": self.classification.value,
+             "accuracy": {"score": self.accuracy.accuracy_score, "coverage_ratio": self.accuracy.coverage_ratio,
+@@ -373,6 +399,10 @@
+ def evaluate_technical_answer(text: str, question_id: str, domain: str, tier: DifficultyTier, skill_tags: List[str]) -> TechnicalAnswerEvaluation:
+     accuracy = assess_accuracy(text, question_id)
+     depth = assess_depth(text, tier)
++    keyword_list = looks_like_keyword_list(text)
++    if keyword_list:
++        accuracy = replace(accuracy, accuracy_score=round(accuracy.accuracy_score * _KEYWORD_LIST_CREDIT, 1))
++        depth = replace(depth, depth_score=round(depth.depth_score * _KEYWORD_LIST_CREDIT, 1))
+     reasoning = assess_logical_reasoning(text)
+     real_world = assess_real_world_applicability(text)
+ 
+@@ -385,7 +415,7 @@
+     return TechnicalAnswerEvaluation(
+         question_id=question_id, domain=domain, tier=tier.value, skill_tags=skill_tags,
+         accuracy=accuracy, depth=depth, logical_reasoning=reasoning, real_world=real_world,
+-        overall_technical_score=overall, classification=classification,
++        overall_technical_score=overall, classification=classification, keyword_list=keyword_list,
+     )
+ 
+ 
+--- a/scoring/service.py
++++ b/scoring/service.py
+@@ -1,50 +1,110 @@
+ """
+ Decision & Scoring Service (Day 2 Process 5.0)
+-Input:  all round scores — ATS, screening, interview, behavior
+-Output: final decision, hiring-fit score, offer letter data
++Input:  the scores of whichever rounds have happened, plus role type and experience level
++Output: hiring-fit score and a RECOMMENDATION for a human to act on
++
++DAY 57 -- WHY THIS WAS REPLACED. The Day 2 stub had its own hard-coded weights (ats 0.2 / screening 0.1 / communication 0.25 /
++technical 0.35 / behavior 0.1) and its own thresholds, and it disagreed with the real engines (Days 41, 51, 52) in ways that
++matter:
++  * a score that was MISSING counted as ZERO (`payload.get(key, 0)`), dragging a candidate down for a round that had not happened;
++  * it returned "rejected" automatically below 50, on any evidence, however incomplete -- the project's own rule (Day 52) is
++    that a rejection is only ever a recommendation a person confirms, and never on incomplete evidence;
++  * it could not see an ATS "reject" zone, integrity flags, critical-round floors or confidence.
++The service now delegates to the real aggregation (Day 51) and recommendation (Day 52) engines. Day 41's own docs listed this
++wiring as the deferred follow-up.
++
++CONTRACT CHANGES vs the stub (API_VERSION 1.0 starts here):
++  * missing score = absent, never zero; at least one round score is required;
++  * `decision` is now one of selected | hold_review | rejected (was selected | hold | rejected) and is a RECOMMENDATION:
++    `human_confirmation_required` is true for rejected, and `automated_action` never rejects;
++  * with a round still outstanding the decision is hold_review / pending_evidence (a technical role with no machine test is
++    never "selected" or "rejected" on partial evidence);
++  * input keys are the real round names; `communication_score` is accepted as an alias for `hr_interview_score`, and
++    `behavior_score` is ignored with a warning (there is no separate behavior round in the aggregation).
+ """
+ 
+-from typing import Any, Dict
++from typing import Any, Dict, List
++
++from utils.base_service import BaseAIService, ServiceInputError
+ 
+-from utils.base_service import BaseAIService
++ROUND_KEYS = {
++    "ats": "ats_score",
++    "screening": "screening_score",
++    "hr_interview": "hr_interview_score",
++    "technical_interview": "technical_score",
++    "machine_test": "machine_test_score",
++}
++LEGACY_ALIASES = {"communication_score": "hr_interview_score"}
++IGNORED_LEGACY_KEYS = ("behavior_score",)
++ZONES = ("shortlist", "review", "reject")
+ 
+ 
+ class DecisionScoringService(BaseAIService):
+     service_name = "decision_scoring_service"
+ 
+-    # Configurable weighting per round (should sum to 1.0)
+-    WEIGHTS = {
+-        "ats_score": 0.2,
+-        "screening_score": 0.1,
+-        "communication_score": 0.25,
+-        "technical_score": 0.35,
+-        "behavior_score": 0.1,
+-    }
+-
+     def process(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+-        self.logger.info("Aggregating scores for candidate %s", payload.get("candidate_id"))
+-
+-        weighted_total = sum(
+-            payload.get(key, 0) * weight for key, weight in self.WEIGHTS.items()
+-        )
+-
+-        decision = "selected" if weighted_total >= 70 else "hold" if weighted_total >= 50 else "rejected"
++        from parsers.cross_round_aggregation_engine import RoundResult, compute_cross_round_score, zone_review_reasons
++        from parsers.final_recommendation_engine import decide
++        from parsers.hr_interview_question_bank import ExperienceLevel, RoleType
++
++        candidate_id = payload.get("candidate_id")
++        if candidate_id is not None and not isinstance(candidate_id, str):
++            raise ServiceInputError("invalid_input", "'candidate_id' must be text.", "candidate_id")
++        role = RoleType(self._get_choice(payload, "role_type", [r.value for r in RoleType], default="technical"))
++        level = ExperienceLevel(self._get_choice(payload, "experience_level", [e.value for e in ExperienceLevel], default="experienced"))
++        zone = payload.get("ats_zone")
++        if zone is not None:
++            zone = self._get_choice(payload, "ats_zone", ZONES, default="shortlist")
++
++        warnings: List[str] = []
++        merged = dict(payload)
++        for old, new in LEGACY_ALIASES.items():
++            if old in payload:
++                if new in payload:
++                    raise ServiceInputError("invalid_input", f"Send either '{new}' or its legacy alias '{old}', not both.", old)
++                merged[new] = payload[old]
++                warnings.append(f"'{old}' is a legacy alias; use '{new}'.")
++        for key in IGNORED_LEGACY_KEYS:
++            if key in payload:
++                warnings.append(f"'{key}' is ignored: there is no separate behavior round in the aggregation.")
++
++        rounds = []
++        for round_name, key in ROUND_KEYS.items():
++            score = self._get_score(merged, key)
++            if score is None:
++                continue
++            reasons = zone_review_reasons(zone) if (round_name == "ats" and zone) else []
++            rounds.append(RoundResult(round_name, score, review_reasons=reasons))
++        if not rounds:
++            raise ServiceInputError("missing_field", f"At least one round score is required: {list(ROUND_KEYS.values())}.", "ats_score")
++
++        self.logger.info("Aggregating %d round score(s) for candidate %s", len(rounds), candidate_id)
++        score = compute_cross_round_score(rounds, role, level, candidate_id or "unknown")
++        decision = decide(score)
+ 
+         response = self._base_response()
+         response.update({
+-            "hiring_fit_score": round(weighted_total, 2),
+-            "decision": decision,
++            "candidate_id": candidate_id,
++            "hiring_fit_score": round(score.hiring_fit_percentage, 2),
++            "decision": decision.outcome.value,
++            "hold_kind": decision.hold_kind.value if decision.hold_kind else None,
++            "confidence": decision.confidence.score,
++            "provisional": score.provisional,
++            "missing_rounds": list(score.missing_rounds),
++            "human_review_required": score.human_review_required,
++            "human_review_reasons": list(score.human_review_reasons),
++            "human_confirmation_required": decision.outcome.value == "rejected",
++            "automation_eligible": decision.automation_eligible,
++            "automated_action": decision.automated_action,
++            "reasons": list(decision.reasons),
++            "warnings": warnings,
+         })
+         return response
+ 
+ 
+ if __name__ == "__main__":
+     demo_scores = {
+-        "candidate_id": "C001",
+-        "ats_score": 80,
+-        "screening_score": 70,
+-        "communication_score": 75,
+-        "technical_score": 85,
+-        "behavior_score": 90,
++        "candidate_id": "C001", "role_type": "non_technical",
++        "ats_score": 60, "screening_score": 70, "hr_interview_score": 85,
+     }
+-    print(DecisionScoringService().process(demo_scores))
++    print(DecisionScoringService().run(demo_scores))
+--- a/screening_ai/service.py
++++ b/screening_ai/service.py
+@@ -1,12 +1,19 @@
+ """
+ Screening AI Service (Day 2 Process 2.0)
+-Input:  candidate contact info, job role, voice/language settings, call trigger
+-Output: call status, transcript, screening score
++Input:  candidate id and the call transcript turns (speech-to-text output)
++Output: call status, screening score, categories answered / missing
++
++DAY 57: this service used to return `call_status: "answered"`, a placeholder transcript and a score of 0 for ANY request, even
++though no call had taken place -- a success-shaped answer with no information behind it. It now runs the real screening
++pipeline on the turns it is given. With no turns it says so (`call_status: "not_started"`, `screening_score: null`).
++
++Placing the call (a voice provider such as Twilio) is still NOT implemented here; this service scores a conversation that has
++already happened or is being fed to it turn by turn.
+ """
+ 
+ from typing import Any, Dict
+ 
+-from utils.base_service import BaseAIService
++from utils.base_service import BaseAIService, ServiceInputError
+ 
+ 
+ class ScreeningService(BaseAIService):
+@@ -14,20 +21,44 @@
+ 
+     def process(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+         candidate_id = payload.get("candidate_id")
+-        language = payload.get("language", "en")
+-
+-        self.logger.info("Triggering screening call for candidate %s (%s)", candidate_id, language)
+-
+-        # TODO: integrate real voice-call provider (e.g. Twilio) + voice-to-text
++        if candidate_id is not None and not isinstance(candidate_id, str):
++            raise ServiceInputError("invalid_input", "'candidate_id' must be text.", "candidate_id")
++        turns = self._get_list(payload, "turns")
+         response = self._base_response()
++        response["candidate_id"] = candidate_id
++
++        if not turns:
++            self.logger.info("No turns supplied for candidate %s: call not started", candidate_id)
++            response.update({"call_status": "not_started", "screening_score": None, "categories_answered": [], "categories_missing": [],
++                             "turns_used": 0,
++                             "warnings": ["No call turns were supplied, so there is nothing to score. A voice provider is not integrated."]})
++            return response
++
++        from parsers.screening_pipeline import run_screening_call
++        from parsers.speech_to_text import RawSTTResult
++
++        raw_turns = []
++        for i, t in enumerate(turns):
++            if not isinstance(t, dict) or not isinstance(t.get("text", ""), str):
++                raise ServiceInputError("invalid_input", f"turns[{i}] must be an object with a text field.", f"turns[{i}]")
++            conf = t.get("confidence", 0.9)
++            if isinstance(conf, bool) or not isinstance(conf, (int, float)) or conf != conf or not 0 <= conf <= 1:
++                raise ServiceInputError("invalid_input", f"turns[{i}].confidence must be a number between 0 and 1.", f"turns[{i}].confidence")
++            raw_turns.append(RawSTTResult(text=t.get("text", ""), confidence=float(conf), is_silent=bool(t.get("is_silent", False))))
++
++        self.logger.info("Scoring screening call for candidate %s (%d turns)", candidate_id, len(raw_turns))
++        call = run_screening_call(raw_turns, candidate_id=candidate_id or "unknown", job_role=str(payload.get("job_role", "unspecified")))
++        status = "ended_early" if call.controller.call_ended_early else "completed" if call.controller.is_call_complete else "incomplete"
+         response.update({
+-            "candidate_id": candidate_id,
+-            "call_status": "answered",
+-            "transcript": "[placeholder transcript]",
+-            "screening_score": 0,
++            "call_status": status,
++            "screening_score": round(call.scoring_result.total_score, 2),
++            "categories_answered": list(call.categories_answered),
++            "categories_missing": list(call.categories_missing),
++            "turns_used": len(raw_turns),
++            "warnings": [] if status == "completed" else [f"The call is {status.replace('_', ' ')}: the score covers only the answered categories."],
+         })
+         return response
+ 
+ 
+ if __name__ == "__main__":
+-    print(ScreeningService().process({"candidate_id": "C001", "language": "en"}))
++    print(ScreeningService().run({"candidate_id": "C001"}))
+--- a/utils/base_service.py
++++ b/utils/base_service.py
+@@ -5,20 +5,76 @@
+ Decision & Scoring) should subclass BaseAIService and implement process().
+ This keeps every service's input/output contract consistent with the
+ Day 2 architecture (input dict in, output dict out, version-tagged).
++
++DAY 57 -- THE STABLE BOUNDARY. `process()` is still where each service does its work, but callers
++should use `run()`:
++
++    run(payload) -> dict      NEVER raises. Always returns one of two shapes.
++
++    success: {"service", "model_version", "api_version", "status": "success", ...service fields...}
++    error:   {"service", "model_version", "api_version", "status": "error",
++              "error": {"code": "...", "message": "...", "field": "..." | null}}
++
++Error codes: invalid_payload | invalid_input | missing_field | invalid_score | too_large |
++unsupported_value | internal_error. An unexpected exception is logged in full but the caller only ever sees
++`internal_error` with a generic message (no stack trace, no library internals).
++
++Every response is JSON-safe: NaN / infinity become null, enums become their values, dataclasses become dicts.
++Breaking a response shape means bumping API_VERSION.
+ """
+ 
++from __future__ import annotations
++
++import dataclasses
++import math
+ from abc import ABC, abstractmethod
+-from typing import Any, Dict
++from enum import Enum
++from typing import Any, Dict, Optional, Sequence
+ 
+ from utils.config import MODEL_VERSION, SERVICE_NAME
+ from utils.logger import get_logger
+ 
++API_VERSION = "1.0"
++MAX_TEXT_CHARS = 200_000          # one resume / job description / answer; larger is refused, not truncated silently
++MAX_ITEMS = 200                   # turns / answers / requirements in one request
++
++
++class ServiceInputError(ValueError):
++    """The caller's input is unusable. `code` and `field` are machine-readable; `str(error)` is safe to show."""
++
++    def __init__(self, code: str, message: str, field: Optional[str] = None) -> None:
++        super().__init__(message)
++        self.code = code
++        self.field = field
++
++
++def to_json_safe(obj: Any, _depth: int = 0) -> Any:
++    """Recursively make a result JSON-serialisable: no NaN/inf, no enums, no dataclasses, no tuples/sets."""
++    if _depth > 12:
++        return str(obj)
++    if obj is None or isinstance(obj, (bool, int, str)):
++        return obj
++    if isinstance(obj, float):
++        return obj if math.isfinite(obj) else None
++    if isinstance(obj, Enum):
++        return to_json_safe(obj.value, _depth + 1)
++    if dataclasses.is_dataclass(obj) and not isinstance(obj, type):
++        return {f.name: to_json_safe(getattr(obj, f.name), _depth + 1) for f in dataclasses.fields(obj)}
++    if isinstance(obj, dict):
++        return {str(k): to_json_safe(v, _depth + 1) for k, v in obj.items()}
++    if isinstance(obj, (list, tuple)):
++        return [to_json_safe(v, _depth + 1) for v in obj]
++    if isinstance(obj, (set, frozenset)):
++        return sorted((to_json_safe(v, _depth + 1) for v in obj), key=str)
++    return str(obj)
++
+ 
+ class BaseAIService(ABC):
+     """Common contract for every AI microservice in the pipeline."""
+ 
+     service_name: str = SERVICE_NAME
+     model_version: str = MODEL_VERSION
++    api_version: str = API_VERSION
+ 
+     def __init__(self) -> None:
+         self.logger = get_logger(self.__class__.__name__)
+@@ -35,13 +91,86 @@
+         Returns:
+             A result dict that always includes 'service', 'model_version',
+             and a 'status' field, plus service-specific fields.
++
++        May raise ServiceInputError (or ValueError/TypeError) for unusable input; callers that must not see
++        exceptions should use run().
+         """
+         raise NotImplementedError
+ 
++    # ---------------------------------------------------------------- stable entry point
++    def run(self, payload: Any) -> Dict[str, Any]:
++        """The stable boundary: validates, runs `process`, and ALWAYS returns a JSON-safe envelope."""
++        try:
++            if not isinstance(payload, dict):
++                raise ServiceInputError("invalid_payload", f"The request body must be a JSON object, got {type(payload).__name__}.")
++            return to_json_safe(self.process(payload))
++        except ServiceInputError as exc:
++            return self._error_response(exc.code, str(exc), exc.field)
++        except (ValueError, TypeError) as exc:
++            return self._error_response("invalid_input", str(exc))
++        except Exception:                                    # noqa: BLE001 - the boundary must not leak internals
++            self.logger.exception("Unexpected error in %s", self.__class__.__name__)
++            return self._error_response("internal_error", "An internal error occurred; the request was not processed.")
++
++    # ---------------------------------------------------------------- envelopes
+     def _base_response(self, status: str = "success") -> Dict[str, Any]:
+         """Helper so every service returns a consistent response envelope."""
+         return {
+             "service": self.service_name,
+             "model_version": self.model_version,
++            "api_version": self.api_version,
+             "status": status,
+         }
++
++    def _error_response(self, code: str, message: str, field: Optional[str] = None) -> Dict[str, Any]:
++        response = self._base_response("error")
++        response["error"] = {"code": code, "message": message, "field": field}
++        return response
++
++    # ---------------------------------------------------------------- input validators
++    @staticmethod
++    def _get_text(payload: Dict[str, Any], key: str, required: bool = True, allow_empty: bool = False) -> Optional[str]:
++        value = payload.get(key)
++        if value is None:
++            if required:
++                raise ServiceInputError("missing_field", f"'{key}' is required.", key)
++            return None
++        if not isinstance(value, str):
++            raise ServiceInputError("invalid_input", f"'{key}' must be text, got {type(value).__name__}.", key)
++        if len(value) > MAX_TEXT_CHARS:
++            raise ServiceInputError("too_large", f"'{key}' is {len(value)} characters; the limit is {MAX_TEXT_CHARS}.", key)
++        if not allow_empty and not value.strip():
++            raise ServiceInputError("invalid_input", f"'{key}' must not be empty.", key)
++        return value
++
++    @staticmethod
++    def _get_score(payload: Dict[str, Any], key: str) -> Optional[float]:
++        """A 0-100 score, or None when absent. A missing score is NOT zero; the caller decides what absence means."""
++        value = payload.get(key)
++        if value is None:
++            return None
++        if isinstance(value, bool) or not isinstance(value, (int, float)):
++            raise ServiceInputError("invalid_score", f"'{key}' must be a number between 0 and 100, got {type(value).__name__}.", key)
++        if not math.isfinite(value) or not 0 <= value <= 100:
++            raise ServiceInputError("invalid_score", f"'{key}' must be between 0 and 100, got {value}.", key)
++        return float(value)
++
++    @staticmethod
++    def _get_choice(payload: Dict[str, Any], key: str, choices: Sequence[str], default: str) -> str:
++        value = payload.get(key, default)
++        if not isinstance(value, str) or value.lower() not in choices:
++            raise ServiceInputError("unsupported_value", f"'{key}' must be one of {list(choices)}, got {value!r}.", key)
++        return value.lower()
++
++    @staticmethod
++    def _get_list(payload: Dict[str, Any], key: str, required: bool = False) -> Optional[list]:
++        value = payload.get(key)
++        if value is None:
++            if required:
++                raise ServiceInputError("missing_field", f"'{key}' is required.", key)
++            return None
++        if not isinstance(value, (list, tuple)):
++            raise ServiceInputError("invalid_input", f"'{key}' must be a list, got {type(value).__name__}.", key)
++        if len(value) > MAX_ITEMS:
++            raise ServiceInputError("too_large", f"'{key}' has {len(value)} items; the limit is {MAX_ITEMS}.", key)
++        return list(value)

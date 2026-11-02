@@ -192,6 +192,38 @@ def _no_evidence(name: str, note: str) -> RoundResult:
     return RoundResult(name, None, note=note)
 
 
+def ats_zone_of(result: "ATSScoreResult") -> str:
+    """The ATS zone ('shortlist' | 'review' | 'reject') exactly as eligibility_engine derives it: the category thresholds
+    PLUS the skill-relevance floor. One definition, shared by the aggregator, the API service and the simulation."""
+    from parsers.ranking_engine import classify_zone                 # lazy: keeps this module light
+    skill = next((c.score for c in result.components if c.name == "skill_match" and getattr(c, "available", False)), None)
+    zone = classify_zone(result.overall_score, role_category=result.role_category, skill_match_score=skill)
+    zone = str(getattr(zone, "value", zone)).lower()
+    # Day 57: when no skills could be compared (the job description has no recognisable requirements, or the resume no
+    # skills), the engine's low score reflects missing structure, not a mismatch. A REJECT needs skill evidence; without it
+    # the honest answer is REVIEW ("a person should look"), the same stance Day 52 takes on thin evidence.
+    if zone == "reject" and skill is None:
+        return "review"
+    return zone
+
+
+def zone_review_reasons(zone: str) -> List[str]:
+    if zone == "reject":
+        return ["ATS zone is REJECT: the resume does not match this role, so interview strength alone should not select the candidate."]
+    if zone == "review":
+        return ["ATS zone is REVIEW: a recruiter should confirm the resume fit before this candidate is selected."]
+    return []
+
+
+def _ats_zone_review_reasons(result: "ATSScoreResult") -> List[str]:
+    """Day 57 (Day 56 finding F1): the ATS zone used to be invisible to the decision. A resume the ATS REJECTED (and a human
+    had rejected) could be recommended for selection on strong interviews alone -- 69.0 on the raw scale, 74.5 on the
+    zone-aligned one. A non-shortlist zone is now a review reason; the Day 52 engine's existing R4 rule then blocks SELECTED
+    and holds the candidate for a person, with the reason in the trace. The zone is derived exactly as eligibility_engine
+    derives it (category thresholds plus the skill-relevance floor)."""
+    return zone_review_reasons(ats_zone_of(result))
+
+
 def round_from_ats(result: Optional["ATSScoreResult"], ats_scale: str = "raw") -> RoundResult:
     """`ats_scale="raw"` (default, unchanged since Day 51) uses the ATS score as is.
     `ats_scale="zone_aligned"` (Day 54) maps it onto the common scale using the ATS's own zone cutoffs: the
@@ -207,8 +239,9 @@ def round_from_ats(result: Optional["ATSScoreResult"], ats_scale: str = "raw") -
         from parsers.scoring_calibration import align_ats_score, describe_alignment    # lazy: keeps this module light
         skill = next((c.score for c in result.components if c.name == "skill_match" and c.available), None)
         return RoundResult("ats", align_ats_score(result.overall_score, result.role_category, skill),
+                           review_reasons=_ats_zone_review_reasons(result),
                            note=f"ATS role category: {result.role_category}. " + describe_alignment(result.overall_score, result.role_category, skill))
-    return RoundResult("ats", result.overall_score, note=f"ATS role category: {result.role_category}")
+    return RoundResult("ats", result.overall_score, review_reasons=_ats_zone_review_reasons(result), note=f"ATS role category: {result.role_category}")
 
 
 def round_from_screening(result: Optional["ScreeningScoreResult"]) -> RoundResult:

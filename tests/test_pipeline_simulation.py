@@ -76,19 +76,30 @@ def test_scenario_file_says_it_is_scripted_not_human():
 
 # -------------------------------------------------------------- screening
 def test_reactive_candidate_reanswers_a_reasked_question_with_the_short_answer(scenarios):
-    turns = reactive_screening_turns(scenarios["S1"])
-    assert len(turns) > 7                                              # S1's rich introduction is judged off-topic and re-asked
-    assert turns[1].text == scenarios["S1"].reask["introduction"]
+    # Day 57: S1's rich introduction used to be judged off-topic and re-asked (that was Day 56 finding F3, now fixed), so the
+    # re-ask path is exercised with an introduction that is genuinely vague.
+    import dataclasses
+    sc = dataclasses.replace(scenarios["S1"], screening=[{"text": "Hmm, not sure what to say.", "confidence": 0.9}] + scenarios["S1"].screening[1:])
+    turns = reactive_screening_turns(sc)
+    assert len(turns) > 7 and turns[1].text == sc.reask["introduction"]
+
+
+def test_rich_introductions_are_no_longer_reasked_after_day_57(scenarios):
+    # the second turn answers the NEXT question (education), not a re-ask of the introduction. (Extra turns that remain are
+    # follow-up probes for short answers such as a bare city name: a separate, intended behaviour.)
+    for k in ("S1", "S2", "S6", "S7"):
+        sc = scenarios[k]
+        assert reactive_screening_turns(sc)[1].text == sc.screening[1]["text"]
 
 
 def test_reactive_candidate_with_no_reask_needed_uses_one_turn_per_category(scenarios):
     assert len(reactive_screening_turns(scenarios["S4"])) <= 8
 
 
-def test_screening_isolation_probe_flags_exactly_the_four_rich_introductions(scenarios):
+def test_screening_isolation_probe_flags_no_introduction_after_day_57(scenarios):
     rows = screening_isolation_probe(list(scenarios.values()))
     flagged = {(r["candidate"], r["category"]) for r in rows if r["quality"] in ("off_topic", "missing")}
-    assert len(rows) == 56 and flagged == {("S1", "introduction"), ("S2", "introduction"), ("S6", "introduction"), ("S7", "introduction")}
+    assert len(rows) == 56 and flagged == set()          # Day 56 flagged 4 of 56 (the introductions of S1, S2, S6, S7)
 
 
 # ----------------------------------------------------------------- upload
@@ -143,11 +154,13 @@ def test_inflater_is_flagged_and_not_selected(scenarios, matcher, tmp_path):
     assert "EXP_CLAIM_VS_RESUME" in {i.code for i in j.inconsistencies} and j.outcome != "selected"
 
 
-def test_ats_reject_with_strong_interviews_flags_the_gate_bypass_under_zone_aligned_scaling(scenarios, matcher, tmp_path):
+def test_ats_reject_with_strong_interviews_is_no_longer_selected_on_either_scale_after_day_57(scenarios, matcher, tmp_path):
     j = journey(scenarios["S8"], matcher, tmp_path)
-    codes = {i.code for i in j.inconsistencies}
     assert j.zone == "reject" and j.funnel_stage == "stopped_at_ats"
-    assert j.outcome_aligned == "selected" and "ATS_GATE_BYPASSED" in codes
+    assert j.outcome == "hold_review" and j.outcome_aligned == "hold_review"       # Day 56: aligned scale gave SELECTED (74.5)
+    assert j.decision_aligned.hold_kind.value == "selection_blocked"
+    assert any("ATS zone is REJECT" in r for r in j.score_aligned.human_review_reasons)
+    assert "ATS_GATE_BYPASSED" not in {i.code for i in j.inconsistencies}
 
 
 # ------------------------------------------------------------------ funnel
@@ -263,13 +276,17 @@ def test_intent_check_uses_the_acceptable_set():
 
 
 # ----------------------------------------------------------- technical probe
-def test_characterisation_technical_scoring_is_keyword_driven():
-    """Documents CURRENT behaviour (see the Day 56 doc). If the technical scorer is improved, this test should be updated:
-    a correct paraphrase should then beat a keyword list."""
+def test_technical_scoring_no_longer_rewards_a_keyword_list_over_a_correct_explanation_after_day_57():
     s = technical_phrasing_probe()
     assert set(s) == {"rubric_phrases", "correct_paraphrase", "keyword_salad", "wrong_but_confident"}
-    assert s["keyword_salad"] > s["correct_paraphrase"]
-    assert s["rubric_phrases"] > s["wrong_but_confident"]
+    assert s["keyword_salad"] < s["correct_paraphrase"] < s["rubric_phrases"]       # Day 56: salad 53.0 > paraphrase 43.5
+
+
+def test_characterisation_open_gap_a_confidently_wrong_answer_still_scores_like_a_correct_paraphrase():
+    """OPEN GAP, documented rather than hidden (Day 57 report): the rubric is phrase-based, so it cannot tell a wrong
+    answer from a correct one worded differently. If the scorer gains misconception detection this test should flip."""
+    s = technical_phrasing_probe()
+    assert abs(s["wrong_but_confident"] - s["correct_paraphrase"]) < 3.0
 
 
 # ------------------------------------------------------------------ performance

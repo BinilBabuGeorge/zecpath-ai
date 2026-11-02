@@ -258,6 +258,9 @@ class InterviewQuestionState:
     follow_up_type: Optional[str] = None   # Day 34 addition: which trigger type was used (clarification/deepening/example_based), for state tracking and repetition-prevention
 
     def capture_response(self, text: str) -> None:
+        # Day 57: a None / non-text answer used to be stored silently and only surfaced as a crash (or a zero) later.
+        if not isinstance(text, str):
+            raise TypeError(f"An interview answer must be text, got {type(text).__name__}.")
         self.response_text = text
         self.response_captured = True
 

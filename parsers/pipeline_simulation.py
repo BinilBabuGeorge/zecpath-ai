@@ -61,12 +61,11 @@ from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
 from typing import Any, Dict, Iterator, List, Optional, Tuple
-from unittest import mock
 
 from parsers import experience_parser, experience_relevance
 from parsers.answer_intent_engine import extract_experience_years
 from parsers.ats_scoring_engine import score_candidate
-from parsers.cross_round_aggregation_engine import compute_from_round_outputs
+from parsers.cross_round_aggregation_engine import ats_zone_of, compute_from_round_outputs
 from parsers.final_recommendation_engine import decide
 from parsers.hiring_report_generator import generate_hiring_report
 from parsers.hr_interview_question_bank import ExperienceLevel, InterviewSession, RoleType
@@ -94,12 +93,9 @@ OUTCOMES = ("selected", "hold_review", "rejected")
 # --------------------------------------------------------------------------- clock
 @contextmanager
 def frozen_today(as_of: date) -> Iterator[None]:
-    """Pin `date.today()` inside the two modules that read the clock. Reproducible runs; no existing file changed."""
-    class _Frozen(date):
-        @classmethod
-        def today(cls) -> date:
-            return as_of
-    with mock.patch.object(experience_parser, "date", _Frozen), mock.patch.object(experience_relevance, "date", _Frozen):
+    """Pin what "Present" means for the experience parser. Since Day 57 this uses the parser's own `reference_date`
+    (before that it patched `date`); behaviour is the same, the mechanism is now a supported API."""
+    with experience_parser.reference_date(as_of):
         yield
 
 
@@ -215,10 +211,8 @@ def upload_resume(path: str | Path) -> Tuple[str, List[str]]:
 
 
 def ats_zone(result: Any) -> str:
-    """The ATS zone exactly as eligibility_engine derives it: category thresholds PLUS the skill-relevance floor."""
-    comp = next((c for c in result.components if c.name == "skill_match"), None)
-    z = classify_zone(result.overall_score, role_category=result.role_category, skill_match_score=comp.score if comp else None)
-    return str(getattr(z, "value", z))
+    """The ATS zone, from the one shared definition (Day 57 moved it to the aggregation engine)."""
+    return ats_zone_of(result)
 
 
 def _stated_years(text: str) -> Optional[float]:
