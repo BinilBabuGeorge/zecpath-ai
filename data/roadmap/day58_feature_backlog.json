@@ -1,0 +1,777 @@
+{
+ "_note": "Day 58 backlog. Value, effort and feasibility are the author's 1-5 estimates (judgement, not measurement). Evidence, legal status and deadlines come from the cited sources as of Nov 2026 and are NOT legal advice; counsel must confirm. Exit-gate wording is a proposal for the product owner.",
+ "sources": {
+  "EU-AIA-5": "EU AI Act Art. 5(1)(f): AI that infers emotions in the workplace is prohibited (medical/safety exceptions); applies since 2 Feb 2025. The Commission's guidelines read 'workplace' to include recruitment. Guidelines are non-binding; counsel decides applicability.",
+  "EU-OMNIBUS": "Digital Omnibus on AI, Regulation (EU) 2026/1744, in force 27 Jul 2026: Annex III high-risk obligations (including recruitment and selection) apply from 2 Dec 2027.",
+  "US-LAWS": "NYC Local Law 144 (annual independent bias audit and candidate notice for automated employment decision tools, enforced since Jul 2023); Illinois HB 3773 (in force 1 Jan 2026) and the Illinois AI Video Interview Act (consent before AI analyses interview video); California FEHA automated-decision rules (1 Oct 2025). Colorado's law was rewritten in 2026 and secondary sources conflict on its date: verify.",
+  "IN-DPDP": "India DPDP Rules 2025 (notified Nov 2025): consent-manager provisions from Nov 2026; core notice, consent, security and breach duties from mid-May 2027.",
+  "HIREVUE-2021": "HireVue dropped facial analysis from its assessments (announced Jan 2021, SHRM report): its own research found that visual analysis no longer added significant value once language analysis improved.",
+  "BARRETT-2019": "Barrett, Adolphs, Marsella, Martinez, Pollak (2019), 'Emotional Expressions Reconsidered', Psychological Science in the Public Interest: facial movements do not reliably and specifically indicate emotional states.",
+  "MACH-2013": "Hoque et al. (2013), 'MACH: My Automated Conversation Coach', UbiComp '13: in a randomised trial of 90 university students, those who practised with automated feedback (speech, eye contact, filler words) improved on counsellor ratings; control groups did not. Small, one week, 2013.",
+  "DAY-48-49": "Project Days 48-49: no video pipeline exists; camera-based gaze/face analysis was deliberately not built; behavioural scoring was designed non-invasively; integrity uses browser events only.",
+  "DAY-56-57": "Project Days 56-57: end-to-end simulation and stabilization findings, including open items O1-O7."
+ },
+ "phases": [
+  {
+   "phase": 0,
+   "name": "Built (Days 1-57)",
+   "exit_gate": "Rule-based scoring layer, governance logic, simulation and stabilization complete; no persistence, login, real speech or video."
+  },
+  {
+   "phase": 1,
+   "name": "Make it real and safe",
+   "exit_gate": "Services behind login with a persisted, anchored audit log; consent wired to intake; at least two recruiters have rated a defined set of real cases; the confidence/stress question is decided; the resume check is live."
+  },
+  {
+   "phase": 2,
+   "name": "Candidate and recruiter value",
+   "exit_gate": "Coach and dashboard in pilot with measured outcomes; bias monitoring producing aggregate selection rates; jurisdiction switches working; real speech pipeline with measured latency and word-error rate."
+  },
+  {
+   "phase": 3,
+   "name": "Media and scale",
+   "exit_gate": "Real calls and the machine-test stage in pilot; any video flag launched only if its false-flag rate is low and equal across groups."
+  },
+  {
+   "phase": 4,
+   "name": "Learn responsibly",
+   "exit_gate": "A learned scorer promoted only after shadow-mode agreement with human ratings beats the baseline with no subgroup gap beyond the agreed limit."
+  }
+ ],
+ "features": [
+  {
+   "summary": "A database, login, per-service credentials and a deployed environment, with the audit log persisted and its head hash anchored outside its own store. Today the services are tested logic with no storage or identity.",
+   "audience": "platform",
+   "builds_on": [
+    "utils/base_service.py",
+    "parsers/audit_trail.py",
+    "parsers/secure_storage_plan.py"
+   ],
+   "depends_on": [],
+   "legal_status": "allowed",
+   "evidence": "established",
+   "affect_inference": false,
+   "phase": 1,
+   "deadline": null,
+   "guardrails": [],
+   "success_metric": "Every service call is authenticated and written to a persisted, anchored audit log.",
+   "decision_needed": false,
+   "source_ids": [
+    "DAY-56-57"
+   ],
+   "id": "F1",
+   "title": "Persistence, authentication and deployment baseline",
+   "area": "foundation",
+   "value": 5,
+   "effort": 4,
+   "feasibility": 3
+  },
+  {
+   "summary": "Run the 80-case edge sweep and the 8 simulated journeys automatically on every change, and track results over time.",
+   "audience": "platform",
+   "builds_on": [
+    "parsers/stability_checks.py",
+    "parsers/pipeline_simulation.py"
+   ],
+   "depends_on": [],
+   "legal_status": "allowed",
+   "evidence": "established",
+   "affect_inference": false,
+   "phase": 1,
+   "deadline": null,
+   "guardrails": [],
+   "success_metric": "Sweep and journeys run on every change; any new failure blocks the merge.",
+   "decision_needed": false,
+   "source_ids": [
+    "DAY-56-57"
+   ],
+   "id": "F2",
+   "title": "Continuous evaluation harness",
+   "area": "foundation",
+   "value": 4,
+   "effort": 2,
+   "feasibility": 5
+  },
+  {
+   "summary": "Collect recruiter ratings of real cases with the existing worksheet and report agreement with the AI. Nothing that learns from data can be trusted before this exists.",
+   "audience": "recruiter",
+   "builds_on": [
+    "parsers/pipeline_simulation.py"
+   ],
+   "depends_on": [],
+   "legal_status": "allowed",
+   "evidence": "established",
+   "affect_inference": false,
+   "phase": 1,
+   "deadline": null,
+   "guardrails": [],
+   "success_metric": "At least two recruiters rate a defined set of real cases; agreement and the two costly disagreements are reported.",
+   "decision_needed": false,
+   "source_ids": [
+    "DAY-56-57"
+   ],
+   "id": "F3",
+   "title": "Human rating pipeline",
+   "area": "foundation",
+   "value": 5,
+   "effort": 2,
+   "feasibility": 4
+  },
+  {
+   "summary": "Connect the consent registry, retention policy and withdrawal logic to real candidate intake, with notices, withdrawal and erasure working end to end.",
+   "audience": "candidate",
+   "builds_on": [
+    "parsers/data_governance.py",
+    "parsers/audit_trail.py"
+   ],
+   "depends_on": [
+    "F1"
+   ],
+   "legal_status": "allowed",
+   "evidence": "established",
+   "affect_inference": false,
+   "phase": 1,
+   "deadline": "India DPDP core duties apply from mid-May 2027",
+   "guardrails": [],
+   "success_metric": "A candidate can grant, see and withdraw each consent, and withdrawal deletes dependent data.",
+   "decision_needed": false,
+   "source_ids": [
+    "IN-DPDP",
+    "EU-OMNIBUS"
+   ],
+   "id": "F4",
+   "title": "Consent and data-subject rights wired to intake",
+   "area": "foundation",
+   "value": 5,
+   "effort": 3,
+   "feasibility": 4
+  },
+  {
+   "summary": "The Day 27/36 'confidence' and 'stress' scores are word-pattern heuristics on transcript text (not biometric) with no validation data, and they carry 25% of the HR answer score. Relabel them as what they measure (hedging language), measure whether they add signal against human ratings, and get a legal view on whether text-only inference counts as emotion inference.",
+   "audience": "platform",
+   "builds_on": [
+    "parsers/confidence_stress_engine.py",
+    "parsers/confidence_sentiment_engine.py",
+    "parsers/hr_interview_scoring_engine.py"
+   ],
+   "depends_on": [],
+   "legal_status": "restricted",
+   "evidence": "unvalidated",
+   "affect_inference": false,
+   "phase": 1,
+   "deadline": null,
+   "guardrails": [
+    "no rejection or selection rule may depend on these signals alone",
+    "relabel in reports and APIs",
+    "legal review before the Dec 2027 high-risk date"
+   ],
+   "success_metric": "Decision made to keep, relabel or remove; if kept, agreement with human ratings shown to improve with the signal.",
+   "decision_needed": true,
+   "source_ids": [
+    "EU-AIA-5",
+    "BARRETT-2019",
+    "DAY-56-57"
+   ],
+   "id": "R1",
+   "title": "Review and relabel the text-based confidence and stress signals",
+   "area": "emotion",
+   "value": 4,
+   "effort": 1,
+   "feasibility": 5
+  },
+  {
+   "summary": "Tell a candidate, at upload, whether the system can read their resume: sections found, unrecognised headings, unreadable dates, skills the job names that the resume does not mention. Stateless; working prototype delivered on Day 58.",
+   "audience": "candidate",
+   "builds_on": [
+    "parsers/resume_readiness.py",
+    "parsers/section_extractor.py",
+    "parsers/resume_extractor.py"
+   ],
+   "depends_on": [],
+   "legal_status": "allowed",
+   "evidence": "plausible",
+   "affect_inference": false,
+   "phase": 1,
+   "deadline": null,
+   "guardrails": [
+    "never returns the ATS score, weights or how to raise a score",
+    "skill hints say 'add only if you genuinely have it'",
+    "report contains no resume text"
+   ],
+   "success_metric": "Share of uploads with no blocker rises; share of candidates who fix a blocker after seeing it is measured.",
+   "decision_needed": false,
+   "source_ids": [
+    "DAY-56-57"
+   ],
+   "id": "C1",
+   "title": "Resume readiness check",
+   "area": "feature",
+   "value": 5,
+   "effort": 1,
+   "feasibility": 5
+  },
+  {
+   "summary": "Replace the mocked speech-to-text with streaming STT/TTS behind a job queue, so media work runs outside the request path. Scoring logic costs ~20-43 ms per candidate; media is where the time and cost will be.",
+   "audience": "platform",
+   "builds_on": [
+    "parsers/speech_to_text.py",
+    "parsers/screening_pipeline.py",
+    "parsers/edge_case_handler.py"
+   ],
+   "depends_on": [
+    "F1"
+   ],
+   "legal_status": "allowed",
+   "evidence": "established",
+   "affect_inference": false,
+   "phase": 2,
+   "deadline": null,
+   "guardrails": [],
+   "success_metric": "Streaming transcription under load with measured latency and word-error rate on Indian-English and Malayalam/Hindi/Tamil speech.",
+   "decision_needed": false,
+   "source_ids": [
+    "DAY-56-57"
+   ],
+   "id": "F5",
+   "title": "Real speech pipeline with asynchronous workers",
+   "area": "foundation",
+   "value": 4,
+   "effort": 4,
+   "feasibility": 3
+  },
+  {
+   "summary": "Voluntary demographic self-identification held in a separate store, used only to compute aggregate selection rates by stage and to support an independent bias audit. Never an input to any score.",
+   "audience": "admin",
+   "builds_on": [
+    "parsers/audit_trail.py",
+    "parsers/fairness_engine.py",
+    "parsers/transcript_demographic_scrubber.py"
+   ],
+   "depends_on": [
+    "F1",
+    "F3"
+   ],
+   "legal_status": "restricted",
+   "evidence": "established",
+   "affect_inference": false,
+   "phase": 2,
+   "deadline": "EU high-risk duties from 2 Dec 2027; NYC annual audit if candidates are in New York City",
+   "guardrails": [
+    "self-identification is voluntary and separate from candidate records",
+    "aggregate reporting only",
+    "never an input to scoring or ranking"
+   ],
+   "success_metric": "Selection rates by stage reported for each group with enough data; an independent audit can be run from the output.",
+   "decision_needed": false,
+   "source_ids": [
+    "EU-OMNIBUS",
+    "US-LAWS"
+   ],
+   "id": "F6",
+   "title": "Bias audit and adverse-impact monitoring",
+   "area": "foundation",
+   "value": 5,
+   "effort": 4,
+   "feasibility": 3
+  },
+  {
+   "summary": "Enforce company isolation in storage and keys, not only in the access rules (PRD multi-tenant requirement).",
+   "audience": "platform",
+   "builds_on": [
+    "parsers/access_control.py",
+    "parsers/secure_storage_plan.py"
+   ],
+   "depends_on": [
+    "F1"
+   ],
+   "legal_status": "allowed",
+   "evidence": "established",
+   "affect_inference": false,
+   "phase": 2,
+   "deadline": null,
+   "guardrails": [],
+   "success_metric": "Cross-tenant access is impossible at the storage layer, proven by test.",
+   "decision_needed": false,
+   "source_ids": [
+    "DAY-56-57"
+   ],
+   "id": "F7",
+   "title": "Multi-tenant isolation with per-tenant keys",
+   "area": "foundation",
+   "value": 4,
+   "effort": 3,
+   "feasibility": 3
+  },
+  {
+   "summary": "One place that decides which features are allowed for which tenant and candidate region (for example no video features where not permitted, consent text per jurisdiction, notice requirements), with a kill switch per feature. Laws here are changing every year; hard-coding them into features will not scale.",
+   "audience": "platform",
+   "builds_on": [
+    "parsers/access_control.py",
+    "parsers/data_governance.py"
+   ],
+   "depends_on": [
+    "F1"
+   ],
+   "legal_status": "allowed",
+   "evidence": "plausible",
+   "affect_inference": false,
+   "phase": 2,
+   "deadline": null,
+   "guardrails": [],
+   "success_metric": "A feature can be switched off for a region without a code release; every switch is audited.",
+   "decision_needed": false,
+   "source_ids": [
+    "EU-AIA-5",
+    "EU-OMNIBUS",
+    "US-LAWS",
+    "IN-DPDP"
+   ],
+   "id": "S4",
+   "title": "Jurisdiction policy engine",
+   "area": "scale",
+   "value": 4,
+   "effort": 2,
+   "feasibility": 4
+  },
+  {
+   "summary": "Candidates practise with the question banks and get qualitative feedback on coverage, structure and clarity. Strictly separate from hiring: separate question variants, practice data never visible to recruiters, opt-in, deletable.",
+   "audience": "candidate",
+   "builds_on": [
+    "parsers/hr_interview_question_bank.py",
+    "parsers/technical_interview_question_bank.py",
+    "parsers/communication_skill_engine.py"
+   ],
+   "depends_on": [
+    "F1",
+    "F4",
+    "C1"
+   ],
+   "legal_status": "restricted",
+   "evidence": "plausible",
+   "affect_inference": false,
+   "phase": 2,
+   "deadline": null,
+   "guardrails": [
+    "different question variants and rubric from the hiring interview",
+    "qualitative feedback, not the hiring score",
+    "practice data firewalled from recruiters and the hiring decision",
+    "opt-in with deletion on request"
+   ],
+   "success_metric": "Practice users show measured improvement on an independent rater's scale versus a control (as in the MACH trial design).",
+   "decision_needed": false,
+   "source_ids": [
+    "MACH-2013",
+    "EU-AIA-5"
+   ],
+   "id": "C2",
+   "title": "Practice interview coach (HR and technical)",
+   "area": "feature",
+   "value": 5,
+   "effort": 3,
+   "feasibility": 3
+  },
+  {
+   "summary": "Pace, pauses, filler words and volume from the audio, shown only to the candidate in practice mode. Behaviour measures, not inferred emotion.",
+   "audience": "candidate",
+   "builds_on": [
+    "parsers/communication_skill_engine.py",
+    "parsers/speech_to_text.py"
+   ],
+   "depends_on": [
+    "C2",
+    "F5"
+   ],
+   "legal_status": "allowed",
+   "evidence": "plausible",
+   "affect_inference": false,
+   "phase": 2,
+   "deadline": null,
+   "guardrails": [
+    "audio features only; no emotion, personality or trait labels",
+    "shown to the candidate only; never reaches a recruiter"
+   ],
+   "success_metric": "Delivery measures validated against human ratings of the same recordings.",
+   "decision_needed": false,
+   "source_ids": [
+    "MACH-2013"
+   ],
+   "id": "C3",
+   "title": "Speech delivery feedback inside the coach",
+   "area": "video",
+   "value": 4,
+   "effort": 2,
+   "feasibility": 3
+  },
+  {
+   "summary": "A short, human-reviewed explanation at category level (which parts of the process went well or were short of the role) so a candidate can improve and understand the outcome.",
+   "audience": "candidate",
+   "builds_on": [
+    "parsers/hiring_report_generator.py",
+    "parsers/final_recommendation_engine.py"
+   ],
+   "depends_on": [
+    "F1",
+    "F3"
+   ],
+   "legal_status": "restricted",
+   "evidence": "plausible",
+   "affect_inference": false,
+   "phase": 2,
+   "deadline": null,
+   "guardrails": [
+    "no scores, weights or rubric text",
+    "no information about other candidates",
+    "a person reviews every rejection message; never auto-sent"
+   ],
+   "success_metric": "Candidates report the feedback was understandable and actionable; no rubric details leak.",
+   "decision_needed": false,
+   "source_ids": [
+    "EU-OMNIBUS",
+    "IN-DPDP"
+   ],
+   "id": "C4",
+   "title": "Candidate feedback after a decision",
+   "area": "feature",
+   "value": 4,
+   "effort": 3,
+   "feasibility": 3
+  },
+  {
+   "summary": "Funnel by stage, score distributions, human-override rate, AI-vs-human agreement, and the cross-stage inconsistency flags from Day 56, fed from the audit log.",
+   "audience": "recruiter",
+   "builds_on": [
+    "parsers/audit_trail.py",
+    "parsers/hiring_report_generator.py",
+    "parsers/pipeline_simulation.py"
+   ],
+   "depends_on": [
+    "F1"
+   ],
+   "legal_status": "allowed",
+   "evidence": "established",
+   "affect_inference": false,
+   "phase": 2,
+   "deadline": null,
+   "guardrails": [],
+   "success_metric": "Recruiters can answer 'where do we lose candidates and does the AI agree with us?' without a developer.",
+   "decision_needed": false,
+   "source_ids": [
+    "DAY-56-57"
+   ],
+   "id": "C5",
+   "title": "Interview analytics dashboard",
+   "area": "feature",
+   "value": 4,
+   "effort": 3,
+   "feasibility": 4
+  },
+  {
+   "summary": "During a live interview, tell the candidate about microphone level, camera framing and connection problems. Not about how they are doing.",
+   "audience": "candidate",
+   "builds_on": [
+    "parsers/edge_case_handler.py",
+    "parsers/speech_to_text.py"
+   ],
+   "depends_on": [
+    "F5"
+   ],
+   "legal_status": "allowed",
+   "evidence": "established",
+   "affect_inference": false,
+   "phase": 2,
+   "deadline": null,
+   "guardrails": [],
+   "success_metric": "Fewer interviews lost to technical problems.",
+   "decision_needed": false,
+   "source_ids": [
+    "DAY-56-57"
+   ],
+   "id": "V4",
+   "title": "Live non-evaluative technical checks",
+   "area": "feedback",
+   "value": 3,
+   "effort": 2,
+   "feasibility": 4
+  },
+  {
+   "summary": "Add selection-rate gaps by stage, score drift over time and false-flag rates to the dashboard.",
+   "audience": "admin",
+   "builds_on": [
+    "parsers/fairness_engine.py",
+    "parsers/audit_trail.py"
+   ],
+   "depends_on": [
+    "C5",
+    "F6"
+   ],
+   "legal_status": "restricted",
+   "evidence": "established",
+   "affect_inference": false,
+   "phase": 3,
+   "deadline": null,
+   "guardrails": [
+    "aggregate only",
+    "access limited to admin and auditor roles"
+   ],
+   "success_metric": "A gap or drift beyond a set limit raises an alert that a person reviews.",
+   "decision_needed": false,
+   "source_ids": [
+    "EU-OMNIBUS",
+    "US-LAWS"
+   ],
+   "id": "C6",
+   "title": "Fairness and drift panel",
+   "area": "feature",
+   "value": 4,
+   "effort": 2,
+   "feasibility": 3
+  },
+  {
+   "summary": "Face present, one person in frame, camera on, as FLAGS for a human to look at. Detection only: no identification, no face templates, no judgement of expression. This reverses the Day 48 decision not to process video, and is therefore gated.",
+   "audience": "recruiter",
+   "builds_on": [
+    "parsers/integrity_detection_engine.py",
+    "parsers/behavioral_signal_engine.py"
+   ],
+   "depends_on": [
+    "F1",
+    "F4",
+    "F5",
+    "F6"
+   ],
+   "legal_status": "restricted",
+   "evidence": "plausible",
+   "affect_inference": false,
+   "phase": 3,
+   "deadline": null,
+   "guardrails": [
+    "explicit consent before any video analysis",
+    "detection only; no face templates stored",
+    "flags never reject; a person reviews",
+    "false-flag rate tested across skin tones and lighting before launch",
+    "disabled by the jurisdiction policy where not permitted"
+   ],
+   "success_metric": "False-flag rate low and equal across groups on a held-out set; flags change human decisions rarely and correctly.",
+   "decision_needed": true,
+   "source_ids": [
+    "US-LAWS",
+    "EU-AIA-5",
+    "DAY-48-49"
+   ],
+   "id": "V1",
+   "title": "Interview integrity signals from video (detection only)",
+   "area": "video",
+   "value": 3,
+   "effort": 4,
+   "feasibility": 2
+  },
+  {
+   "summary": "The coach responds while the candidate speaks (pace, structure prompts) in practice mode only.",
+   "audience": "candidate",
+   "builds_on": [
+    "parsers/communication_skill_engine.py"
+   ],
+   "depends_on": [
+    "C2",
+    "C3",
+    "F5"
+   ],
+   "legal_status": "allowed",
+   "evidence": "plausible",
+   "affect_inference": false,
+   "phase": 3,
+   "deadline": null,
+   "guardrails": [
+    "practice mode only",
+    "never in a scored interview"
+   ],
+   "success_metric": "Practice sessions with live prompts improve more than without, in a controlled comparison.",
+   "decision_needed": false,
+   "source_ids": [
+    "MACH-2013"
+   ],
+   "id": "V6",
+   "title": "Real-time feedback inside practice mode",
+   "area": "feedback",
+   "value": 4,
+   "effort": 3,
+   "feasibility": 3
+  },
+  {
+   "summary": "Place and receive real calls (PRD Phase 4) through a voice provider, with recording consent, retry windows and the silence/dead-line rules from Day 57.",
+   "audience": "platform",
+   "builds_on": [
+    "parsers/screening_pipeline.py",
+    "parsers/edge_case_handler.py"
+   ],
+   "depends_on": [
+    "F1",
+    "F4",
+    "F5"
+   ],
+   "legal_status": "restricted",
+   "evidence": "plausible",
+   "affect_inference": false,
+   "phase": 3,
+   "deadline": null,
+   "guardrails": [
+    "recording only with recorded consent",
+    "office-hours calling enforced"
+   ],
+   "success_metric": "Answer rate, completion rate and cost per completed call measured on a pilot.",
+   "decision_needed": false,
+   "source_ids": [
+    "IN-DPDP",
+    "DAY-56-57"
+   ],
+   "id": "S1",
+   "title": "Telephony provider integration for AI screening calls",
+   "area": "scale",
+   "value": 4,
+   "effort": 4,
+   "feasibility": 3
+  },
+  {
+   "summary": "Add the machine-test round to the end-to-end flow so technical roles can reach a final decision instead of ending 'pending evidence' (Day 56 finding).",
+   "audience": "platform",
+   "builds_on": [
+    "parsers/machine_test_evaluation_engine.py",
+    "parsers/cross_round_aggregation_engine.py"
+   ],
+   "depends_on": [
+    "F5"
+   ],
+   "legal_status": "allowed",
+   "evidence": "established",
+   "affect_inference": false,
+   "phase": 3,
+   "deadline": null,
+   "guardrails": [],
+   "success_metric": "Technical-role journeys complete to a recommendation in the simulation and in a pilot.",
+   "decision_needed": false,
+   "source_ids": [
+    "DAY-56-57"
+   ],
+   "id": "S2",
+   "title": "Machine-test stage in the orchestrated pipeline",
+   "area": "scale",
+   "value": 4,
+   "effort": 3,
+   "feasibility": 3
+  },
+  {
+   "summary": "Replace the phrase-matching technical rubric (which cannot tell a wrong answer from a correct paraphrase) with a learned or semantic scorer, run in shadow mode first and promoted only if it beats the baseline against human ratings with equal error rates across groups.",
+   "audience": "platform",
+   "builds_on": [
+    "parsers/technical_skill_scoring_engine.py"
+   ],
+   "depends_on": [
+    "F2",
+    "F3",
+    "F6"
+   ],
+   "legal_status": "restricted",
+   "evidence": "unvalidated",
+   "affect_inference": false,
+   "phase": 4,
+   "deadline": null,
+   "guardrails": [
+    "shadow mode before any effect on a decision",
+    "promotion requires beating the baseline on human labels",
+    "subgroup error rates reported",
+    "one-step rollback"
+   ],
+   "success_metric": "Agreement with human ratings above the keyword baseline on a held-out set, with no subgroup gap beyond a set limit.",
+   "decision_needed": true,
+   "source_ids": [
+    "EU-OMNIBUS",
+    "DAY-56-57"
+   ],
+   "id": "S3",
+   "title": "Learned or semantic scoring with evaluation gates",
+   "area": "scale",
+   "value": 4,
+   "effort": 5,
+   "feasibility": 2
+  },
+  {
+   "summary": "Not recommended. In the EU this is prohibited in recruitment; the science does not support reading emotions or honesty from facial movement; a major vendor dropped it; and it conflicts with Day 48's own decision. Recommend amending those PRD phases to non-affective alternatives (integrity flags, coverage of answer content). Phases 66 and 83 (gaze, focus, distraction) are a separate, related question handled under V1.",
+   "audience": "recruiter",
+   "builds_on": [
+    "parsers/behavioral_signal_engine.py"
+   ],
+   "depends_on": [],
+   "legal_status": "prohibited_in_recruitment_eu",
+   "evidence": "contradicted",
+   "affect_inference": true,
+   "phase": null,
+   "deadline": null,
+   "guardrails": [],
+   "success_metric": null,
+   "decision_needed": true,
+   "source_ids": [
+    "EU-AIA-5",
+    "BARRETT-2019",
+    "HIREVUE-2021",
+    "DAY-48-49"
+   ],
+   "id": "V2",
+   "title": "Emotion, stress, confidence or honesty inference from face or voice, used in hiring decisions (PRD Phases 18, 41 and 87, and the 'Emotion & confidence analysis' future enhancement)",
+   "area": "emotion",
+   "value": 1,
+   "effort": 4,
+   "feasibility": 2
+  },
+  {
+   "summary": "Not recommended. Unreliable (same evidence as above), and a coach that infers emotions is one configuration change away from an employment use that is prohibited. Delivery measures (pace, pauses, fillers) give the useful part without the inference.",
+   "audience": "candidate",
+   "builds_on": [
+    "parsers/communication_skill_engine.py"
+   ],
+   "depends_on": [],
+   "legal_status": "restricted",
+   "evidence": "unvalidated",
+   "affect_inference": true,
+   "phase": null,
+   "deadline": null,
+   "guardrails": [],
+   "success_metric": null,
+   "decision_needed": true,
+   "source_ids": [
+    "EU-AIA-5",
+    "BARRETT-2019"
+   ],
+   "id": "V3",
+   "title": "Emotion detection inside the candidate coach",
+   "area": "emotion",
+   "value": 2,
+   "effort": 3,
+   "feasibility": 2
+  },
+  {
+   "summary": "Not recommended. Telling candidates how they are scoring while they are scored changes the behaviour being measured, leaks the rubric, and treats candidates unequally if some use it more. Practice mode (V6) and technical checks (V4) cover the useful cases.",
+   "audience": "candidate",
+   "builds_on": [
+    "parsers/communication_skill_engine.py"
+   ],
+   "depends_on": [],
+   "legal_status": "allowed",
+   "evidence": "unvalidated",
+   "affect_inference": false,
+   "phase": null,
+   "deadline": null,
+   "guardrails": [],
+   "success_metric": null,
+   "decision_needed": true,
+   "source_ids": [
+    "DAY-56-57"
+   ],
+   "id": "V5",
+   "title": "Real-time evaluative feedback to candidates during a scored interview",
+   "area": "feedback",
+   "value": 2,
+   "effort": 3,
+   "feasibility": 3
+  }
+ ]
+}

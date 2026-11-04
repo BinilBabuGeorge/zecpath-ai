@@ -1,0 +1,110 @@
+{
+  "backlog": {
+    "features": 24,
+    "scheduled": 21,
+    "unscheduled": [
+      "V2",
+      "V3",
+      "V5"
+    ],
+    "problems": [],
+    "modules_referenced": 28
+  },
+  "roadmap": {
+    "0": [],
+    "1": [
+      "C1",
+      "F3",
+      "R1",
+      "F2",
+      "F1",
+      "F4"
+    ],
+    "2": [
+      "C2",
+      "S4",
+      "C5",
+      "F6",
+      "C4",
+      "F7",
+      "F5",
+      "C3",
+      "V4"
+    ],
+    "3": [
+      "C6",
+      "S2",
+      "V6",
+      "S1",
+      "V1"
+    ],
+    "4": [
+      "S3"
+    ]
+  },
+  "top_priorities": [
+    [
+      "C1",
+      14
+    ],
+    [
+      "F3",
+      12
+    ],
+    [
+      "R1",
+      12
+    ],
+    [
+      "F2",
+      11
+    ],
+    [
+      "F4",
+      11
+    ]
+  ],
+  "not_recommended": [
+    {
+      "id": "V2",
+      "legal_status": "prohibited_in_recruitment_eu",
+      "evidence": "contradicted"
+    },
+    {
+      "id": "V3",
+      "legal_status": "restricted",
+      "evidence": "unvalidated"
+    },
+    {
+      "id": "V5",
+      "legal_status": "allowed",
+      "evidence": "unvalidated"
+    }
+  ],
+  "facts": {
+    "confidence_weight": 0.25
+  },
+  "prototype": {
+    "sample_resumes": 16,
+    "ready": 16,
+    "heading_cost": {
+      "Skills:": {
+        "ats_score": 50.1,
+        "ready": true,
+        "blockers": []
+      },
+      "Technical Skills": {
+        "ats_score": 50.1,
+        "ready": true,
+        "blockers": []
+      },
+      "Tools I use": {
+        "ats_score": 14.2,
+        "ready": false,
+        "blockers": [
+          "NO_SKILLS_SECTION"
+        ]
+      }
+    }
+  }
+}
