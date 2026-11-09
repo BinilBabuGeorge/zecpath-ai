@@ -1,6 +1,11 @@
 # Core
 python-dotenv==1.0.1
 
+# Day 59: integration schemas, OpenAPI file and the mapping diagram
+jsonschema==4.26.0
+PyYAML==6.0.3
+matplotlib==3.11.2
+
 # Testing
 pytest==8.3.3
 pytest-cov==5.0.0
