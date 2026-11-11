@@ -22,7 +22,8 @@ PARTIAL FAILURE. One bad resume does not fail the batch: its entry carries the o
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+import os
+from typing import Any, Dict, List, Optional
 
 from ats_engine.service import ATSService
 from utils.base_service import BaseAIService, MAX_ITEMS, ServiceInputError
@@ -31,9 +32,13 @@ from utils.base_service import BaseAIService, MAX_ITEMS, ServiceInputError
 class ATSBatchService(BaseAIService):
     service_name = "ats_batch_service"
 
-    def __init__(self) -> None:
+    def __init__(self, workers: Optional[int] = None, min_parallel_batch: Optional[int] = None) -> None:
+        """`workers` > 1 spreads large batches over worker processes (see ats_engine/parallel.py); the default is 1, or the number in
+        the environment variable ZECPATH_BATCH_WORKERS. Results are identical either way."""
         super().__init__()
         self._single = ATSService()
+        self._workers = workers if workers is not None else int(os.environ.get("ZECPATH_BATCH_WORKERS", "1") or 1)
+        self._min_parallel = min_parallel_batch
 
     def process(self, payload: Dict[str, Any]) -> Dict[str, Any]:
         job_description = self._get_text(payload, "job_description")
@@ -53,18 +58,30 @@ class ATSBatchService(BaseAIService):
             seen.add(cid)
 
         self.logger.info("Scoring a batch of %d candidates against one job description (%d chars)", len(candidates), len(job_description))
+        warnings: List[str] = []
+        outcomes = self._score_all(job_description, candidates, warnings)
         results: List[Dict[str, Any]] = []
         failed = 0
-        for c in candidates:
-            outcome = self._single.run({"resume_text": c.get("resume_text", ""), "job_description": job_description})
+        for c, outcome in zip(candidates, outcomes):
             if outcome.get("status") != "success":
                 failed += 1
             results.append({"candidate_id": c["candidate_id"], "outcome": outcome})
 
         response = self._base_response()
         response.update({"scoring_basis": "per_pair", "total": len(candidates), "succeeded": len(candidates) - failed,
-                         "failed": failed, "results": results, "warnings": []})
+                         "failed": failed, "results": results, "warnings": warnings})
         return response
+
+    def _score_all(self, job_description: str, candidates: List[Dict[str, Any]], warnings: List[str]) -> List[Dict[str, Any]]:
+        from ats_engine import parallel
+        threshold = self._min_parallel if self._min_parallel is not None else parallel.MIN_PARALLEL_BATCH
+        if self._workers > 1 and len(candidates) >= threshold:
+            try:
+                return parallel.score_batch_parallel(job_description, candidates, self._workers)
+            except Exception as exc:                      # a pool that cannot start must not fail the batch
+                self.logger.warning("Parallel scoring unavailable (%s); scoring sequentially", type(exc).__name__)
+                warnings.append("Parallel scoring was not available, so the batch was scored one candidate at a time; the results are the same.")
+        return [self._single.run({"resume_text": c.get("resume_text", ""), "job_description": job_description}) for c in candidates]
 
 
 __all__ = ["ATSBatchService", "MAX_ITEMS"]

@@ -24,15 +24,24 @@ would fetch the object from encrypted storage with a service credential; none ex
 
 from __future__ import annotations
 
+import copy
+import hashlib
 from datetime import date
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional
 
 from utils.base_service import BaseAIService, ServiceInputError
 from utils.config import MEDIA_STORAGE_PATH
+from utils.perf import BoundedLRU
 
 SUPPORTED_FILE_TYPES = ("pdf", "docx")
 MAX_FILE_REF_CHARS = 512
+
+# PERFORMANCE (Day 60): parsing the same file again (a retried job, a re-uploaded CV, a re-score after a job description changes) repeats
+# work that is 87% pdfplumber for a PDF. The parse is a pure function of the file's BYTES, the file type and the "as of" date, so the
+# result is cached under a hash of exactly those (never under the file name, which can be reused for a different file). Bounded by
+# entries and by bytes; each caller gets its own copy, with its own candidate_id.
+_PARSE_CACHE = BoundedLRU("resume_parse", max_items=256, max_bytes=16_000_000, sizeof=lambda v: 4000 + 3 * len(v.get("cleaned_text", "")))
 
 
 def default_file_resolver(file_ref: str) -> str:
@@ -52,11 +61,6 @@ class ResumeParsingService(BaseAIService):
         self._resolver = resolver or default_file_resolver
 
     def process(self, payload: Dict[str, Any]) -> Dict[str, Any]:
-        from parsers.education_parser import parse_certifications, parse_education
-        from parsers.experience_parser import compute_total_experience, parse_experience, reference_date
-        from parsers.resume_extractor import ResumeUploadError, extract_resume
-        from parsers.skill_extractor import extract_skills
-
         candidate_id = self._get_text(payload, "candidate_id")
         file_ref = self._get_text(payload, "file_ref")
         if len(file_ref) > MAX_FILE_REF_CHARS:
@@ -71,6 +75,36 @@ class ResumeParsingService(BaseAIService):
             raise ServiceInputError("invalid_input", f"'file_ref' does not end in .{file_type}, which does not match 'file_type'.", "file_type")
 
         self.logger.info("Parsing a %s resume for candidate %s", file_type, candidate_id)
+        cache_key = self._cache_key(path, file_type, as_of)
+        if cache_key is not None:
+            hit = _PARSE_CACHE.get_or_compute(cache_key, lambda: self._parse_file(path, file_type, as_of))
+            parsed = copy.deepcopy(hit)
+        else:
+            parsed = self._parse_file(path, file_type, as_of)
+        response = self._base_response()
+        response["candidate_id"] = candidate_id
+        response.update(parsed)
+        return response
+
+    @staticmethod
+    def _cache_key(path: str, file_type: str, as_of: Optional[date]):
+        """A hash of the file's bytes plus the file type and the resolved date, or None if the file cannot be read (the normal error
+        path then reports it exactly as before)."""
+        try:
+            data = Path(path).read_bytes()
+        except OSError:
+            return None
+        if not data:
+            return None
+        return (hashlib.blake2b(data, digest_size=20).hexdigest(), file_type, (as_of or date.today()).isoformat())
+
+    def _parse_file(self, path: str, file_type: str, as_of: Optional[date]) -> Dict[str, Any]:
+        """Everything in the response that depends only on the file (not on the caller)."""
+        from parsers.education_parser import parse_certifications, parse_education
+        from parsers.experience_parser import compute_total_experience, parse_experience, reference_date
+        from parsers.resume_extractor import ResumeUploadError, extract_resume
+        from parsers.skill_extractor import extract_skills
+
         try:
             extracted = extract_resume(path)
         except ResumeUploadError as exc:
@@ -95,9 +129,7 @@ class ResumeParsingService(BaseAIService):
             education = parse_education(text)
             certs = parse_certifications(text)
 
-        response = self._base_response()
-        response.update({
-            "candidate_id": candidate_id,
+        return {
             "file_type": file_type,
             "as_of_date": (as_of or date.today()).isoformat(),
             "has_text": extracted.has_text,
@@ -117,8 +149,7 @@ class ResumeParsingService(BaseAIService):
                            "institution": e.institution, "year": e.year} for e in education],
             "certifications": [{"name": c.name, "issuer": c.issuer, "year": c.year, "category": c.category} for c in certs],
             "warnings": warnings,
-        })
-        return response
+        }
 
     @staticmethod
     def _get_as_of(payload: Dict[str, Any]) -> Optional[date]:

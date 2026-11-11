@@ -35,6 +35,8 @@ from datetime import datetime, timezone
 from enum import Enum
 from typing import Dict, List, Optional
 
+from utils.perf import compile_phrase_patterns
+
 
 # ---------------------------------------------------------------------------
 # Enums
@@ -253,6 +255,10 @@ def _is_negated(lowered: str, match_start: int) -> bool:
     return any(neg in window for neg in _NEGATORS)
 
 
+_NO_RES = compile_phrase_patterns(_NO_PHRASES)     # built from the same sets, in the same iteration order
+_YES_RES = compile_phrase_patterns(_YES_PHRASES)
+
+
 def _extract_yes_no(text: str) -> Optional[bool]:
     """Word-boundary matching, not naive substring containment -- an
     earlier version used plain `phrase in lowered`, which incorrectly
@@ -267,12 +273,12 @@ def _extract_yes_no(text: str) -> Optional[bool]:
     word "sure" inside it as a false YES.
     """
     lowered = text.lower().strip()
-    for phrase in _NO_PHRASES:
-        match = re.search(rf"\b{re.escape(phrase)}\b", lowered)
+    for phrase, rx in _NO_RES:
+        match = rx.search(lowered)
         if match and not _is_negated(lowered, match.start()):
             return False
-    for phrase in _YES_PHRASES:
-        match = re.search(rf"\b{re.escape(phrase)}\b", lowered)
+    for phrase, rx in _YES_RES:
+        match = rx.search(lowered)
         if match and not _is_negated(lowered, match.start()):
             return True
     return None

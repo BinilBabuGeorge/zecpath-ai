@@ -43,6 +43,7 @@ from typing import Dict, List, Optional, Tuple
 
 from parsers.answer_intent_engine import AnswerQuality, StructuredAnswer, understand_answer
 from parsers.screening_question_bank import CATEGORIES
+from utils.perf import compile_phrase_patterns
 
 # ---------------------------------------------------------------------------
 # Constants -- named, adjustable, reasonable-but-arbitrary (same stance
@@ -129,13 +130,16 @@ class NextAction:
 # The two genuinely new detectors Day 25 doesn't provide
 # ---------------------------------------------------------------------------
 
+_CONFUSION_RES = compile_phrase_patterns(_CONFUSION_PHRASES)
+
+
 def detect_confusion(text: str) -> bool:
     """A candidate reaction to the QUESTION, not a property of an
     answer's content -- distinct from Day 25's quality gate, which
     only ever judges the substance of what was said.
     """
     lowered = text.lower()
-    return any(re.search(rf"\b{re.escape(phrase)}\b", lowered) for phrase in _CONFUSION_PHRASES)
+    return any(rx.search(lowered) for _, rx in _CONFUSION_RES)
 
 
 def _word_set(text: str) -> set:

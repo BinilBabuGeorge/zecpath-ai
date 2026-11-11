@@ -56,6 +56,7 @@ from typing import Dict, List, Optional
 from parsers.conversation_flow_engine import detect_repeated_answer
 from parsers.hr_interview_question_bank import InterviewQuestionState, InterviewSession
 from parsers.transcript_schema import _WORD_NUMBERS, _APPROXIMATE_WORD_NUMBERS
+from utils.perf import compile_phrase_patterns
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -175,9 +176,12 @@ def has_concrete_example(text: str) -> bool:
     return False
 
 
+_VAGUE_HEDGE_RES = compile_phrase_patterns(_VAGUE_HEDGE_PHRASES)
+
+
 def is_vague_behavioral_answer(text: str) -> bool:
     lowered = text.lower().strip()
-    return any(re.search(rf"\b{re.escape(phrase)}\b", lowered) for phrase in _VAGUE_HEDGE_PHRASES)
+    return any(rx.search(lowered) for _, rx in _VAGUE_HEDGE_RES)
 
 
 def assess_behavioral_answer(text: str, is_silent: bool = False) -> BehavioralAnswerQuality:

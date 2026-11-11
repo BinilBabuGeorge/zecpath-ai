@@ -10,10 +10,12 @@ from __future__ import annotations
 
 import re
 import difflib
-from dataclasses import dataclass, field
+import hashlib
+from dataclasses import dataclass, field, replace
 from typing import Dict, List, Optional
 
 from parsers.skill_dictionary import SKILL_DICTIONARY, SKILL_STACKS
+from utils.perf import BoundedLRU
 
 _SYNONYM_LOOKUP: Dict[str, str] = {}
 
@@ -42,6 +44,9 @@ _COMBINED_EXACT_PATTERN = re.compile(
 )
 
 _STACK_LOOKUP = {name.lower(): skills for name, skills in SKILL_STACKS.items()}
+# PERFORMANCE (Day 60): the stack pattern was rebuilt (re.escape + string join + re cache lookup) for every stack on every call.
+# Compiling each once gives the identical match (same pattern text) without the repeated work.
+_STACK_PATTERNS = {name: re.compile(r"(?<!\w)" + re.escape(name) + r"(?!\w)") for name in _STACK_LOOKUP}
 
 FUZZY_MATCH_THRESHOLD = 0.82
 
@@ -55,6 +60,34 @@ FUZZY_MATCH_THRESHOLD = 0.82
 # difflib comparison cost per fragment, but removes a real per-call
 # list-construction cost sitting in front of it.
 _ALL_KNOWN_TERMS = list(_SYNONYM_LOOKUP.keys())
+
+# PERFORMANCE (Day 60), two changes to the fuzzy fallback, which Day 60 profiling found was 15% of ATS scoring, 42% of DOCX parsing
+# and 37% of screening scoring (difflib.get_close_matches, once per unfamiliar fragment):
+#   1. LENGTH WINDOW. difflib only keeps a term if real_quick_ratio() >= cutoff, and real_quick_ratio is 2*min(la,lb)/(la+lb), which
+#      depends only on the two LENGTHS. A term whose length makes that ratio fall below the cutoff can never be returned, so it is
+#      never offered to difflib. The test uses the same expression difflib does, so the result is identical by construction
+#      (checked on 20,000 generated fragments in tests/test_day60_performance.py).
+#   2. MEMO. The answer for a fragment depends only on the fragment (the dictionary is a constant), and the same fragments recur
+#      across resumes ("node js", "reactjs", "communication"). Stored in a bounded LRU (see utils/perf.py).
+_MAX_TERM_LEN_INDEXED = 64
+
+
+def _terms_for_length(length: int) -> List[str]:
+    return [t for t in _ALL_KNOWN_TERMS if 2.0 * min(length, len(t)) / (length + len(t)) >= FUZZY_MATCH_THRESHOLD]
+
+
+_TERMS_BY_FRAGMENT_LENGTH: Dict[int, List[str]] = {n: _terms_for_length(n) for n in range(1, _MAX_TERM_LEN_INDEXED + 1)}
+_FUZZY_CACHE = BoundedLRU("skill_fuzzy", max_items=8192, max_bytes=2_000_000, sizeof=lambda v: 120 if v is None else 120 + len(v))
+_SKILLS_CACHE = BoundedLRU("skill_extract_text", max_items=1024, max_bytes=8_000_000, sizeof=lambda v: 400 + sum(250 + 60 * len(s.mentions) for s in v))
+
+
+def _closest_known_term(frag_lower: str) -> Optional[str]:
+    """The single dictionary term difflib.get_close_matches(frag, terms, n=1, cutoff=FUZZY_MATCH_THRESHOLD) would return, or None."""
+    def compute() -> Optional[str]:
+        terms = _TERMS_BY_FRAGMENT_LENGTH.get(len(frag_lower), _ALL_KNOWN_TERMS)
+        close = difflib.get_close_matches(frag_lower, terms, n=1, cutoff=FUZZY_MATCH_THRESHOLD)
+        return close[0] if close else None
+    return _FUZZY_CACHE.get_or_compute(frag_lower, compute)
 
 
 @dataclass
@@ -84,8 +117,7 @@ def _find_stack_matches(text: str) -> Dict[str, List[str]]:
     lowered = text.lower()
 
     for stack_name, implied_skills in _STACK_LOOKUP.items():
-        pattern = r"(?<!\w)" + re.escape(stack_name) + r"(?!\w)"
-        if re.search(pattern, lowered):
+        if _STACK_PATTERNS[stack_name].search(lowered):
             for skill in implied_skills:
                 found.setdefault(skill, []).append(f"(via '{stack_name.upper()}' stack)")
 
@@ -125,16 +157,16 @@ def _find_fuzzy_matches(text: str, already_found: set) -> Dict[str, List[str]]:
         if frag_lower in _SYNONYM_LOOKUP:
             continue
 
-        close = difflib.get_close_matches(frag_lower, _ALL_KNOWN_TERMS, n=1, cutoff=FUZZY_MATCH_THRESHOLD)
-        if not close:
+        close_term = _closest_known_term(frag_lower)
+        if close_term is None:
             continue
 
-        canonical = _SYNONYM_LOOKUP[close[0]]
+        canonical = _SYNONYM_LOOKUP[close_term]
         if canonical in already_found:
             continue
 
-        ratio = difflib.SequenceMatcher(None, frag_lower, close[0]).ratio()
-        found.setdefault(canonical, []).append(f"{fragment} (~{ratio:.2f} match to '{close[0]}')")
+        ratio = difflib.SequenceMatcher(None, frag_lower, close_term).ratio()
+        found.setdefault(canonical, []).append(f"{fragment} (~{ratio:.2f} match to '{close_term}')")
 
     return found
 
@@ -154,6 +186,16 @@ def _score_confidence(method: str, mention_count: int, fuzzy_ratio: Optional[flo
 
 
 def extract_skills(text: str) -> List[ExtractedSkill]:
+    """Skills found in `text`. PERFORMANCE (Day 60): the result is a pure function of the text, and the same text is extracted many
+    times (a job description's skills section once per candidate; a resume once when parsed and again when scored). Results are
+    memoised by a hash of the text (the text itself is not kept alive) in a bounded LRU, and every caller gets its OWN copy, so
+    changing a returned skill can never change what the next caller sees."""
+    key = hashlib.blake2b(text.encode("utf-8", "surrogatepass"), digest_size=16).digest()
+    cached = _SKILLS_CACHE.get_or_compute(key, lambda: _extract_skills_uncached(text))
+    return [replace(skill, mentions=list(skill.mentions)) for skill in cached]
+
+
+def _extract_skills_uncached(text: str) -> List[ExtractedSkill]:
     exact = _find_exact_matches(text)
     stacks = _find_stack_matches(text)
     exact_and_stack_names = set(exact) | set(stacks)

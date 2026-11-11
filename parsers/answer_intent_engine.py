@@ -51,6 +51,7 @@ from typing import Dict, List, Optional
 
 from parsers.skill_extractor import extract_skills
 from parsers.transcript_schema import normalize_answer, NormalizationStatus
+from utils.perf import compile_phrase_patterns
 
 
 # ---------------------------------------------------------------------------
@@ -306,10 +307,13 @@ def extract_salary_expectation(text: str) -> Optional[Dict]:
 # 3. Quality gating -- vague / off-topic / missing
 # ---------------------------------------------------------------------------
 
+_HEDGE_RES = compile_phrase_patterns(_HEDGE_PHRASES)
+
+
 def _is_vague(text: str, category_scores: Optional[Dict[str, float]] = None,
               expected_category: Optional[str] = None) -> bool:
     lowered = text.lower().strip()
-    if any(re.search(rf"\b{re.escape(phrase)}\b", lowered) for phrase in _HEDGE_PHRASES):
+    if any(rx.search(lowered) for _, rx in _HEDGE_RES):
         return True
     # A very short answer (1-2 words) that isn't a clean yes/no is
     # ONLY too thin to be a real answer if it also carries no

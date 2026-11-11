@@ -14,8 +14,6 @@ from collections import OrderedDict
 from dataclasses import dataclass, field
 from typing import Dict, List
 
-from sklearn.feature_extraction.text import TfidfVectorizer
-
 from parsers.skill_dictionary import SKILL_DICTIONARY
 
 _SYNONYM_LOOKUP: Dict[str, str] = {}
@@ -63,6 +61,10 @@ EMBED_CACHE_SIZE = 1024
 
 class SemanticMatcher:
     def __init__(self, corpus: List[str], normalize: bool = True, cache_size: int = EMBED_CACHE_SIZE):
+        # MEMORY (Day 60): scikit-learn (with NumPy and SciPy) is about 120 MB of resident memory and a second of import time. It used to be
+        # imported when this module was, and this module is reached by every service that touches an ATS zone (decision, interview,
+        # screening), none of which builds a matcher. Importing it here, on first use, means only workers that really score resumes pay for it.
+        from sklearn.feature_extraction.text import TfidfVectorizer
         self.normalize = normalize
         prepared = [normalize_for_embedding(t) if normalize else t for t in corpus]
         self.vectorizer = TfidfVectorizer(stop_words="english", ngram_range=(1, 2))
@@ -90,6 +92,44 @@ class SemanticMatcher:
                 if len(self._cache) > self._cache_size:
                     self._cache.popitem(last=False)
         return vector
+
+    def embed_many(self, texts: List[str]) -> list:
+        """Vectors for several texts, in order, equal to calling embed() on each.
+
+        PERFORMANCE (Day 60): profiling found that most of the time in embed() was not the arithmetic but scikit-learn's fixed
+        per-call cost (input validation, sparse-matrix construction): scoring one resume made six separate transform() calls. The
+        rows of a TF-IDF transform are independent of one another, so ONE call for every text that is not already cached gives
+        each text the same vector it would have got alone (tests/test_day60_performance.py compares them array by array).
+        """
+        vectors: list = [None] * len(texts)
+        missing: Dict[str, List[int]] = {}
+        for i, text in enumerate(texts):
+            cached = None
+            if self._cache_size:
+                with self._lock:
+                    cached = self._cache.get(text)
+                    if cached is not None:
+                        self._cache.move_to_end(text)
+                        self.cache_hits += 1
+            if cached is not None:
+                vectors[i] = cached
+            else:
+                missing.setdefault(text, []).append(i)
+        if missing:
+            unique = list(missing)
+            prepared = [normalize_for_embedding(t) if self.normalize else t for t in unique]
+            matrix = self.vectorizer.transform(prepared)
+            for row, text in enumerate(unique):
+                vector = matrix[row]
+                for i in missing[text]:
+                    vectors[i] = vector
+                if self._cache_size:
+                    with self._lock:
+                        self.cache_misses += 1
+                        self._cache[text] = vector
+                        if len(self._cache) > self._cache_size:
+                            self._cache.popitem(last=False)
+        return vectors
 
     def similarity(self, text_a: str, text_b: str) -> float:
         vec_a = self.embed(text_a)
@@ -123,10 +163,15 @@ def compare_resume_to_jd(
     thresholds: Dict[str, float],
 ) -> MatchResult:
     component_scores = {}
-    for component, weight in COMPONENT_WEIGHTS.items():
-        resume_text = resume_sections.get(component, "")
-        jd_text = jd_sections.get(component, "")
-        component_scores[component] = matcher.similarity(resume_text, jd_text)
+    names = list(COMPONENT_WEIGHTS)
+    if hasattr(matcher, "embed_many"):
+        # PERFORMANCE (Day 60): all six section texts embedded in one call (see SemanticMatcher.embed_many); same arithmetic as similarity().
+        vectors = matcher.embed_many([resume_sections.get(c, "") for c in names] + [jd_sections.get(c, "") for c in names])
+        for i, component in enumerate(names):
+            component_scores[component] = round(float(vectors[i].multiply(vectors[i + len(names)]).sum()), 4)
+    else:
+        for component in names:
+            component_scores[component] = matcher.similarity(resume_sections.get(component, ""), jd_sections.get(component, ""))
 
     overall = round(sum(component_scores[c] * w for c, w in COMPONENT_WEIGHTS.items()), 4)
     classification = classify_score(overall, thresholds)

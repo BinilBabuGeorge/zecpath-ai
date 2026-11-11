@@ -1,0 +1,5934 @@
+{
+ "answer_corpus_size": 240,
+ "as_of": "2026-11-01",
+ "ats_batch": {
+  "api_version": "1.0",
+  "failed": 0,
+  "model_version": "v0.1.0",
+  "results": [
+   {
+    "candidate_id": "C00",
+    "outcome": {
+     "api_version": "1.0",
+     "ats_score": 50.2,
+     "components": [
+      {
+       "available": true,
+       "name": "skill_match",
+       "score": 80.0
+      },
+      {
+       "available": true,
+       "name": "experience",
+       "score": 21.1
+      },
+      {
+       "available": true,
+       "name": "education",
+       "score": 86.5
+      },
+      {
+       "available": true,
+       "name": "semantic",
+       "score": 14.7
+      }
+     ],
+     "model_version": "v0.1.0",
+     "role_category": "tech",
+     "scoring_mode": "ats_engine",
+     "service": "ats_ai_service",
+     "status": "success",
+     "warnings": [],
+     "zone": "shortlist"
+    }
+   },
+   {
+    "candidate_id": "C01",
+    "outcome": {
+     "api_version": "1.0",
+     "ats_score": 19.1,
+     "components": [
+      {
+       "available": true,
+       "name": "skill_match",
+       "score": 0.0
+      },
+      {
+       "available": true,
+       "name": "experience",
+       "score": 19.5
+      },
+      {
+       "available": true,
+       "name": "education",
+       "score": 86.5
+      },
+      {
+       "available": true,
+       "name": "semantic",
+       "score": 1.7
+      }
+     ],
+     "model_version": "v0.1.0",
+     "role_category": "tech",
+     "scoring_mode": "ats_engine",
+     "service": "ats_ai_service",
+     "status": "success",
+     "warnings": [],
+     "zone": "reject"
+    }
+   },
+   {
+    "candidate_id": "C02",
+    "outcome": {
+     "api_version": "1.0",
+     "ats_score": 18.3,
+     "components": [
+      {
+       "available": true,
+       "name": "skill_match",
+       "score": 0.0
+      },
+      {
+       "available": true,
+       "name": "experience",
+       "score": 17.5
+      },
+      {
+       "available": true,
+       "name": "education",
+       "score": 86.5
+      },
+      {
+       "available": true,
+       "name": "semantic",
+       "score": 0.5
+      }
+     ],
+     "model_version": "v0.1.0",
+     "role_category": "tech",
+     "scoring_mode": "ats_engine",
+     "service": "ats_ai_service",
+     "status": "success",
+     "warnings": [],
+     "zone": "reject"
+    }
+   },
+   {
+    "candidate_id": "C03",
+    "outcome": {
+     "api_version": "1.0",
+     "ats_score": 17.3,
+     "components": [
+      {
+       "available": true,
+       "name": "skill_match",
+       "score": 0.0
+      },
+      {
+       "available": true,
+       "name": "experience",
+       "score": 14.1
+      },
+      {
+       "available": true,
+       "name": "education",
+       "score": 86.5
+      },
+      {
+       "available": true,
+       "name": "semantic",
+       "score": 0.5
+      }
+     ],
+     "model_version": "v0.1.0",
+     "role_category": "tech",
+     "scoring_mode": "ats_engine",
+     "service": "ats_ai_service",
+     "status": "success",
+     "warnings": [],
+     "zone": "reject"
+    }
+   },
+   {
+    "candidate_id": "C04",
+    "outcome": {
+     "api_version": "1.0",
+     "ats_score": 18.7,
+     "components": [
+      {
+       "available": true,
+       "name": "skill_match",
+       "score": 0.0
+      },
+      {
+       "available": true,
+       "name": "experience",
+       "score": 18.7
+      },
+      {
+       "available": true,
+       "name": "education",
+       "score": 86.5
+      },
+      {
+       "available": true,
+       "name": "semantic",
+       "score": 0.4
+      }
+     ],
+     "model_version": "v0.1.0",
+     "role_category": "tech",
+     "scoring_mode": "ats_engine",
+     "service": "ats_ai_service",
+     "status": "success",
+     "warnings": [],
+     "zone": "reject"
+    }
+   },
+   {
+    "candidate_id": "C05",
+    "outcome": {
+     "api_version": "1.0",
+     "ats_score": 18.5,
+     "components": [
+      {
+       "available": true,
+       "name": "skill_match",
+       "score": 0.0
+      },
+      {
+       "available": true,
+       "name": "experience",
+       "score": 16.0
+      },
+      {
+       "available": true,
+       "name": "education",
+       "score": 86.5
+      },
+      {
+       "available": true,
+       "name": "semantic",
+       "score": 3.3
+      }
+     ],
+     "model_version": "v0.1.0",
+     "role_category": "tech",
+     "scoring_mode": "ats_engine",
+     "service": "ats_ai_service",
+     "status": "success",
+     "warnings": [],
+     "zone": "reject"
+    }
+   },
+   {
+    "candidate_id": "C06",
+    "outcome": {
+     "api_version": "1.0",
+     "ats_score": 15.4,
+     "components": [
+      {
+       "available": true,
+       "name": "skill_match",
+       "score": 0.0
+      },
+      {
+       "available": true,
+       "name": "experience",
+       "score": 7.6
+      },
+      {
+       "available": true,
+       "name": "education",
+       "score": 86.5
+      },
+      {
+       "available": true,
+       "name": "semantic",
+       "score": 0.4
+      }
+     ],
+     "model_version": "v0.1.0",
+     "role_category": "tech",
+     "scoring_mode": "ats_engine",
+     "service": "ats_ai_service",
+     "status": "success",
+     "warnings": [],
+     "zone": "reject"
+    }
+   },
+   {
+    "candidate_id": "C07",
+    "outcome": {
+     "api_version": "1.0",
+     "ats_score": 17.6,
+     "components": [
+      {
+       "available": true,
+       "name": "skill_match",
+       "score": 0.0
+      },
+      {
+       "available": true,
+       "name": "experience",
+       "score": 15.1
+      },
+      {
+       "available": true,
+       "name": "education",
+       "score": 86.5
+      },
+      {
+       "available": true,
+       "name": "semantic",
+       "score": 0.4
+      }
+     ],
+     "model_version": "v0.1.0",
+     "role_category": "tech",
+     "scoring_mode": "ats_engine",
+     "service": "ats_ai_service",
+     "status": "success",
+     "warnings": [],
+     "zone": "reject"
+    }
+   },
+   {
+    "candidate_id": "C08",
+    "outcome": {
+     "api_version": "1.0",
+     "ats_score": 17.8,
+     "components": [
+      {
+       "available": true,
+       "name": "skill_match",
+       "score": 0.0
+      },
+      {
+       "available": true,
+       "name": "experience",
+       "score": 15.6
+      },
+      {
+       "available": true,
+       "name": "education",
+       "score": 86.5
+      },
+      {
+       "available": true,
+       "name": "semantic",
+       "score": 0.4
+      }
+     ],
+     "model_version": "v0.1.0",
+     "role_category": "tech",
+     "scoring_mode": "ats_engine",
+     "service": "ats_ai_service",
+     "status": "success",
+     "warnings": [],
+     "zone": "reject"
+    }
+   },
+   {
+    "candidate_id": "C09",
+    "outcome": {
+     "api_version": "1.0",
+     "ats_score": 19.9,
+     "components": [
+      {
+       "available": true,
+       "name": "skill_match",
+       "score": 0.0
+      },
+      {
+       "available": true,
+       "name": "experience",
+       "score": 22.6
+      },
+      {
+       "available": true,
+       "name": "education",
+       "score": 86.5
+      },
+      {
+       "available": true,
+       "name": "semantic",
+       "score": 0.5
+      }
+     ],
+     "model_version": "v0.1.0",
+     "role_category": "tech",
+     "scoring_mode": "ats_engine",
+     "service": "ats_ai_service",
+     "status": "success",
+     "warnings": [],
+     "zone": "reject"
+    }
+   },
+   {
+    "candidate_id": "C10",
+    "outcome": {
+     "api_version": "1.0",
+     "ats_score": 35.0,
+     "components": [
+      {
+       "available": true,
+       "name": "skill_match",
+       "score": 20.0
+      },
+      {
+       "available": true,
+       "name": "experience",
+       "score": 47.0
+      },
+      {
+       "available": true,
+       "name": "education",
+       "score": 86.5
+      },
+      {
+       "available": true,
+       "name": "semantic",
+       "score": 4.5
+      }
+     ],
+     "model_version": "v0.1.0",
+     "role_category": "tech",
+     "scoring_mode": "ats_engine",
+     "service": "ats_ai_service",
+     "status": "success",
+     "warnings": [],
+     "zone": "review"
+    }
+   },
+   {
+    "candidate_id": "C11",
+    "outcome": {
+     "api_version": "1.0",
+     "ats_score": 47.0,
+     "components": [
+      {
+       "available": true,
+       "name": "skill_match",
+       "score": 50.0
+      },
+      {
+       "available": true,
+       "name": "experience",
+       "score": 47.4
+      },
+      {
+       "available": true,
+       "name": "education",
+       "score": 86.5
+      },
+      {
+       "available": true,
+       "name": "semantic",
+       "score": 11.6
+      }
+     ],
+     "model_version": "v0.1.0",
+     "role_category": "tech",
+     "scoring_mode": "ats_engine",
+     "service": "ats_ai_service",
+     "status": "success",
+     "warnings": [],
+     "zone": "shortlist"
+    }
+   },
+   {
+    "candidate_id": "C12",
+    "outcome": {
+     "api_version": "1.0",
+     "ats_score": 29.7,
+     "components": [
+      {
+       "available": true,
+       "name": "skill_match",
+       "score": 20.0
+      },
+      {
+       "available": false,
+       "name": "experience",
+       "score": 0.0
+      },
+      {
+       "available": true,
+       "name": "education",
+       "score": 86.5
+      },
+      {
+       "available": true,
+       "name": "semantic",
+       "score": 4.2
+      }
+     ],
+     "model_version": "v0.1.0",
+     "role_category": "tech",
+     "scoring_mode": "ats_engine",
+     "service": "ats_ai_service",
+     "status": "success",
+     "warnings": [],
+     "zone": "review"
+    }
+   },
+   {
+    "candidate_id": "C13",
+    "outcome": {
+     "api_version": "1.0",
+     "ats_score": 41.5,
+     "components": [
+      {
+       "available": true,
+       "name": "skill_match",
+       "score": 50.0
+      },
+      {
+       "available": true,
+       "name": "experience",
+       "score": 50.6
+      },
+      {
+       "available": false,
+       "name": "education",
+       "score": 0.0
+      },
+      {
+       "available": true,
+       "name": "semantic",
+       "score": 12.8
+      }
+     ],
+     "model_version": "v0.1.0",
+     "role_category": "tech",
+     "scoring_mode": "ats_engine",
+     "service": "ats_ai_service",
+     "status": "success",
+     "warnings": [],
+     "zone": "review"
+    }
+   },
+   {
+    "candidate_id": "C14",
+    "outcome": {
+     "api_version": "1.0",
+     "ats_score": 50.5,
+     "components": [
+      {
+       "available": true,
+       "name": "skill_match",
+       "score": 60.0
+      },
+      {
+       "available": true,
+       "name": "experience",
+       "score": 46.3
+      },
+      {
+       "available": true,
+       "name": "education",
+       "score": 86.5
+      },
+      {
+       "available": true,
+       "name": "semantic",
+       "score": 12.8
+      }
+     ],
+     "model_version": "v0.1.0",
+     "role_category": "tech",
+     "scoring_mode": "ats_engine",
+     "service": "ats_ai_service",
+     "status": "success",
+     "warnings": [],
+     "zone": "shortlist"
+    }
+   },
+   {
+    "candidate_id": "C15",
+    "outcome": {
+     "api_version": "1.0",
+     "ats_score": 49.7,
+     "components": [
+      {
+       "available": true,
+       "name": "skill_match",
+       "score": 70.0
+      },
+      {
+       "available": true,
+       "name": "experience",
+       "score": 29.2
+      },
+      {
+       "available": true,
+       "name": "education",
+       "score": 86.5
+      },
+      {
+       "available": true,
+       "name": "semantic",
+       "score": 17.0
+      }
+     ],
+     "model_version": "v0.1.0",
+     "role_category": "tech",
+     "scoring_mode": "ats_engine",
+     "service": "ats_ai_service",
+     "status": "success",
+     "warnings": [],
+     "zone": "shortlist"
+    }
+   }
+  ],
+  "scoring_basis": "per_pair",
+  "service": "ats_batch_service",
+  "status": "success",
+  "succeeded": 16,
+  "total": 16,
+  "warnings": []
+ },
+ "ats_n": {
+  "jds": 4,
+  "resumes": 16
+ },
+ "ats_pairs": [
+  {
+   "api_version": "1.0",
+   "ats_score": 50.2,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 80.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 21.1
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 14.7
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "shortlist"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 19.1,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 19.5
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 1.7
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 18.3,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 17.5
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.5
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 17.3,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 14.1
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.5
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 18.7,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 18.7
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.4
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 18.5,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 16.0
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 3.3
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 15.4,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 7.6
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.4
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 17.6,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 15.1
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.4
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 17.8,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 15.6
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.4
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 19.9,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 22.6
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.5
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 35.0,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 20.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 47.0
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 4.5
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "review"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 47.0,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 50.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 47.4
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 11.6
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "shortlist"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 29.7,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 20.0
+    },
+    {
+     "available": false,
+     "name": "experience",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 4.2
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "review"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 41.5,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 50.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 50.6
+    },
+    {
+     "available": false,
+     "name": "education",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 12.8
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "review"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 50.5,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 60.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 46.3
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 12.8
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "shortlist"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 49.7,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 70.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 29.2
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 17.0
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "shortlist"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 22.1,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 25.6
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.6
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 19.6,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 18.5
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.4
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 60.7,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 100.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 57.2
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 10.9
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "shortlist"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 20.6,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 20.6
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 1.7
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 27.7,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 40.7
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 1.9
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 21.5,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 24.0
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.4
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 17.8,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 13.4
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.4
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 25.6,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 35.3
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.7
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 20.6,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 20.3
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 1.9
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 31.0,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 20.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 34.9
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 3.2
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "review"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 18.8,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 16.3
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.4
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 19.2,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 17.4
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.4
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 20.1,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": false,
+     "name": "experience",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.2
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 8.5,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 19.9
+    },
+    {
+     "available": false,
+     "name": "education",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 1.1
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 19.2,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 17.4
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.4
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 20.1,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 20.0
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.3
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 55.1,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 88.9
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 21.8
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 22.5
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "shortlist"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 19.1,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 19.5
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 1.5
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 18.3,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 17.5
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.4
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 17.3,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 14.1
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.4
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 18.7,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 18.7
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.5
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 18.1,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 16.0
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 1.5
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 15.4,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 7.6
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.3
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 17.6,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 15.1
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.3
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 17.8,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 15.6
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.5
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 19.9,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 22.6
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.4
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 35.9,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 22.2
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 47.3
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 4.7
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "review"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 50.2,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 55.6
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 48.4
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 15.9
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "shortlist"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 31.3,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 22.2
+    },
+    {
+     "available": false,
+     "name": "experience",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 5.9
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "review"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 46.2,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 55.6
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 51.8
+    },
+    {
+     "available": false,
+     "name": "education",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 21.4
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "review"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 54.2,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 66.7
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 47.0
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 18.9
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "shortlist"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 53.4,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 77.8
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 27.4
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 25.0
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "tech",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "shortlist"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 22.1,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 25.6
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.4
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 19.6,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 18.5
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.3
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 62.0,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 100.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 57.2
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 16.2
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "shortlist"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 20.8,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 20.6
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 2.5
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 27.7,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 40.7
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 1.8
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 21.5,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 24.0
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.3
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 17.8,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 13.4
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.3
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 25.5,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 35.3
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.5
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 20.9,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 20.3
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 3.1
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 25.3,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 34.9
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.6
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 18.8,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 16.3
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.3
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 19.2,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 17.4
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.3
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 20.2,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": false,
+     "name": "experience",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.5
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 8.6,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 19.9
+    },
+    {
+     "available": false,
+     "name": "education",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 1.3
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 19.2,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 17.4
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.2
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  },
+  {
+   "api_version": "1.0",
+   "ats_score": 20.1,
+   "components": [
+    {
+     "available": true,
+     "name": "skill_match",
+     "score": 0.0
+    },
+    {
+     "available": true,
+     "name": "experience",
+     "score": 20.0
+    },
+    {
+     "available": true,
+     "name": "education",
+     "score": 86.5
+    },
+    {
+     "available": true,
+     "name": "semantic",
+     "score": 0.2
+    }
+   ],
+   "model_version": "v0.1.0",
+   "role_category": "business",
+   "scoring_mode": "ats_engine",
+   "service": "ats_ai_service",
+   "status": "success",
+   "warnings": [],
+   "zone": "reject"
+  }
+ ],
+ "decision": [
+  {
+   "api_version": "1.0",
+   "automated_action": "none",
+   "automation_eligible": false,
+   "candidate_id": "C1",
+   "confidence": 48.4,
+   "decision": "hold_review",
+   "hiring_fit_score": 69.29,
+   "hold_kind": "pending_evidence",
+   "human_confirmation_required": false,
+   "human_review_reasons": [],
+   "human_review_required": false,
+   "missing_rounds": [
+    "machine_test"
+   ],
+   "model_version": "v0.1.0",
+   "provisional": true,
+   "reasons": [
+    "The decision is pending: still waiting on machine_test. A provisional score is not comparable with a complete one."
+   ],
+   "service": "decision_scoring_service",
+   "status": "success",
+   "warnings": []
+  },
+  {
+   "api_version": "1.0",
+   "automated_action": "none",
+   "automation_eligible": false,
+   "candidate_id": "C1",
+   "confidence": 60.0,
+   "decision": "hold_review",
+   "hiring_fit_score": 32.86,
+   "hold_kind": "pending_evidence",
+   "human_confirmation_required": false,
+   "human_review_reasons": [],
+   "human_review_required": false,
+   "missing_rounds": [
+    "machine_test"
+   ],
+   "model_version": "v0.1.0",
+   "provisional": true,
+   "reasons": [
+    "The decision is pending: still waiting on machine_test. A provisional score is not comparable with a complete one."
+   ],
+   "service": "decision_scoring_service",
+   "status": "success",
+   "warnings": []
+  },
+  {
+   "api_version": "1.0",
+   "automated_action": "none",
+   "automation_eligible": false,
+   "candidate_id": "C1",
+   "confidence": 60.0,
+   "decision": "hold_review",
+   "hiring_fit_score": 90.0,
+   "hold_kind": "pending_evidence",
+   "human_confirmation_required": false,
+   "human_review_reasons": [],
+   "human_review_required": false,
+   "missing_rounds": [
+    "machine_test"
+   ],
+   "model_version": "v0.1.0",
+   "provisional": true,
+   "reasons": [
+    "The decision is pending: still waiting on machine_test. A provisional score is not comparable with a complete one."
+   ],
+   "service": "decision_scoring_service",
+   "status": "success",
+   "warnings": []
+  },
+  {
+   "api_version": "1.0",
+   "automated_action": "none",
+   "automation_eligible": false,
+   "candidate_id": "C1",
+   "confidence": 60.0,
+   "decision": "hold_review",
+   "hiring_fit_score": 57.5,
+   "hold_kind": "pending_evidence",
+   "human_confirmation_required": false,
+   "human_review_reasons": [],
+   "human_review_required": false,
+   "missing_rounds": [
+    "hr_interview",
+    "technical_interview",
+    "machine_test"
+   ],
+   "model_version": "v0.1.0",
+   "provisional": true,
+   "reasons": [
+    "The decision is pending: still waiting on hr_interview, technical_interview, machine_test. A provisional score is not comparable with a complete one."
+   ],
+   "service": "decision_scoring_service",
+   "status": "success",
+   "warnings": []
+  },
+  {
+   "api_version": "1.0",
+   "automated_action": "none",
+   "automation_eligible": false,
+   "candidate_id": "C1",
+   "confidence": 59.2,
+   "decision": "hold_review",
+   "hiring_fit_score": 75.0,
+   "hold_kind": "pending_evidence",
+   "human_confirmation_required": false,
+   "human_review_reasons": [
+    "Rounds disagree strongly (screening 80 vs ats 45); an average hides that."
+   ],
+   "human_review_required": true,
+   "missing_rounds": [
+    "machine_test"
+   ],
+   "model_version": "v0.1.0",
+   "provisional": true,
+   "reasons": [
+    "The decision is pending: still waiting on machine_test. A provisional score is not comparable with a complete one."
+   ],
+   "service": "decision_scoring_service",
+   "status": "success",
+   "warnings": []
+  }
+ ],
+ "generated_with_python": "3.12.3",
+ "interview_hr": [
+  {
+   "answers_ignored": 0,
+   "answers_scored": 4,
+   "api_version": "1.0",
+   "communication_score": 56.8,
+   "confidence_score": 65.0,
+   "hr_score": 57.5,
+   "interview_status": "scored",
+   "interview_type": "hr",
+   "model_version": "v0.1.0",
+   "non_substantive_answers": 1,
+   "relevance_score": 52.5,
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": null,
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 4,
+   "api_version": "1.0",
+   "communication_score": 53.6,
+   "confidence_score": 64.9,
+   "hr_score": 56.5,
+   "interview_status": "scored",
+   "interview_type": "hr",
+   "model_version": "v0.1.0",
+   "non_substantive_answers": 1,
+   "relevance_score": 52.5,
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": null,
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 4,
+   "api_version": "1.0",
+   "communication_score": 54.8,
+   "confidence_score": 63.3,
+   "hr_score": 67.7,
+   "interview_status": "scored",
+   "interview_type": "hr",
+   "model_version": "v0.1.0",
+   "non_substantive_answers": 1,
+   "relevance_score": 80.0,
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": null,
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 4,
+   "api_version": "1.0",
+   "communication_score": 45.1,
+   "confidence_score": 53.2,
+   "hr_score": 45.4,
+   "interview_status": "scored",
+   "interview_type": "hr",
+   "model_version": "v0.1.0",
+   "non_substantive_answers": 2,
+   "relevance_score": 40.0,
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": null,
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 4,
+   "api_version": "1.0",
+   "communication_score": 55.0,
+   "confidence_score": 65.8,
+   "hr_score": 57.2,
+   "interview_status": "scored",
+   "interview_type": "hr",
+   "model_version": "v0.1.0",
+   "non_substantive_answers": 1,
+   "relevance_score": 52.5,
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": null,
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 4,
+   "api_version": "1.0",
+   "communication_score": 60.0,
+   "confidence_score": 70.0,
+   "hr_score": 59.9,
+   "interview_status": "scored",
+   "interview_type": "hr",
+   "model_version": "v0.1.0",
+   "non_substantive_answers": 0,
+   "relevance_score": 52.5,
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": null,
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 4,
+   "api_version": "1.0",
+   "communication_score": 48.0,
+   "confidence_score": 44.1,
+   "hr_score": 47.7,
+   "interview_status": "scored",
+   "interview_type": "hr",
+   "model_version": "v0.1.0",
+   "non_substantive_answers": 2,
+   "relevance_score": 50.0,
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": null,
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 4,
+   "api_version": "1.0",
+   "communication_score": 69.6,
+   "confidence_score": 81.4,
+   "hr_score": 81.5,
+   "interview_status": "scored",
+   "interview_type": "hr",
+   "model_version": "v0.1.0",
+   "non_substantive_answers": 0,
+   "relevance_score": 90.0,
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": null,
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 4,
+   "api_version": "1.0",
+   "communication_score": 61.1,
+   "confidence_score": 60.7,
+   "hr_score": 61.6,
+   "interview_status": "scored",
+   "interview_type": "hr",
+   "model_version": "v0.1.0",
+   "non_substantive_answers": 0,
+   "relevance_score": 62.5,
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": null,
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 4,
+   "api_version": "1.0",
+   "communication_score": 65.5,
+   "confidence_score": 70.0,
+   "hr_score": 72.8,
+   "interview_status": "scored",
+   "interview_type": "hr",
+   "model_version": "v0.1.0",
+   "non_substantive_answers": 0,
+   "relevance_score": 80.0,
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": null,
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 4,
+   "api_version": "1.0",
+   "communication_score": 60.1,
+   "confidence_score": 74.7,
+   "hr_score": 68.5,
+   "interview_status": "scored",
+   "interview_type": "hr",
+   "model_version": "v0.1.0",
+   "non_substantive_answers": 1,
+   "relevance_score": 70.0,
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": null,
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 4,
+   "api_version": "1.0",
+   "communication_score": 47.1,
+   "confidence_score": 57.1,
+   "hr_score": 44.0,
+   "interview_status": "scored",
+   "interview_type": "hr",
+   "model_version": "v0.1.0",
+   "non_substantive_answers": 2,
+   "relevance_score": 32.5,
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": null,
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 4,
+   "api_version": "1.0",
+   "communication_score": 43.3,
+   "confidence_score": 51.6,
+   "hr_score": 44.4,
+   "interview_status": "scored",
+   "interview_type": "hr",
+   "model_version": "v0.1.0",
+   "non_substantive_answers": 2,
+   "relevance_score": 40.0,
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": null,
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 4,
+   "api_version": "1.0",
+   "communication_score": 60.9,
+   "confidence_score": 61.1,
+   "hr_score": 68.8,
+   "interview_status": "scored",
+   "interview_type": "hr",
+   "model_version": "v0.1.0",
+   "non_substantive_answers": 0,
+   "relevance_score": 80.0,
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": null,
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 4,
+   "api_version": "1.0",
+   "communication_score": 64.5,
+   "confidence_score": 80.2,
+   "hr_score": 64.2,
+   "interview_status": "scored",
+   "interview_type": "hr",
+   "model_version": "v0.1.0",
+   "non_substantive_answers": 0,
+   "relevance_score": 52.5,
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": null,
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 4,
+   "api_version": "1.0",
+   "communication_score": 59.8,
+   "confidence_score": 65.0,
+   "hr_score": 61.4,
+   "interview_status": "scored",
+   "interview_type": "hr",
+   "model_version": "v0.1.0",
+   "non_substantive_answers": 1,
+   "relevance_score": 60.0,
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": null,
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 4,
+   "api_version": "1.0",
+   "communication_score": 69.6,
+   "confidence_score": 83.0,
+   "hr_score": 77.8,
+   "interview_status": "scored",
+   "interview_type": "hr",
+   "model_version": "v0.1.0",
+   "non_substantive_answers": 0,
+   "relevance_score": 80.0,
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": null,
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 4,
+   "api_version": "1.0",
+   "communication_score": 59.8,
+   "confidence_score": 69.6,
+   "hr_score": 62.8,
+   "interview_status": "scored",
+   "interview_type": "hr",
+   "model_version": "v0.1.0",
+   "non_substantive_answers": 1,
+   "relevance_score": 60.0,
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": null,
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 4,
+   "api_version": "1.0",
+   "communication_score": 52.2,
+   "confidence_score": 65.8,
+   "hr_score": 49.1,
+   "interview_status": "scored",
+   "interview_type": "hr",
+   "model_version": "v0.1.0",
+   "non_substantive_answers": 1,
+   "relevance_score": 35.0,
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": null,
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 4,
+   "api_version": "1.0",
+   "communication_score": 61.2,
+   "confidence_score": 68.8,
+   "hr_score": 62.9,
+   "interview_status": "scored",
+   "interview_type": "hr",
+   "model_version": "v0.1.0",
+   "non_substantive_answers": 1,
+   "relevance_score": 60.0,
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": null,
+   "warnings": []
+  }
+ ],
+ "interview_technical": [
+  {
+   "answers_ignored": 0,
+   "answers_scored": 3,
+   "api_version": "1.0",
+   "communication_score": null,
+   "interview_status": "scored",
+   "interview_type": "technical",
+   "model_version": "v0.1.0",
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": 7.0,
+   "tier": "basics",
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 3,
+   "api_version": "1.0",
+   "communication_score": null,
+   "interview_status": "scored",
+   "interview_type": "technical",
+   "model_version": "v0.1.0",
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": 10.6,
+   "tier": "intermediate",
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 3,
+   "api_version": "1.0",
+   "communication_score": null,
+   "interview_status": "scored",
+   "interview_type": "technical",
+   "model_version": "v0.1.0",
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": 26.0,
+   "tier": "basics",
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 3,
+   "api_version": "1.0",
+   "communication_score": null,
+   "interview_status": "scored",
+   "interview_type": "technical",
+   "model_version": "v0.1.0",
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": 9.6,
+   "tier": "advanced",
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 3,
+   "api_version": "1.0",
+   "communication_score": null,
+   "interview_status": "scored",
+   "interview_type": "technical",
+   "model_version": "v0.1.0",
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": 31.0,
+   "tier": "basics",
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 3,
+   "api_version": "1.0",
+   "communication_score": null,
+   "interview_status": "scored",
+   "interview_type": "technical",
+   "model_version": "v0.1.0",
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": 21.2,
+   "tier": "advanced",
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 3,
+   "api_version": "1.0",
+   "communication_score": null,
+   "interview_status": "scored",
+   "interview_type": "technical",
+   "model_version": "v0.1.0",
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": 34.0,
+   "tier": "basics",
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 3,
+   "api_version": "1.0",
+   "communication_score": null,
+   "interview_status": "scored",
+   "interview_type": "technical",
+   "model_version": "v0.1.0",
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": 31.4,
+   "tier": "intermediate",
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 3,
+   "api_version": "1.0",
+   "communication_score": null,
+   "interview_status": "scored",
+   "interview_type": "technical",
+   "model_version": "v0.1.0",
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": 45.0,
+   "tier": "basics",
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 3,
+   "api_version": "1.0",
+   "communication_score": null,
+   "interview_status": "scored",
+   "interview_type": "technical",
+   "model_version": "v0.1.0",
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": 7.2,
+   "tier": "advanced",
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 3,
+   "api_version": "1.0",
+   "communication_score": null,
+   "interview_status": "scored",
+   "interview_type": "technical",
+   "model_version": "v0.1.0",
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": 23.0,
+   "tier": "basics",
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 3,
+   "api_version": "1.0",
+   "communication_score": null,
+   "interview_status": "scored",
+   "interview_type": "technical",
+   "model_version": "v0.1.0",
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": 6.8,
+   "tier": "advanced",
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 3,
+   "api_version": "1.0",
+   "communication_score": null,
+   "interview_status": "scored",
+   "interview_type": "technical",
+   "model_version": "v0.1.0",
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": 10.0,
+   "tier": "basics",
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 3,
+   "api_version": "1.0",
+   "communication_score": null,
+   "interview_status": "scored",
+   "interview_type": "technical",
+   "model_version": "v0.1.0",
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": 12.1,
+   "tier": "intermediate",
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 3,
+   "api_version": "1.0",
+   "communication_score": null,
+   "interview_status": "scored",
+   "interview_type": "technical",
+   "model_version": "v0.1.0",
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": 45.0,
+   "tier": "basics",
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 3,
+   "api_version": "1.0",
+   "communication_score": null,
+   "interview_status": "scored",
+   "interview_type": "technical",
+   "model_version": "v0.1.0",
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": 11.4,
+   "tier": "advanced",
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 3,
+   "api_version": "1.0",
+   "communication_score": null,
+   "interview_status": "scored",
+   "interview_type": "technical",
+   "model_version": "v0.1.0",
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": 27.0,
+   "tier": "basics",
+   "warnings": []
+  },
+  {
+   "answers_ignored": 0,
+   "answers_scored": 3,
+   "api_version": "1.0",
+   "communication_score": null,
+   "interview_status": "scored",
+   "interview_type": "technical",
+   "model_version": "v0.1.0",
+   "service": "interview_intelligence_service",
+   "status": "success",
+   "technical_score": 12.4,
+   "tier": "advanced",
+   "warnings": []
+  }
+ ],
+ "legacy_sum": false,
+ "note": "Generated from the pre-Day-60 code. See make_day60_golden.py.",
+ "parse_hashes": {
+  "resume_01_mern_developer.docx": "2d1697fc6b76e01681a7",
+  "resume_01_mern_developer.pdf": "7a70aec5ef5e247fcf07",
+  "resume_02_uiux_designer.docx": "472781e35945819ab22e",
+  "resume_02_uiux_designer.pdf": "d4b1030f67c60afd8895",
+  "resume_03_sales_executive.docx": "879e7b1891021ff1bf29",
+  "resume_03_sales_executive.pdf": "eefeeaf0f50f77aebb3b",
+  "resume_04_data_analyst.docx": "fb21e75f6c6a25a7507a",
+  "resume_04_data_analyst.pdf": "a0a84edcaa96d3576563",
+  "resume_05_hr_executive.docx": "b85e6f76a0ccafc5351a",
+  "resume_05_hr_executive.pdf": "a46dff96bce7cc6b03b7",
+  "resume_06_mechanical_engineer.docx": "d97d50c792ffa91ce6b6",
+  "resume_06_mechanical_engineer.pdf": "9a047e7763d83f8abf9b",
+  "resume_07_content_writer.docx": "a39e6cc4f1d7fd38dbae",
+  "resume_07_content_writer.pdf": "a25ea3def5e32e2b5980",
+  "resume_08_digital_marketer.docx": "627b3bf5e13152c47d34",
+  "resume_08_digital_marketer.pdf": "ee4dd295bbd12c36f721",
+  "resume_09_accountant.docx": "110a1a50edbc8b083fff",
+  "resume_09_accountant.pdf": "223c56193fa5648aab69",
+  "resume_10_customer_support.docx": "340acffb2179926a6442",
+  "resume_10_customer_support.pdf": "0441ba04d0dc13ddd397"
+ },
+ "phrase_engines": {
+  "assess_fluency": [
+   "52be6940670232d0d00b",
+   "4de59e149c55dc904931",
+   "ae094ceb1420621a31d6",
+   "233c2f3714a957360262",
+   "b7bcc466562ff2515673",
+   "c141879ba7e7caef41b9",
+   "9fe58fb3ef14a22548dd",
+   "f677fd18a79cd9fcb508",
+   "bf0d3de810b213bcbe27",
+   "b7bcc466562ff2515673",
+   "e07c17590b765503a8ff",
+   "f677fd18a79cd9fcb508",
+   "90e6da41f2bcb82b1865",
+   "907e4e0b9aaf00c03d2f",
+   "ae3fca26a76973cfa182",
+   "18686bed5d3079139c71",
+   "6634f58e7b6cd9556da1",
+   "ddb9827a34c8dc045831",
+   "e2ede3980e7f9f3b0230",
+   "1844efca67ebf15f7c68",
+   "fe7ee518245fa908563a",
+   "c141879ba7e7caef41b9",
+   "115e7c8b49c5f4a401df",
+   "1de53d9bfa62dc9fc7df",
+   "115e7c8b49c5f4a401df",
+   "907e4e0b9aaf00c03d2f",
+   "4dc922b2a172e68ccb33",
+   "f677fd18a79cd9fcb508",
+   "52be6940670232d0d00b",
+   "9fe58fb3ef14a22548dd",
+   "bf0d3de810b213bcbe27",
+   "95555772bafb7bd5888b",
+   "8e14cb823ddc28c47e28",
+   "3f372131167d7fb27340",
+   "878a1196470febf2fbf2",
+   "3f372131167d7fb27340",
+   "878a1196470febf2fbf2",
+   "b77ce7e2ac5d2319e5e8",
+   "878a1196470febf2fbf2",
+   "7a3a409cf1c9f0799d4c",
+   "b7bcc466562ff2515673",
+   "907e4e0b9aaf00c03d2f",
+   "b14e8488e7d92ffd2a1b",
+   "ef34e3e0f53b6472840a",
+   "907e4e0b9aaf00c03d2f",
+   "fe3fa45f019f818eab1d",
+   "ae3fca26a76973cfa182",
+   "ae094ceb1420621a31d6",
+   "115e7c8b49c5f4a401df",
+   "24b3d7f6293fa201da4b",
+   "ae094ceb1420621a31d6",
+   "f677fd18a79cd9fcb508",
+   "115e7c8b49c5f4a401df",
+   "9abbf67404fe9f86e5da",
+   "a24fc1361c70f8ae5d19",
+   "b7bcc466562ff2515673",
+   "7f31a908051274a0e97d",
+   "08d342c4e7bd12a606da",
+   "1ebddf19cf7e75260e4f",
+   "814cfeff2bb39bb62103",
+   "86fe4bf6fae833c076db",
+   "907e4e0b9aaf00c03d2f",
+   "21f6865b5b00862841ea",
+   "b99f027e11c3353297a4",
+   "ae0d767fb8b6adf6f4c5",
+   "d36727ca0cd7524f3bff",
+   "9fe58fb3ef14a22548dd",
+   "d741bacab619b7d387f7",
+   "233c2f3714a957360262",
+   "ae094ceb1420621a31d6",
+   "d36727ca0cd7524f3bff",
+   "bf0d3de810b213bcbe27",
+   "233c2f3714a957360262",
+   "907e4e0b9aaf00c03d2f",
+   "24d763df1d866d3e4c1c",
+   "6344d110f6f18a810de6",
+   "878a1196470febf2fbf2",
+   "907e4e0b9aaf00c03d2f",
+   "233c2f3714a957360262",
+   "ef34e3e0f53b6472840a",
+   "f677fd18a79cd9fcb508",
+   "a326a07353f5e97a3d11",
+   "4dc922b2a172e68ccb33",
+   "115e7c8b49c5f4a401df",
+   "ae3fca26a76973cfa182",
+   "63bea05452ef49063465",
+   "233c2f3714a957360262",
+   "8caab35f9e6a50b1c2a5",
+   "233c2f3714a957360262",
+   "bf0d3de810b213bcbe27",
+   "233c2f3714a957360262",
+   "713625705dba99e56b57",
+   "b99f027e11c3353297a4",
+   "814cfeff2bb39bb62103",
+   "f6276ee39fa1a56d4d20",
+   "ac5042a1ea7c52f212b5",
+   "84208fe9158ec40efba9",
+   "f677fd18a79cd9fcb508",
+   "f677fd18a79cd9fcb508",
+   "3f372131167d7fb27340",
+   "233c2f3714a957360262",
+   "bf0d3de810b213bcbe27",
+   "878a1196470febf2fbf2",
+   "52be6940670232d0d00b",
+   "ee3fbcb6796e9751e14f",
+   "814cfeff2bb39bb62103",
+   "3f372131167d7fb27340",
+   "f677fd18a79cd9fcb508",
+   "ed1261713370baf60cea",
+   "fac3bcac06f606f54153",
+   "4dc922b2a172e68ccb33",
+   "ae094ceb1420621a31d6",
+   "115e7c8b49c5f4a401df",
+   "ae094ceb1420621a31d6",
+   "ae094ceb1420621a31d6",
+   "bf3b2001df542ce53c5b",
+   "d83a2f9cb1baa7e372c1",
+   "4dc922b2a172e68ccb33",
+   "233c2f3714a957360262",
+   "4dc922b2a172e68ccb33",
+   "ce0f509897e38ef28b1a",
+   "3f372131167d7fb27340",
+   "c1bc97880cfab6c0de6d",
+   "62f86daf537c83668544",
+   "417bd00088f0cf313e92",
+   "5f76d8c7a0c045a0a76c",
+   "5867f6ac90ce927e24fd",
+   "ef34e3e0f53b6472840a",
+   "90e6da41f2bcb82b1865",
+   "b99f027e11c3353297a4",
+   "b99f027e11c3353297a4",
+   "634c1f400707f803e362",
+   "9fe58fb3ef14a22548dd",
+   "ec116de777476480dbb7",
+   "115e7c8b49c5f4a401df",
+   "87e8a12638a003a13fbe",
+   "75610c395a3058972260",
+   "3f372131167d7fb27340",
+   "ae3fca26a76973cfa182",
+   "0895cdbcbf52751fc95a",
+   "ed1261713370baf60cea",
+   "907e4e0b9aaf00c03d2f",
+   "f756402350a16c7d3a6a",
+   "4de59e149c55dc904931",
+   "0e5578f47d5dba3fe348",
+   "f1bcb7437bec9fc362be",
+   "d741bacab619b7d387f7",
+   "c81d3efd9e073a9d1c2e",
+   "bff36ad10234f64928b5",
+   "5ed03aeef6c139a6a83a",
+   "848e8911ef478820b336",
+   "115e7c8b49c5f4a401df",
+   "84f01f4b4b54460cab28",
+   "ef34e3e0f53b6472840a",
+   "af5cc526b8b9b63e6a49",
+   "d8a456b61d03f6ad7dd1",
+   "8f7d21f7177365dfdade",
+   "233c2f3714a957360262",
+   "ae3fca26a76973cfa182",
+   "ac6ed786f7f971266023",
+   "9fe58fb3ef14a22548dd",
+   "b7bcc466562ff2515673",
+   "233c2f3714a957360262",
+   "ae094ceb1420621a31d6",
+   "170f7982a17b82d707a9",
+   "ae094ceb1420621a31d6",
+   "f677fd18a79cd9fcb508",
+   "24d763df1d866d3e4c1c",
+   "4dc922b2a172e68ccb33",
+   "4c6304b52435d532fcc1",
+   "972b132d4992bf5fe8a3",
+   "52be6940670232d0d00b",
+   "907e4e0b9aaf00c03d2f",
+   "4dc922b2a172e68ccb33",
+   "b99f027e11c3353297a4",
+   "4dc922b2a172e68ccb33",
+   "fe0a93b2db7f1cc6f7b0",
+   "233c2f3714a957360262",
+   "454260f09d053096b855",
+   "233c2f3714a957360262",
+   "52be6940670232d0d00b",
+   "814cfeff2bb39bb62103",
+   "4dc922b2a172e68ccb33",
+   "5da52bbf8e66f1b8305f",
+   "e8a3f3208fbd0fc4bc2e",
+   "fe3fa45f019f818eab1d",
+   "b83917df09c4ef55aa78",
+   "878a1196470febf2fbf2",
+   "78f42b45ea49789f4f3d",
+   "9fe58fb3ef14a22548dd",
+   "5ccd1fd599d55b5fd746",
+   "e7424b37f0eb8be3021d",
+   "4dc922b2a172e68ccb33",
+   "cd87167bea3eb3224362",
+   "6344d110f6f18a810de6",
+   "b99f027e11c3353297a4",
+   "52be6940670232d0d00b",
+   "d741bacab619b7d387f7",
+   "907e4e0b9aaf00c03d2f",
+   "ae094ceb1420621a31d6",
+   "c03a63dd0cb9a3f2be26",
+   "3f372131167d7fb27340",
+   "52be6940670232d0d00b",
+   "ee3fbcb6796e9751e14f",
+   "4dc922b2a172e68ccb33",
+   "4dc922b2a172e68ccb33",
+   "814cfeff2bb39bb62103",
+   "f677fd18a79cd9fcb508",
+   "a326a07353f5e97a3d11",
+   "27e897b153484ff9ab91",
+   "5f4462febccb530c2244",
+   "1f329183716e3cb3a3c8",
+   "f7cd7dfcc96139374fdd",
+   "907e4e0b9aaf00c03d2f",
+   "f677fd18a79cd9fcb508",
+   "33c84ed35ecde32d1452",
+   "ae3fca26a76973cfa182",
+   "3f372131167d7fb27340",
+   "634c1f400707f803e362",
+   "9fe58fb3ef14a22548dd",
+   "08d342c4e7bd12a606da",
+   "bf3b2001df542ce53c5b",
+   "3039c9b59ca061a5385d",
+   "115e7c8b49c5f4a401df",
+   "f677fd18a79cd9fcb508",
+   "c1bc97880cfab6c0de6d",
+   "b7ae92042b37ae67447e",
+   "95555772bafb7bd5888b",
+   "8caab35f9e6a50b1c2a5",
+   "f677fd18a79cd9fcb508",
+   "ef34e3e0f53b6472840a",
+   "b83917df09c4ef55aa78",
+   "d2562f45ebb8ae317a75",
+   "e5ee661b6f321b679f05",
+   "ae094ceb1420621a31d6",
+   "907e4e0b9aaf00c03d2f",
+   "ae3fca26a76973cfa182",
+   "ae094ceb1420621a31d6",
+   "e5a78479895fee338fc1",
+   "4dc922b2a172e68ccb33"
+  ],
+  "assess_grammar": [
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "a93184fcb99c965df3ad",
+   "a93184fcb99c965df3ad",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "96010463cb1dd6722e8e",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "a93184fcb99c965df3ad",
+   "a93184fcb99c965df3ad",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "a93184fcb99c965df3ad",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "8733fae2b3288013e6da",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "84e23b2c37d197095648",
+   "7384eb95254e4fae9c5a",
+   "981cce2877e9f9cb7552",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "a93184fcb99c965df3ad",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "9b15ace25c63c45f21b2",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "a93184fcb99c965df3ad",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "50553e34046dbf82728c",
+   "a93184fcb99c965df3ad",
+   "a93184fcb99c965df3ad",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "8f4aa8546a5ba671810c",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "a93184fcb99c965df3ad",
+   "b8c2ed931d4dd90e601e",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "092c0634a29a7565b473",
+   "a93184fcb99c965df3ad",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "81505ea13f5e8b444363",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "a93184fcb99c965df3ad",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "a93184fcb99c965df3ad",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "96010463cb1dd6722e8e",
+   "a93184fcb99c965df3ad",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "8f4aa8546a5ba671810c",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "8733fae2b3288013e6da",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "a93184fcb99c965df3ad",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "02b5e96dc82afd96b27a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a",
+   "7384eb95254e4fae9c5a"
+  ],
+  "assess_structure": [
+   "f4a571a1770c0f159601",
+   "2a894061dbe59fe16f89",
+   "24a069825151d7079c27",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "228642f9d2975302bda8",
+   "228642f9d2975302bda8",
+   "6519ad0cee2aea60c58e",
+   "f4a571a1770c0f159601",
+   "24a069825151d7079c27",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "493f0a66f9e0c2e30749",
+   "6519ad0cee2aea60c58e",
+   "6519ad0cee2aea60c58e",
+   "82974141b4f9b86da392",
+   "f4a571a1770c0f159601",
+   "24a069825151d7079c27",
+   "754d7c17e0b4c22b16b6",
+   "754d7c17e0b4c22b16b6",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "18cae60549b6f095fdcd",
+   "24a069825151d7079c27",
+   "f4a571a1770c0f159601",
+   "228642f9d2975302bda8",
+   "f4a571a1770c0f159601",
+   "18cae60549b6f095fdcd",
+   "228642f9d2975302bda8",
+   "228642f9d2975302bda8",
+   "228642f9d2975302bda8",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "18cae60549b6f095fdcd",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "18cae60549b6f095fdcd",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "d76b7f83a8fed7215db9",
+   "f4a571a1770c0f159601",
+   "493f0a66f9e0c2e30749",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "6519ad0cee2aea60c58e",
+   "f4a571a1770c0f159601",
+   "82974141b4f9b86da392",
+   "24a069825151d7079c27",
+   "754d7c17e0b4c22b16b6",
+   "228642f9d2975302bda8",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "754d7c17e0b4c22b16b6",
+   "228642f9d2975302bda8",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "2a894061dbe59fe16f89",
+   "d90dba16a7b9a4aceb3b",
+   "24a069825151d7079c27",
+   "f4a571a1770c0f159601",
+   "24a069825151d7079c27",
+   "f4a571a1770c0f159601",
+   "d90dba16a7b9a4aceb3b",
+   "24a069825151d7079c27",
+   "754d7c17e0b4c22b16b6",
+   "f4a571a1770c0f159601",
+   "d76b7f83a8fed7215db9",
+   "228642f9d2975302bda8",
+   "f4a571a1770c0f159601",
+   "228642f9d2975302bda8",
+   "6519ad0cee2aea60c58e",
+   "6519ad0cee2aea60c58e",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "d90dba16a7b9a4aceb3b",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "754d7c17e0b4c22b16b6",
+   "f4a571a1770c0f159601",
+   "228642f9d2975302bda8",
+   "f4a571a1770c0f159601",
+   "6519ad0cee2aea60c58e",
+   "24a069825151d7079c27",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "24a069825151d7079c27",
+   "7ecbabe4b9563a477ff7",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "228642f9d2975302bda8",
+   "18cae60549b6f095fdcd",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "6519ad0cee2aea60c58e",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "754d7c17e0b4c22b16b6",
+   "f4a571a1770c0f159601",
+   "24a069825151d7079c27",
+   "754d7c17e0b4c22b16b6",
+   "18cae60549b6f095fdcd",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "3e90b233cc82a3c77fda",
+   "228642f9d2975302bda8",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "6519ad0cee2aea60c58e",
+   "f4a571a1770c0f159601",
+   "18cae60549b6f095fdcd",
+   "6519ad0cee2aea60c58e",
+   "6519ad0cee2aea60c58e",
+   "f4a571a1770c0f159601",
+   "228fd183d945a7288964",
+   "2a894061dbe59fe16f89",
+   "754d7c17e0b4c22b16b6",
+   "24a069825151d7079c27",
+   "24a069825151d7079c27",
+   "228642f9d2975302bda8",
+   "82974141b4f9b86da392",
+   "f4a571a1770c0f159601",
+   "6519ad0cee2aea60c58e",
+   "228642f9d2975302bda8",
+   "228fd183d945a7288964",
+   "24a069825151d7079c27",
+   "f4a571a1770c0f159601",
+   "82974141b4f9b86da392",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "228642f9d2975302bda8",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "24a069825151d7079c27",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "d76b7f83a8fed7215db9",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "6519ad0cee2aea60c58e",
+   "493f0a66f9e0c2e30749",
+   "18cae60549b6f095fdcd",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "6519ad0cee2aea60c58e",
+   "f4a571a1770c0f159601",
+   "6519ad0cee2aea60c58e",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "228642f9d2975302bda8",
+   "6519ad0cee2aea60c58e",
+   "d76b7f83a8fed7215db9",
+   "82974141b4f9b86da392",
+   "6519ad0cee2aea60c58e",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "18cae60549b6f095fdcd",
+   "228642f9d2975302bda8",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "18cae60549b6f095fdcd",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "228642f9d2975302bda8",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "754d7c17e0b4c22b16b6",
+   "f4a571a1770c0f159601",
+   "754d7c17e0b4c22b16b6",
+   "18cae60549b6f095fdcd",
+   "f4a571a1770c0f159601",
+   "24a069825151d7079c27",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601",
+   "f4a571a1770c0f159601"
+  ],
+  "detect_confusion": [
+   true,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   true,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   true,
+   false,
+   true,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   true,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   true,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   true,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   true,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   true,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   true,
+   true,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   true,
+   false,
+   false,
+   false,
+   true,
+   true,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false
+  ],
+  "detect_hesitation": [
+   "b4a3086a9f521aec4e60",
+   "ed0c2fda50c60935a62a",
+   "b4a3086a9f521aec4e60",
+   "8a5de20123dd591f1446",
+   "51c479d59c1b05ce90ab",
+   "235c95064b045f2ef020",
+   "b4a3086a9f521aec4e60",
+   "b7774c8e74cb94f10e8f",
+   "9963f99ccacf129b0139",
+   "ad4f67cdffb923a88c0d",
+   "4f68e54912578737b4ce",
+   "b4a3086a9f521aec4e60",
+   "bc6b96c5d843300792c1",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "a3648db76a2333a272e1",
+   "b4a3086a9f521aec4e60",
+   "22d1b559452c6d90a2dc",
+   "7f57a304f577492a02f2",
+   "d8c0c666901eb94e59e0",
+   "235c95064b045f2ef020",
+   "e6c6fc1d1d57aec561bd",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "5a3dd4072c04a9915df7",
+   "31e38605486e389f671c",
+   "acfdbc677145edcae687",
+   "b4a3086a9f521aec4e60",
+   "b32987172a4696e98d82",
+   "f2205eb74fac00c67ee5",
+   "b4a3086a9f521aec4e60",
+   "b5898a0220c47d5bc3ee",
+   "9570965ac7151290348f",
+   "b4a3086a9f521aec4e60",
+   "98c6324dd6713b2f6878",
+   "77129849241c64c0a34c",
+   "b4a3086a9f521aec4e60",
+   "c857216b77a0b72bdf90",
+   "372ccfe957d45e7fd675",
+   "f691a6843b7e626bdd25",
+   "42ef88bd0f44858ca98c",
+   "f4b4b4a00866052e8567",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "21d7cdeccf180a18d34b",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "ecb8dc36e650e778813e",
+   "d8c0c666901eb94e59e0",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "5a7909124074be9945f2",
+   "0b7cd4d473fdcd7e8de7",
+   "b4a3086a9f521aec4e60",
+   "85873eea107e5dfaa24d",
+   "8f853b1981f00e3ddf90",
+   "11a466a9fd135bc11bcd",
+   "b7774c8e74cb94f10e8f",
+   "3f1fc6c44788a3862f0e",
+   "422e39542e74aea6b6ab",
+   "b7774c8e74cb94f10e8f",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "3057fe37c47bcd380f0e",
+   "b4a3086a9f521aec4e60",
+   "09a46ee873baeb0654f3",
+   "002e53f2c9d75944e1fe",
+   "bcde1c06e6f5cc5bf0ec",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "98c6324dd6713b2f6878",
+   "e6c6fc1d1d57aec561bd",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "634d4bf542febffdb304",
+   "e6c6fc1d1d57aec561bd",
+   "b4a3086a9f521aec4e60",
+   "20fa604f5ab7ca4cf5dc",
+   "b4a3086a9f521aec4e60",
+   "8a5de20123dd591f1446",
+   "2ab27baa44809a8efe10",
+   "1214b8de49a6e68cf64c",
+   "f0d54876a7d928c74fde",
+   "85873eea107e5dfaa24d",
+   "236b91723190a79a0535",
+   "c1e160092d7bac7650b3",
+   "b4a3086a9f521aec4e60",
+   "d318c0bc4059b3f99585",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "bcde1c06e6f5cc5bf0ec",
+   "ffe0df50d6d669dc8d1a",
+   "b4a3086a9f521aec4e60",
+   "8a5de20123dd591f1446",
+   "b4a3086a9f521aec4e60",
+   "93c6d7eb0322aa982171",
+   "98c6324dd6713b2f6878",
+   "acfdbc677145edcae687",
+   "629db1994c948862dc4d",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "5c3183845c2fd47a2b92",
+   "8a5de20123dd591f1446",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "085fd94b87e4888bd51f",
+   "e6c28625874a6d4a2fa2",
+   "2ab27baa44809a8efe10",
+   "b4a3086a9f521aec4e60",
+   "a635f2a67ff54ddd510c",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "351d267da51d3363229c",
+   "e23414c77e68f0b3b19c",
+   "9aa53821506368411061",
+   "b4a3086a9f521aec4e60",
+   "3e1a26623fe1684ef814",
+   "b7774c8e74cb94f10e8f",
+   "b4a3086a9f521aec4e60",
+   "cb602d287d1dc9d1c7dc",
+   "e956e3ae22e2709e8a74",
+   "778bdd97e7fb533aeedd",
+   "ea090738db99419deba2",
+   "c05dfd55e5861bb3f698",
+   "b4a3086a9f521aec4e60",
+   "b7774c8e74cb94f10e8f",
+   "b4a3086a9f521aec4e60",
+   "72f8f828af5d77a4bd33",
+   "bf88c20cf72cb84b8fbb",
+   "5a3dd4072c04a9915df7",
+   "235c95064b045f2ef020",
+   "79a9cc5d20c7587226c0",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "2aab487314551e078c00",
+   "34ab4d790fee453a88ac",
+   "8a5de20123dd591f1446",
+   "dd917aabdef9530eeffe",
+   "1e0306f9fc33b52d8fa3",
+   "19e72b8fd0f45d8a148f",
+   "83e44b5a6de46d31acda",
+   "ec2d2da8ac6b9ec98d77",
+   "b4a3086a9f521aec4e60",
+   "3cace78ccaa7a165f12b",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b32987172a4696e98d82",
+   "b4a3086a9f521aec4e60",
+   "1def8e7d073b4130bcbc",
+   "b4a3086a9f521aec4e60",
+   "3f239fc2da56147a5d2f",
+   "b4a3086a9f521aec4e60",
+   "f5b5d01423fbe7fcccfe",
+   "98c6324dd6713b2f6878",
+   "b4a3086a9f521aec4e60",
+   "1e0306f9fc33b52d8fa3",
+   "d4411c51d5e61173ced0",
+   "44777dccafa1e34014fd",
+   "b4a3086a9f521aec4e60",
+   "634d4bf542febffdb304",
+   "b4a3086a9f521aec4e60",
+   "d2d5275b1f0659b2a123",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "0dc697b27d821207ce1e",
+   "634d4bf542febffdb304",
+   "6e9abece6f5f0b748772",
+   "e91d6b81c8d37f5b26e1",
+   "895106fb1b146a50f66d",
+   "e970710f4d4223ebb81d",
+   "80d8f35fe6c2506b6e09",
+   "192dc1eb6eaff6a3387c",
+   "b4a3086a9f521aec4e60",
+   "d1c7b174ef015714a959",
+   "3f239fc2da56147a5d2f",
+   "b4a3086a9f521aec4e60",
+   "e945c19e6a1ec03f309b",
+   "c28992a2f30861c0b3fa",
+   "7b2de82f0aa1b3e2b7b4",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "49c13826d8fef2849b99",
+   "5c3183845c2fd47a2b92",
+   "6a3da2e296b3a1121954",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "544e55082e35a6f25df0",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "bc94f8c3800ddcfb6fad",
+   "acfdbc677145edcae687",
+   "b4a3086a9f521aec4e60",
+   "fd6108f22bc2139eeccb",
+   "09a46ee873baeb0654f3",
+   "6a3f9b5955205f996044",
+   "72e18657786da4ec7d96",
+   "49c13826d8fef2849b99",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b62635d80bad2d5d5761",
+   "06c6f0ddcbdf05223e74",
+   "793acb53799e12975ae3",
+   "ceb62b60cbba66267387",
+   "acfdbc677145edcae687",
+   "b4a3086a9f521aec4e60",
+   "b70ec008321527f28c87",
+   "79d9cb500e52d1885ac9",
+   "8afcacc01301a6f88b48",
+   "b4a3086a9f521aec4e60",
+   "a3556dc54bdd988e341e",
+   "69f3d68f7949a21143d8",
+   "4627bc27d0a05fecb734",
+   "c559e89e9952e56a1d25",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "b4a3086a9f521aec4e60",
+   "c01a1ad182c4c3e6d094",
+   "dd034990894e55a3fc06"
+  ],
+  "detect_uncertainty": [
+   "c75633989792e8f59804",
+   "01d2ae25ee90a3b44ae7",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "a6b04d664afb109739eb",
+   "4715d6f37210593c4c7d",
+   "15efb904b05e5ae4e50e",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "8f1818f1883f9c147d05",
+   "ea9bb4cc801cc24505e9",
+   "4715d6f37210593c4c7d",
+   "00c49d52568fb1846e20",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "2dadaa277ba5f221fdcd",
+   "b75dd7b406ed6081a6d6",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "84c3cb517f1623376905",
+   "c60ecc485143e54ba42c",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "d8930932da03a1cbb2ff",
+   "e86403868e44e3d4035a",
+   "4715d6f37210593c4c7d",
+   "7e1934ff931ffa1a4896",
+   "8fcd05f075765affc6dd",
+   "d3971076426c9ba1a375",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "f5a08d85c415680e1009",
+   "4715d6f37210593c4c7d",
+   "22fa62ea7049bee02bcf",
+   "f9453ec2fd8039d7e5c8",
+   "4715d6f37210593c4c7d",
+   "f9453ec2fd8039d7e5c8",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "89e5bc75541679014844",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "393720d9fd88f5bcc3fa",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "5186fad436981f28af67",
+   "eafc3ad2d08f94aeb60c",
+   "4715d6f37210593c4c7d",
+   "ddbeb487c6f0e51d152f",
+   "fb89cf41ec571a5be7c9",
+   "4715d6f37210593c4c7d",
+   "a19ab8f069bfddf3d1d9",
+   "4715d6f37210593c4c7d",
+   "ae00c0426367edf09365",
+   "beb159b9c72a316ee335",
+   "4715d6f37210593c4c7d",
+   "093475a68d09952a4aa5",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "093475a68d09952a4aa5",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "c75633989792e8f59804",
+   "4715d6f37210593c4c7d",
+   "524298b4685f61659434",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "9a367e8a166c58cc6b75",
+   "4715d6f37210593c4c7d",
+   "524298b4685f61659434",
+   "4715d6f37210593c4c7d",
+   "5186fad436981f28af67",
+   "6758512610475b18834f",
+   "a2aa492482ffe337d622",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "233234413468f2fd74ef",
+   "4715d6f37210593c4c7d",
+   "65401d0b9b2715d49ace",
+   "4715d6f37210593c4c7d",
+   "aa93e63ddbeb930e4007",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "0ef57da12be13bc43ade",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "84c3cb517f1623376905",
+   "680ce3e4a124b50b9a31",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "9a367e8a166c58cc6b75",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "bca487985c0eb5f97cb2",
+   "4715d6f37210593c4c7d",
+   "8fcd05f075765affc6dd",
+   "2314a4a68f310d74e934",
+   "57ebeddfb6fa9fc36d0b",
+   "ddbeb487c6f0e51d152f",
+   "4715d6f37210593c4c7d",
+   "2e02bd6bf47044e71384",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "71a7b3640919574febc2",
+   "7e1934ff931ffa1a4896",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "7b49f7dc199e092a74ae",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "2ec7e7a0ebde1fbfc155",
+   "7e2f0b5912e5a8bd2e17",
+   "fef1055472bc90ce24ab",
+   "4715d6f37210593c4c7d",
+   "758a8973f1205ac42f13",
+   "4715d6f37210593c4c7d",
+   "9ddc7d394a1e7ee071cc",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "23609f5356dcef0b8086",
+   "4715d6f37210593c4c7d",
+   "93d3008e7aefbd90b1c3",
+   "b75dd7b406ed6081a6d6",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "0b2ade4b3f8449c7ee65",
+   "c255256e07f14e664daa",
+   "42afe2cf88cbe84ed0a2",
+   "1c2589f6379038e41d0b",
+   "ea9bb4cc801cc24505e9",
+   "4715d6f37210593c4c7d",
+   "73bb4021b997422bd19e",
+   "63275aa8c769b52b22a7",
+   "4715d6f37210593c4c7d",
+   "78ee42bb1d0b9d322232",
+   "f9761155806b7980e687",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "0bf0e93a2c560c2fff99",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "aaae96ddf7ca1d4bb67c",
+   "521bbb051b9e89075043",
+   "a6b04d664afb109739eb",
+   "23609f5356dcef0b8086",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "1e421902c2e2128c457c",
+   "537d0a68b89de15a2cba",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "f0dc5adb765b926eb008",
+   "23609f5356dcef0b8086",
+   "a43d95f44c1e57b0b1aa",
+   "5b3553ddf8ccb096aa28",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "200dead4431a5fa36309",
+   "65e12cba1319339d97f4",
+   "2cef8ba7c4cb29b99b65",
+   "f2699c86723f0607c936",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "62ef90e00c52bc8b68b7",
+   "690624f499de351ea857",
+   "4715d6f37210593c4c7d",
+   "c75633989792e8f59804",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "42afe2cf88cbe84ed0a2",
+   "8ab4d6e260b7cc1653ba",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "6181674f91fcec0d3e3e",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "ee3def3ee7de33eae80b",
+   "4715d6f37210593c4c7d",
+   "fce299f867ba8698490c",
+   "da0447348f849244513d",
+   "4715d6f37210593c4c7d",
+   "dbdca924dffb2035e1ce",
+   "ad47af3c183eb515488b",
+   "4715d6f37210593c4c7d",
+   "1035a058095d92167ac9",
+   "0bf0e93a2c560c2fff99",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "9f92a558ef26701de174",
+   "4715d6f37210593c4c7d",
+   "7ead6e7b333084c8447a",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "3e11cf2f2030f717654b",
+   "7739e7adb0cf4fd3f89c",
+   "cfe1e7646ab9e4a13669",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "f9da9d525da44756b6cc",
+   "bae1ac5f182f8ddd869a",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d",
+   "4715d6f37210593c4c7d"
+  ],
+  "extract_yes_no": [
+   false,
+   null,
+   null,
+   null,
+   null,
+   false,
+   false,
+   null,
+   null,
+   null,
+   null,
+   null,
+   false,
+   null,
+   null,
+   null,
+   false,
+   null,
+   false,
+   false,
+   false,
+   false,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   true,
+   null,
+   false,
+   false,
+   false,
+   null,
+   null,
+   false,
+   true,
+   false,
+   null,
+   true,
+   false,
+   null,
+   true,
+   null,
+   true,
+   false,
+   null,
+   false,
+   null,
+   true,
+   true,
+   null,
+   null,
+   null,
+   null,
+   null,
+   true,
+   false,
+   true,
+   false,
+   true,
+   null,
+   false,
+   false,
+   null,
+   true,
+   false,
+   null,
+   true,
+   true,
+   null,
+   false,
+   null,
+   null,
+   true,
+   false,
+   false,
+   null,
+   null,
+   null,
+   null,
+   true,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   false,
+   false,
+   false,
+   null,
+   false,
+   false,
+   null,
+   true,
+   false,
+   true,
+   false,
+   null,
+   true,
+   true,
+   null,
+   true,
+   false,
+   false,
+   null,
+   null,
+   true,
+   null,
+   null,
+   null,
+   true,
+   true,
+   null,
+   false,
+   false,
+   false,
+   null,
+   null,
+   false,
+   false,
+   null,
+   null,
+   true,
+   true,
+   false,
+   null,
+   false,
+   true,
+   false,
+   null,
+   true,
+   null,
+   null,
+   true,
+   false,
+   null,
+   false,
+   false,
+   null,
+   null,
+   null,
+   null,
+   null,
+   true,
+   null,
+   null,
+   true,
+   null,
+   null,
+   null,
+   false,
+   null,
+   null,
+   false,
+   false,
+   true,
+   null,
+   null,
+   false,
+   false,
+   null,
+   true,
+   null,
+   null,
+   false,
+   true,
+   false,
+   true,
+   null,
+   null,
+   null,
+   true,
+   false,
+   null,
+   null,
+   null,
+   true,
+   null,
+   null,
+   null,
+   null,
+   true,
+   true,
+   null,
+   true,
+   null,
+   true,
+   true,
+   true,
+   true,
+   null,
+   null,
+   true,
+   false,
+   true,
+   null,
+   null,
+   null,
+   true,
+   false,
+   null,
+   false,
+   false,
+   null,
+   null,
+   null,
+   false,
+   true,
+   false,
+   null,
+   true,
+   null,
+   false,
+   true,
+   null,
+   null,
+   null,
+   null,
+   false,
+   true,
+   null,
+   false,
+   true,
+   null,
+   true,
+   false,
+   null,
+   null,
+   null,
+   true,
+   null,
+   true,
+   null,
+   null,
+   null,
+   true,
+   true,
+   true
+  ],
+  "is_vague": [
+   true,
+   false,
+   true,
+   false,
+   false,
+   true,
+   true,
+   false,
+   false,
+   false,
+   true,
+   false,
+   true,
+   true,
+   false,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   false,
+   true,
+   true,
+   false,
+   true,
+   false,
+   true,
+   false,
+   false,
+   false,
+   true,
+   true,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   true,
+   false,
+   true,
+   true,
+   false,
+   true,
+   false,
+   false,
+   true,
+   true,
+   true,
+   false,
+   false,
+   true,
+   false,
+   true,
+   true,
+   true,
+   false,
+   true,
+   true,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   true,
+   false,
+   false,
+   true,
+   true,
+   false,
+   true,
+   true,
+   true,
+   true,
+   false,
+   true,
+   true,
+   true,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   true,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   true,
+   false,
+   true,
+   true,
+   false,
+   false,
+   true,
+   false,
+   true,
+   true,
+   false,
+   true,
+   false,
+   true,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   true,
+   true,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   true,
+   true,
+   false,
+   false,
+   false,
+   false,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   false,
+   true,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   true,
+   false,
+   false,
+   true,
+   true,
+   false,
+   true,
+   false,
+   false,
+   false,
+   true,
+   true,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   true,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   true,
+   true,
+   false,
+   false,
+   true,
+   true,
+   false,
+   false,
+   false,
+   true,
+   true,
+   false,
+   true,
+   true,
+   true,
+   false,
+   false,
+   true,
+   false,
+   false,
+   true,
+   false,
+   true,
+   false,
+   true,
+   true,
+   true,
+   false,
+   true,
+   true,
+   false,
+   true,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   true,
+   true,
+   false,
+   true,
+   false,
+   false,
+   true,
+   true,
+   true,
+   false,
+   true,
+   false,
+   false
+  ],
+  "is_vague_behavioral_answer": [
+   true,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ]
+ },
+ "screening": [
+  {
+   "api_version": "1.0",
+   "call_status": "incomplete",
+   "candidate_id": "C1",
+   "categories_answered": [
+    "introduction",
+    "education",
+    "experience",
+    "skills"
+   ],
+   "categories_missing": [
+    "location",
+    "salary",
+    "notice_period"
+   ],
+   "model_version": "v0.1.0",
+   "screening_score": 33.8,
+   "service": "screening_ai_service",
+   "status": "success",
+   "turns_used": 7,
+   "warnings": [
+    "The call is incomplete: the score covers only the answered categories."
+   ]
+  },
+  {
+   "api_version": "1.0",
+   "call_status": "incomplete",
+   "candidate_id": "C1",
+   "categories_answered": [
+    "introduction",
+    "education",
+    "experience",
+    "skills"
+   ],
+   "categories_missing": [
+    "location",
+    "salary",
+    "notice_period"
+   ],
+   "model_version": "v0.1.0",
+   "screening_score": 28.5,
+   "service": "screening_ai_service",
+   "status": "success",
+   "turns_used": 7,
+   "warnings": [
+    "The call is incomplete: the score covers only the answered categories."
+   ]
+  },
+  {
+   "api_version": "1.0",
+   "call_status": "incomplete",
+   "candidate_id": "C1",
+   "categories_answered": [
+    "introduction",
+    "education",
+    "experience",
+    "skills"
+   ],
+   "categories_missing": [
+    "location",
+    "salary",
+    "notice_period"
+   ],
+   "model_version": "v0.1.0",
+   "screening_score": 23.2,
+   "service": "screening_ai_service",
+   "status": "success",
+   "turns_used": 7,
+   "warnings": [
+    "The call is incomplete: the score covers only the answered categories."
+   ]
+  },
+  {
+   "api_version": "1.0",
+   "call_status": "incomplete",
+   "candidate_id": "C1",
+   "categories_answered": [
+    "introduction",
+    "education",
+    "experience",
+    "skills"
+   ],
+   "categories_missing": [
+    "location",
+    "salary",
+    "notice_period"
+   ],
+   "model_version": "v0.1.0",
+   "screening_score": 38.7,
+   "service": "screening_ai_service",
+   "status": "success",
+   "turns_used": 7,
+   "warnings": [
+    "The call is incomplete: the score covers only the answered categories."
+   ]
+  },
+  {
+   "api_version": "1.0",
+   "call_status": "incomplete",
+   "candidate_id": "C1",
+   "categories_answered": [
+    "introduction",
+    "education",
+    "experience",
+    "skills"
+   ],
+   "categories_missing": [
+    "location",
+    "salary",
+    "notice_period"
+   ],
+   "model_version": "v0.1.0",
+   "screening_score": 38.8,
+   "service": "screening_ai_service",
+   "status": "success",
+   "turns_used": 7,
+   "warnings": [
+    "The call is incomplete: the score covers only the answered categories."
+   ]
+  },
+  {
+   "api_version": "1.0",
+   "call_status": "incomplete",
+   "candidate_id": "C1",
+   "categories_answered": [
+    "introduction",
+    "education",
+    "experience",
+    "skills",
+    "location"
+   ],
+   "categories_missing": [
+    "salary",
+    "notice_period"
+   ],
+   "model_version": "v0.1.0",
+   "screening_score": 46.6,
+   "service": "screening_ai_service",
+   "status": "success",
+   "turns_used": 7,
+   "warnings": [
+    "The call is incomplete: the score covers only the answered categories."
+   ]
+  },
+  {
+   "api_version": "1.0",
+   "call_status": "incomplete",
+   "candidate_id": "C1",
+   "categories_answered": [
+    "introduction",
+    "education",
+    "experience",
+    "skills"
+   ],
+   "categories_missing": [
+    "location",
+    "salary",
+    "notice_period"
+   ],
+   "model_version": "v0.1.0",
+   "screening_score": 33.8,
+   "service": "screening_ai_service",
+   "status": "success",
+   "turns_used": 7,
+   "warnings": [
+    "The call is incomplete: the score covers only the answered categories."
+   ]
+  },
+  {
+   "api_version": "1.0",
+   "call_status": "incomplete",
+   "candidate_id": "C1",
+   "categories_answered": [
+    "introduction",
+    "education",
+    "experience",
+    "skills",
+    "location"
+   ],
+   "categories_missing": [
+    "salary",
+    "notice_period"
+   ],
+   "model_version": "v0.1.0",
+   "screening_score": 36.0,
+   "service": "screening_ai_service",
+   "status": "success",
+   "turns_used": 7,
+   "warnings": [
+    "The call is incomplete: the score covers only the answered categories."
+   ]
+  },
+  {
+   "api_version": "1.0",
+   "call_status": "incomplete",
+   "candidate_id": "C1",
+   "categories_answered": [
+    "introduction",
+    "education",
+    "experience",
+    "skills"
+   ],
+   "categories_missing": [
+    "location",
+    "salary",
+    "notice_period"
+   ],
+   "model_version": "v0.1.0",
+   "screening_score": 26.9,
+   "service": "screening_ai_service",
+   "status": "success",
+   "turns_used": 7,
+   "warnings": [
+    "The call is incomplete: the score covers only the answered categories."
+   ]
+  },
+  {
+   "api_version": "1.0",
+   "call_status": "incomplete",
+   "candidate_id": "C1",
+   "categories_answered": [
+    "introduction",
+    "education",
+    "experience",
+    "skills",
+    "location"
+   ],
+   "categories_missing": [
+    "salary",
+    "notice_period"
+   ],
+   "model_version": "v0.1.0",
+   "screening_score": 47.9,
+   "service": "screening_ai_service",
+   "status": "success",
+   "turns_used": 7,
+   "warnings": [
+    "The call is incomplete: the score covers only the answered categories."
+   ]
+  }
+ ],
+ "skills": [
+  "f9a79ead213e1b290ae5",
+  "c93cf58a994c22d4863f",
+  "6eee7d1283bc456fa1b2",
+  "a43eb7f2d76f7896bed5",
+  "77fa859095188f655f72",
+  "663013b0e83c06ded443",
+  "2a732f0a4c8b982e6fc3",
+  "d8201112350f1d1b3aab",
+  "67a311db1660aa38d7ca",
+  "e070845faae9993a381c",
+  "5200177103c007b0489d",
+  "8a2e5372d0a6f7bdf9a4",
+  "31bf867c62139e6cde17",
+  "3dc2086ef753c97fe216",
+  "26292ccbc4042082df64",
+  "bc170e36ae914133e837",
+  "dfe7abc3c223e5a2af17",
+  "a3a0c3da751dde1844af",
+  "07695f81afd9063915b1",
+  "da6742fa5e4811fbef11",
+  "4ec82d20522d44b7e7ec",
+  "4f53cda18c2baa0c0354",
+  "c1357910b10fc0d50621",
+  "4f53cda18c2baa0c0354",
+  "4f53cda18c2baa0c0354"
+ ],
+ "skills_repeat": [
+  "f9a79ead213e1b290ae5",
+  "c93cf58a994c22d4863f",
+  "6eee7d1283bc456fa1b2",
+  "a43eb7f2d76f7896bed5",
+  "77fa859095188f655f72",
+  "663013b0e83c06ded443",
+  "2a732f0a4c8b982e6fc3",
+  "d8201112350f1d1b3aab",
+  "67a311db1660aa38d7ca",
+  "e070845faae9993a381c",
+  "5200177103c007b0489d",
+  "8a2e5372d0a6f7bdf9a4",
+  "31bf867c62139e6cde17",
+  "3dc2086ef753c97fe216",
+  "26292ccbc4042082df64",
+  "bc170e36ae914133e837",
+  "dfe7abc3c223e5a2af17",
+  "a3a0c3da751dde1844af",
+  "07695f81afd9063915b1",
+  "da6742fa5e4811fbef11",
+  "4ec82d20522d44b7e7ec",
+  "4f53cda18c2baa0c0354",
+  "c1357910b10fc0d50621",
+  "4f53cda18c2baa0c0354",
+  "4f53cda18c2baa0c0354"
+ ]
+}

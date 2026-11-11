@@ -52,6 +52,7 @@ from dataclasses import dataclass, field
 from typing import Dict, List, Optional
 
 from parsers.answer_intent_engine import StructuredAnswer
+from utils.perf import compile_phrase_patterns
 
 # ---------------------------------------------------------------------------
 # 1. Hesitation pattern detection
@@ -84,17 +85,21 @@ class HesitationResult:
     hesitation_rate_per_100_words: float
 
 
+_UNAMBIGUOUS_FILLER_RES = compile_phrase_patterns(_UNAMBIGUOUS_FILLERS, escape=False)   # these were passed unescaped; kept exactly
+_FILLER_PHRASE_RES = compile_phrase_patterns(_FILLER_PHRASES)
+
+
 def detect_hesitation(text: str) -> HesitationResult:
     lowered = text.lower()
     word_count = max(len(lowered.split()), 1)
 
     filler_count = 0
-    for filler in _UNAMBIGUOUS_FILLERS:
-        filler_count += len(re.findall(rf"\b{filler}\b", lowered))
+    for _, rx in _UNAMBIGUOUS_FILLER_RES:
+        filler_count += len(rx.findall(lowered))
 
     phrases_found = []
-    for phrase in _FILLER_PHRASES:
-        hits = len(re.findall(rf"\b{re.escape(phrase)}\b", lowered))
+    for phrase, rx in _FILLER_PHRASE_RES:
+        hits = len(rx.findall(lowered))
         if hits:
             phrases_found.extend([phrase] * hits)
             filler_count += hits
@@ -209,13 +214,16 @@ class UncertaintyResult:
     uncertainty_rate_per_100_words: float
 
 
+_UNCERTAINTY_RES = compile_phrase_patterns(_UNCERTAINTY_MARKERS)
+
+
 def detect_uncertainty(text: str) -> UncertaintyResult:
     lowered = text.lower()
     word_count = max(len(lowered.split()), 1)
 
     found = []
-    for marker in _UNCERTAINTY_MARKERS:
-        hits = len(re.findall(rf"\b{re.escape(marker)}\b", lowered))
+    for marker, rx in _UNCERTAINTY_RES:
+        hits = len(rx.findall(lowered))
         if hits:
             found.extend([marker] * hits)
 

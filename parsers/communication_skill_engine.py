@@ -94,6 +94,7 @@ from typing import Dict, List, Optional
 from parsers.confidence_sentiment_engine import HesitationResult, detect_hesitation
 from parsers.hr_followup_engine import has_concrete_example, is_vague_behavioral_answer
 from parsers.hr_interview_question_bank import InterviewQuestionState, InterviewSession
+from utils.perf import compile_phrase_patterns
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -166,7 +167,8 @@ def assess_fluency(text: str) -> FluencyResult:
         1 for s in sentences if len(s.split()) < _FRAGMENT_WORD_THRESHOLD
     ) if sentence_count > 1 else 0  # a single short answer isn't a "fragment", it's just short
 
-    connectors_found = [c for c in _CONTINUITY_CONNECTORS if re.search(rf"\b{re.escape(c)}\b", text.lower())]
+    _lowered_text = text.lower()
+    connectors_found = [c for c, rx in _CONTINUITY_RES if rx.search(_lowered_text)]
 
     # No punctuation at all on a longer answer means sentence
     # segmentation collapsed to one giant "sentence" -- a transcript
@@ -201,9 +203,14 @@ class GrammarResult:
     grammar_score: float
 
 
+_GRAMMAR_ERROR_RES = compile_phrase_patterns(_GRAMMAR_ERROR_PATTERNS)
+_CONTINUITY_RES = compile_phrase_patterns(_CONTINUITY_CONNECTORS)
+_STRUCTURING_RES = compile_phrase_patterns(_STRUCTURING_CONNECTORS)
+
+
 def assess_grammar(text: str) -> GrammarResult:
     lowered = text.lower()
-    errors = [p for p in _GRAMMAR_ERROR_PATTERNS if re.search(rf"\b{re.escape(p)}\b", lowered)]
+    errors = [p for p, rx in _GRAMMAR_ERROR_RES if rx.search(lowered)]
     repeated = _REPEATED_WORD_RE.findall(lowered)
 
     score = 100.0 - min(40.0, len(errors) * 10.0) - min(20.0, len(repeated) * 10.0)
@@ -275,7 +282,8 @@ class StructureResult:
 def assess_structure(text: str, sentence_count: Optional[int] = None) -> StructureResult:
     if sentence_count is None:
         sentence_count = len(_split_sentences(text))
-    connectors = [c for c in _STRUCTURING_CONNECTORS if re.search(rf"\b{re.escape(c)}\b", text.lower())]
+    _lowered_text = text.lower()
+    connectors = [c for c, rx in _STRUCTURING_RES if rx.search(_lowered_text)]
 
     score = 40.0 + min(30.0, sentence_count * 10.0) + min(30.0, len(connectors) * 10.0)
     return StructureResult(
