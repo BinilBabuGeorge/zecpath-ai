@@ -1,6 +1,12 @@
 # Core
 python-dotenv==1.0.1
 
+# Day 62: the code imports these, but they were not listed (a fresh install failed at the first ATS score or file read).
+# numpy and scipy are installed with scikit-learn.
+scikit-learn==1.9.0
+pdfplumber==0.11.10
+python-docx==1.2.0
+
 # Day 59: integration schemas, OpenAPI file and the mapping diagram
 jsonschema==4.26.0
 PyYAML==6.0.3

@@ -5,6 +5,18 @@ interviews, behavior analysis, and hiring decisions. See `docs/CODE_STANDARDS.md
 for coding conventions, and the Day 2 architecture doc for how these services
 communicate (REST / Queue / Webhook).
 
+## Start here (documentation)
+
+| If you want to... | Read |
+|---|---|
+| get set up and make a first change | `docs/day62_developer_onboarding_guide.md` |
+| know what every module, API, score and data model is | `docs/day62_zecpath_ai_technical_handbook.md` (also as Word: `Zecpath_AI_Technical_Handbook.docx`) |
+| see how the pieces fit, and how it would be deployed | `docs/day62_system_architecture.md` |
+| know why a number is what it is | the document for the day that built it, in `docs/` |
+
+The handbook is generated from the code: after changing a weight, threshold, API operation or module, run
+`python run_day62_handbook.py`. `tests/test_day62_documentation.py` fails when the documents and the code disagree.
+
 ## Project Structure
 
 ```
