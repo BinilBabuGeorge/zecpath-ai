@@ -1,0 +1,1178 @@
+[
+  {
+    "id": "DC-01",
+    "job": "Full Stack Developer (MERN)",
+    "overall_score": 62.0,
+    "zone": "shortlist",
+    "role_category": "tech",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 90.0,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 31.5
+      },
+      {
+        "name": "experience",
+        "score": 46.9,
+        "available": true,
+        "effective_weight": 0.3,
+        "contribution": 14.1
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 16.9,
+        "available": true,
+        "effective_weight": 0.2,
+        "contribution": 3.4
+      }
+    ],
+    "notes": [],
+    "years_parsed": 4.7
+  },
+  {
+    "id": "DC-02",
+    "job": "Full Stack Developer (MERN)",
+    "overall_score": 48.6,
+    "zone": "shortlist",
+    "role_category": "tech",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 70.0,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 24.5
+      },
+      {
+        "name": "experience",
+        "score": 29.8,
+        "available": true,
+        "effective_weight": 0.3,
+        "contribution": 8.9
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 11.1,
+        "available": true,
+        "effective_weight": 0.2,
+        "contribution": 2.2
+      }
+    ],
+    "notes": [],
+    "years_parsed": 8.2
+  },
+  {
+    "id": "DC-03",
+    "job": "Full Stack Developer (MERN)",
+    "overall_score": 37.0,
+    "zone": "review",
+    "role_category": "tech",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 50.0,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 17.5
+      },
+      {
+        "name": "experience",
+        "score": 15.3,
+        "available": true,
+        "effective_weight": 0.3,
+        "contribution": 4.6
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 9.4,
+        "available": true,
+        "effective_weight": 0.2,
+        "contribution": 1.9
+      }
+    ],
+    "notes": [],
+    "years_parsed": 0.6
+  },
+  {
+    "id": "DC-04",
+    "job": "Full Stack Developer (MERN)",
+    "overall_score": 58.1,
+    "zone": "shortlist",
+    "role_category": "tech",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 100.0,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 35.0
+      },
+      {
+        "name": "experience",
+        "score": 28.6,
+        "available": true,
+        "effective_weight": 0.3,
+        "contribution": 8.6
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 7.7,
+        "available": true,
+        "effective_weight": 0.2,
+        "contribution": 1.5
+      }
+    ],
+    "notes": [],
+    "years_parsed": 1.8
+  },
+  {
+    "id": "DC-05",
+    "job": "Full Stack Developer (MERN)",
+    "overall_score": 43.8,
+    "zone": "review",
+    "role_category": "tech",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 50.0,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 17.5
+      },
+      {
+        "name": "experience",
+        "score": 38.3,
+        "available": true,
+        "effective_weight": 0.3,
+        "contribution": 11.5
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 9.1,
+        "available": true,
+        "effective_weight": 0.2,
+        "contribution": 1.8
+      }
+    ],
+    "notes": [],
+    "years_parsed": 6.2
+  },
+  {
+    "id": "DC-06",
+    "job": "Full Stack Developer (MERN)",
+    "overall_score": 45.3,
+    "zone": "review",
+    "role_category": "tech",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 50.0,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 17.5
+      },
+      {
+        "name": "experience",
+        "score": 42.9,
+        "available": true,
+        "effective_weight": 0.3,
+        "contribution": 12.9
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 9.5,
+        "available": true,
+        "effective_weight": 0.2,
+        "contribution": 1.9
+      }
+    ],
+    "notes": [],
+    "years_parsed": 5.1
+  },
+  {
+    "id": "DC-07",
+    "job": "Full Stack Developer (MERN)",
+    "overall_score": 52.4,
+    "zone": "shortlist",
+    "role_category": "tech",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 60.0,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 21.0
+      },
+      {
+        "name": "experience",
+        "score": 52.2,
+        "available": true,
+        "effective_weight": 0.3,
+        "contribution": 15.7
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 13.5,
+        "available": true,
+        "effective_weight": 0.2,
+        "contribution": 2.7
+      }
+    ],
+    "notes": [],
+    "years_parsed": 2.7
+  },
+  {
+    "id": "DC-08",
+    "job": "Full Stack Developer (MERN)",
+    "overall_score": 55.5,
+    "zone": "shortlist",
+    "role_category": "tech",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 80.0,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 28.0
+      },
+      {
+        "name": "experience",
+        "score": 39.5,
+        "available": true,
+        "effective_weight": 0.3,
+        "contribution": 11.8
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 13.7,
+        "available": true,
+        "effective_weight": 0.2,
+        "contribution": 2.7
+      }
+    ],
+    "notes": [],
+    "years_parsed": 3.7
+  },
+  {
+    "id": "DC-09",
+    "job": "Full Stack Developer (MERN)",
+    "overall_score": 57.2,
+    "zone": "shortlist",
+    "role_category": "tech",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 80.0,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 28.0
+      },
+      {
+        "name": "experience",
+        "score": 41.8,
+        "available": true,
+        "effective_weight": 0.3,
+        "contribution": 12.5
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 18.4,
+        "available": true,
+        "effective_weight": 0.2,
+        "contribution": 3.7
+      }
+    ],
+    "notes": [],
+    "years_parsed": 4.2
+  },
+  {
+    "id": "DC-10",
+    "job": "Java Backend Developer",
+    "overall_score": 61.9,
+    "zone": "shortlist",
+    "role_category": "tech",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 83.3,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 29.2
+      },
+      {
+        "name": "experience",
+        "score": 53.1,
+        "available": true,
+        "effective_weight": 0.3,
+        "contribution": 15.9
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 18.8,
+        "available": true,
+        "effective_weight": 0.2,
+        "contribution": 3.8
+      }
+    ],
+    "notes": [],
+    "years_parsed": 4.2
+  },
+  {
+    "id": "DC-11",
+    "job": "Java Backend Developer",
+    "overall_score": 49.6,
+    "zone": "shortlist",
+    "role_category": "tech",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 50.0,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 17.5
+      },
+      {
+        "name": "experience",
+        "score": 50.9,
+        "available": true,
+        "effective_weight": 0.3,
+        "contribution": 15.3
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 18.9,
+        "available": true,
+        "effective_weight": 0.2,
+        "contribution": 3.8
+      }
+    ],
+    "notes": [],
+    "years_parsed": 3.2
+  },
+  {
+    "id": "DC-12",
+    "job": "Java Backend Developer",
+    "overall_score": 53.6,
+    "zone": "shortlist",
+    "role_category": "tech",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 66.7,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 23.3
+      },
+      {
+        "name": "experience",
+        "score": 47.7,
+        "available": true,
+        "effective_weight": 0.3,
+        "contribution": 14.3
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 14.8,
+        "available": true,
+        "effective_weight": 0.2,
+        "contribution": 3.0
+      }
+    ],
+    "notes": [],
+    "years_parsed": 4.2
+  },
+  {
+    "id": "DC-13",
+    "job": "Java Backend Developer",
+    "overall_score": 1.0,
+    "zone": "reject",
+    "role_category": "tech",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 0.0,
+        "available": true,
+        "effective_weight": 0.636,
+        "contribution": 0.0
+      },
+      {
+        "name": "experience",
+        "score": 0.0,
+        "available": false,
+        "effective_weight": 0.0,
+        "contribution": 0.0
+      },
+      {
+        "name": "education",
+        "score": 0.0,
+        "available": false,
+        "effective_weight": 0.0,
+        "contribution": 0.0
+      },
+      {
+        "name": "semantic",
+        "score": 2.7,
+        "available": true,
+        "effective_weight": 0.364,
+        "contribution": 1.0
+      }
+    ],
+    "notes": [
+      "experience: No work experience entries found on resume -- weight redistributed to other components",
+      "education: No education entries found on resume -- weight redistributed to other components"
+    ],
+    "years_parsed": 0.0
+  },
+  {
+    "id": "DC-14",
+    "job": "DevOps Engineer",
+    "overall_score": 72.6,
+    "zone": "shortlist",
+    "role_category": "tech",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 100.0,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 35.0
+      },
+      {
+        "name": "experience",
+        "score": 69.2,
+        "available": true,
+        "effective_weight": 0.3,
+        "contribution": 20.8
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 19.0,
+        "available": true,
+        "effective_weight": 0.2,
+        "contribution": 3.8
+      }
+    ],
+    "notes": [],
+    "years_parsed": 4.2
+  },
+  {
+    "id": "DC-15",
+    "job": "DevOps Engineer",
+    "overall_score": 39.0,
+    "zone": "review",
+    "role_category": "tech",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 50.0,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 17.5
+      },
+      {
+        "name": "experience",
+        "score": 24.8,
+        "available": true,
+        "effective_weight": 0.3,
+        "contribution": 7.4
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 5.3,
+        "available": true,
+        "effective_weight": 0.2,
+        "contribution": 1.1
+      }
+    ],
+    "notes": [],
+    "years_parsed": 4.7
+  },
+  {
+    "id": "DC-16",
+    "job": "DevOps Engineer",
+    "overall_score": 38.8,
+    "zone": "review",
+    "role_category": "tech",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 50.0,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 17.5
+      },
+      {
+        "name": "experience",
+        "score": 23.8,
+        "available": true,
+        "effective_weight": 0.3,
+        "contribution": 7.1
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 5.9,
+        "available": true,
+        "effective_weight": 0.2,
+        "contribution": 1.2
+      }
+    ],
+    "notes": [],
+    "years_parsed": 4.9
+  },
+  {
+    "id": "DC-17",
+    "job": "Sales Executive (B2B SaaS)",
+    "overall_score": 58.1,
+    "zone": "shortlist",
+    "role_category": "business",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 100.0,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 25.0
+      },
+      {
+        "name": "experience",
+        "score": 46.6,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 16.3
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 15.0,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 3.8
+      }
+    ],
+    "notes": [],
+    "years_parsed": 3.2
+  },
+  {
+    "id": "DC-18",
+    "job": "Sales Executive (B2B SaaS)",
+    "overall_score": 54.2,
+    "zone": "review",
+    "role_category": "business",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 80.0,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 20.0
+      },
+      {
+        "name": "experience",
+        "score": 53.9,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 18.9
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 9.3,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 2.3
+      }
+    ],
+    "notes": [],
+    "years_parsed": 2.7
+  },
+  {
+    "id": "DC-19",
+    "job": "Sales Executive (B2B SaaS)",
+    "overall_score": 44.5,
+    "zone": "review",
+    "role_category": "business",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 60.0,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 15.0
+      },
+      {
+        "name": "experience",
+        "score": 38.5,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 13.5
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 11.9,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 3.0
+      }
+    ],
+    "notes": [],
+    "years_parsed": 0.2
+  },
+  {
+    "id": "DC-20",
+    "job": "Sales Executive (B2B SaaS)",
+    "overall_score": 24.4,
+    "zone": "reject",
+    "role_category": "business",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 0.0,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 0.0
+      },
+      {
+        "name": "experience",
+        "score": 32.2,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 11.3
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 0.6,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 0.1
+      }
+    ],
+    "notes": [],
+    "years_parsed": 3.2
+  },
+  {
+    "id": "DC-21",
+    "job": "Sales Executive (B2B SaaS)",
+    "overall_score": 57.9,
+    "zone": "shortlist",
+    "role_category": "business",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 100.0,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 25.0
+      },
+      {
+        "name": "experience",
+        "score": 46.5,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 16.3
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 14.4,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 3.6
+      }
+    ],
+    "notes": [],
+    "years_parsed": 4.1
+  },
+  {
+    "id": "DC-22",
+    "job": "UI/UX Designer",
+    "overall_score": 57.8,
+    "zone": "shortlist",
+    "role_category": "creative",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 75.0,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 18.8
+      },
+      {
+        "name": "experience",
+        "score": 53.9,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 13.5
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.2,
+        "contribution": 17.3
+      },
+      {
+        "name": "semantic",
+        "score": 27.3,
+        "available": true,
+        "effective_weight": 0.3,
+        "contribution": 8.2
+      }
+    ],
+    "notes": [],
+    "years_parsed": 4.1
+  },
+  {
+    "id": "DC-23",
+    "job": "UI/UX Designer",
+    "overall_score": 28.7,
+    "zone": "review",
+    "role_category": "creative",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 12.5,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 3.1
+      },
+      {
+        "name": "experience",
+        "score": 43.3,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 10.8
+      },
+      {
+        "name": "education",
+        "score": 67.3,
+        "available": true,
+        "effective_weight": 0.2,
+        "contribution": 13.5
+      },
+      {
+        "name": "semantic",
+        "score": 4.2,
+        "available": true,
+        "effective_weight": 0.3,
+        "contribution": 1.3
+      }
+    ],
+    "notes": [],
+    "years_parsed": 2.1
+  },
+  {
+    "id": "DC-24",
+    "job": "UI/UX Designer",
+    "overall_score": 52.7,
+    "zone": "review",
+    "role_category": "creative",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 75.0,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 18.8
+      },
+      {
+        "name": "experience",
+        "score": 57.2,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 14.3
+      },
+      {
+        "name": "education",
+        "score": 59.0,
+        "available": true,
+        "effective_weight": 0.2,
+        "contribution": 11.8
+      },
+      {
+        "name": "semantic",
+        "score": 26.0,
+        "available": true,
+        "effective_weight": 0.3,
+        "contribution": 7.8
+      }
+    ],
+    "notes": [],
+    "years_parsed": 5.5
+  },
+  {
+    "id": "DC-25",
+    "job": "UI/UX Designer",
+    "overall_score": 1.1,
+    "zone": "reject",
+    "role_category": "creative",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 0.0,
+        "available": true,
+        "effective_weight": 0.455,
+        "contribution": 0.0
+      },
+      {
+        "name": "experience",
+        "score": 0.0,
+        "available": false,
+        "effective_weight": 0.0,
+        "contribution": 0.0
+      },
+      {
+        "name": "education",
+        "score": 0.0,
+        "available": false,
+        "effective_weight": 0.0,
+        "contribution": 0.0
+      },
+      {
+        "name": "semantic",
+        "score": 2.1,
+        "available": true,
+        "effective_weight": 0.545,
+        "contribution": 1.1
+      }
+    ],
+    "notes": [
+      "experience: No work experience entries found on resume -- weight redistributed to other components",
+      "education: No education entries found on resume -- weight redistributed to other components"
+    ],
+    "years_parsed": 0.0
+  },
+  {
+    "id": "DC-26",
+    "job": "HR Recruiter (Talent Acquisition)",
+    "overall_score": 56.3,
+    "zone": "shortlist",
+    "role_category": "business",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 100.0,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 25.0
+      },
+      {
+        "name": "experience",
+        "score": 36.9,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 12.9
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 21.5,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 5.4
+      }
+    ],
+    "notes": [],
+    "years_parsed": 3.2
+  },
+  {
+    "id": "DC-27",
+    "job": "HR Recruiter (Talent Acquisition)",
+    "overall_score": 58.6,
+    "zone": "shortlist",
+    "role_category": "business",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 100.0,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 25.0
+      },
+      {
+        "name": "experience",
+        "score": 46.4,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 16.2
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 17.6,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 4.4
+      }
+    ],
+    "notes": [],
+    "years_parsed": 1.6
+  },
+  {
+    "id": "DC-28",
+    "job": "HR Recruiter (Talent Acquisition)",
+    "overall_score": 59.3,
+    "zone": "shortlist",
+    "role_category": "business",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 100.0,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 25.0
+      },
+      {
+        "name": "experience",
+        "score": 43.2,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 15.1
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 24.6,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 6.2
+      }
+    ],
+    "notes": [],
+    "years_parsed": 2.2
+  },
+  {
+    "id": "DC-29",
+    "job": "HR Recruiter (Talent Acquisition)",
+    "overall_score": 54.6,
+    "zone": "review",
+    "role_category": "business",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 100.0,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 25.0
+      },
+      {
+        "name": "experience",
+        "score": 30.2,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 10.6
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 23.8,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 6.0
+      }
+    ],
+    "notes": [],
+    "years_parsed": 2.7
+  },
+  {
+    "id": "DC-30",
+    "job": "HR Recruiter (Talent Acquisition)",
+    "overall_score": 57.1,
+    "zone": "shortlist",
+    "role_category": "business",
+    "components": [
+      {
+        "name": "skill_match",
+        "score": 100.0,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 25.0
+      },
+      {
+        "name": "experience",
+        "score": 34.8,
+        "available": true,
+        "effective_weight": 0.35,
+        "contribution": 12.2
+      },
+      {
+        "name": "education",
+        "score": 86.5,
+        "available": true,
+        "effective_weight": 0.15,
+        "contribution": 13.0
+      },
+      {
+        "name": "semantic",
+        "score": 27.6,
+        "available": true,
+        "effective_weight": 0.25,
+        "contribution": 6.9
+      }
+    ],
+    "notes": [],
+    "years_parsed": 3.2
+  }
+]

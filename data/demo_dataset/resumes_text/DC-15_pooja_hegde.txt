@@ -1,0 +1,22 @@
+Name: Pooja Hegde
+Designation: Site Reliability Engineer
+Location: Bengaluru, India
+Email: pooja.hegde@example.com
+Phone: +91-90000-02015
+
+Summary:
+4.5 years of SRE work with Ansible, Helm, Prometheus and Grafana on Kubernetes.
+
+Skills: Kubernetes, Docker, Linux, Ansible, Helm, Prometheus, Grafana, ArgoCD, Bash, Python
+
+Experience:
+- Site Reliability Engineer, Nimbus Cloud (Mar 2024 - Present)
+  Ran 12 production clusters; built Prometheus and Grafana alerting that cut paging noise by half.
+- Linux Administrator, Datagrid Services (Apr 2022 - Feb 2024)
+  Automated server builds with Ansible.
+
+Education:
+- B.E. in Computer Science, BMS College of Engineering, 2021
+
+Certifications:
+- Certified Kubernetes Administrator (2023)

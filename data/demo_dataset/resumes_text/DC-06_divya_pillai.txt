@@ -1,0 +1,19 @@
+Name: Divya Pillai
+Designation: Python Backend Developer
+Location: Chennai, India
+Email: divya.pillai@example.com
+Phone: +91-90000-02006
+
+Summary:
+5 years building Django and Flask services; some React for internal tools.
+
+Skills: Python, Django, Flask, PostgreSQL, Redis, Celery, Docker, AWS, REST APIs, Git, CI/CD
+
+Experience:
+- Senior Backend Developer, Datacrest (Nov 2023 - Present)
+  Owned the Django billing service; reduced nightly job time from 3 hours to 40 minutes with Celery.
+- Backend Developer, Orbitwave (Nov 2021 - Oct 2023)
+  Built Flask APIs for a logistics tracker on PostgreSQL.
+
+Education:
+- B.E. in Computer Science, SSN College of Engineering, 2021

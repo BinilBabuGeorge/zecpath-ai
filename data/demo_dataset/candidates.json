@@ -1,0 +1,839 @@
+{
+  "_note": "SYNTHETIC DEMO DATA. Every name, employer, institute, e-mail and phone number is invented; any match with a real person or company is a coincidence. 'expected_outcomes' are the AUTHOR'S design intent, written before the pipeline was run; they are not human judgement. No scores are stored here: scores come from running the real engines on these inputs (parsers/demo_environment.py).",
+  "as_of": "2026-11-21",
+  "candidates": [
+    {
+      "id": "DC-01",
+      "name": "Priya Menon",
+      "job_id": "JOB-01",
+      "job_title": "Full Stack Developer (MERN)",
+      "role_type": "technical",
+      "domain": "mern",
+      "scenario": "Aligned strong mid-level developer",
+      "resume_file": "resumes/DC-01_priya_menon.docx",
+      "resume_format": "docx",
+      "resume_style": "standard",
+      "resume_quality": "excellent",
+      "years_on_resume": 4.5,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "strong",
+        "hr": "excellent",
+        "technical": "strong",
+        "machine_test": [
+          "strong",
+          "strong"
+        ]
+      },
+      "expected_outcomes": [
+        "selected"
+      ],
+      "expected_rationale": "consistent, specific evidence in every round; the resume and the call agree",
+      "technical_tier": "intermediate"
+    },
+    {
+      "id": "DC-02",
+      "name": "Arjun Verma",
+      "job_id": "JOB-01",
+      "job_title": "Full Stack Developer (MERN)",
+      "role_type": "technical",
+      "domain": "mern",
+      "scenario": "Senior tech lead, over the 3-6 year band",
+      "resume_file": "resumes/DC-02_arjun_verma.pdf",
+      "resume_format": "pdf",
+      "resume_style": "standard",
+      "resume_quality": "excellent",
+      "years_on_resume": 8.0,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "strong",
+        "hr": "excellent",
+        "technical": "strong",
+        "machine_test": [
+          "strong",
+          "strong"
+        ]
+      },
+      "expected_outcomes": [
+        "selected",
+        "hold_review"
+      ],
+      "expected_rationale": "strong evidence; salary and seniority above the posted band justify a human look",
+      "technical_tier": "advanced"
+    },
+    {
+      "id": "DC-03",
+      "name": "Sneha Kulkarni",
+      "job_id": "JOB-01",
+      "job_title": "Full Stack Developer (MERN)",
+      "role_type": "technical",
+      "domain": "mern",
+      "scenario": "Fresher with good projects",
+      "resume_file": "resumes/DC-03_sneha_kulkarni.docx",
+      "resume_format": "docx",
+      "resume_style": "standard",
+      "resume_quality": "good",
+      "years_on_resume": 0.5,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "ok",
+        "hr": "good",
+        "technical": "ok",
+        "machine_test": [
+          "partial",
+          "partial"
+        ]
+      },
+      "expected_outcomes": [
+        "hold_review",
+        "rejected"
+      ],
+      "expected_rationale": "relevant skills but too little experience for a 3-6 year role; a human should decide",
+      "technical_tier": "basics"
+    },
+    {
+      "id": "DC-04",
+      "name": "Rahul Desai",
+      "job_id": "JOB-01",
+      "job_title": "Full Stack Developer (MERN)",
+      "role_type": "technical",
+      "domain": "mern",
+      "scenario": "Keyword-stuffed resume, shallow interviews",
+      "resume_file": "resumes/DC-04_rahul_desai.docx",
+      "resume_format": "docx",
+      "resume_style": "stuffed",
+      "resume_quality": "poor (keyword stuffing)",
+      "years_on_resume": 1.5,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "vague",
+        "hr": "weak",
+        "technical": "weak",
+        "machine_test": [
+          "weak",
+          "weak"
+        ]
+      },
+      "expected_outcomes": [
+        "rejected",
+        "hold_review"
+      ],
+      "expected_rationale": "the resume lists everything; the interviews cannot back it up",
+      "technical_tier": "basics"
+    },
+    {
+      "id": "DC-05",
+      "name": "Ishaan Qureshi",
+      "job_id": "JOB-01",
+      "job_title": "Full Stack Developer (MERN)",
+      "role_type": "technical",
+      "domain": "mern",
+      "scenario": "Career changer from manual QA",
+      "resume_file": "resumes/DC-05_ishaan_qureshi.pdf",
+      "resume_format": "pdf",
+      "resume_style": "standard",
+      "resume_quality": "average",
+      "years_on_resume": 6.0,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "ok",
+        "hr": "good",
+        "technical": "ok",
+        "machine_test": [
+          "strong",
+          "partial"
+        ]
+      },
+      "expected_outcomes": [
+        "hold_review"
+      ],
+      "expected_rationale": "real but partial match: the total years are high, relevant development years are about two",
+      "technical_tier": "advanced"
+    },
+    {
+      "id": "DC-06",
+      "name": "Divya Pillai",
+      "job_id": "JOB-01",
+      "job_title": "Full Stack Developer (MERN)",
+      "role_type": "technical",
+      "domain": "mern",
+      "scenario": "Strong Python backend developer, wrong stack",
+      "resume_file": "resumes/DC-06_divya_pillai.docx",
+      "resume_format": "docx",
+      "resume_style": "standard",
+      "resume_quality": "good",
+      "years_on_resume": 5.0,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "strong",
+        "hr": "good",
+        "technical": "ok",
+        "machine_test": [
+          "strong",
+          "strong"
+        ]
+      },
+      "expected_outcomes": [
+        "hold_review",
+        "rejected"
+      ],
+      "expected_rationale": "a strong engineer in a different stack; the ATS should not shortlist, a human may still see value",
+      "technical_tier": "advanced"
+    },
+    {
+      "id": "DC-07",
+      "name": "Karthik Subramanian",
+      "job_id": "JOB-01",
+      "job_title": "Full Stack Developer (MERN)",
+      "role_type": "technical",
+      "domain": "mern",
+      "scenario": "Inflater: says 5 years in the call, resume shows about 2.5",
+      "resume_file": "resumes/DC-07_karthik_subramanian.docx",
+      "resume_format": "docx",
+      "resume_style": "standard",
+      "resume_quality": "average",
+      "years_on_resume": 2.5,
+      "years_claimed_in_call": 5,
+      "answer_levels": {
+        "screening": "strong",
+        "hr": "good",
+        "technical": "ok",
+        "machine_test": [
+          "partial",
+          "partial"
+        ]
+      },
+      "expected_outcomes": [
+        "hold_review"
+      ],
+      "expected_rationale": "the call and the resume disagree about experience; a human must resolve it",
+      "technical_tier": "intermediate"
+    },
+    {
+      "id": "DC-08",
+      "name": "Anjali Bhatt",
+      "job_id": "JOB-01",
+      "job_title": "Full Stack Developer (MERN)",
+      "role_type": "technical",
+      "domain": "mern",
+      "scenario": "Technically strong but nervous speaker",
+      "resume_file": "resumes/DC-08_anjali_bhatt.pdf",
+      "resume_format": "pdf",
+      "resume_style": "standard",
+      "resume_quality": "good",
+      "years_on_resume": 3.5,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "ok",
+        "hr": "nervous",
+        "technical": "strong",
+        "machine_test": [
+          "strong",
+          "strong"
+        ]
+      },
+      "expected_outcomes": [
+        "selected",
+        "hold_review"
+      ],
+      "expected_rationale": "strong skills; hesitant delivery should not sink an otherwise strong profile",
+      "technical_tier": "intermediate"
+    },
+    {
+      "id": "DC-09",
+      "name": "Vikram Singh",
+      "job_id": "JOB-01",
+      "job_title": "Full Stack Developer (MERN)",
+      "role_type": "technical",
+      "domain": "mern",
+      "scenario": "Strong scores but repeated tab switching in the machine test",
+      "resume_file": "resumes/DC-09_vikram_singh.docx",
+      "resume_format": "docx",
+      "resume_style": "standard",
+      "resume_quality": "good",
+      "years_on_resume": 4.0,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "strong",
+        "hr": "good",
+        "technical": "strong",
+        "machine_test": [
+          "strong",
+          "strong"
+        ]
+      },
+      "expected_outcomes": [
+        "hold_review"
+      ],
+      "expected_rationale": "scores are strong, but the integrity tag blocks an automatic selection and asks for a human review",
+      "technical_tier": "intermediate"
+    },
+    {
+      "id": "DC-10",
+      "name": "Nikhil Joshi",
+      "job_id": "JOB-02",
+      "job_title": "Java Backend Developer",
+      "role_type": "technical",
+      "domain": "java",
+      "scenario": "Aligned strong Java developer",
+      "resume_file": "resumes/DC-10_nikhil_joshi.docx",
+      "resume_format": "docx",
+      "resume_style": "standard",
+      "resume_quality": "excellent",
+      "years_on_resume": 4.0,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "strong",
+        "hr": "excellent",
+        "technical": "strong",
+        "machine_test": [
+          "strong",
+          "strong"
+        ]
+      },
+      "expected_outcomes": [
+        "selected"
+      ],
+      "expected_rationale": "consistent, specific evidence in every round",
+      "technical_tier": "intermediate"
+    },
+    {
+      "id": "DC-11",
+      "name": "Farhan Sheikh",
+      "job_id": "JOB-02",
+      "job_title": "Java Backend Developer",
+      "role_type": "technical",
+      "domain": "java",
+      "scenario": "Right keywords, shallow depth",
+      "resume_file": "resumes/DC-11_farhan_sheikh.docx",
+      "resume_format": "docx",
+      "resume_style": "standard",
+      "resume_quality": "average",
+      "years_on_resume": 3.0,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "ok",
+        "hr": "average",
+        "technical": "weak",
+        "machine_test": [
+          "partial",
+          "weak"
+        ]
+      },
+      "expected_outcomes": [
+        "hold_review",
+        "rejected"
+      ],
+      "expected_rationale": "the resume matches the keywords; the interviews show limited depth",
+      "technical_tier": "intermediate"
+    },
+    {
+      "id": "DC-12",
+      "name": "Lakshmi Iyer",
+      "job_id": "JOB-02",
+      "job_title": "Java Backend Developer",
+      "role_type": "technical",
+      "domain": "java",
+      "scenario": "Strong developer with a 14-month career gap",
+      "resume_file": "resumes/DC-12_lakshmi_iyer.pdf",
+      "resume_format": "pdf",
+      "resume_style": "standard",
+      "resume_quality": "good",
+      "years_on_resume": 4.2,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "strong",
+        "hr": "good",
+        "technical": "strong",
+        "machine_test": [
+          "strong",
+          "partial"
+        ]
+      },
+      "expected_outcomes": [
+        "selected",
+        "hold_review"
+      ],
+      "expected_rationale": "the gap should not count against strong evidence; a human may want to ask about it",
+      "technical_tier": "intermediate"
+    },
+    {
+      "id": "DC-13",
+      "name": "Tarun Mehta",
+      "job_id": "JOB-02",
+      "job_title": "Java Backend Developer",
+      "role_type": "technical",
+      "domain": "java",
+      "scenario": "Good developer, resume without section headings",
+      "resume_file": "resumes/DC-13_tarun_mehta.docx",
+      "resume_format": "docx",
+      "resume_style": "no_headings",
+      "resume_quality": "poor (formatting)",
+      "years_on_resume": 3.5,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "strong",
+        "hr": "good",
+        "technical": "ok",
+        "machine_test": [
+          "strong",
+          "partial"
+        ]
+      },
+      "expected_outcomes": [
+        "hold_review",
+        "selected"
+      ],
+      "expected_rationale": "a formatting problem on the resume should not hide a competent developer",
+      "technical_tier": "basics"
+    },
+    {
+      "id": "DC-14",
+      "name": "Aditya Rao",
+      "job_id": "JOB-03",
+      "job_title": "DevOps Engineer",
+      "role_type": "technical",
+      "domain": "devops",
+      "scenario": "Aligned strong DevOps engineer",
+      "resume_file": "resumes/DC-14_aditya_rao.docx",
+      "resume_format": "docx",
+      "resume_style": "standard",
+      "resume_quality": "excellent",
+      "years_on_resume": 4.0,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "strong",
+        "hr": "excellent",
+        "technical": "strong",
+        "machine_test": [
+          "strong",
+          "strong"
+        ]
+      },
+      "expected_outcomes": [
+        "selected"
+      ],
+      "expected_rationale": "consistent, specific evidence in every round",
+      "technical_tier": "intermediate"
+    },
+    {
+      "id": "DC-15",
+      "name": "Pooja Hegde",
+      "job_id": "JOB-03",
+      "job_title": "DevOps Engineer",
+      "role_type": "technical",
+      "domain": "devops",
+      "scenario": "Competent engineer whose tools the ATS vocabulary does not know",
+      "resume_file": "resumes/DC-15_pooja_hegde.docx",
+      "resume_format": "docx",
+      "resume_style": "standard",
+      "resume_quality": "good",
+      "years_on_resume": 4.5,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "strong",
+        "hr": "good",
+        "technical": "strong",
+        "machine_test": [
+          "strong",
+          "partial"
+        ]
+      },
+      "expected_outcomes": [
+        "hold_review",
+        "selected"
+      ],
+      "expected_rationale": "a good fit whose strongest tools (Ansible, Helm, Prometheus) are not in the ATS vocabulary",
+      "technical_tier": "intermediate"
+    },
+    {
+      "id": "DC-16",
+      "name": "Manoj Pandey",
+      "job_id": "JOB-03",
+      "job_title": "DevOps Engineer",
+      "role_type": "technical",
+      "domain": "devops",
+      "scenario": "System administrator moving to cloud",
+      "resume_file": "resumes/DC-16_manoj_pandey.pdf",
+      "resume_format": "pdf",
+      "resume_style": "standard",
+      "resume_quality": "average",
+      "years_on_resume": 4.8,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "ok",
+        "hr": "average",
+        "technical": "ok",
+        "machine_test": [
+          "partial",
+          "weak"
+        ]
+      },
+      "expected_outcomes": [
+        "hold_review",
+        "rejected"
+      ],
+      "expected_rationale": "strong Linux base; the cloud and infrastructure-as-code requirements are only partly met",
+      "technical_tier": "intermediate"
+    },
+    {
+      "id": "DC-17",
+      "name": "Neha Kapoor",
+      "job_id": "JOB-04",
+      "job_title": "Sales Executive (B2B SaaS)",
+      "role_type": "non_technical",
+      "domain": null,
+      "scenario": "Aligned strong B2B SaaS seller",
+      "resume_file": "resumes/DC-17_neha_kapoor.docx",
+      "resume_format": "docx",
+      "resume_style": "standard",
+      "resume_quality": "excellent",
+      "years_on_resume": 3.0,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "strong",
+        "hr": "excellent",
+        "technical": null,
+        "machine_test": null
+      },
+      "expected_outcomes": [
+        "selected"
+      ],
+      "expected_rationale": "consistent, specific evidence in every round"
+    },
+    {
+      "id": "DC-18",
+      "name": "Sameer Khan",
+      "job_id": "JOB-04",
+      "job_title": "Sales Executive (B2B SaaS)",
+      "role_type": "non_technical",
+      "domain": null,
+      "scenario": "Average, generic seller",
+      "resume_file": "resumes/DC-18_sameer_khan.pdf",
+      "resume_format": "pdf",
+      "resume_style": "standard",
+      "resume_quality": "average",
+      "years_on_resume": 2.5,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "ok",
+        "hr": "average",
+        "technical": null,
+        "machine_test": null
+      },
+      "expected_outcomes": [
+        "hold_review",
+        "rejected"
+      ],
+      "expected_rationale": "relevant basics, no evidence of B2B software selling or standout results"
+    },
+    {
+      "id": "DC-19",
+      "name": "Riya Sharma",
+      "job_id": "JOB-04",
+      "job_title": "Sales Executive (B2B SaaS)",
+      "role_type": "non_technical",
+      "domain": null,
+      "scenario": "MBA fresher",
+      "resume_file": "resumes/DC-19_riya_sharma.docx",
+      "resume_format": "docx",
+      "resume_style": "standard",
+      "resume_quality": "good",
+      "years_on_resume": 0.0,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "ok",
+        "hr": "good",
+        "technical": null,
+        "machine_test": null
+      },
+      "expected_outcomes": [
+        "hold_review",
+        "rejected"
+      ],
+      "expected_rationale": "promising fresher for a 2-4 year role; below the experience band"
+    },
+    {
+      "id": "DC-20",
+      "name": "Ajay Thomas",
+      "job_id": "JOB-04",
+      "job_title": "Sales Executive (B2B SaaS)",
+      "role_type": "non_technical",
+      "domain": null,
+      "scenario": "Mismatch: HR executive applying for a sales role",
+      "resume_file": "resumes/DC-20_ajay_thomas.docx",
+      "resume_format": "docx",
+      "resume_style": "standard",
+      "resume_quality": "good",
+      "years_on_resume": 3.0,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "ok",
+        "hr": "good",
+        "technical": null,
+        "machine_test": null
+      },
+      "expected_outcomes": [
+        "rejected",
+        "hold_review"
+      ],
+      "expected_rationale": "no sales evidence; good communication does not replace the required skills"
+    },
+    {
+      "id": "DC-21",
+      "name": "Gaurav Malik",
+      "job_id": "JOB-04",
+      "job_title": "Sales Executive (B2B SaaS)",
+      "role_type": "non_technical",
+      "domain": null,
+      "scenario": "Frequent job changes, confident talker",
+      "resume_file": "resumes/DC-21_gaurav_malik.pdf",
+      "resume_format": "pdf",
+      "resume_style": "standard",
+      "resume_quality": "average",
+      "years_on_resume": 4.0,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "strong",
+        "hr": "good",
+        "technical": null,
+        "machine_test": null
+      },
+      "expected_outcomes": [
+        "hold_review"
+      ],
+      "expected_rationale": "relevant skills and a strong talker, but five roles in four years need a human conversation"
+    },
+    {
+      "id": "DC-22",
+      "name": "Kavya Reddy",
+      "job_id": "JOB-05",
+      "job_title": "UI/UX Designer",
+      "role_type": "non_technical",
+      "domain": null,
+      "scenario": "Aligned strong product designer",
+      "resume_file": "resumes/DC-22_kavya_reddy.docx",
+      "resume_format": "docx",
+      "resume_style": "standard",
+      "resume_quality": "excellent",
+      "years_on_resume": 4.0,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "strong",
+        "hr": "excellent",
+        "technical": null,
+        "machine_test": null
+      },
+      "expected_outcomes": [
+        "selected"
+      ],
+      "expected_rationale": "consistent, specific evidence in every round"
+    },
+    {
+      "id": "DC-23",
+      "name": "Dev Patel",
+      "job_id": "JOB-05",
+      "job_title": "UI/UX Designer",
+      "role_type": "non_technical",
+      "domain": null,
+      "scenario": "Thin resume, generic answers",
+      "resume_file": "resumes/DC-23_dev_patel.docx",
+      "resume_format": "docx",
+      "resume_style": "minimal",
+      "resume_quality": "poor (minimal)",
+      "years_on_resume": 2.0,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "vague",
+        "hr": "weak",
+        "technical": null,
+        "machine_test": null
+      },
+      "expected_outcomes": [
+        "rejected",
+        "hold_review"
+      ],
+      "expected_rationale": "the resume and the answers give little evidence of product design work"
+    },
+    {
+      "id": "DC-24",
+      "name": "Shreya Banerjee",
+      "job_id": "JOB-05",
+      "job_title": "UI/UX Designer",
+      "role_type": "non_technical",
+      "domain": null,
+      "scenario": "Strong designer returning after a two-year break",
+      "resume_file": "resumes/DC-24_shreya_banerjee.pdf",
+      "resume_format": "pdf",
+      "resume_style": "standard",
+      "resume_quality": "good",
+      "years_on_resume": 5.5,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "strong",
+        "hr": "good",
+        "technical": null,
+        "machine_test": null
+      },
+      "expected_outcomes": [
+        "selected",
+        "hold_review"
+      ],
+      "expected_rationale": "the gap should not count against strong evidence; a human may want to ask about it"
+    },
+    {
+      "id": "DC-25",
+      "name": "Omar Siddiqui",
+      "job_id": "JOB-05",
+      "job_title": "UI/UX Designer",
+      "role_type": "non_technical",
+      "domain": null,
+      "scenario": "Capable designer, careless resume (typos, no headings)",
+      "resume_file": "resumes/DC-25_omar_siddiqui.docx",
+      "resume_format": "docx",
+      "resume_style": "typos",
+      "resume_quality": "poor (typos)",
+      "years_on_resume": 3.0,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "ok",
+        "hr": "good",
+        "technical": null,
+        "machine_test": null
+      },
+      "expected_outcomes": [
+        "hold_review",
+        "selected"
+      ],
+      "expected_rationale": "typos on a resume are a signal for a recruiter to read, not a reason to reject a designer outright"
+    },
+    {
+      "id": "DC-26",
+      "name": "Sunita Rajan",
+      "job_id": "JOB-06",
+      "job_title": "HR Recruiter (Talent Acquisition)",
+      "role_type": "non_technical",
+      "domain": null,
+      "scenario": "Aligned strong talent acquisition executive",
+      "resume_file": "resumes/DC-26_sunita_rajan.docx",
+      "resume_format": "docx",
+      "resume_style": "standard",
+      "resume_quality": "excellent",
+      "years_on_resume": 3.0,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "strong",
+        "hr": "excellent",
+        "technical": null,
+        "machine_test": null
+      },
+      "expected_outcomes": [
+        "selected"
+      ],
+      "expected_rationale": "consistent, specific evidence in every round"
+    },
+    {
+      "id": "DC-27",
+      "name": "Amit Chawla",
+      "job_id": "JOB-06",
+      "job_title": "HR Recruiter (Talent Acquisition)",
+      "role_type": "non_technical",
+      "domain": null,
+      "scenario": "Average recruiter, limited detail",
+      "resume_file": "resumes/DC-27_amit_chawla.pdf",
+      "resume_format": "pdf",
+      "resume_style": "standard",
+      "resume_quality": "average",
+      "years_on_resume": 1.5,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "ok",
+        "hr": "average",
+        "technical": null,
+        "machine_test": null
+      },
+      "expected_outcomes": [
+        "hold_review",
+        "selected"
+      ],
+      "expected_rationale": "meets the basics for a 1-3 year role without distinguishing evidence"
+    },
+    {
+      "id": "DC-28",
+      "name": "Harish Bhandari",
+      "job_id": "JOB-06",
+      "job_title": "HR Recruiter (Talent Acquisition)",
+      "role_type": "non_technical",
+      "domain": null,
+      "scenario": "Resume with a full demographic header (fairness check)",
+      "resume_file": "resumes/DC-28_harish_bhandari.docx",
+      "resume_format": "docx",
+      "resume_style": "bias_header",
+      "resume_quality": "good",
+      "years_on_resume": 2.5,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "strong",
+        "hr": "good",
+        "technical": null,
+        "machine_test": null
+      },
+      "expected_outcomes": [
+        "selected",
+        "hold_review"
+      ],
+      "expected_rationale": "personal details must not affect the result: compare with an identical resume without the header"
+    },
+    {
+      "id": "DC-29",
+      "name": "Fatima Noor",
+      "job_id": "JOB-06",
+      "job_title": "HR Recruiter (Talent Acquisition)",
+      "role_type": "non_technical",
+      "domain": null,
+      "scenario": "Strong recruiter, limited English and a noisy line",
+      "resume_file": "resumes/DC-29_fatima_noor.docx",
+      "resume_format": "docx",
+      "resume_style": "standard",
+      "resume_quality": "good",
+      "years_on_resume": 2.5,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "ok",
+        "hr": "limited_english",
+        "technical": null,
+        "machine_test": null
+      },
+      "expected_outcomes": [
+        "hold_review",
+        "selected"
+      ],
+      "expected_rationale": "weak speech recognition and limited English should lead to a human review, not a rejection"
+    },
+    {
+      "id": "DC-30",
+      "name": "Jasmine D'Souza",
+      "job_id": "JOB-06",
+      "job_title": "HR Recruiter (Talent Acquisition)",
+      "role_type": "non_technical",
+      "domain": null,
+      "scenario": "The call drops after three questions",
+      "resume_file": "resumes/DC-30_jasmine_d_souza.pdf",
+      "resume_format": "pdf",
+      "resume_style": "standard",
+      "resume_quality": "good",
+      "years_on_resume": 3.0,
+      "years_claimed_in_call": null,
+      "answer_levels": {
+        "screening": "dropped",
+        "hr": "good",
+        "technical": null,
+        "machine_test": null
+      },
+      "expected_outcomes": [
+        "hold_review"
+      ],
+      "expected_rationale": "the call ended early, so the evidence is incomplete: hold for evidence, not a rejection"
+    }
+  ]
+}

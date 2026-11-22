@@ -1,0 +1,22 @@
+Name: Priya Menon
+Designation: Full Stack Developer
+Location: Bengaluru, India
+Email: priya.menon@example.com
+Phone: +91-90000-02001
+
+Summary:
+4.5 years building payment and dashboard products with MongoDB, Express, React and Node.js.
+
+Skills: React.js, Node.js, Express.js, MongoDB, REST APIs, TypeScript, Git, Docker, CI/CD, Jest
+
+Experience:
+- Full Stack Developer, Zenpay Labs (Mar 2024 - Present)
+  Built the merchant dashboard in React and the settlement APIs in Node.js and Express for 30k merchants; cut p95 API latency by 40 percent with MongoDB index changes.
+- Software Engineer, Frontdesk Software (Apr 2022 - Feb 2024)
+  Developed REST APIs and React screens for a booking product; set up the GitHub Actions CI pipeline.
+
+Education:
+- B.Tech in Computer Science, RV College of Engineering, 2021
+
+Certifications:
+- MongoDB Certified Developer Associate (2023)

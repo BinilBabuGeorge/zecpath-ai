@@ -6,7 +6,7 @@ Read this first. It gets you from a clean machine to a first change in a day. Th
 
 ## 1. What you are joining
 
-A Python codebase of small, stateless AI services that score resumes, screening calls, interviews and machine tests and recommend a hiring decision for a person to act on. About 76 Python files and 1,622 test functions. Almost all logic is rule-based and deterministic, with reasoned (not calibrated) weights. Nothing is deployed; there is no gateway, database or queue here.
+A Python codebase of small, stateless AI services that score resumes, screening calls, interviews and machine tests and recommend a hiring decision for a person to act on. About 80 Python files and 1,643 test functions. Almost all logic is rule-based and deterministic, with reasoned (not calibrated) weights. Nothing is deployed; there is no gateway, database or queue here.
 
 ## 2. Your first day
 

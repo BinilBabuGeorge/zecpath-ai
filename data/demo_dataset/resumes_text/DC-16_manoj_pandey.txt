@@ -1,0 +1,22 @@
+Name: Manoj Pandey
+Designation: Senior Linux System Administrator
+Location: Hyderabad, India
+Email: manoj.pandey@example.com
+Phone: +91-90000-02016
+
+Summary:
+Nearly 5 years of Linux and server administration; recently learning Docker and AWS.
+
+Skills: Linux, Bash, Docker, AWS, Jenkins, Git, Nagios
+
+Experience:
+- Senior System Administrator, Metroline Services (Oct 2024 - Present)
+  Administered 200 Linux servers; started containerising two internal tools with Docker.
+- System Administrator, Metroline Services (Jan 2022 - Sep 2024)
+  Patched servers and managed backups.
+
+Education:
+- B.Sc in Computer Science, Osmania University, 2018
+
+Certifications:
+- Red Hat Certified System Administrator (2021)

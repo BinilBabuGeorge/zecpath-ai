@@ -1,0 +1,14 @@
+Name: Omar Siddiqui
+Designation: UI/UX Desinger
+Location: Chennai, India
+Email: omar.siddiqui@example.com
+Phone: +91-90000-02025
+
+3 year experiance in UI UX desgin for web and mobile aplications.
+
+Technologies I work with: Figma, Adobe XD, Prototyping, User Research.
+
+UI/UX Desinger at Pixelnest from Jan 2025 to now. Desgined mobile app screens and made prototypes in Figma for a food delivery startup.
+Junior Desinger at Pixelnest from Oct 2023 to Dec 2024. Made wireframes and helped in user reserch.
+
+Studied Bachlor of Design at Anna University (2022).

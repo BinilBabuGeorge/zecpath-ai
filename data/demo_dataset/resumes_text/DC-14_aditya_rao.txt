@@ -1,0 +1,23 @@
+Name: Aditya Rao
+Designation: DevOps Engineer
+Location: Hyderabad, India
+Email: aditya.rao@example.com
+Phone: +91-90000-02014
+
+Summary:
+4 years automating deployments and running Kubernetes clusters on AWS.
+
+Skills: Linux, Docker, Kubernetes, AWS, Terraform, Jenkins, CI/CD, Python, Git
+
+Experience:
+- DevOps Engineer, Skyrail Analytics (Jun 2024 - Present)
+  Moved 30 services to Kubernetes with Terraform-managed AWS infrastructure; cut deployment time from 45 to 8 minutes.
+- Systems Engineer, Kestrel Infosystems (Oct 2022 - May 2024)
+  Maintained Linux servers and Jenkins pipelines.
+
+Education:
+- B.Tech in Electronics and Communication, JNTU Hyderabad, 2021
+
+Certifications:
+- AWS Certified Solutions Architect Associate (2023)
+- Certified Kubernetes Administrator (2024)

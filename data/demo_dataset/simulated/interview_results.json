@@ -1,0 +1,212 @@
+[
+  {
+    "id": "DC-01",
+    "hr_score": 93.1,
+    "hr_answers_scored": 6,
+    "technical_score": 77.0,
+    "technical_tier": "intermediate"
+  },
+  {
+    "id": "DC-02",
+    "hr_score": 93.1,
+    "hr_answers_scored": 6,
+    "technical_score": 65.7,
+    "technical_tier": "advanced"
+  },
+  {
+    "id": "DC-03",
+    "hr_score": 86.4,
+    "hr_answers_scored": 6,
+    "technical_score": 47.3,
+    "technical_tier": "basics"
+  },
+  {
+    "id": "DC-04",
+    "hr_score": 78.1,
+    "hr_answers_scored": 6,
+    "technical_score": 27.0,
+    "technical_tier": "basics"
+  },
+  {
+    "id": "DC-05",
+    "hr_score": 89.3,
+    "hr_answers_scored": 6,
+    "technical_score": 20.5,
+    "technical_tier": "advanced"
+  },
+  {
+    "id": "DC-06",
+    "hr_score": 89.0,
+    "hr_answers_scored": 6,
+    "technical_score": 20.5,
+    "technical_tier": "advanced"
+  },
+  {
+    "id": "DC-07",
+    "hr_score": 89.1,
+    "hr_answers_scored": 6,
+    "technical_score": 28.6,
+    "technical_tier": "intermediate"
+  },
+  {
+    "id": "DC-08",
+    "hr_score": 84.3,
+    "hr_answers_scored": 6,
+    "technical_score": 77.0,
+    "technical_tier": "intermediate"
+  },
+  {
+    "id": "DC-09",
+    "hr_score": 89.1,
+    "hr_answers_scored": 6,
+    "technical_score": 77.0,
+    "technical_tier": "intermediate"
+  },
+  {
+    "id": "DC-10",
+    "hr_score": 93.0,
+    "hr_answers_scored": 6,
+    "technical_score": 75.7,
+    "technical_tier": "intermediate"
+  },
+  {
+    "id": "DC-11",
+    "hr_score": 82.3,
+    "hr_answers_scored": 6,
+    "technical_score": 11.9,
+    "technical_tier": "intermediate"
+  },
+  {
+    "id": "DC-12",
+    "hr_score": 89.1,
+    "hr_answers_scored": 6,
+    "technical_score": 75.7,
+    "technical_tier": "intermediate"
+  },
+  {
+    "id": "DC-13",
+    "hr_score": 89.1,
+    "hr_answers_scored": 6,
+    "technical_score": 33.7,
+    "technical_tier": "basics"
+  },
+  {
+    "id": "DC-14",
+    "hr_score": 92.7,
+    "hr_answers_scored": 6,
+    "technical_score": 56.0,
+    "technical_tier": "intermediate"
+  },
+  {
+    "id": "DC-15",
+    "hr_score": 89.0,
+    "hr_answers_scored": 6,
+    "technical_score": 56.0,
+    "technical_tier": "intermediate"
+  },
+  {
+    "id": "DC-16",
+    "hr_score": 82.4,
+    "hr_answers_scored": 6,
+    "technical_score": 30.3,
+    "technical_tier": "intermediate"
+  },
+  {
+    "id": "DC-17",
+    "hr_score": 93.0,
+    "hr_answers_scored": 6,
+    "technical_score": null,
+    "technical_tier": null
+  },
+  {
+    "id": "DC-18",
+    "hr_score": 82.3,
+    "hr_answers_scored": 6,
+    "technical_score": null,
+    "technical_tier": null
+  },
+  {
+    "id": "DC-19",
+    "hr_score": 86.2,
+    "hr_answers_scored": 6,
+    "technical_score": null,
+    "technical_tier": null
+  },
+  {
+    "id": "DC-20",
+    "hr_score": 89.2,
+    "hr_answers_scored": 6,
+    "technical_score": null,
+    "technical_tier": null
+  },
+  {
+    "id": "DC-21",
+    "hr_score": 92.1,
+    "hr_answers_scored": 6,
+    "technical_score": null,
+    "technical_tier": null
+  },
+  {
+    "id": "DC-22",
+    "hr_score": 92.8,
+    "hr_answers_scored": 6,
+    "technical_score": null,
+    "technical_tier": null
+  },
+  {
+    "id": "DC-23",
+    "hr_score": 78.1,
+    "hr_answers_scored": 6,
+    "technical_score": null,
+    "technical_tier": null
+  },
+  {
+    "id": "DC-24",
+    "hr_score": 89.1,
+    "hr_answers_scored": 6,
+    "technical_score": null,
+    "technical_tier": null
+  },
+  {
+    "id": "DC-25",
+    "hr_score": 89.1,
+    "hr_answers_scored": 6,
+    "technical_score": null,
+    "technical_tier": null
+  },
+  {
+    "id": "DC-26",
+    "hr_score": 92.8,
+    "hr_answers_scored": 6,
+    "technical_score": null,
+    "technical_tier": null
+  },
+  {
+    "id": "DC-27",
+    "hr_score": 82.3,
+    "hr_answers_scored": 6,
+    "technical_score": null,
+    "technical_tier": null
+  },
+  {
+    "id": "DC-28",
+    "hr_score": 91.9,
+    "hr_answers_scored": 6,
+    "technical_score": null,
+    "technical_tier": null
+  },
+  {
+    "id": "DC-29",
+    "hr_score": 86.0,
+    "hr_answers_scored": 6,
+    "technical_score": null,
+    "technical_tier": null
+  },
+  {
+    "id": "DC-30",
+    "hr_score": 89.0,
+    "hr_answers_scored": 6,
+    "technical_score": null,
+    "technical_tier": null
+  }
+]

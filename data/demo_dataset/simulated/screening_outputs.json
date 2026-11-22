@@ -1,0 +1,1213 @@
+[
+  {
+    "id": "DC-01",
+    "total_score": 93.7,
+    "answered": 7,
+    "missing": [],
+    "turns": 7,
+    "consistency_findings": [],
+    "claimed_years": 4.5,
+    "resume_years_parsed": 4.7,
+    "questions": [
+      {
+        "category": null,
+        "score": 56.2
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-02",
+    "total_score": 93.4,
+    "answered": 7,
+    "missing": [],
+    "turns": 7,
+    "consistency_findings": [],
+    "claimed_years": 8.0,
+    "resume_years_parsed": 8.2,
+    "questions": [
+      {
+        "category": null,
+        "score": 54.1
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-03",
+    "total_score": 90.0,
+    "answered": 7,
+    "missing": [],
+    "turns": 10,
+    "consistency_findings": [],
+    "claimed_years": 0.5,
+    "resume_years_parsed": 0.6,
+    "questions": [
+      {
+        "category": null,
+        "score": 65.1
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 65.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-04",
+    "total_score": 85.1,
+    "answered": 7,
+    "missing": [],
+    "turns": 8,
+    "consistency_findings": [],
+    "claimed_years": 3.0,
+    "resume_years_parsed": 1.8,
+    "questions": [
+      {
+        "category": null,
+        "score": 65.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 55.0
+      },
+      {
+        "category": null,
+        "score": 76.0
+      }
+    ]
+  },
+  {
+    "id": "DC-05",
+    "total_score": 95.0,
+    "answered": 7,
+    "missing": [],
+    "turns": 10,
+    "consistency_findings": [],
+    "claimed_years": 6.0,
+    "resume_years_parsed": 6.2,
+    "questions": [
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 65.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-06",
+    "total_score": 93.4,
+    "answered": 7,
+    "missing": [],
+    "turns": 7,
+    "consistency_findings": [],
+    "claimed_years": 5.0,
+    "resume_years_parsed": 5.1,
+    "questions": [
+      {
+        "category": null,
+        "score": 54.1
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-07",
+    "total_score": 93.4,
+    "answered": 7,
+    "missing": [],
+    "turns": 7,
+    "consistency_findings": [],
+    "claimed_years": 5.0,
+    "resume_years_parsed": 2.7,
+    "questions": [
+      {
+        "category": null,
+        "score": 54.1
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-08",
+    "total_score": 95.0,
+    "answered": 7,
+    "missing": [],
+    "turns": 10,
+    "consistency_findings": [],
+    "claimed_years": 3.5,
+    "resume_years_parsed": 3.7,
+    "questions": [
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 65.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-09",
+    "total_score": 93.4,
+    "answered": 7,
+    "missing": [],
+    "turns": 7,
+    "consistency_findings": [],
+    "claimed_years": 4.0,
+    "resume_years_parsed": 4.2,
+    "questions": [
+      {
+        "category": null,
+        "score": 54.1
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-10",
+    "total_score": 93.7,
+    "answered": 7,
+    "missing": [],
+    "turns": 7,
+    "consistency_findings": [],
+    "claimed_years": 4.0,
+    "resume_years_parsed": 4.2,
+    "questions": [
+      {
+        "category": null,
+        "score": 56.2
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-11",
+    "total_score": 90.0,
+    "answered": 7,
+    "missing": [],
+    "turns": 10,
+    "consistency_findings": [],
+    "claimed_years": 3.0,
+    "resume_years_parsed": 3.2,
+    "questions": [
+      {
+        "category": null,
+        "score": 65.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 65.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-12",
+    "total_score": 93.4,
+    "answered": 7,
+    "missing": [],
+    "turns": 7,
+    "consistency_findings": [],
+    "claimed_years": 4.2,
+    "resume_years_parsed": 4.2,
+    "questions": [
+      {
+        "category": null,
+        "score": 54.1
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-13",
+    "total_score": 93.4,
+    "answered": 7,
+    "missing": [],
+    "turns": 7,
+    "consistency_findings": [],
+    "claimed_years": 3.5,
+    "resume_years_parsed": 0.0,
+    "questions": [
+      {
+        "category": null,
+        "score": 54.1
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-14",
+    "total_score": 93.7,
+    "answered": 7,
+    "missing": [],
+    "turns": 7,
+    "consistency_findings": [],
+    "claimed_years": 4.0,
+    "resume_years_parsed": 4.2,
+    "questions": [
+      {
+        "category": null,
+        "score": 56.2
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-15",
+    "total_score": 90.9,
+    "answered": 7,
+    "missing": [],
+    "turns": 7,
+    "consistency_findings": [
+      "Experience-years mismatch across answers [None, None]: values [12.0, 4.5] disagree by more than 1.0 year(s)."
+    ],
+    "claimed_years": 4.5,
+    "resume_years_parsed": 4.7,
+    "questions": [
+      {
+        "category": null,
+        "score": 45.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 91.0
+      }
+    ]
+  },
+  {
+    "id": "DC-16",
+    "total_score": 90.0,
+    "answered": 7,
+    "missing": [],
+    "turns": 10,
+    "consistency_findings": [],
+    "claimed_years": 4.8,
+    "resume_years_parsed": 4.9,
+    "questions": [
+      {
+        "category": null,
+        "score": 65.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 65.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-17",
+    "total_score": 91.2,
+    "answered": 7,
+    "missing": [],
+    "turns": 7,
+    "consistency_findings": [
+      "Experience-years mismatch across answers [None, None]: values [15.0, 3.0] disagree by more than 1.0 year(s)."
+    ],
+    "claimed_years": 3.0,
+    "resume_years_parsed": 3.2,
+    "questions": [
+      {
+        "category": null,
+        "score": 47.5
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 91.0
+      }
+    ]
+  },
+  {
+    "id": "DC-18",
+    "total_score": 95.0,
+    "answered": 7,
+    "missing": [],
+    "turns": 10,
+    "consistency_findings": [],
+    "claimed_years": 2.5,
+    "resume_years_parsed": 2.7,
+    "questions": [
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 65.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-19",
+    "total_score": 90.0,
+    "answered": 7,
+    "missing": [],
+    "turns": 10,
+    "consistency_findings": [],
+    "claimed_years": 0.0,
+    "resume_years_parsed": 0.2,
+    "questions": [
+      {
+        "category": null,
+        "score": 65.1
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 65.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-20",
+    "total_score": 95.0,
+    "answered": 7,
+    "missing": [],
+    "turns": 10,
+    "consistency_findings": [],
+    "claimed_years": 3.0,
+    "resume_years_parsed": 3.2,
+    "questions": [
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 65.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-21",
+    "total_score": 92.5,
+    "answered": 7,
+    "missing": [],
+    "turns": 7,
+    "consistency_findings": [],
+    "claimed_years": 4.0,
+    "resume_years_parsed": 4.1,
+    "questions": [
+      {
+        "category": null,
+        "score": 47.5
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-22",
+    "total_score": 91.7,
+    "answered": 7,
+    "missing": [],
+    "turns": 7,
+    "consistency_findings": [
+      "Experience-years mismatch across answers [None, None]: values [1.0, 4.0] disagree by more than 1.0 year(s)."
+    ],
+    "claimed_years": 4.0,
+    "resume_years_parsed": 4.1,
+    "questions": [
+      {
+        "category": null,
+        "score": 51.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 91.0
+      }
+    ]
+  },
+  {
+    "id": "DC-23",
+    "total_score": 85.1,
+    "answered": 7,
+    "missing": [],
+    "turns": 8,
+    "consistency_findings": [],
+    "claimed_years": 3.0,
+    "resume_years_parsed": 2.1,
+    "questions": [
+      {
+        "category": null,
+        "score": 65.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 55.0
+      },
+      {
+        "category": null,
+        "score": 76.0
+      }
+    ]
+  },
+  {
+    "id": "DC-24",
+    "total_score": 92.5,
+    "answered": 7,
+    "missing": [],
+    "turns": 7,
+    "consistency_findings": [],
+    "claimed_years": 5.5,
+    "resume_years_parsed": 5.5,
+    "questions": [
+      {
+        "category": null,
+        "score": 47.5
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-25",
+    "total_score": 90.0,
+    "answered": 7,
+    "missing": [],
+    "turns": 10,
+    "consistency_findings": [],
+    "claimed_years": 3.0,
+    "resume_years_parsed": 0.0,
+    "questions": [
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 65.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 65.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-26",
+    "total_score": 92.1,
+    "answered": 7,
+    "missing": [],
+    "turns": 7,
+    "consistency_findings": [],
+    "claimed_years": 3.0,
+    "resume_years_parsed": 3.2,
+    "questions": [
+      {
+        "category": null,
+        "score": 45.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-27",
+    "total_score": 95.0,
+    "answered": 7,
+    "missing": [],
+    "turns": 10,
+    "consistency_findings": [],
+    "claimed_years": 1.5,
+    "resume_years_parsed": 1.6,
+    "questions": [
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 65.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-28",
+    "total_score": 92.1,
+    "answered": 7,
+    "missing": [],
+    "turns": 7,
+    "consistency_findings": [],
+    "claimed_years": 2.5,
+    "resume_years_parsed": 2.2,
+    "questions": [
+      {
+        "category": null,
+        "score": 45.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-29",
+    "total_score": 90.0,
+    "answered": 7,
+    "missing": [],
+    "turns": 10,
+    "consistency_findings": [],
+    "claimed_years": 2.5,
+    "resume_years_parsed": 2.7,
+    "questions": [
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 65.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 65.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "id": "DC-30",
+    "total_score": 43.6,
+    "answered": 3,
+    "missing": [
+      "skills",
+      "location",
+      "salary",
+      "notice_period"
+    ],
+    "turns": 3,
+    "consistency_findings": [],
+    "claimed_years": 3.0,
+    "resume_years_parsed": 3.2,
+    "questions": [
+      {
+        "category": null,
+        "score": 45.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 100.0
+      },
+      {
+        "category": null,
+        "score": 10.0
+      },
+      {
+        "category": null,
+        "score": 10.0
+      },
+      {
+        "category": null,
+        "score": 15.0
+      },
+      {
+        "category": null,
+        "score": 25.0
+      }
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+Name: Vikram Singh
+Designation: Full Stack Developer
+Location: Delhi NCR, India
+Email: vikram.singh@example.com
+Phone: +91-90000-02009
+
+Summary:
+4 years developing web products with React, Node.js and MongoDB.
+
+Skills: React.js, Node.js, Express.js, MongoDB, REST APIs, Git, CI/CD, TypeScript
+
+Experience:
+- Full Stack Developer, Trailhead Digital (Jun 2024 - Present)
+  Built the customer portal in React and its Express APIs; added end-to-end tests.
+- Software Engineer, Trailhead Digital (Oct 2022 - May 2024)
+  Developed MongoDB-backed REST APIs.
+
+Education:
+- B.Tech in Computer Science, Amity University, 2021

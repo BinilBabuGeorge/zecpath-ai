@@ -1,0 +1,50 @@
+[
+  {
+    "id": "JOB-01",
+    "slug": "mern_full_stack_developer",
+    "title": "Full Stack Developer (MERN)",
+    "role_type": "technical",
+    "domain": "mern",
+    "file": "jobs/JOB-01_mern_full_stack_developer.txt"
+  },
+  {
+    "id": "JOB-02",
+    "slug": "java_backend_developer",
+    "title": "Java Backend Developer",
+    "role_type": "technical",
+    "domain": "java",
+    "file": "jobs/JOB-02_java_backend_developer.txt"
+  },
+  {
+    "id": "JOB-03",
+    "slug": "devops_engineer",
+    "title": "DevOps Engineer",
+    "role_type": "technical",
+    "domain": "devops",
+    "file": "jobs/JOB-03_devops_engineer.txt"
+  },
+  {
+    "id": "JOB-04",
+    "slug": "sales_executive",
+    "title": "Sales Executive (B2B SaaS)",
+    "role_type": "non_technical",
+    "domain": null,
+    "file": "jobs/JOB-04_sales_executive.txt"
+  },
+  {
+    "id": "JOB-05",
+    "slug": "ui_ux_designer",
+    "title": "UI/UX Designer",
+    "role_type": "non_technical",
+    "domain": null,
+    "file": "jobs/JOB-05_ui_ux_designer.txt"
+  },
+  {
+    "id": "JOB-06",
+    "slug": "hr_recruiter",
+    "title": "HR Recruiter (Talent Acquisition)",
+    "role_type": "non_technical",
+    "domain": null,
+    "file": "jobs/JOB-06_hr_recruiter.txt"
+  }
+]

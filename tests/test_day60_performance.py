@@ -22,6 +22,7 @@ import random
 import subprocess
 import sys
 import threading
+from datetime import date
 from pathlib import Path
 
 import pytest
@@ -29,6 +30,7 @@ import pytest
 from ats_engine.batch_service import ATSBatchService
 from ats_engine.resume_parsing_service import ResumeParsingService, _PARSE_CACHE
 from ats_engine.service import ATSService
+from parsers import experience_parser
 from parsers import scaling_model as sm
 from parsers import skill_extractor as se
 from parsers.semantic_matcher import SemanticMatcher, compare_resume_to_jd
@@ -43,6 +45,14 @@ GOLDEN_MAIN = json.loads((ROOT / "tests/golden/day60_golden_outputs.json").read_
 GOLDEN_LEGACY = json.loads((ROOT / "tests/golden/day60_golden_outputs_py311sum.json").read_text(encoding="utf-8"))
 GOLDEN = GOLDEN_MAIN if sys.version_info >= (3, 12) else GOLDEN_LEGACY
 AS_OF = GOLDEN["as_of"]
+# The ATS experience score counts years up to "Present", which means TODAY unless pinned. The golden ATS outputs were generated on 2026-11-11 and
+# are reproduced by any "today" from 2026-11-08 to 2026-11-18; outside that window the tests failed by 0.1 on the experience score although no
+# code had changed (found on 2026-11-22). The golden tests therefore pin "Present" to the generation day instead of reading the calendar.
+GOLDEN_ATS_TODAY = date(2026, 11, 11)
+
+
+def _pinned_today():
+    return experience_parser.reference_date(GOLDEN_ATS_TODAY)
 
 
 def _pre_312_sum(iterable, start=0):
@@ -81,25 +91,28 @@ def _fresh_caches():
 # ---------------------------------------------------------------------------------------------------- golden: same answers
 def test_golden_ats_scores_are_identical_for_every_resume_and_job():
     assert GOLDEN["ats_n"] == {"jds": len(JDS), "resumes": len(RESUMES)}
-    got = [ATSService().run({"resume_text": r, "job_description": j}) for j in JDS for r in RESUMES]
+    with _pinned_today():
+        got = [ATSService().run({"resume_text": r, "job_description": j}) for j in JDS for r in RESUMES]
     assert got == GOLDEN["ats_pairs"]
 
 
 def test_golden_ats_scores_are_identical_with_caches_warm_and_with_caches_off(monkeypatch):
-    warm = [ATSService().run({"resume_text": r, "job_description": j}) for j in JDS for r in RESUMES]      # fills the caches
-    again = [ATSService().run({"resume_text": r, "job_description": j}) for j in JDS for r in RESUMES]     # served from them
-    assert warm == again == GOLDEN["ats_pairs"]
-    monkeypatch.setenv("ZECPATH_CACHE", "off")
-    off = [ATSService().run({"resume_text": r, "job_description": j}) for j in JDS for r in RESUMES]
+    with _pinned_today():
+        warm = [ATSService().run({"resume_text": r, "job_description": j}) for j in JDS for r in RESUMES]      # fills the caches
+        again = [ATSService().run({"resume_text": r, "job_description": j}) for j in JDS for r in RESUMES]     # served from them
+        assert warm == again == GOLDEN["ats_pairs"]
+        monkeypatch.setenv("ZECPATH_CACHE", "off")
+        off = [ATSService().run({"resume_text": r, "job_description": j}) for j in JDS for r in RESUMES]
     assert off == GOLDEN["ats_pairs"]
 
 
 def test_golden_batch_result_is_identical_and_equals_single_requests():
     body = {"job_description": JDS[0], "candidates": [{"candidate_id": f"C{i:02d}", "resume_text": r} for i, r in enumerate(RESUMES)]}
-    got = ATSBatchService().run(body)
-    assert got == GOLDEN["ats_batch"]
-    for item, resume in zip(got["results"], RESUMES):
-        assert item["outcome"] == ATSService().run({"resume_text": resume, "job_description": JDS[0]})
+    with _pinned_today():
+        got = ATSBatchService().run(body)
+        assert got == GOLDEN["ats_batch"]
+        for item, resume in zip(got["results"], RESUMES):
+            assert item["outcome"] == ATSService().run({"resume_text": resume, "job_description": JDS[0]})
 
 
 def test_golden_resume_parsing_is_identical_for_every_sample_file():

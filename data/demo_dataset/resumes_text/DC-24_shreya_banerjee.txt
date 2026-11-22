@@ -1,0 +1,19 @@
+Name: Shreya Banerjee
+Designation: UX Designer
+Location: Chennai, India
+Email: shreya.banerjee@example.com
+Phone: +91-90000-02024
+
+Summary:
+5.5 years in UX design; returning after a two-year career break.
+
+Skills: Figma, Adobe XD, Prototyping, User Research, Design Systems, Sketch
+
+Experience:
+- UX Designer, Freelance and volunteer projects (Jan 2025 - Present)
+  Redesigned the booking flow for a non-profit clinic; ran six usability tests.
+- UX Designer, Quicklane Apps (Jun 2019 - Dec 2022)
+  Designed the rider app flows and led research for a ride-hailing start-up.
+
+Education:
+- Master of Design (HCI), IIT Guwahati, 2019

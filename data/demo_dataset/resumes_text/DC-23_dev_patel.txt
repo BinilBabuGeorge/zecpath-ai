@@ -1,0 +1,14 @@
+Name: Dev Patel
+Designation: Graphic Designer
+Location: Chennai, India
+Email: dev.patel@example.com
+Phone: +91-90000-02023
+
+Skills: Photoshop, Figma
+
+Experience:
+- Graphic Designer, Printwell (Nov 2024 - Present)
+  Designed posters and banners.
+
+Education:
+- Diploma in Graphic Design, Arena Animation, 2024

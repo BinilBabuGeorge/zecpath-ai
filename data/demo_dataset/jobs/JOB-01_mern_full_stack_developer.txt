@@ -1,0 +1,29 @@
+Job Title: Full Stack Developer (MERN)
+Department: Engineering
+Location: Bengaluru (Hybrid)
+Experience Required: 3-6 years
+Employment Type: Full-time
+
+About the Role:
+Lumio Pay is a fintech start-up building payments tooling for small merchants. We need a Full Stack Developer to own features end to end across our React front end and Node.js services.
+
+Required Skills:
+- Strong proficiency in React.js and Node.js
+- Hands-on experience with MongoDB and Express.js
+- Experience designing and consuming REST APIs
+- Working knowledge of Git and CI/CD pipelines
+
+Good to Have:
+- TypeScript
+- Docker and AWS exposure
+
+Education:
+- B.Tech/B.E. in Computer Science or a related field
+
+Responsibilities:
+- Design and build REST APIs and React components
+- Write tests and take part in code reviews
+- Debug production issues and improve performance
+- Work with product and design on new features
+
+Salary Range: Rs 10,00,000 - Rs 18,00,000 per annum

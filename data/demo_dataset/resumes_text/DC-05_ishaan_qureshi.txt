@@ -1,0 +1,24 @@
+Name: Ishaan Qureshi
+Designation: Software Developer (ex-QA)
+Location: Delhi NCR, India
+Email: ishaan.qureshi@example.com
+Phone: +91-90000-02005
+
+Summary:
+4 years in manual and automation testing, now 2 years as a developer working in React and Node.js.
+
+Skills: React.js, Node.js, JavaScript, MongoDB, Git, Jira, Selenium, REST APIs
+
+Experience:
+- Software Developer, Craftwave Technologies (Dec 2024 - Present)
+  Moved from QA to development; built React screens and Node.js endpoints for an HR product.
+- QA Automation Engineer, Craftwave Technologies (Nov 2022 - Nov 2024)
+  Wrote Selenium suites and Postman collections for REST APIs.
+- Manual Tester, Testlane Services (Oct 2020 - Oct 2022)
+  Executed regression cycles and raised defects in Jira.
+
+Education:
+- B.Tech in Electronics, Delhi Technological College, 2020
+
+Certifications:
+- ISTQB Foundation Level (2021)

@@ -25,3 +25,6 @@ logs/*.log
 # Data (don't commit real candidate data or media)
 data/*
 !data/.gitkeep
+
+# Day 63: the demo dataset is SYNTHETIC (invented names, example.com e-mails) and is meant to be committed
+!data/demo_dataset/

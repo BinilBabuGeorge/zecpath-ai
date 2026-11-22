@@ -1,0 +1,54 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [4 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 912 >>
+stream
+BT /F1 10 Tf 14 TL 40 800 Td
+(Name: Lakshmi Iyer) Tj T*
+(Designation: Java Backend Developer) Tj T*
+(Location: Chennai, India) Tj T*
+(Email: lakshmi.iyer@example.com) Tj T*
+(Phone: +91-90000-02012) Tj T*
+() Tj T*
+(Summary:) Tj T*
+(4 years of Java and Spring Boot experience; returning after a career break to care for) Tj T*
+(  family.) Tj T*
+() Tj T*
+(Skills: Java, Spring Boot, PostgreSQL, REST APIs, Docker, Git, Jenkins, SQL) Tj T*
+() Tj T*
+(Experience:) Tj T*
+(- Senior Java Developer, Greenfield Tech \(Sep 2025 - Present\)) Tj T*
+(  Back after a break; rebuilt the order-history service and reduced its memory use by 30) Tj T*
+(  percent.) Tj T*
+(- Java Developer, Greenfield Tech \(Jul 2021 - Jun 2024\)) Tj T*
+(  Built Spring Boot REST services on PostgreSQL for an e-commerce platform.) Tj T*
+() Tj T*
+(Education:) Tj T*
+(- B.E. in Information Technology, Madras Institute of Technology, 2021) Tj T*
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000000311 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1274
+%%EOF

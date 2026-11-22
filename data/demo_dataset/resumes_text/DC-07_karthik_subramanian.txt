@@ -1,0 +1,19 @@
+Name: Karthik Subramanian
+Designation: Full Stack Developer
+Location: Bengaluru, India
+Email: karthik.subramanian@example.com
+Phone: +91-90000-02007
+
+Summary:
+Full stack developer with 2.5 years of experience in React and Node.js.
+
+Skills: React.js, Node.js, Express.js, MongoDB, JavaScript, Git, REST APIs
+
+Experience:
+- Full Stack Developer, Appsmith Works (May 2025 - Present)
+  Built React screens and Express endpoints for a CRM tool.
+- Junior Developer, Appsmith Works (Apr 2024 - Apr 2025)
+  Fixed bugs and wrote small React components.
+
+Education:
+- B.Tech in Computer Science, PES University, 2023

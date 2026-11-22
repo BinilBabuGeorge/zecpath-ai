@@ -6,7 +6,7 @@ Zecpath: AI Job Portal | Technical handbook for the AI system | Built 2026-11-20
 
 **Who it is for.** Developers who will build, change or run the Zecpath AI layer; reviewers who need to know what exists; and the next person who inherits the project.
 
-**What it covers.** The AI layer in this repository: 76 Python files (64 in `parsers/`, 7 service files and 5 shared utilities), its schemas, tests and documents. It does **not** cover the Zecpath backend, frontend, telephony, video, email or payments: they are not in this repository (section 1.3 says exactly where the line is).
+**What it covers.** The AI layer in this repository: 80 Python files (68 in `parsers/`, 7 service files and 5 shared utilities), its schemas, tests and documents. It does **not** cover the Zecpath backend, frontend, telephony, video, email or payments: they are not in this repository (section 1.3 says exactly where the line is).
 
 **Three words are used with care.**
 
@@ -87,12 +87,12 @@ The PRD (Parts 1 to 6) describes 100 phases. This repository is the AI layer onl
 
 | Measure | Value |
 |---|---|
-| Python files in the AI layer | 76 |
-| Engines in `parsers/` | 64 |
+| Python files in the AI layer | 80 |
+| Engines in `parsers/` | 68 |
 | Services (stable API boundary) | 7 |
-| Test files / test functions | 68 / 1,622 |
+| Test files / test functions | 69 / 1,643 |
 | API version | 1.0 |
-| Documents in `docs/` | 65 |
+| Documents in `docs/` | 66 |
 
 The last full regression recorded in the repository (Day 61) reports 2,017 passed and 6 skipped; a parametrised test counts once per case, which is why that is more than the number of test functions.
 
@@ -131,7 +131,7 @@ Every service subclasses `BaseAIService` (`utils/base_service.py`) and implement
 | F | Technical interview, machine test, behaviour and integrity | 5 |
 | G | Aggregation, final recommendation and reporting | 3 |
 | H | Governance, audit and security | 6 |
-| I | Integration, operations and quality tooling | 10 |
+| I | Integration, operations and quality tooling | 14 |
 | S | Services (the stable API boundary) | 7 |
 
 **Rule: services do not import one another.** Communication between services goes through the gateway (REST, queue or webhook). Inside `tests/` direct imports are fine. The engines in `parsers/` are shared libraries and may import each other.
@@ -288,7 +288,11 @@ Every module starts with a docstring that states what it does, its input contrac
 | Module | Lines | What it does | PRD phase |
 |---|---|---|---|
 | `parsers/consistency_audit.py` | 275 | Property checks that the aggregate, decision and ATS alignment must satisfy. | - |
-| `parsers/documentation_index.py` | 248 | Module catalogue, PRD coverage map and live numbers the handbook is generated from. | - |
+| `parsers/demo_dataset_answers.py` | 428 | Answer templates, technical answer banks and machine-test code used to build the demo dataset. | - |
+| `parsers/demo_dataset_builder.py` | 300 | Writes the demo dataset's input files: resumes (DOCX, PDF), answers, machine-test attempts, browser events. | - |
+| `parsers/demo_dataset_content.py` | 608 | The 6 demo job descriptions and 30 synthetic candidate personas, with the author's expected outcomes. | - |
+| `parsers/demo_environment.py` | 389 | End-to-end environment: runs the demo dataset through all five rounds with the real engines and computes findings. | - |
+| `parsers/documentation_index.py` | 252 | Module catalogue, PRD coverage map and live numbers the handbook is generated from. | - |
 | `parsers/evaluation_harness.py` | 268 | The one tested confusion-matrix and threshold-analysis tool. | - |
 | `parsers/integration_contract.py` | 772 | API catalogue, JSON Schemas, OpenAPI, error rules, retry and idempotency logic. | - |
 | `parsers/observability.py` | 469 | Structured logger with allowlist and privacy guard, metrics registry, service observer. | 9, 10 |
@@ -766,7 +770,7 @@ There is no gateway, queue, load balancer, autoscaler or cluster in this project
 
 ### 9.1 Tests
 
-1,622 test functions in 68 files under `tests/`, one file per module, plain `pytest`. The Day 61 full regression: 2,017 passed, 6 skipped. Run `pytest --cov=. --cov-report=term-missing` for coverage.
+1,643 test functions in 69 files under `tests/`, one file per module, plain `pytest`. The Day 61 full regression: 2,017 passed, 6 skipped. Run `pytest --cov=. --cov-report=term-missing` for coverage.
 
 **Python 3.11 and 3.12 differ in one place.** Python 3.12 made `sum()` on floats more exact, which moves a few HR scores by 0.1 at rounding boundaries. The Day 60 golden test therefore has two golden files and reads the one that matches the Python it runs on (`tests/golden/make_day60_golden.py` explains why). Never regenerate a golden file from optimised code: that compares the code with itself.
 
@@ -919,3 +923,4 @@ Every day's work has its own document in `docs/`.
 | `docs/day62_developer_onboarding_guide.md` | Zecpath AI: Developer Onboarding Guide |
 | `docs/day62_system_architecture.md` | Zecpath AI: System Architecture |
 | `docs/day62_zecpath_ai_technical_handbook.md` | Zecpath AI Technical Handbook |
+| `docs/day63_demo_dataset.md` | Day 63: Demo Dataset Creation |

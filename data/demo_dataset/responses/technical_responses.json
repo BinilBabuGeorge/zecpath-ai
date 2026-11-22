@@ -1,0 +1,194 @@
+{
+  "DC-01": {
+    "domain": "mern",
+    "tier": "intermediate",
+    "level": "strong",
+    "answers": [
+      "I'm a Full Stack Developer with 4.5 years of experience. Recently at Zenpay Labs I cut our payment API latency by about forty percent by fixing MongoDB indexes. Day to day I work with React.js, Node.js, Express.js and MongoDB.",
+      "A project I owned end to end was a merchant dashboard in React with settlement APIs in Node.js and Express on MongoDB. I chose React for the front end, Node.js and Express for the API, and MongoDB with indexes designed around our main queries, because it matched our access patterns and kept the system simple to run. I also handled testing, deployment and monitoring myself, and I learned to watch performance and failures from the start.",
+      "Node.js runs JavaScript on a single thread with an event loop. Asynchronous work such as file and network I/O is handed to the operating system or the libuv thread pool, and when it finishes its callback is queued. The event loop picks callbacks up in phases, timers then I/O callbacks then setImmediate, and between phases it drains the microtask queue where promises and process.nextTick run. Heavy CPU work blocks the loop and delays every request, so it should move to worker threads or a separate service.",
+      "A MongoDB index is a B-tree structure that lets the database find documents without scanning the whole collection, so queries on an indexed field are much faster. Compound indexes help queries that filter and sort on several fields, where the field order matters. The trade-off is extra storage and slower writes, because every insert and update also updates the indexes, so I index the fields used in frequent queries and use explain to confirm that the index is really used.",
+      "I would start with metrics and logs to see when the 504 errors happen: latency percentiles, CPU and memory, event loop lag and database connection pool usage. Common causes are slow MongoDB queries without indexes, blocking synchronous code in the event loop, an exhausted connection pool under load, or an upstream timeout shorter than the slowest request. I would check the load balancer and Express timeouts, reproduce the problem with a load test, profile the slow endpoints and then fix it, for example by adding indexes, caching, or moving heavy work to a queue."
+    ]
+  },
+  "DC-02": {
+    "domain": "mern",
+    "tier": "advanced",
+    "level": "strong",
+    "answers": [
+      "I'm a Lead Full Stack Engineer with 8 years of experience. Recently at Stackbridge Systems I designed an order service that now handles two million requests a day. Day to day I work with React.js, Node.js, Express.js and MongoDB.",
+      "A project I owned end to end was an event-driven order service on Node.js and MongoDB with a React admin console. I chose React for the front end, Node.js and Express for the API, and MongoDB with indexes designed around our main queries, because it matched our access patterns and kept the system simple to run. I also handled testing, deployment and monitoring myself, and I learned to watch performance and failures from the start.",
+      "I would keep state as local as possible and lift only what is truly shared. For server data I would use a data-fetching library such as React Query to handle caching and revalidation instead of copying it into a global store. Context is fine for low-frequency values like the theme or the current user, but it re-renders every consumer on change, so for frequently changing shared client state I would use Redux Toolkit or a lighter store such as Zustand with selectors. The trade-off is boilerplate and indirection against predictability, so I choose per use case and keep selectors memoised to avoid unnecessary re-renders.",
+      "MongoDB scales horizontally through sharding: data is split into chunks by a shard key and distributed across shards, with mongos routers directing queries and config servers holding the metadata. The shard key choice is critical, because a monotonically increasing key creates a hot shard, while a high-cardinality or hashed key balances writes. The trade-offs are operational complexity, scatter-gather queries that do not include the shard key, and the difficulty of changing the key later, so I would shard only when a single replica set can no longer cope.",
+      "I would use WebSockets, for example Socket.IO, for low-latency two-way updates, with Node.js servers behind a load balancer using sticky sessions or a Redis pub/sub adapter so events reach every instance. For concurrent edits I would use operational transformation or a CRDT library such as Yjs to merge changes without conflicts. Documents and version history would be stored in MongoDB with periodic snapshots, and presence kept in Redis. On the React side I would apply optimistic updates and batch changes. To scale to thousands of users I would shard by document, add rate limiting and monitoring, and plan for reconnection and offline edits."
+    ]
+  },
+  "DC-03": {
+    "domain": "mern",
+    "tier": "basics",
+    "level": "ok",
+    "answers": [
+      "I work as a MERN Stack Developer (Fresher) and I have less than a year of experience with React.js, Node.js and Express.js.",
+      "I worked on a task manager with login, a recipe sharing app and an expense tracker, all on the MERN stack. I mostly wrote features and fixed bugs, and I used React.js, Node.js and Express.js.",
+      "Props come from the parent component and state lives inside the component. State can change and props cannot.",
+      "Middleware is a function in Express that runs before the route handler, for example to check authentication.",
+      "I would check whether the state is in the parent component and use memo so the list does not re-render again and again."
+    ]
+  },
+  "DC-04": {
+    "domain": "mern",
+    "tier": "basics",
+    "level": "weak",
+    "answers": [
+      "I do development work, mostly small tasks given by my team.",
+      "I worked on some projects, using the technologies the team used. I do not remember all the details.",
+      "They are both used to store data in React. I do not remember the exact difference.",
+      "It is something in Express that sits in the middle. I have used it but I am not sure how it works.",
+      "I would reload the page and try to see what is wrong, maybe use a different library."
+    ]
+  },
+  "DC-05": {
+    "domain": "mern",
+    "tier": "advanced",
+    "level": "ok",
+    "answers": [
+      "I work as a Software Developer (ex-QA) and I have 6 years of experience with React.js, Node.js and JavaScript.",
+      "I worked on an HR leave-management screen in React with Node.js endpoints. I mostly wrote features and fixed bugs, and I used React.js, Node.js and JavaScript.",
+      "I would use Redux for global state and Context for small things, and keep the components small.",
+      "Sharding splits the data over many servers using a shard key. It helps to scale but the shard key must be chosen well.",
+      "I would use WebSockets for real-time updates, store the document in MongoDB and use a library to handle conflicts."
+    ]
+  },
+  "DC-06": {
+    "domain": "mern",
+    "tier": "advanced",
+    "level": "ok",
+    "answers": [
+      "I work as a Python Backend Developer and I have 5 years of experience with Python, Django and Flask.",
+      "I worked on a Django billing service with a small React admin tool. I mostly wrote features and fixed bugs, and I used Python, Django and Flask.",
+      "I would use Redux for global state and Context for small things, and keep the components small.",
+      "Sharding splits the data over many servers using a shard key. It helps to scale but the shard key must be chosen well.",
+      "I would use WebSockets for real-time updates, store the document in MongoDB and use a library to handle conflicts."
+    ]
+  },
+  "DC-07": {
+    "domain": "mern",
+    "tier": "intermediate",
+    "level": "ok",
+    "answers": [
+      "I work as a Full Stack Developer and I have 2.5 years of experience with React.js, Node.js and Express.js.",
+      "I worked on a CRM reporting module with React charts and Express endpoints. I mostly wrote features and fixed bugs, and I used React.js, Node.js and Express.js.",
+      "Node is single threaded and uses callbacks and promises. The event loop takes finished tasks from the queue so the main thread does not block.",
+      "Indexes make queries faster because MongoDB does not scan every document, but too many indexes slow down writes.",
+      "I would check the logs to see which API is slow, probably a database query, then add an index or increase the timeout."
+    ]
+  },
+  "DC-08": {
+    "domain": "mern",
+    "tier": "intermediate",
+    "level": "strong",
+    "answers": [
+      "I'm a Full Stack Developer with 3.5 years of experience. Recently at Insightly Data I made our slowest dashboard load in under two seconds. Day to day I work with React.js, Node.js, Express.js and MongoDB.",
+      "A project I owned end to end was analytics dashboards in React with MongoDB aggregation pipelines. I chose React for the front end, Node.js and Express for the API, and MongoDB with indexes designed around our main queries, because it matched our access patterns and kept the system simple to run. I also handled testing, deployment and monitoring myself, and I learned to watch performance and failures from the start.",
+      "Node.js runs JavaScript on a single thread with an event loop. Asynchronous work such as file and network I/O is handed to the operating system or the libuv thread pool, and when it finishes its callback is queued. The event loop picks callbacks up in phases, timers then I/O callbacks then setImmediate, and between phases it drains the microtask queue where promises and process.nextTick run. Heavy CPU work blocks the loop and delays every request, so it should move to worker threads or a separate service.",
+      "A MongoDB index is a B-tree structure that lets the database find documents without scanning the whole collection, so queries on an indexed field are much faster. Compound indexes help queries that filter and sort on several fields, where the field order matters. The trade-off is extra storage and slower writes, because every insert and update also updates the indexes, so I index the fields used in frequent queries and use explain to confirm that the index is really used.",
+      "I would start with metrics and logs to see when the 504 errors happen: latency percentiles, CPU and memory, event loop lag and database connection pool usage. Common causes are slow MongoDB queries without indexes, blocking synchronous code in the event loop, an exhausted connection pool under load, or an upstream timeout shorter than the slowest request. I would check the load balancer and Express timeouts, reproduce the problem with a load test, profile the slow endpoints and then fix it, for example by adding indexes, caching, or moving heavy work to a queue."
+    ]
+  },
+  "DC-09": {
+    "domain": "mern",
+    "tier": "intermediate",
+    "level": "strong",
+    "answers": [
+      "I'm a Full Stack Developer with 4 years of experience. Recently at Trailhead Digital I built the customer portal used by around ten thousand clients. Day to day I work with React.js, Node.js, Express.js and MongoDB.",
+      "A project I owned end to end was a customer portal in React with Express APIs on MongoDB. I chose React for the front end, Node.js and Express for the API, and MongoDB with indexes designed around our main queries, because it matched our access patterns and kept the system simple to run. I also handled testing, deployment and monitoring myself, and I learned to watch performance and failures from the start.",
+      "Node.js runs JavaScript on a single thread with an event loop. Asynchronous work such as file and network I/O is handed to the operating system or the libuv thread pool, and when it finishes its callback is queued. The event loop picks callbacks up in phases, timers then I/O callbacks then setImmediate, and between phases it drains the microtask queue where promises and process.nextTick run. Heavy CPU work blocks the loop and delays every request, so it should move to worker threads or a separate service.",
+      "A MongoDB index is a B-tree structure that lets the database find documents without scanning the whole collection, so queries on an indexed field are much faster. Compound indexes help queries that filter and sort on several fields, where the field order matters. The trade-off is extra storage and slower writes, because every insert and update also updates the indexes, so I index the fields used in frequent queries and use explain to confirm that the index is really used.",
+      "I would start with metrics and logs to see when the 504 errors happen: latency percentiles, CPU and memory, event loop lag and database connection pool usage. Common causes are slow MongoDB queries without indexes, blocking synchronous code in the event loop, an exhausted connection pool under load, or an upstream timeout shorter than the slowest request. I would check the load balancer and Express timeouts, reproduce the problem with a load test, profile the slow endpoints and then fix it, for example by adding indexes, caching, or moving heavy work to a queue."
+    ]
+  },
+  "DC-10": {
+    "domain": "java",
+    "tier": "intermediate",
+    "level": "strong",
+    "answers": [
+      "I'm a Java Backend Developer with 4 years of experience. Recently at Meridian Financial Tech I reduced a claims report from forty seconds to four by tuning PostgreSQL queries. Day to day I work with Java, Spring Boot, PostgreSQL and MySQL.",
+      "A project I owned end to end was a claims microservice in Spring Boot on PostgreSQL with Redis caching. I chose Spring Boot with PostgreSQL, caching hot reads in Redis, and integration tests around the main flows, because it matched our access patterns and kept the system simple to run. I also handled testing, deployment and monitoring myself, and I learned to watch performance and failures from the start.",
+      "The JVM garbage collector reclaims objects that are no longer reachable from GC roots such as thread stacks and static references. The heap is divided into generations: new objects start in the young generation, and those that survive several minor collections are promoted to the old generation, which is collected less often. Collectors such as G1 work in regions and aim for a pause-time target, while a full GC is expensive and causes stop-the-world pauses, so I watch the GC logs and tune the heap size and the collector when pauses become too long.",
+      "The == operator compares references, so it is true only when both variables point to the same object, while equals compares logical equality as defined by the class. Strings are the classic example: two different String objects with the same text are not == but are equals. If you override equals you must also override hashCode so that objects behave correctly in a HashMap or HashSet.",
+      "I would measure first rather than guess: check application metrics through Actuator and Micrometer, response-time percentiles, thread pool and connection pool usage, and GC behaviour. Then I would profile with a tool such as VisualVM or a flame graph and look at the slow SQL with query logs or explain plans, since N+1 queries and missing indexes are very common in JPA and Hibernate code. Fixes could be adding indexes, fetch joins or batching, caching hot reads in Redis, tuning the HikariCP connection pool and moving slow work to asynchronous processing. I would verify with a load test before and after."
+    ]
+  },
+  "DC-11": {
+    "domain": "java",
+    "tier": "intermediate",
+    "level": "weak",
+    "answers": [
+      "I do development work, mostly small tasks given by my team.",
+      "I worked on some projects, using the technologies the team used. I do not remember all the details.",
+      "Java deletes unused things automatically. I do not know how it decides.",
+      "Both are used to compare. Equals is for strings.",
+      "I would restart the application and increase the server size."
+    ]
+  },
+  "DC-12": {
+    "domain": "java",
+    "tier": "intermediate",
+    "level": "strong",
+    "answers": [
+      "I'm a Java Backend Developer with 4.2 years of experience. Recently at Greenfield Tech I cut the memory use of the order-history service by about thirty percent. Day to day I work with Java, Spring Boot, PostgreSQL and REST APIs.",
+      "A project I owned end to end was an order-history service in Spring Boot on PostgreSQL. I chose Spring Boot with PostgreSQL, caching hot reads in Redis, and integration tests around the main flows, because it matched our access patterns and kept the system simple to run. I also handled testing, deployment and monitoring myself, and I learned to watch performance and failures from the start.",
+      "The JVM garbage collector reclaims objects that are no longer reachable from GC roots such as thread stacks and static references. The heap is divided into generations: new objects start in the young generation, and those that survive several minor collections are promoted to the old generation, which is collected less often. Collectors such as G1 work in regions and aim for a pause-time target, while a full GC is expensive and causes stop-the-world pauses, so I watch the GC logs and tune the heap size and the collector when pauses become too long.",
+      "The == operator compares references, so it is true only when both variables point to the same object, while equals compares logical equality as defined by the class. Strings are the classic example: two different String objects with the same text are not == but are equals. If you override equals you must also override hashCode so that objects behave correctly in a HashMap or HashSet.",
+      "I would measure first rather than guess: check application metrics through Actuator and Micrometer, response-time percentiles, thread pool and connection pool usage, and GC behaviour. Then I would profile with a tool such as VisualVM or a flame graph and look at the slow SQL with query logs or explain plans, since N+1 queries and missing indexes are very common in JPA and Hibernate code. Fixes could be adding indexes, fetch joins or batching, caching hot reads in Redis, tuning the HikariCP connection pool and moving slow work to asynchronous processing. I would verify with a load test before and after."
+    ]
+  },
+  "DC-13": {
+    "domain": "java",
+    "tier": "basics",
+    "level": "ok",
+    "answers": [
+      "I work as a Java Developer and I have 3.5 years of experience with Java, Spring Boot and MySQL.",
+      "I worked on an inventory system in Spring Boot on MySQL. I mostly wrote features and fixed bugs, and I used Java, Spring Boot and MySQL.",
+      "An interface has only method declarations and a class can implement many, and an abstract class can have some implemented methods.",
+      "Static members belong to the class and not to an object, so we can call them without creating an object.",
+      "I would read the stack trace to find the line, then add a null check and logs there."
+    ]
+  },
+  "DC-14": {
+    "domain": "devops",
+    "tier": "intermediate",
+    "level": "strong",
+    "answers": [
+      "I'm a DevOps Engineer with 4 years of experience. Recently at Skyrail Analytics I cut our deployment time from forty five minutes to eight. Day to day I work with Linux, Docker, Kubernetes and AWS.",
+      "A project I owned end to end was a Kubernetes platform on AWS managed with Terraform and Jenkins. I chose Terraform for the infrastructure, Kubernetes for deployment, and a Jenkins pipeline with automated tests and rollbacks, because it matched our access patterns and kept the system simple to run. I also handled testing, deployment and monitoring myself, and I learned to watch performance and failures from the start.",
+      "A liveness probe tells Kubernetes whether a container is still healthy, and if it fails the kubelet restarts the container, which recovers from deadlocks. A readiness probe tells Kubernetes whether the pod is ready to receive traffic, and if it fails the pod is removed from the service endpoints but not restarted. Both matter: readiness avoids sending requests to a pod that is starting or overloaded, liveness recovers stuck processes, and a startup probe helps slow-starting applications. A badly configured liveness probe can cause restart loops.",
+      "Terraform is a declarative infrastructure-as-code tool used to provision resources such as networks, clusters and databases, tracking them in a state file and planning changes before applying them. Ansible is a configuration-management tool that configures what runs on the machines, installing packages and managing files and services, usually agentless over SSH. Terraform favours immutable infrastructure and creating resources, Ansible is more procedural about configuring them, and many teams use both together.",
+      "I would compare the artifacts and the environments: check that the same container image digest is deployed, and look for differences in environment variables, configuration, secrets, dependency versions and infrastructure such as the operating system, network policies or resource limits. I would check the logs and metrics in production, reproduce the issue in a staging environment that mirrors production, and look at data differences and feature flags. To prevent it I would build once and promote the same artifact, keep configuration in version control, and add smoke tests and monitoring after each deployment."
+    ]
+  },
+  "DC-15": {
+    "domain": "devops",
+    "tier": "intermediate",
+    "level": "strong",
+    "answers": [
+      "I'm a Site Reliability Engineer with 4.5 years of experience. Recently at Nimbus Cloud I cut paging noise by half with better Prometheus and Grafana alerts. Day to day I work with Kubernetes, Docker, Linux and Ansible.",
+      "A project I owned end to end was twelve production Kubernetes clusters with Helm, Prometheus and Grafana. I chose Terraform for the infrastructure, Kubernetes for deployment, and a Jenkins pipeline with automated tests and rollbacks, because it matched our access patterns and kept the system simple to run. I also handled testing, deployment and monitoring myself, and I learned to watch performance and failures from the start.",
+      "A liveness probe tells Kubernetes whether a container is still healthy, and if it fails the kubelet restarts the container, which recovers from deadlocks. A readiness probe tells Kubernetes whether the pod is ready to receive traffic, and if it fails the pod is removed from the service endpoints but not restarted. Both matter: readiness avoids sending requests to a pod that is starting or overloaded, liveness recovers stuck processes, and a startup probe helps slow-starting applications. A badly configured liveness probe can cause restart loops.",
+      "Terraform is a declarative infrastructure-as-code tool used to provision resources such as networks, clusters and databases, tracking them in a state file and planning changes before applying them. Ansible is a configuration-management tool that configures what runs on the machines, installing packages and managing files and services, usually agentless over SSH. Terraform favours immutable infrastructure and creating resources, Ansible is more procedural about configuring them, and many teams use both together.",
+      "I would compare the artifacts and the environments: check that the same container image digest is deployed, and look for differences in environment variables, configuration, secrets, dependency versions and infrastructure such as the operating system, network policies or resource limits. I would check the logs and metrics in production, reproduce the issue in a staging environment that mirrors production, and look at data differences and feature flags. To prevent it I would build once and promote the same artifact, keep configuration in version control, and add smoke tests and monitoring after each deployment."
+    ]
+  },
+  "DC-16": {
+    "domain": "devops",
+    "tier": "intermediate",
+    "level": "ok",
+    "answers": [
+      "I work as a Senior Linux System Administrator and I have 4.8 years of experience with Linux, Bash and Docker.",
+      "I worked on a Docker pilot for two internal tools. I mostly wrote features and fixed bugs, and I used Linux, Bash and Docker.",
+      "Liveness checks if the container is alive and restarts it, and readiness checks if it can take traffic.",
+      "Terraform creates the infrastructure and Ansible configures the servers after they are created.",
+      "I would check the configuration and the environment variables between CI and production, and look at the logs."
+    ]
+  }
+}

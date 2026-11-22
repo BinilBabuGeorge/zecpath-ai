@@ -1,0 +1,19 @@
+Name: Jasmine D'Souza
+Designation: Recruitment Specialist
+Location: Delhi NCR, India
+Email: jasmine.d_souza@example.com
+Phone: +91-90000-02030
+
+Summary:
+3 years of recruitment experience in the IT services industry.
+
+Skills: Recruitment, Candidate Sourcing, Onboarding, Excel, Interview Coordination, Applicant Tracking
+
+Experience:
+- Recruitment Specialist, Techhive Services (Jan 2025 - Present)
+  Hired 120 IT professionals a year; ran campus drives in four cities.
+- Recruitment Associate, Techhive Services (Oct 2023 - Dec 2024)
+  Sourced developers and coordinated interviews.
+
+Education:
+- MBA in Human Resources, Christ University, 2022

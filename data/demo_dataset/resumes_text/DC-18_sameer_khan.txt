@@ -1,0 +1,19 @@
+Name: Sameer Khan
+Designation: Sales Executive
+Location: Mumbai, India
+Email: sameer.khan@example.com
+Phone: +91-90000-02018
+
+Summary:
+2.5 years of experience in field and inside sales.
+
+Skills: Cold Calling, Lead Generation, Negotiation, CRM
+
+Experience:
+- Sales Executive, Homeline Furnishings (May 2025 - Present)
+  Handled walk-in and phone enquiries and converted leads to orders.
+- Sales Associate, Homeline Furnishings (Apr 2024 - Apr 2025)
+  Assisted customers and updated the sales register.
+
+Education:
+- B.Com, Mumbai University, 2023

@@ -1,0 +1,1198 @@
+{
+  "DC-01": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hi, I'm Priya Menon, a Full Stack Developer based in Bengaluru. I recently worked on a merchant dashboard in React with settlement APIs in Node.js and Express on MongoDB.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I completed my B.Tech in Computer Science from RV College of Engineering in 2021.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have 4.5 years of experience, and I am currently working at Zenpay Labs.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "My main skills are React.js, Node.js, Express.js, MongoDB, REST APIs and TypeScript.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am currently based in Bengaluru.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "I'm expecting around 15 lakhs per annum, and I'm open to discussion.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "My notice period is 60 days.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-02": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hi, I'm Arjun Verma, a Lead Full Stack Engineer based in Hyderabad. I recently worked on an event-driven order service on Node.js and MongoDB with a React admin console.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I completed my B.E. in Information Technology from Anna University in 2016.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have 8 years of experience, and I am currently working at Stackbridge Systems.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "My main skills are React.js, Node.js, Express.js, MongoDB, TypeScript and AWS.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am currently based in Hyderabad.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "I'm expecting around 32 lakhs per annum, and I'm open to discussion.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "My notice period is 90 days.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-03": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hello, my name is Sneha Kulkarni and I work as a MERN Stack Developer (Fresher).",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I did my B.Tech in Computer Science, in 2026.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have around 0.5 years of experience.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "I mainly work with React.js, Node.js and Express.js.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am in Pune.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "Around 5 lakhs per annum.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "15 days notice.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-04": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Yes, I am Rahul. I do some work in this field, mostly whatever the team needs.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I studied in college and completed my degree.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have quite some experience in this line, a few years.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "I am a fast learner and a hard worker, I can learn anything quickly.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I can relocate anywhere, it is no problem for me.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "As per company standards, whatever is fair.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "I can join soon, it is flexible.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {
+      "introduction": "Hello, my name is Rahul Desai and I work as a Full Stack Developer.",
+      "education": "I did my B.Sc in Information Technology, in 2024.",
+      "experience": "I have around 1.5 years of experience.",
+      "skills": "I mainly work with React.js, Node.js and Express.js.",
+      "location": "I am in Mumbai.",
+      "salary": "Around 14 lakhs per annum.",
+      "notice_period": "30 days notice."
+    }
+  },
+  "DC-05": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hello, my name is Ishaan Qureshi and I work as a Software Developer (ex-QA).",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I did my B.Tech in Electronics, in 2020.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have around 6 years of experience.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "I mainly work with React.js, Node.js and JavaScript.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am in Delhi NCR.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "Around 12 lakhs per annum.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "45 days notice.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-06": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hi, I'm Divya Pillai, a Python Backend Developer based in Chennai. I recently worked on a Django billing service with a small React admin tool.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I completed my B.E. in Computer Science from SSN College of Engineering in 2021.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have 5 years of experience, and I am currently working at Datacrest.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "My main skills are Python, Django, Flask, PostgreSQL, Redis and Celery.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am currently based in Chennai.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "I'm expecting around 18 lakhs per annum, and I'm open to discussion.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "My notice period is 60 days.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-07": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hi, I'm Karthik Subramanian, a Full Stack Developer based in Bengaluru. I recently worked on a CRM reporting module with React charts and Express endpoints.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I completed my B.Tech in Computer Science from PES University in 2023.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have 5 years of experience, and I am currently working at Appsmith Works.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "My main skills are React.js, Node.js, Express.js, MongoDB, JavaScript and Git.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am currently based in Bengaluru.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "I'm expecting around 16 lakhs per annum, and I'm open to discussion.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "My notice period is 30 days.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-08": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hello, my name is Anjali Bhatt and I work as a Full Stack Developer.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I did my B.E. in Computer Engineering, in 2022.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have around 3.5 years of experience.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "I mainly work with React.js, Node.js and Express.js.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am in Pune.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "Around 14 lakhs per annum.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "30 days notice.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-09": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hi, I'm Vikram Singh, a Full Stack Developer based in Delhi NCR. I recently worked on a customer portal in React with Express APIs on MongoDB.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I completed my B.Tech in Computer Science from Amity University in 2021.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have 4 years of experience, and I am currently working at Trailhead Digital.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "My main skills are React.js, Node.js, Express.js, MongoDB, REST APIs and Git.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am currently based in Delhi NCR.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "I'm expecting around 15 lakhs per annum, and I'm open to discussion.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "My notice period is 30 days.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-10": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hi, I'm Nikhil Joshi, a Java Backend Developer based in Pune. I recently worked on a claims microservice in Spring Boot on PostgreSQL with Redis caching.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I completed my B.E. in Computer Engineering from Savitribai Phule Pune University in 2021.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have 4 years of experience, and I am currently working at Meridian Financial Tech.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "My main skills are Java, Spring Boot, PostgreSQL, MySQL, REST APIs and Docker.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am currently based in Pune.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "I'm expecting around 14 lakhs per annum, and I'm open to discussion.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "My notice period is 60 days.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-11": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hello, my name is Farhan Sheikh and I work as a Java Developer.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I did my B.Sc in Computer Science, in 2022.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have around 3 years of experience.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "I mainly work with Java, Spring Boot and MySQL.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am in Mumbai.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "Around 10 lakhs per annum.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "30 days notice.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-12": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hi, I'm Lakshmi Iyer, a Java Backend Developer based in Chennai. I recently worked on an order-history service in Spring Boot on PostgreSQL.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I completed my B.E. in Information Technology from Madras Institute of Technology in 2021.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have 4.2 years of experience, and I am currently working at Greenfield Tech.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "My main skills are Java, Spring Boot, PostgreSQL, REST APIs, Docker and Git.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am currently based in Chennai.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "I'm expecting around 15 lakhs per annum, and I'm open to discussion.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "My notice period is 30 days.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-13": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hi, I'm Tarun Mehta, a Java Developer based in Pune. I recently worked on an inventory system in Spring Boot on MySQL.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I completed my B.E. in Computer Science from Walchand College of Engineering in 2022.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have 3.5 years of experience, and I am currently working at Sapphire Systems.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "My main skills are Java, Spring Boot, MySQL, REST APIs, Git and Docker.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am currently based in Pune.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "I'm expecting around 11 lakhs per annum, and I'm open to discussion.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "My notice period is 45 days.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-14": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hi, I'm Aditya Rao, a DevOps Engineer based in Hyderabad. I recently worked on a Kubernetes platform on AWS managed with Terraform and Jenkins.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I completed my B.Tech in Electronics and Communication from JNTU Hyderabad in 2021.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have 4 years of experience, and I am currently working at Skyrail Analytics.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "My main skills are Linux, Docker, Kubernetes, AWS, Terraform and Jenkins.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am currently based in Hyderabad.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "I'm expecting around 18 lakhs per annum, and I'm open to discussion.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "My notice period is 60 days.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-15": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hi, I'm Pooja Hegde, a Site Reliability Engineer based in Bengaluru. I recently worked on twelve production Kubernetes clusters with Helm, Prometheus and Grafana.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I completed my B.E. in Computer Science from BMS College of Engineering in 2021.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have 4.5 years of experience, and I am currently working at Nimbus Cloud.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "My main skills are Kubernetes, Docker, Linux, Ansible, Helm and Prometheus.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am currently based in Bengaluru.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "I'm expecting around 18 lakhs per annum, and I'm open to discussion.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "My notice period is 60 days.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-16": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hello, my name is Manoj Pandey and I work as a Senior Linux System Administrator.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I did my B.Sc in Computer Science, in 2018.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have around 4.8 years of experience.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "I mainly work with Linux, Bash and Docker.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am in Hyderabad.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "Around 14 lakhs per annum.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "90 days notice.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-17": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hi, I'm Neha Kapoor, a Sales Executive based in Mumbai. I recently worked on an outbound programme that booked fifteen qualified demos a month.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I completed my MBA in Marketing from NMIMS Mumbai in 2022.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have 3 years of experience, and I am currently working at Cloudline Software.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "My main skills are Lead Generation, Cold Calling, Negotiation, Salesforce, CRM and Email Marketing.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am currently based in Mumbai.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "I'm expecting around 9 lakhs per annum, and I'm open to discussion.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "My notice period is 30 days.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-18": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hello, my name is Sameer Khan and I work as a Sales Executive.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I did my B.Com, in 2023.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have around 2.5 years of experience.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "I mainly work with Cold Calling, Lead Generation and Negotiation.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am in Mumbai.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "Around 6 lakhs per annum.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "30 days notice.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-19": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hello, my name is Riya Sharma and I work as a MBA Graduate (Marketing).",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I did my MBA in Marketing, in 2026.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have around 0 years of full-time experience of experience.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "I mainly work with Lead Generation, Cold Calling and Negotiation.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am in Delhi NCR.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "Around 5 lakhs per annum.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "15 days notice.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-20": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hello, my name is Ajay Thomas and I work as a HR Executive.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I did my MBA in Human Resources, in 2022.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have around 3 years of experience.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "I mainly work with Recruitment, Onboarding and Excel.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am in Kochi.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "Around 7 lakhs per annum.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "30 days notice.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-21": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hi, I'm Gaurav Malik, a Sales Manager based in Mumbai. I recently worked on an enterprise telecom pipeline.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I completed my BBA from Mumbai University in 2022.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have 4 years of experience, and I am currently working at Telewave.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "My main skills are Lead Generation, Cold Calling, Negotiation, CRM and Salesforce.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am currently based in Mumbai.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "I'm expecting around 11 lakhs per annum, and I'm open to discussion.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "My notice period is 30 days.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-22": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hi, I'm Kavya Reddy, a Product Designer based in Chennai. I recently worked on a one hundred and twenty component design system in Figma.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I completed my Bachelor of Design from National Institute of Design Bengaluru in 2022.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have 4 years of experience, and I am currently working at Learnloop.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "My main skills are Figma, Adobe XD, Prototyping, User Research, Design Systems and Sketch.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am currently based in Chennai.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "I'm expecting around 12 lakhs per annum, and I'm open to discussion.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "My notice period is 60 days.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-23": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Yes, I am Dev. I do some work in this field, mostly whatever the team needs.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I studied in college and completed my degree.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have quite some experience in this line, a few years.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "I am a fast learner and a hard worker, I can learn anything quickly.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I can relocate anywhere, it is no problem for me.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "As per company standards, whatever is fair.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "I can join soon, it is flexible.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {
+      "introduction": "Hello, my name is Dev Patel and I work as a Graphic Designer.",
+      "education": "I did my Diploma in Graphic Design, in 2024.",
+      "experience": "I have around 2 years of experience.",
+      "skills": "I mainly work with Photoshop and Figma.",
+      "location": "I am in Chennai.",
+      "salary": "Around 8 lakhs per annum.",
+      "notice_period": "15 days notice."
+    }
+  },
+  "DC-24": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hi, I'm Shreya Banerjee, a UX Designer based in Chennai. I recently worked on a clinic booking flow redesign tested with six users.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I completed my Master of Design (HCI) from IIT Guwahati in 2019.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have 5.5 years of experience, and I am currently working at Quicklane Apps.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "My main skills are Figma, Adobe XD, Prototyping, User Research, Design Systems and Sketch.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am currently based in Chennai.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "I'm expecting around 11 lakhs per annum, and I'm open to discussion.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "My notice period is 15 days.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-25": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hello, my name is Omar Siddiqui and I work as a UI/UX Desinger.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I did my Bachlor of Design, in 2022.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have around 3 years of experience.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "I mainly work with Figma, Adobe XD and Prototyping.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am in Chennai.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "Around 8 lakhs per annum.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "30 days notice.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-26": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hi, I'm Sunita Rajan, a Talent Acquisition Executive based in Delhi NCR. I recently worked on a bulk hiring programme that closed a hundred and eighty hires a year.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I completed my MBA in Human Resources from Delhi School of Management in 2022.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have 3 years of experience, and I am currently working at Fleetwise Logistics.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "My main skills are Recruitment, Candidate Sourcing, Onboarding, Excel, Interview Coordination and Naukri.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am currently based in Delhi NCR.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "I'm expecting around 6 lakhs per annum, and I'm open to discussion.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "My notice period is 30 days.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-27": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hello, my name is Amit Chawla and I work as a HR Executive.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I did my BBA, in 2024.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have around 1.5 years of experience.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "I mainly work with Recruitment, Onboarding and Excel.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am in Delhi NCR.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "Around 4 lakhs per annum.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "30 days notice.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-28": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hi, I'm Harish Bhandari, a HR Recruiter based in Delhi NCR. I recently worked on a multi-city retail hiring drive.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I completed my BBA from IP University in 2024.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have 2.5 years of experience, and I am currently working at Shoplane Retail.",
+        "confidence": 0.93
+      },
+      {
+        "category": "skills",
+        "text": "My main skills are Recruitment, Candidate Sourcing, Onboarding, Excel and Interview Coordination.",
+        "confidence": 0.93
+      },
+      {
+        "category": "location",
+        "text": "I am currently based in Delhi NCR.",
+        "confidence": 0.93
+      },
+      {
+        "category": "salary",
+        "text": "I'm expecting around 5 lakhs per annum, and I'm open to discussion.",
+        "confidence": 0.93
+      },
+      {
+        "category": "notice_period",
+        "text": "My notice period is 30 days.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  },
+  "DC-29": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hello, my name is Fatima Noor and I work as a HR Recruiter.",
+        "confidence": 0.58
+      },
+      {
+        "category": "education",
+        "text": "I did my B.A. in Sociology, in 2023.",
+        "confidence": 0.58
+      },
+      {
+        "category": "experience",
+        "text": "I have around 2.5 years of experience.",
+        "confidence": 0.58
+      },
+      {
+        "category": "skills",
+        "text": "I mainly work with Recruitment, Candidate Sourcing and Onboarding.",
+        "confidence": 0.58
+      },
+      {
+        "category": "location",
+        "text": "I am in Delhi NCR.",
+        "confidence": 0.58
+      },
+      {
+        "category": "salary",
+        "text": "Around 5 lakhs per annum.",
+        "confidence": 0.58
+      },
+      {
+        "category": "notice_period",
+        "text": "30 days notice.",
+        "confidence": 0.58
+      }
+    ],
+    "reask": {}
+  },
+  "DC-30": {
+    "answers": [
+      {
+        "category": "introduction",
+        "text": "Hi, I'm Jasmine D'Souza, a Recruitment Specialist based in Delhi NCR. I recently worked on campus drives in four cities.",
+        "confidence": 0.93
+      },
+      {
+        "category": "education",
+        "text": "I completed my MBA in Human Resources from Christ University in 2022.",
+        "confidence": 0.93
+      },
+      {
+        "category": "experience",
+        "text": "I have 3 years of experience, and I am currently working at Techhive Services.",
+        "confidence": 0.93
+      }
+    ],
+    "reask": {}
+  }
+}

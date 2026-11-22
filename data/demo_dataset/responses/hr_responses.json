@@ -1,0 +1,872 @@
+{
+  "DC-01": {
+    "level": "excellent",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a Full Stack Developer with 4.5 years of experience. At Zenpay Labs I cut our payment API latency by about forty percent by fixing MongoDB indexes. I enjoy building features end to end, and I like owning an outcome from the first idea until it is running well."
+      },
+      {
+        "question": "career_journey",
+        "text": "I started as a junior developer and took on more responsibility each year. The work that taught me most was a merchant dashboard in React with settlement APIs in Node.js and Express on MongoDB, because it made me think carefully about performance and reliability and about the people who depend on what I build."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "My main strength is breaking big problems into small testable steps. A weakness I have worked on: I used to say yes to everything, so now I size work with the product manager first. That habit has made my work calmer and my teams more predictable."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I work best in teams that share feedback openly. When we disagreed on priorities I suggested we write down the options and their trade-offs, we discussed them together, and we agreed on a plan that we delivered on time."
+      },
+      {
+        "question": "career_goals",
+        "text": "In the next two to three years I want to become a tech lead who mentors others, while staying close to the day-to-day work and continuing to learn from people more experienced than me."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 60 days, I am comfortable with the location and the working model, and I am looking for a role where I can stay for several years and make a real contribution."
+      }
+    ]
+  },
+  "DC-02": {
+    "level": "excellent",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a Lead Full Stack Engineer with 8 years of experience. At Stackbridge Systems I designed an order service that now handles two million requests a day. I enjoy building features end to end, and I like owning an outcome from the first idea until it is running well."
+      },
+      {
+        "question": "career_journey",
+        "text": "I started as a junior developer and took on more responsibility each year. The work that taught me most was an event-driven order service on Node.js and MongoDB with a React admin console, because it made me think carefully about performance and reliability and about the people who depend on what I build."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "My main strength is breaking big problems into small testable steps. A weakness I have worked on: I can over-engineer early designs, so I ask a teammate to challenge the first version. That habit has made my work calmer and my teams more predictable."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I work best in teams that share feedback openly. When we disagreed on priorities I suggested we write down the options and their trade-offs, we discussed them together, and we agreed on a plan that we delivered on time."
+      },
+      {
+        "question": "career_goals",
+        "text": "In the next two to three years I want to move into an engineering manager role, while staying close to the day-to-day work and continuing to learn from people more experienced than me."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 90 days, I am comfortable with the location and the working model, and I am looking for a role where I can stay for several years and make a real contribution."
+      }
+    ]
+  },
+  "DC-03": {
+    "level": "good",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a MERN Stack Developer (Fresher) with very little experience so far of experience. At Pixelforge I built a feedback page that the team still uses in production. I enjoy building features end to end."
+      },
+      {
+        "question": "career_journey",
+        "text": "I began as a junior developer and grew into my current role. A project I learned a lot from was a task manager with login, a recipe sharing app and an expense tracker, all on the MERN stack, and it taught me about performance and reliability."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "I am good at breaking big problems into small testable steps. One thing I am improving: I sometimes spend too long on small details, so I now set a time box for each task."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I like working in a team and asking for feedback. Once we had a disagreement about priorities, so we listed the options and chose one together."
+      },
+      {
+        "question": "career_goals",
+        "text": "In a few years I would like to grow into a solid backend and frontend developer."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 15 days and I am fine with the location. I am looking for a long-term role."
+      }
+    ]
+  },
+  "DC-04": {
+    "level": "weak",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I am a hard working person. I have done many things."
+      },
+      {
+        "question": "career_journey",
+        "text": "I worked in some places and did different work."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "I am a perfectionist and I work too hard."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I do not have any problem with anyone."
+      },
+      {
+        "question": "career_goals",
+        "text": "I want to be at the top one day."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "I can join whenever."
+      }
+    ]
+  },
+  "DC-05": {
+    "level": "good",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a Software Developer (ex-QA) with 6 years of experience. At Craftwave Technologies I moved from testing into development inside the same company. I enjoy building features end to end."
+      },
+      {
+        "question": "career_journey",
+        "text": "I began as a junior developer and grew into my current role. A project I learned a lot from was an HR leave-management screen in React with Node.js endpoints, and it taught me about performance and reliability."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "I am good at breaking big problems into small testable steps. One thing I am improving: my backend experience is newer than my testing experience, so I am filling gaps with side projects."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I like working in a team and asking for feedback. Once we had a disagreement about priorities, so we listed the options and chose one together."
+      },
+      {
+        "question": "career_goals",
+        "text": "In a few years I would like to become a confident full stack engineer."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 45 days and I am fine with the location. I am looking for a long-term role."
+      }
+    ]
+  },
+  "DC-06": {
+    "level": "good",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a Python Backend Developer with 5 years of experience. At Datacrest I cut a nightly billing job from three hours to forty minutes. I enjoy building features end to end."
+      },
+      {
+        "question": "career_journey",
+        "text": "I began as a junior developer and grew into my current role. A project I learned a lot from was a Django billing service with a small React admin tool, and it taught me about performance and reliability."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "I am good at breaking big problems into small testable steps. One thing I am improving: I have less React experience than backend, so I am learning it through an internal tool."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I like working in a team and asking for feedback. Once we had a disagreement about priorities, so we listed the options and chose one together."
+      },
+      {
+        "question": "career_goals",
+        "text": "In a few years I would like to become a full stack engineer."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 60 days and I am fine with the location. I am looking for a long-term role."
+      }
+    ]
+  },
+  "DC-07": {
+    "level": "good",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a Full Stack Developer with 2.5 years of experience. At Appsmith Works I delivered a CRM reporting module on my own. I enjoy building features end to end."
+      },
+      {
+        "question": "career_journey",
+        "text": "I began as a junior developer and grew into my current role. A project I learned a lot from was a CRM reporting module with React charts and Express endpoints, and it taught me about performance and reliability."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "I am good at breaking big problems into small testable steps. One thing I am improving: I tend to under-document my code, so I now write a short note for every pull request."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I like working in a team and asking for feedback. Once we had a disagreement about priorities, so we listed the options and chose one together."
+      },
+      {
+        "question": "career_goals",
+        "text": "In a few years I would like to lead a small team."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 30 days and I am fine with the location. I am looking for a long-term role."
+      }
+    ]
+  },
+  "DC-08": {
+    "level": "nervous",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "Um, thank you. So, I'm a Full Stack Developer, and I have 3.5 years of experience, I think. At Insightly Data I made our slowest dashboard load in under two seconds. Sorry, I get a little nervous in interviews."
+      },
+      {
+        "question": "career_journey",
+        "text": "Um, I started as a junior developer, and then, I think, I grew into my role. The project I learned most from was analytics dashboards in React with MongoDB aggregation pipelines, because it taught me about performance and reliability."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "My strength is, I would say, breaking big problems into small testable steps. A weakness, um, I get nervous speaking in interviews, so I practise with a friend."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I work well with a team, I think. Once there was a disagreement, and we, um, listed the options and decided together, so that worked well."
+      },
+      {
+        "question": "career_goals",
+        "text": "I would like to, um, become a senior engineer, in a few years, if I keep learning."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 30 days, and I am, I think, flexible about the rest. I would like a long-term role."
+      }
+    ]
+  },
+  "DC-09": {
+    "level": "good",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a Full Stack Developer with 4 years of experience. At Trailhead Digital I built the customer portal used by around ten thousand clients. I enjoy building features end to end."
+      },
+      {
+        "question": "career_journey",
+        "text": "I began as a junior developer and grew into my current role. A project I learned a lot from was a customer portal in React with Express APIs on MongoDB, and it taught me about performance and reliability."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "I am good at breaking big problems into small testable steps. One thing I am improving: I sometimes jump into code before planning, so I now sketch the design first."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I like working in a team and asking for feedback. Once we had a disagreement about priorities, so we listed the options and chose one together."
+      },
+      {
+        "question": "career_goals",
+        "text": "In a few years I would like to become a tech lead."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 30 days and I am fine with the location. I am looking for a long-term role."
+      }
+    ]
+  },
+  "DC-10": {
+    "level": "excellent",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a Java Backend Developer with 4 years of experience. At Meridian Financial Tech I reduced a claims report from forty seconds to four by tuning PostgreSQL queries. I enjoy building reliable services, and I like owning an outcome from the first idea until it is running well."
+      },
+      {
+        "question": "career_journey",
+        "text": "I started as a associate developer and took on more responsibility each year. The work that taught me most was a claims microservice in Spring Boot on PostgreSQL with Redis caching, because it made me think carefully about data and performance and about the people who depend on what I build."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "My main strength is tracing a problem down to its real cause. A weakness I have worked on: I sometimes dig too deep into one bug, so I set a time box and ask for a second pair of eyes. That habit has made my work calmer and my teams more predictable."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I work best in teams that share feedback openly. When we disagreed on priorities I suggested we write down the options and their trade-offs, we discussed them together, and we agreed on a plan that we delivered on time."
+      },
+      {
+        "question": "career_goals",
+        "text": "In the next two to three years I want to grow into a senior engineer who designs services, while staying close to the day-to-day work and continuing to learn from people more experienced than me."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 60 days, I am comfortable with the location and the working model, and I am looking for a role where I can stay for several years and make a real contribution."
+      }
+    ]
+  },
+  "DC-11": {
+    "level": "average",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I am a Java Developer with 3 years of experience. I work at Bytewise Solutions and I do my tasks sincerely."
+      },
+      {
+        "question": "career_journey",
+        "text": "I have worked in this field for some time and done several projects, such as a retail application with Spring Boot modules on MySQL."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "I am hard working and sincere. I want to improve my skills further."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I get along with everyone in the team and I try to help others when needed."
+      },
+      {
+        "question": "career_goals",
+        "text": "I want to grow in my career and take more responsibility in the future."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 30 days. I am ready to join if the offer is good."
+      }
+    ]
+  },
+  "DC-12": {
+    "level": "good",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a Java Backend Developer with 4.2 years of experience. At Greenfield Tech I cut the memory use of the order-history service by about thirty percent. I enjoy building reliable services."
+      },
+      {
+        "question": "career_journey",
+        "text": "I began as a associate developer and grew into my current role. A project I learned a lot from was an order-history service in Spring Boot on PostgreSQL, and it taught me about data and performance."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "I am good at tracing a problem down to its real cause. One thing I am improving: my newest tools knowledge needed refreshing after my break, so I completed two courses."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I like working in a team and asking for feedback. Once we had a disagreement about priorities, so we listed the options and chose one together."
+      },
+      {
+        "question": "career_goals",
+        "text": "In a few years I would like to grow into a lead role."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 30 days and I am fine with the location. I am looking for a long-term role."
+      }
+    ]
+  },
+  "DC-13": {
+    "level": "good",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a Java Developer with 3.5 years of experience. At Sapphire Systems I tuned MySQL queries and made the stock screen three times faster. I enjoy building reliable services."
+      },
+      {
+        "question": "career_journey",
+        "text": "I began as a associate developer and grew into my current role. A project I learned a lot from was an inventory system in Spring Boot on MySQL, and it taught me about data and performance."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "I am good at tracing a problem down to its real cause. One thing I am improving: I do not document enough, so I now write short design notes."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I like working in a team and asking for feedback. Once we had a disagreement about priorities, so we listed the options and chose one together."
+      },
+      {
+        "question": "career_goals",
+        "text": "In a few years I would like to become a senior developer."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 45 days and I am fine with the location. I am looking for a long-term role."
+      }
+    ]
+  },
+  "DC-14": {
+    "level": "excellent",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a DevOps Engineer with 4 years of experience. At Skyrail Analytics I cut our deployment time from forty five minutes to eight. I enjoy making deployments boring and reliable, and I like owning an outcome from the first idea until it is running well."
+      },
+      {
+        "question": "career_journey",
+        "text": "I started as a systems engineer and took on more responsibility each year. The work that taught me most was a Kubernetes platform on AWS managed with Terraform and Jenkins, because it made me think carefully about reliability and rollback and about the people who depend on what I build."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "My main strength is automating repeated work safely. A weakness I have worked on: I automate too eagerly, so I now check that a task is repeated enough before I script it. That habit has made my work calmer and my teams more predictable."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I work best in teams that share feedback openly. When we disagreed on priorities I suggested we write down the options and their trade-offs, we discussed them together, and we agreed on a plan that we delivered on time."
+      },
+      {
+        "question": "career_goals",
+        "text": "In the next two to three years I want to become a platform lead, while staying close to the day-to-day work and continuing to learn from people more experienced than me."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 60 days, I am comfortable with the location and the working model, and I am looking for a role where I can stay for several years and make a real contribution."
+      }
+    ]
+  },
+  "DC-15": {
+    "level": "good",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a Site Reliability Engineer with 4.5 years of experience. At Nimbus Cloud I cut paging noise by half with better Prometheus and Grafana alerts. I enjoy making deployments boring and reliable."
+      },
+      {
+        "question": "career_journey",
+        "text": "I began as a systems engineer and grew into my current role. A project I learned a lot from was twelve production Kubernetes clusters with Helm, Prometheus and Grafana, and it taught me about reliability and rollback."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "I am good at automating repeated work safely. One thing I am improving: I have limited Terraform experience compared with Ansible, so I am practising on a side project."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I like working in a team and asking for feedback. Once we had a disagreement about priorities, so we listed the options and chose one together."
+      },
+      {
+        "question": "career_goals",
+        "text": "In a few years I would like to become a principal SRE."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 60 days and I am fine with the location. I am looking for a long-term role."
+      }
+    ]
+  },
+  "DC-16": {
+    "level": "average",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I am a Senior Linux System Administrator with 4.8 years of experience. I work at Metroline Services and I do my tasks sincerely."
+      },
+      {
+        "question": "career_journey",
+        "text": "I have worked in this field for some time and done several projects, such as a Docker pilot for two internal tools."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "I am hard working and sincere. I want to improve my skills further."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I get along with everyone in the team and I try to help others when needed."
+      },
+      {
+        "question": "career_goals",
+        "text": "I want to grow in my career and take more responsibility in the future."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 90 days. I am ready to join if the offer is good."
+      }
+    ]
+  },
+  "DC-17": {
+    "level": "excellent",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a Sales Executive with 3 years of experience. At Cloudline Software I reached one hundred and eighteen percent of target for four quarters in a row. I enjoy building long-term client relationships, and I like owning an outcome from the first idea until it is running well."
+      },
+      {
+        "question": "career_journey",
+        "text": "I started as a sales associate and took on more responsibility each year. The work that taught me most was an outbound programme that booked fifteen qualified demos a month, because it made me think carefully about qualifying leads and about the people who depend on what I build."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "My main strength is listening first and then framing the value clearly. A weakness I have worked on: I used to chase every lead, so I now score leads before I invest time. That habit has made my work calmer and my teams more predictable."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I work best in teams that share feedback openly. When we disagreed on priorities I suggested we write down the options and their trade-offs, we discussed them together, and we agreed on a plan that we delivered on time."
+      },
+      {
+        "question": "career_goals",
+        "text": "In the next two to three years I want to become a sales team lead, while staying close to the day-to-day work and continuing to learn from people more experienced than me."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 30 days, I am comfortable with the location and the working model, and I am looking for a role where I can stay for several years and make a real contribution."
+      }
+    ]
+  },
+  "DC-18": {
+    "level": "average",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I am a Sales Executive with 2.5 years of experience. I work at Homeline Furnishings and I do my tasks sincerely."
+      },
+      {
+        "question": "career_journey",
+        "text": "I have worked in this field for some time and done several projects, such as converting walk-in enquiries to orders."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "I am hard working and sincere. I want to improve my skills further."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I get along with everyone in the team and I try to help others when needed."
+      },
+      {
+        "question": "career_goals",
+        "text": "I want to grow in my career and take more responsibility in the future."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 30 days. I am ready to join if the offer is good."
+      }
+    ]
+  },
+  "DC-19": {
+    "level": "good",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a MBA Graduate (Marketing) with very little experience so far of experience. At Brandspire I generated twenty five qualified leads during my internship. I enjoy building long-term client relationships."
+      },
+      {
+        "question": "career_journey",
+        "text": "I began as a sales associate and grew into my current role. A project I learned a lot from was a summer outreach project generating qualified leads, and it taught me about qualifying leads."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "I am good at listening first and then framing the value clearly. One thing I am improving: I am still building my product knowledge, so I read the demo scripts daily."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I like working in a team and asking for feedback. Once we had a disagreement about priorities, so we listed the options and chose one together."
+      },
+      {
+        "question": "career_goals",
+        "text": "In a few years I would like to become a strong account executive."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 15 days and I am fine with the location. I am looking for a long-term role."
+      }
+    ]
+  },
+  "DC-20": {
+    "level": "good",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a HR Executive with 3 years of experience. At Oceanic Hospitality I filled forty hotel roles in one quarter. I enjoy building long-term client relationships."
+      },
+      {
+        "question": "career_journey",
+        "text": "I began as a sales associate and grew into my current role. A project I learned a lot from was a bulk hiring drive for hotel staff, and it taught me about qualifying leads."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "I am good at listening first and then framing the value clearly. One thing I am improving: I have not done direct selling, which I want to try."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I like working in a team and asking for feedback. Once we had a disagreement about priorities, so we listed the options and chose one together."
+      },
+      {
+        "question": "career_goals",
+        "text": "In a few years I would like to move into a client-facing role."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 30 days and I am fine with the location. I am looking for a long-term role."
+      }
+    ]
+  },
+  "DC-21": {
+    "level": "good",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a Sales Manager with 4 years of experience. At Telewave I built a pipeline of twenty enterprise accounts in my first quarter. I enjoy building long-term client relationships."
+      },
+      {
+        "question": "career_journey",
+        "text": "I began as a sales associate and grew into my current role. A project I learned a lot from was an enterprise telecom pipeline, and it taught me about qualifying leads."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "I am good at listening first and then framing the value clearly. One thing I am improving: I move on quickly when I am not growing, and I am working on staying longer."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I like working in a team and asking for feedback. Once we had a disagreement about priorities, so we listed the options and chose one together."
+      },
+      {
+        "question": "career_goals",
+        "text": "In a few years I would like to lead a larger team."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 30 days and I am fine with the location. I am looking for a long-term role."
+      }
+    ]
+  },
+  "DC-22": {
+    "level": "excellent",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a Product Designer with 4 years of experience. At Learnloop I cut onboarding drop-off by eighteen percent after usability testing. I enjoy turning messy problems into clear flows, and I like owning an outcome from the first idea until it is running well."
+      },
+      {
+        "question": "career_journey",
+        "text": "I started as a junior designer and took on more responsibility each year. The work that taught me most was a one hundred and twenty component design system in Figma, because it made me think carefully about user research and about the people who depend on what I build."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "My main strength is testing ideas early with real users. A weakness I have worked on: I used to polish too long before testing, so I now share rough flows early. That habit has made my work calmer and my teams more predictable."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I work best in teams that share feedback openly. When we disagreed on priorities I suggested we write down the options and their trade-offs, we discussed them together, and we agreed on a plan that we delivered on time."
+      },
+      {
+        "question": "career_goals",
+        "text": "In the next two to three years I want to become a design lead, while staying close to the day-to-day work and continuing to learn from people more experienced than me."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 60 days, I am comfortable with the location and the working model, and I am looking for a role where I can stay for several years and make a real contribution."
+      }
+    ]
+  },
+  "DC-23": {
+    "level": "weak",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I am a hard working person. I have done many things."
+      },
+      {
+        "question": "career_journey",
+        "text": "I worked in some places and did different work."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "I am a perfectionist and I work too hard."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I do not have any problem with anyone."
+      },
+      {
+        "question": "career_goals",
+        "text": "I want to be at the top one day."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "I can join whenever."
+      }
+    ]
+  },
+  "DC-24": {
+    "level": "good",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a UX Designer with 5.5 years of experience. At Quicklane Apps I led the research that simplified our rider sign-up flow. I enjoy turning messy problems into clear flows."
+      },
+      {
+        "question": "career_journey",
+        "text": "I began as a junior designer and grew into my current role. A project I learned a lot from was a clinic booking flow redesign tested with six users, and it taught me about user research."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "I am good at testing ideas early with real users. One thing I am improving: my tools knowledge needed refreshing after my break, so I rebuilt a portfolio project."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I like working in a team and asking for feedback. Once we had a disagreement about priorities, so we listed the options and chose one together."
+      },
+      {
+        "question": "career_goals",
+        "text": "In a few years I would like to return to a full-time product design role."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 15 days and I am fine with the location. I am looking for a long-term role."
+      }
+    ]
+  },
+  "DC-25": {
+    "level": "good",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a UI/UX Desinger with 3 years of experience. At Pixelnest I designed the ordering flow used by about fifty thousand customers. I enjoy turning messy problems into clear flows."
+      },
+      {
+        "question": "career_journey",
+        "text": "I began as a junior designer and grew into my current role. A project I learned a lot from was a food delivery ordering flow prototyped in Figma, and it taught me about user research."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "I am good at testing ideas early with real users. One thing I am improving: I make small mistakes in my documents, so I now ask a colleague to proofread."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I like working in a team and asking for feedback. Once we had a disagreement about priorities, so we listed the options and chose one together."
+      },
+      {
+        "question": "career_goals",
+        "text": "In a few years I would like to become a senior designer."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 30 days and I am fine with the location. I am looking for a long-term role."
+      }
+    ]
+  },
+  "DC-26": {
+    "level": "excellent",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a Talent Acquisition Executive with 3 years of experience. At Fleetwise Logistics I cut our time to hire from thirty eight days to twenty six. I enjoy matching people to the right roles, and I like owning an outcome from the first idea until it is running well."
+      },
+      {
+        "question": "career_journey",
+        "text": "I started as a HR trainee and took on more responsibility each year. The work that taught me most was a bulk hiring programme that closed a hundred and eighty hires a year, because it made me think carefully about candidate experience and about the people who depend on what I build."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "My main strength is staying organised across many open requisitions. A weakness I have worked on: I used to over-screen on paper, so I now call candidates before I reject. That habit has made my work calmer and my teams more predictable."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I work best in teams that share feedback openly. When we disagreed on priorities I suggested we write down the options and their trade-offs, we discussed them together, and we agreed on a plan that we delivered on time."
+      },
+      {
+        "question": "career_goals",
+        "text": "In the next two to three years I want to become a talent acquisition lead, while staying close to the day-to-day work and continuing to learn from people more experienced than me."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 30 days, I am comfortable with the location and the working model, and I am looking for a role where I can stay for several years and make a real contribution."
+      }
+    ]
+  },
+  "DC-27": {
+    "level": "average",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I am a HR Executive with 1.5 years of experience. I work at Maxcare Services and I do my tasks sincerely."
+      },
+      {
+        "question": "career_journey",
+        "text": "I have worked in this field for some time and done several projects, such as scheduling interviews and onboarding new joiners."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "I am hard working and sincere. I want to improve my skills further."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I get along with everyone in the team and I try to help others when needed."
+      },
+      {
+        "question": "career_goals",
+        "text": "I want to grow in my career and take more responsibility in the future."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 30 days. I am ready to join if the offer is good."
+      }
+    ]
+  },
+  "DC-28": {
+    "level": "good",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a HR Recruiter with 2.5 years of experience. At Shoplane Retail I hired store staff in six cities within one quarter. I enjoy matching people to the right roles."
+      },
+      {
+        "question": "career_journey",
+        "text": "I began as a HR trainee and grew into my current role. A project I learned a lot from was a multi-city retail hiring drive, and it taught me about candidate experience."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "I am good at staying organised across many open requisitions. One thing I am improving: I sometimes take on too many requisitions at once, so I now prioritise with managers."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I like working in a team and asking for feedback. Once we had a disagreement about priorities, so we listed the options and chose one together."
+      },
+      {
+        "question": "career_goals",
+        "text": "In a few years I would like to become a talent acquisition specialist."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 30 days and I am fine with the location. I am looking for a long-term role."
+      }
+    ]
+  },
+  "DC-29": {
+    "level": "limited_english",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I am Fatima Noor. I am working as HR Recruiter from 2.5 years. In my company Callbridge BPO I hired twenty five agents every month for our support campaigns."
+      },
+      {
+        "question": "career_journey",
+        "text": "First I started as HR trainee, then I learn many things and now I am HR Recruiter. I did monthly agent hiring for voice-support campaigns."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "My strength is staying organised across many open requisitions. My weakness is my English is improving and I practise every day."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I like to work in team. If problem is there, we sit together and solve it."
+      },
+      {
+        "question": "career_goals",
+        "text": "In future I want to become a senior recruiter. I will work hard for this."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 30 days. I can join after that and I want long time job."
+      }
+    ]
+  },
+  "DC-30": {
+    "level": "good",
+    "answers": [
+      {
+        "question": "self_introduction",
+        "text": "I'm a Recruitment Specialist with 3 years of experience. At Techhive Services I hired a hundred and twenty IT professionals in a year. I enjoy matching people to the right roles."
+      },
+      {
+        "question": "career_journey",
+        "text": "I began as a HR trainee and grew into my current role. A project I learned a lot from was campus drives in four cities, and it taught me about candidate experience."
+      },
+      {
+        "question": "strengths_weaknesses",
+        "text": "I am good at staying organised across many open requisitions. One thing I am improving: I sometimes over-prepare for interviews, so I now keep a short checklist."
+      },
+      {
+        "question": "teamwork_culture_fit",
+        "text": "I like working in a team and asking for feedback. Once we had a disagreement about priorities, so we listed the options and chose one together."
+      },
+      {
+        "question": "career_goals",
+        "text": "In a few years I would like to become a hiring manager's trusted partner."
+      },
+      {
+        "question": "availability_commitment",
+        "text": "My notice period is 60 days and I am fine with the location. I am looking for a long-term role."
+      }
+    ]
+  }
+}

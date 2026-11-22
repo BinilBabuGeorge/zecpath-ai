@@ -1,0 +1,24 @@
+Name: Arjun Verma
+Designation: Lead Full Stack Engineer
+Location: Hyderabad, India
+Email: arjun.verma@example.com
+Phone: +91-90000-02002
+
+Summary:
+8 years in product engineering; led teams of up to 6 building multi-tenant SaaS on the MERN stack.
+
+Skills: React.js, Node.js, Express.js, MongoDB, TypeScript, AWS, Docker, Kubernetes, REST APIs, GraphQL, CI/CD, Git
+
+Experience:
+- Lead Full Stack Engineer, Stackbridge Systems (Apr 2023 - Present)
+  Led a six-person team; designed the event-driven order service handling 2M requests a day; introduced code review standards.
+- Senior Software Engineer, Quantra Technologies (Oct 2020 - Mar 2023)
+  Built the React admin platform and Node.js APIs; mentored four junior developers.
+- Software Engineer, Ledgerline (Sep 2018 - Sep 2020)
+  Developed Express APIs on MongoDB for an invoicing product.
+
+Education:
+- B.E. in Information Technology, Anna University, 2016
+
+Certifications:
+- AWS Certified Developer Associate (2022)

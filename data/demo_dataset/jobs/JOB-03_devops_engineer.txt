@@ -1,0 +1,30 @@
+Job Title: DevOps Engineer
+Department: Infrastructure
+Location: Hyderabad (Hybrid)
+Experience Required: 3-5 years
+Employment Type: Full-time
+
+About the Role:
+Cloudharbor runs a multi-tenant analytics product on AWS. You will own our build pipelines, container platform and infrastructure code.
+
+Required Skills:
+- Linux administration
+- Docker and Kubernetes
+- AWS
+- Infrastructure as code with Terraform
+- CI/CD pipelines using Jenkins or similar
+
+Good to Have:
+- Python scripting
+- Monitoring and alerting experience
+
+Education:
+- B.Tech/B.E. in any engineering discipline, or equivalent experience
+
+Responsibilities:
+- Maintain and improve CI/CD pipelines
+- Manage Kubernetes clusters and deployments
+- Write and review Terraform modules
+- Respond to incidents and write post-incident reviews
+
+Salary Range: Rs 12,00,000 - Rs 20,00,000 per annum

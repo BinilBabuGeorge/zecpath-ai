@@ -1,0 +1,55 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [4 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 919 >>
+stream
+BT /F1 10 Tf 14 TL 40 800 Td
+(Name: Manoj Pandey) Tj T*
+(Designation: Senior Linux System Administrator) Tj T*
+(Location: Hyderabad, India) Tj T*
+(Email: manoj.pandey@example.com) Tj T*
+(Phone: +91-90000-02016) Tj T*
+() Tj T*
+(Summary:) Tj T*
+(Nearly 5 years of Linux and server administration; recently learning Docker and AWS.) Tj T*
+() Tj T*
+(Skills: Linux, Bash, Docker, AWS, Jenkins, Git, Nagios) Tj T*
+() Tj T*
+(Experience:) Tj T*
+(- Senior System Administrator, Metroline Services \(Oct 2024 - Present\)) Tj T*
+(  Administered 200 Linux servers; started containerising two internal tools with Docker.) Tj T*
+(- System Administrator, Metroline Services \(Jan 2022 - Sep 2024\)) Tj T*
+(  Patched servers and managed backups.) Tj T*
+() Tj T*
+(Education:) Tj T*
+(- B.Sc in Computer Science, Osmania University, 2018) Tj T*
+() Tj T*
+(Certifications:) Tj T*
+(- Red Hat Certified System Administrator \(2021\)) Tj T*
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000000311 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1281
+%%EOF

@@ -1,0 +1,53 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [4 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 845 >>
+stream
+BT /F1 10 Tf 14 TL 40 800 Td
+(Name: Anjali Bhatt) Tj T*
+(Designation: Full Stack Developer) Tj T*
+(Location: Pune, India) Tj T*
+(Email: anjali.bhatt@example.com) Tj T*
+(Phone: +91-90000-02008) Tj T*
+() Tj T*
+(Summary:) Tj T*
+(3.5 years building analytics dashboards with React, Node.js and MongoDB.) Tj T*
+() Tj T*
+(Skills: React.js, Node.js, Express.js, MongoDB, REST APIs, Git, Docker, TypeScript) Tj T*
+() Tj T*
+(Experience:) Tj T*
+(- Full Stack Developer, Insightly Data \(Oct 2024 - Present\)) Tj T*
+(  Built chart-heavy React dashboards and aggregation APIs on MongoDB for 200 enterprise) Tj T*
+(  users.) Tj T*
+(- Software Engineer, Insightly Data \(Apr 2023 - Sep 2024\)) Tj T*
+(  Developed Express endpoints and unit tests.) Tj T*
+() Tj T*
+(Education:) Tj T*
+(- B.E. in Computer Engineering, Pune Institute of Technology, 2022) Tj T*
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000000311 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1207
+%%EOF

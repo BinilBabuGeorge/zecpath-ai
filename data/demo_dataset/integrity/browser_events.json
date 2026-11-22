@@ -1,0 +1,44 @@
+{
+  "DC-09": [
+    {
+      "event_type": "tab_hidden",
+      "timestamp": 140
+    },
+    {
+      "event_type": "tab_visible",
+      "timestamp": 175
+    },
+    {
+      "event_type": "tab_hidden",
+      "timestamp": 330
+    },
+    {
+      "event_type": "tab_visible",
+      "timestamp": 372
+    },
+    {
+      "event_type": "tab_hidden",
+      "timestamp": 520
+    },
+    {
+      "event_type": "tab_visible",
+      "timestamp": 566
+    },
+    {
+      "event_type": "window_blur",
+      "timestamp": 700
+    },
+    {
+      "event_type": "window_focus",
+      "timestamp": 738
+    },
+    {
+      "event_type": "tab_hidden",
+      "timestamp": 905
+    },
+    {
+      "event_type": "tab_visible",
+      "timestamp": 950
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+Name: Lakshmi Iyer
+Designation: Java Backend Developer
+Location: Chennai, India
+Email: lakshmi.iyer@example.com
+Phone: +91-90000-02012
+
+Summary:
+4 years of Java and Spring Boot experience; returning after a career break to care for family.
+
+Skills: Java, Spring Boot, PostgreSQL, REST APIs, Docker, Git, Jenkins, SQL
+
+Experience:
+- Senior Java Developer, Greenfield Tech (Sep 2025 - Present)
+  Back after a break; rebuilt the order-history service and reduced its memory use by 30 percent.
+- Java Developer, Greenfield Tech (Jul 2021 - Jun 2024)
+  Built Spring Boot REST services on PostgreSQL for an e-commerce platform.
+
+Education:
+- B.E. in Information Technology, Madras Institute of Technology, 2021

@@ -128,6 +128,10 @@ MODULE_CATALOGUE: Dict[str, Tuple[str, str, str]] = {
     "parsers/consistency_audit.py": ("I", "Property checks that the aggregate, decision and ATS alignment must satisfy.", "-"),
     "parsers/evaluation_harness.py": ("I", "The one tested confusion-matrix and threshold-analysis tool.", "-"),
     "parsers/roadmap_planner.py": ("I", "Keeps the Day 58 roadmap data consistent and ordered.", "-"),
+    "parsers/demo_dataset_content.py": ("I", "The 6 demo job descriptions and 30 synthetic candidate personas, with the author's expected outcomes.", "-"),
+    "parsers/demo_dataset_answers.py": ("I", "Answer templates, technical answer banks and machine-test code used to build the demo dataset.", "-"),
+    "parsers/demo_dataset_builder.py": ("I", "Writes the demo dataset's input files: resumes (DOCX, PDF), answers, machine-test attempts, browser events.", "-"),
+    "parsers/demo_environment.py": ("I", "End-to-end environment: runs the demo dataset through all five rounds with the real engines and computes findings.", "-"),
     "parsers/documentation_index.py": ("I", "Module catalogue, PRD coverage map and live numbers the handbook is generated from.", "-"),
 }
 

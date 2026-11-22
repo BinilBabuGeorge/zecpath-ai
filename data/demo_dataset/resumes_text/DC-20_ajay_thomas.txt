@@ -1,0 +1,19 @@
+Name: Ajay Thomas
+Designation: HR Executive
+Location: Kochi, India
+Email: ajay.thomas@example.com
+Phone: +91-90000-02020
+
+Summary:
+3 years in HR operations, recruitment and onboarding.
+
+Skills: Recruitment, Onboarding, Excel
+
+Experience:
+- HR Executive, Oceanic Hospitality (Jan 2025 - Present)
+  Ran end-to-end recruitment for hotel staff and managed onboarding formalities.
+- HR Assistant, Oceanic Hospitality (Oct 2023 - Dec 2024)
+  Maintained employee records and attendance in Excel.
+
+Education:
+- MBA in Human Resources, Rajagiri Business School, 2022

@@ -1,0 +1,19 @@
+Name: Sunita Rajan
+Designation: Talent Acquisition Executive
+Location: Delhi NCR, India
+Email: sunita.rajan@example.com
+Phone: +91-90000-02026
+
+Summary:
+3 years of end-to-end recruitment for operations and sales roles in logistics.
+
+Skills: Recruitment, Candidate Sourcing, Onboarding, Excel, Interview Coordination, Naukri, LinkedIn Recruiter
+
+Experience:
+- Talent Acquisition Executive, Fleetwise Logistics (Jan 2025 - Present)
+  Closed 180 hires a year across operations and sales; cut time-to-hire from 38 to 26 days.
+- HR Recruiter, Fleetwise Logistics (Oct 2023 - Dec 2024)
+  Sourced and screened candidates and coordinated interviews.
+
+Education:
+- MBA in Human Resources, Delhi School of Management, 2022

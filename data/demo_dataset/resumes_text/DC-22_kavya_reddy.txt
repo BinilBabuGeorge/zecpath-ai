@@ -1,0 +1,22 @@
+Name: Kavya Reddy
+Designation: Product Designer
+Location: Chennai, India
+Email: kavya.reddy@example.com
+Phone: +91-90000-02022
+
+Summary:
+4 years designing mobile and web products; own the design system for a learning app.
+
+Skills: Figma, Adobe XD, Prototyping, User Research, Design Systems, Sketch
+
+Experience:
+- Product Designer, Learnloop (Nov 2023 - Present)
+  Built and maintained a 120-component design system in Figma; ran 25 usability sessions that cut onboarding drop-off by 18 percent.
+- UI Designer, Studio Marigold (Nov 2022 - Oct 2023)
+  Designed web and mobile screens for five client apps.
+
+Education:
+- Bachelor of Design, National Institute of Design Bengaluru, 2022
+
+Certifications:
+- Google UX Design Certificate (2022)

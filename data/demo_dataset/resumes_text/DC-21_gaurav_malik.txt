@@ -1,0 +1,25 @@
+Name: Gaurav Malik
+Designation: Sales Manager
+Location: Mumbai, India
+Email: gaurav.malik@example.com
+Phone: +91-90000-02021
+
+Summary:
+4 years across five sales roles in software, telecom and insurance.
+
+Skills: Lead Generation, Cold Calling, Negotiation, CRM, Salesforce
+
+Experience:
+- Sales Manager, Telewave (Aug 2026 - Present)
+  Leading a team of 4 on enterprise telecom accounts.
+- Sales Executive, Insureline (Jan 2026 - Jul 2026)
+  Sold group insurance to corporates.
+- Account Executive, Softgrid (Feb 2025 - Dec 2025)
+  Sold SaaS subscriptions to small businesses.
+- Sales Executive, Callnet (Mar 2024 - Jan 2025)
+  Handled outbound calling for a broadband product.
+- Business Development Associate, Leadforge (Nov 2022 - Feb 2024)
+  Qualified leads for a staffing firm.
+
+Education:
+- BBA, Mumbai University, 2022

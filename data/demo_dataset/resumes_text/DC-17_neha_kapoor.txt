@@ -1,0 +1,23 @@
+Name: Neha Kapoor
+Designation: Sales Executive
+Location: Mumbai, India
+Email: neha.kapoor@example.com
+Phone: +91-90000-02017
+
+Summary:
+3 years selling subscription software to mid-sized companies; consistently above target.
+
+Skills: Lead Generation, Cold Calling, Negotiation, Salesforce, CRM, Email Marketing
+
+Experience:
+- Sales Executive, Cloudline Software (Jan 2025 - Present)
+  Closed 24 accounts worth Rs 1.2 crore a year; reached 118 percent of target in the last four quarters.
+- Business Development Associate, Cloudline Software (Oct 2023 - Dec 2024)
+  Booked 15 qualified demos a month through calls and email.
+
+Education:
+- MBA in Marketing, NMIMS Mumbai, 2022
+- B.Com, Mumbai University, 2020
+
+Certifications:
+- Salesforce Administrator Fundamentals (2023)

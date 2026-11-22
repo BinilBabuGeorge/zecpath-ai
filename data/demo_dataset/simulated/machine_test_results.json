@@ -1,0 +1,348 @@
+[
+  {
+    "id": "DC-01",
+    "overall_score": 97.0,
+    "band": "strong",
+    "integrity_risk_tag": "clear",
+    "human_review_required": false,
+    "human_review_reasons": [],
+    "tasks": [
+      {
+        "task_id": "MT-A",
+        "score": 97.0,
+        "flags": []
+      },
+      {
+        "task_id": "MT-B",
+        "score": 97.0,
+        "flags": []
+      }
+    ]
+  },
+  {
+    "id": "DC-02",
+    "overall_score": 97.0,
+    "band": "strong",
+    "integrity_risk_tag": "clear",
+    "human_review_required": false,
+    "human_review_reasons": [],
+    "tasks": [
+      {
+        "task_id": "MT-A",
+        "score": 97.0,
+        "flags": []
+      },
+      {
+        "task_id": "MT-B",
+        "score": 97.0,
+        "flags": []
+      }
+    ]
+  },
+  {
+    "id": "DC-03",
+    "overall_score": 54.4,
+    "band": "moderate",
+    "integrity_risk_tag": "clear",
+    "human_review_required": true,
+    "human_review_reasons": [
+      "MT-B: Passes visible cases but fails hidden ones (possible hard-coding)."
+    ],
+    "tasks": [
+      {
+        "task_id": "MT-A",
+        "score": 59.1,
+        "flags": []
+      },
+      {
+        "task_id": "MT-B",
+        "score": 51.3,
+        "flags": [
+          "PASSES_VISIBLE_FAILS_HIDDEN"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "DC-04",
+    "overall_score": 3.0,
+    "band": "limited",
+    "integrity_risk_tag": "clear",
+    "human_review_required": false,
+    "human_review_reasons": [],
+    "tasks": [
+      {
+        "task_id": "MT-A",
+        "score": 3.0,
+        "flags": []
+      },
+      {
+        "task_id": "MT-B",
+        "score": 3.0,
+        "flags": []
+      }
+    ]
+  },
+  {
+    "id": "DC-05",
+    "overall_score": 69.6,
+    "band": "moderate",
+    "integrity_risk_tag": "clear",
+    "human_review_required": true,
+    "human_review_reasons": [
+      "MT-B: Passes visible cases but fails hidden ones (possible hard-coding)."
+    ],
+    "tasks": [
+      {
+        "task_id": "MT-A",
+        "score": 97.0,
+        "flags": []
+      },
+      {
+        "task_id": "MT-B",
+        "score": 51.3,
+        "flags": [
+          "PASSES_VISIBLE_FAILS_HIDDEN"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "DC-06",
+    "overall_score": 97.0,
+    "band": "strong",
+    "integrity_risk_tag": "clear",
+    "human_review_required": false,
+    "human_review_reasons": [],
+    "tasks": [
+      {
+        "task_id": "MT-A",
+        "score": 97.0,
+        "flags": []
+      },
+      {
+        "task_id": "MT-B",
+        "score": 97.0,
+        "flags": []
+      }
+    ]
+  },
+  {
+    "id": "DC-07",
+    "overall_score": 54.4,
+    "band": "moderate",
+    "integrity_risk_tag": "clear",
+    "human_review_required": true,
+    "human_review_reasons": [
+      "MT-B: Passes visible cases but fails hidden ones (possible hard-coding)."
+    ],
+    "tasks": [
+      {
+        "task_id": "MT-A",
+        "score": 59.1,
+        "flags": []
+      },
+      {
+        "task_id": "MT-B",
+        "score": 51.3,
+        "flags": [
+          "PASSES_VISIBLE_FAILS_HIDDEN"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "DC-08",
+    "overall_score": 97.0,
+    "band": "strong",
+    "integrity_risk_tag": "clear",
+    "human_review_required": false,
+    "human_review_reasons": [],
+    "tasks": [
+      {
+        "task_id": "MT-A",
+        "score": 97.0,
+        "flags": []
+      },
+      {
+        "task_id": "MT-B",
+        "score": 97.0,
+        "flags": []
+      }
+    ]
+  },
+  {
+    "id": "DC-09",
+    "overall_score": 97.0,
+    "band": "strong",
+    "integrity_risk_tag": "medium",
+    "human_review_required": true,
+    "human_review_reasons": [
+      "Interview integrity tag is MEDIUM (Day 49): review the session before relying on this score."
+    ],
+    "tasks": [
+      {
+        "task_id": "MT-A",
+        "score": 97.0,
+        "flags": []
+      },
+      {
+        "task_id": "MT-B",
+        "score": 97.0,
+        "flags": []
+      }
+    ]
+  },
+  {
+    "id": "DC-10",
+    "overall_score": 97.0,
+    "band": "strong",
+    "integrity_risk_tag": "clear",
+    "human_review_required": false,
+    "human_review_reasons": [],
+    "tasks": [
+      {
+        "task_id": "MT-A",
+        "score": 97.0,
+        "flags": []
+      },
+      {
+        "task_id": "MT-B",
+        "score": 97.0,
+        "flags": []
+      }
+    ]
+  },
+  {
+    "id": "DC-11",
+    "overall_score": 25.4,
+    "band": "limited",
+    "integrity_risk_tag": "clear",
+    "human_review_required": false,
+    "human_review_reasons": [],
+    "tasks": [
+      {
+        "task_id": "MT-A",
+        "score": 59.1,
+        "flags": []
+      },
+      {
+        "task_id": "MT-B",
+        "score": 3.0,
+        "flags": []
+      }
+    ]
+  },
+  {
+    "id": "DC-12",
+    "overall_score": 69.6,
+    "band": "moderate",
+    "integrity_risk_tag": "clear",
+    "human_review_required": true,
+    "human_review_reasons": [
+      "MT-B: Passes visible cases but fails hidden ones (possible hard-coding)."
+    ],
+    "tasks": [
+      {
+        "task_id": "MT-A",
+        "score": 97.0,
+        "flags": []
+      },
+      {
+        "task_id": "MT-B",
+        "score": 51.3,
+        "flags": [
+          "PASSES_VISIBLE_FAILS_HIDDEN"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "DC-13",
+    "overall_score": 69.6,
+    "band": "moderate",
+    "integrity_risk_tag": "clear",
+    "human_review_required": true,
+    "human_review_reasons": [
+      "MT-B: Passes visible cases but fails hidden ones (possible hard-coding)."
+    ],
+    "tasks": [
+      {
+        "task_id": "MT-A",
+        "score": 97.0,
+        "flags": []
+      },
+      {
+        "task_id": "MT-B",
+        "score": 51.3,
+        "flags": [
+          "PASSES_VISIBLE_FAILS_HIDDEN"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "DC-14",
+    "overall_score": 97.0,
+    "band": "strong",
+    "integrity_risk_tag": "clear",
+    "human_review_required": false,
+    "human_review_reasons": [],
+    "tasks": [
+      {
+        "task_id": "MT-A",
+        "score": 97.0,
+        "flags": []
+      },
+      {
+        "task_id": "MT-B",
+        "score": 97.0,
+        "flags": []
+      }
+    ]
+  },
+  {
+    "id": "DC-15",
+    "overall_score": 69.6,
+    "band": "moderate",
+    "integrity_risk_tag": "clear",
+    "human_review_required": true,
+    "human_review_reasons": [
+      "MT-B: Passes visible cases but fails hidden ones (possible hard-coding)."
+    ],
+    "tasks": [
+      {
+        "task_id": "MT-A",
+        "score": 97.0,
+        "flags": []
+      },
+      {
+        "task_id": "MT-B",
+        "score": 51.3,
+        "flags": [
+          "PASSES_VISIBLE_FAILS_HIDDEN"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "DC-16",
+    "overall_score": 25.4,
+    "band": "limited",
+    "integrity_risk_tag": "clear",
+    "human_review_required": false,
+    "human_review_reasons": [],
+    "tasks": [
+      {
+        "task_id": "MT-A",
+        "score": 59.1,
+        "flags": []
+      },
+      {
+        "task_id": "MT-B",
+        "score": 3.0,
+        "flags": []
+      }
+    ]
+  }
+]

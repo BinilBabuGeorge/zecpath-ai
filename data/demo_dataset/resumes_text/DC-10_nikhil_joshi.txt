@@ -1,0 +1,22 @@
+Name: Nikhil Joshi
+Designation: Java Backend Developer
+Location: Pune, India
+Email: nikhil.joshi@example.com
+Phone: +91-90000-02010
+
+Summary:
+4 years building Spring Boot services for insurance and banking clients.
+
+Skills: Java, Spring Boot, PostgreSQL, MySQL, REST APIs, Docker, Git, Redis, Jenkins, AWS
+
+Experience:
+- Java Backend Developer, Meridian Financial Tech (Jun 2024 - Present)
+  Owned the claims microservice; tuned PostgreSQL queries that cut report time from 40 seconds to 4.
+- Software Engineer, Kestrel Infosystems (Oct 2022 - May 2024)
+  Built Spring Boot REST APIs and JUnit tests for a loan-origination platform.
+
+Education:
+- B.E. in Computer Engineering, Savitribai Phule Pune University, 2021
+
+Certifications:
+- Oracle Certified Associate, Java SE 11 (2022)

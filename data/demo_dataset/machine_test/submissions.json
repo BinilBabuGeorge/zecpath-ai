@@ -1,0 +1,2840 @@
+{
+  "DC-01": {
+    "MT-A": {
+      "snapshots": [
+        {
+          "timestamp": 120.0,
+          "code": "def top_n_words(text, n):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 312.0,
+          "code": "def top_n_words(text, n):\n    counts = {}\n    for w in text.split():\n        counts[w] = counts.get(w, 0) + 1\n    ordered = sorted(counts, key=lambda w: counts[w], reverse=True)\n    return ordered[:n]\n",
+          "trigger": "run"
+        },
+        {
+          "timestamp": 504.0,
+          "code": "import re\nfrom collections import Counter\n\n\ndef top_n_words(text, n):\n    words = re.findall(r\"[a-z']+\", text.lower())\n    counts = Counter(words)\n    ordered = sorted(counts.items(), key=lambda item: (-item[1], item[0]))\n    return [word for word, _ in ordered[:n]]\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 316.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 3.96,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.72,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": false,
+              "runtime_ms": 4.38,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.19,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": false,
+              "runtime_ms": 4.37,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.49,
+              "timed_out": false
+            }
+          ]
+        },
+        {
+          "timestamp": 508.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 3.96,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.72,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": true,
+              "runtime_ms": 4.38,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.19,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": true,
+              "runtime_ms": 4.37,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.49,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 504.0
+    },
+    "MT-B": {
+      "snapshots": [
+        {
+          "timestamp": 180.0,
+          "code": "def merge_intervals(intervals):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 468.0,
+          "code": "def merge_intervals(intervals):\n    merged = []\n    for start, end in intervals:\n        if merged and start <= merged[-1][1]:\n            merged[-1][1] = end\n        else:\n            merged.append([start, end])\n    return merged\n",
+          "trigger": "run"
+        },
+        {
+          "timestamp": 756.0,
+          "code": "def merge_intervals(intervals):\n    merged = []\n    for start, end in sorted(intervals):\n        if merged and start <= merged[-1][1]:\n            merged[-1][1] = max(merged[-1][1], end)\n        else:\n            merged.append([start, end])\n    return merged\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 472.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "B-v1",
+              "passed": true,
+              "runtime_ms": 3.45,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-v2",
+              "passed": true,
+              "runtime_ms": 2.98,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h1",
+              "passed": true,
+              "runtime_ms": 3.44,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h2",
+              "passed": false,
+              "runtime_ms": 3.09,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h3",
+              "passed": false,
+              "runtime_ms": 3.0,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h4",
+              "passed": true,
+              "runtime_ms": 3.26,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h5",
+              "passed": false,
+              "runtime_ms": 3.28,
+              "timed_out": false
+            }
+          ]
+        },
+        {
+          "timestamp": 760.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "B-v1",
+              "passed": true,
+              "runtime_ms": 3.45,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-v2",
+              "passed": true,
+              "runtime_ms": 2.98,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h1",
+              "passed": true,
+              "runtime_ms": 3.44,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h2",
+              "passed": true,
+              "runtime_ms": 3.09,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h3",
+              "passed": true,
+              "runtime_ms": 3.0,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h4",
+              "passed": true,
+              "runtime_ms": 3.26,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h5",
+              "passed": true,
+              "runtime_ms": 3.28,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 756.0
+    }
+  },
+  "DC-02": {
+    "MT-A": {
+      "snapshots": [
+        {
+          "timestamp": 120.0,
+          "code": "def top_n_words(text, n):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 312.0,
+          "code": "def top_n_words(text, n):\n    counts = {}\n    for w in text.split():\n        counts[w] = counts.get(w, 0) + 1\n    ordered = sorted(counts, key=lambda w: counts[w], reverse=True)\n    return ordered[:n]\n",
+          "trigger": "run"
+        },
+        {
+          "timestamp": 504.0,
+          "code": "import re\nfrom collections import Counter\n\n\ndef top_n_words(text, n):\n    words = re.findall(r\"[a-z']+\", text.lower())\n    counts = Counter(words)\n    ordered = sorted(counts.items(), key=lambda item: (-item[1], item[0]))\n    return [word for word, _ in ordered[:n]]\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 316.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.22,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.15,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": false,
+              "runtime_ms": 4.09,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.42,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": false,
+              "runtime_ms": 4.23,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.05,
+              "timed_out": false
+            }
+          ]
+        },
+        {
+          "timestamp": 508.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.22,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.15,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": true,
+              "runtime_ms": 4.09,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.42,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": true,
+              "runtime_ms": 4.23,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.05,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 504.0
+    },
+    "MT-B": {
+      "snapshots": [
+        {
+          "timestamp": 180.0,
+          "code": "def merge_intervals(intervals):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 468.0,
+          "code": "def merge_intervals(intervals):\n    merged = []\n    for start, end in intervals:\n        if merged and start <= merged[-1][1]:\n            merged[-1][1] = end\n        else:\n            merged.append([start, end])\n    return merged\n",
+          "trigger": "run"
+        },
+        {
+          "timestamp": 756.0,
+          "code": "def merge_intervals(intervals):\n    merged = []\n    for start, end in sorted(intervals):\n        if merged and start <= merged[-1][1]:\n            merged[-1][1] = max(merged[-1][1], end)\n        else:\n            merged.append([start, end])\n    return merged\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 472.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "B-v1",
+              "passed": true,
+              "runtime_ms": 3.25,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-v2",
+              "passed": true,
+              "runtime_ms": 3.11,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h1",
+              "passed": true,
+              "runtime_ms": 3.31,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h2",
+              "passed": false,
+              "runtime_ms": 3.57,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h3",
+              "passed": false,
+              "runtime_ms": 3.2,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h4",
+              "passed": true,
+              "runtime_ms": 3.18,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h5",
+              "passed": false,
+              "runtime_ms": 3.07,
+              "timed_out": false
+            }
+          ]
+        },
+        {
+          "timestamp": 760.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "B-v1",
+              "passed": true,
+              "runtime_ms": 3.25,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-v2",
+              "passed": true,
+              "runtime_ms": 3.11,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h1",
+              "passed": true,
+              "runtime_ms": 3.31,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h2",
+              "passed": true,
+              "runtime_ms": 3.57,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h3",
+              "passed": true,
+              "runtime_ms": 3.2,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h4",
+              "passed": true,
+              "runtime_ms": 3.18,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h5",
+              "passed": true,
+              "runtime_ms": 3.07,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 756.0
+    }
+  },
+  "DC-03": {
+    "MT-A": {
+      "snapshots": [
+        {
+          "timestamp": 120.0,
+          "code": "def top_n_words(text, n):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 1020.0,
+          "code": "def top_n_words(text, n):\n    counts = {}\n    for w in text.split():\n        counts[w] = counts.get(w, 0) + 1\n    ordered = sorted(counts, key=lambda w: counts[w], reverse=True)\n    return ordered[:n]\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 1024.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.78,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.65,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": false,
+              "runtime_ms": 5.08,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.93,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": false,
+              "runtime_ms": 4.81,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.49,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 1020.0
+    },
+    "MT-B": {
+      "snapshots": [
+        {
+          "timestamp": 180.0,
+          "code": "def merge_intervals(intervals):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 1530.0,
+          "code": "def merge_intervals(intervals):\n    merged = []\n    for start, end in intervals:\n        if merged and start <= merged[-1][1]:\n            merged[-1][1] = end\n        else:\n            merged.append([start, end])\n    return merged\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 1534.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "B-v1",
+              "passed": true,
+              "runtime_ms": 3.76,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-v2",
+              "passed": true,
+              "runtime_ms": 3.3,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h1",
+              "passed": true,
+              "runtime_ms": 3.86,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h2",
+              "passed": false,
+              "runtime_ms": 3.47,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h3",
+              "passed": false,
+              "runtime_ms": 3.7,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h4",
+              "passed": true,
+              "runtime_ms": 3.71,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h5",
+              "passed": false,
+              "runtime_ms": 3.81,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 1530.0
+    }
+  },
+  "DC-04": {
+    "MT-A": {
+      "snapshots": [
+        {
+          "timestamp": 120.0,
+          "code": "def top_n_words(text, n):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 1188.0,
+          "code": "def top_n_words(text, n)\n    return text.split()[:n]\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 1192.0,
+          "compile_error": true,
+          "stdout_tail": "",
+          "stderr_tail": "SyntaxError: expected ':' (solution.py, line 1)",
+          "results": []
+        }
+      ],
+      "submitted_at": 1188.0
+    },
+    "MT-B": {
+      "snapshots": [
+        {
+          "timestamp": 180.0,
+          "code": "def merge_intervals(intervals):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 1782.0,
+          "code": "def merge_intervals(intervals):\n    result = []\n    for i in intervals\n        result.append(i)\n    return result\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 1786.0,
+          "compile_error": true,
+          "stdout_tail": "",
+          "stderr_tail": "SyntaxError: expected ':' (solution.py, line 3)",
+          "results": []
+        }
+      ],
+      "submitted_at": 1782.0
+    }
+  },
+  "DC-05": {
+    "MT-A": {
+      "snapshots": [
+        {
+          "timestamp": 120.0,
+          "code": "def top_n_words(text, n):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 312.0,
+          "code": "def top_n_words(text, n):\n    counts = {}\n    for w in text.split():\n        counts[w] = counts.get(w, 0) + 1\n    ordered = sorted(counts, key=lambda w: counts[w], reverse=True)\n    return ordered[:n]\n",
+          "trigger": "run"
+        },
+        {
+          "timestamp": 504.0,
+          "code": "import re\nfrom collections import Counter\n\n\ndef top_n_words(text, n):\n    words = re.findall(r\"[a-z']+\", text.lower())\n    counts = Counter(words)\n    ordered = sorted(counts.items(), key=lambda item: (-item[1], item[0]))\n    return [word for word, _ in ordered[:n]]\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 316.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.08,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.64,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": false,
+              "runtime_ms": 4.44,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.23,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": false,
+              "runtime_ms": 4.83,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.25,
+              "timed_out": false
+            }
+          ]
+        },
+        {
+          "timestamp": 508.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.08,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.64,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": true,
+              "runtime_ms": 4.44,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.23,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": true,
+              "runtime_ms": 4.83,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.25,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 504.0
+    },
+    "MT-B": {
+      "snapshots": [
+        {
+          "timestamp": 180.0,
+          "code": "def merge_intervals(intervals):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 1530.0,
+          "code": "def merge_intervals(intervals):\n    merged = []\n    for start, end in intervals:\n        if merged and start <= merged[-1][1]:\n            merged[-1][1] = end\n        else:\n            merged.append([start, end])\n    return merged\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 1534.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "B-v1",
+              "passed": true,
+              "runtime_ms": 3.94,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-v2",
+              "passed": true,
+              "runtime_ms": 3.76,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h1",
+              "passed": true,
+              "runtime_ms": 3.61,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h2",
+              "passed": false,
+              "runtime_ms": 3.44,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h3",
+              "passed": false,
+              "runtime_ms": 3.67,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h4",
+              "passed": true,
+              "runtime_ms": 3.31,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h5",
+              "passed": false,
+              "runtime_ms": 3.81,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 1530.0
+    }
+  },
+  "DC-06": {
+    "MT-A": {
+      "snapshots": [
+        {
+          "timestamp": 120.0,
+          "code": "def top_n_words(text, n):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 312.0,
+          "code": "def top_n_words(text, n):\n    counts = {}\n    for w in text.split():\n        counts[w] = counts.get(w, 0) + 1\n    ordered = sorted(counts, key=lambda w: counts[w], reverse=True)\n    return ordered[:n]\n",
+          "trigger": "run"
+        },
+        {
+          "timestamp": 504.0,
+          "code": "import re\nfrom collections import Counter\n\n\ndef top_n_words(text, n):\n    words = re.findall(r\"[a-z']+\", text.lower())\n    counts = Counter(words)\n    ordered = sorted(counts.items(), key=lambda item: (-item[1], item[0]))\n    return [word for word, _ in ordered[:n]]\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 316.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.71,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.5,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": false,
+              "runtime_ms": 4.11,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.3,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": false,
+              "runtime_ms": 4.8,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.2,
+              "timed_out": false
+            }
+          ]
+        },
+        {
+          "timestamp": 508.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.71,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.5,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": true,
+              "runtime_ms": 4.11,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.3,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": true,
+              "runtime_ms": 4.8,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.2,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 504.0
+    },
+    "MT-B": {
+      "snapshots": [
+        {
+          "timestamp": 180.0,
+          "code": "def merge_intervals(intervals):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 468.0,
+          "code": "def merge_intervals(intervals):\n    merged = []\n    for start, end in intervals:\n        if merged and start <= merged[-1][1]:\n            merged[-1][1] = end\n        else:\n            merged.append([start, end])\n    return merged\n",
+          "trigger": "run"
+        },
+        {
+          "timestamp": 756.0,
+          "code": "def merge_intervals(intervals):\n    merged = []\n    for start, end in sorted(intervals):\n        if merged and start <= merged[-1][1]:\n            merged[-1][1] = max(merged[-1][1], end)\n        else:\n            merged.append([start, end])\n    return merged\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 472.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "B-v1",
+              "passed": true,
+              "runtime_ms": 3.1,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-v2",
+              "passed": true,
+              "runtime_ms": 3.29,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h1",
+              "passed": true,
+              "runtime_ms": 3.29,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h2",
+              "passed": false,
+              "runtime_ms": 3.0,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h3",
+              "passed": false,
+              "runtime_ms": 3.4,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h4",
+              "passed": true,
+              "runtime_ms": 3.37,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h5",
+              "passed": false,
+              "runtime_ms": 3.51,
+              "timed_out": false
+            }
+          ]
+        },
+        {
+          "timestamp": 760.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "B-v1",
+              "passed": true,
+              "runtime_ms": 3.1,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-v2",
+              "passed": true,
+              "runtime_ms": 3.29,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h1",
+              "passed": true,
+              "runtime_ms": 3.29,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h2",
+              "passed": true,
+              "runtime_ms": 3.0,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h3",
+              "passed": true,
+              "runtime_ms": 3.4,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h4",
+              "passed": true,
+              "runtime_ms": 3.37,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h5",
+              "passed": true,
+              "runtime_ms": 3.51,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 756.0
+    }
+  },
+  "DC-07": {
+    "MT-A": {
+      "snapshots": [
+        {
+          "timestamp": 120.0,
+          "code": "def top_n_words(text, n):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 1020.0,
+          "code": "def top_n_words(text, n):\n    counts = {}\n    for w in text.split():\n        counts[w] = counts.get(w, 0) + 1\n    ordered = sorted(counts, key=lambda w: counts[w], reverse=True)\n    return ordered[:n]\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 1024.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 5.22,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.66,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": false,
+              "runtime_ms": 4.5,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 5.07,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": false,
+              "runtime_ms": 4.58,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.54,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 1020.0
+    },
+    "MT-B": {
+      "snapshots": [
+        {
+          "timestamp": 180.0,
+          "code": "def merge_intervals(intervals):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 1530.0,
+          "code": "def merge_intervals(intervals):\n    merged = []\n    for start, end in intervals:\n        if merged and start <= merged[-1][1]:\n            merged[-1][1] = end\n        else:\n            merged.append([start, end])\n    return merged\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 1534.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "B-v1",
+              "passed": true,
+              "runtime_ms": 3.87,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-v2",
+              "passed": true,
+              "runtime_ms": 3.58,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h1",
+              "passed": true,
+              "runtime_ms": 3.63,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h2",
+              "passed": false,
+              "runtime_ms": 3.31,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h3",
+              "passed": false,
+              "runtime_ms": 3.95,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h4",
+              "passed": true,
+              "runtime_ms": 3.39,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h5",
+              "passed": false,
+              "runtime_ms": 3.86,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 1530.0
+    }
+  },
+  "DC-08": {
+    "MT-A": {
+      "snapshots": [
+        {
+          "timestamp": 120.0,
+          "code": "def top_n_words(text, n):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 312.0,
+          "code": "def top_n_words(text, n):\n    counts = {}\n    for w in text.split():\n        counts[w] = counts.get(w, 0) + 1\n    ordered = sorted(counts, key=lambda w: counts[w], reverse=True)\n    return ordered[:n]\n",
+          "trigger": "run"
+        },
+        {
+          "timestamp": 504.0,
+          "code": "import re\nfrom collections import Counter\n\n\ndef top_n_words(text, n):\n    words = re.findall(r\"[a-z']+\", text.lower())\n    counts = Counter(words)\n    ordered = sorted(counts.items(), key=lambda item: (-item[1], item[0]))\n    return [word for word, _ in ordered[:n]]\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 316.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.56,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.31,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": false,
+              "runtime_ms": 4.72,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.22,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": false,
+              "runtime_ms": 3.97,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.54,
+              "timed_out": false
+            }
+          ]
+        },
+        {
+          "timestamp": 508.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.56,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.31,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": true,
+              "runtime_ms": 4.72,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.22,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": true,
+              "runtime_ms": 3.97,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.54,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 504.0
+    },
+    "MT-B": {
+      "snapshots": [
+        {
+          "timestamp": 180.0,
+          "code": "def merge_intervals(intervals):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 468.0,
+          "code": "def merge_intervals(intervals):\n    merged = []\n    for start, end in intervals:\n        if merged and start <= merged[-1][1]:\n            merged[-1][1] = end\n        else:\n            merged.append([start, end])\n    return merged\n",
+          "trigger": "run"
+        },
+        {
+          "timestamp": 756.0,
+          "code": "def merge_intervals(intervals):\n    merged = []\n    for start, end in sorted(intervals):\n        if merged and start <= merged[-1][1]:\n            merged[-1][1] = max(merged[-1][1], end)\n        else:\n            merged.append([start, end])\n    return merged\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 472.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "B-v1",
+              "passed": true,
+              "runtime_ms": 3.44,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-v2",
+              "passed": true,
+              "runtime_ms": 3.16,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h1",
+              "passed": true,
+              "runtime_ms": 3.03,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h2",
+              "passed": false,
+              "runtime_ms": 3.49,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h3",
+              "passed": false,
+              "runtime_ms": 3.12,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h4",
+              "passed": true,
+              "runtime_ms": 3.6,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h5",
+              "passed": false,
+              "runtime_ms": 3.49,
+              "timed_out": false
+            }
+          ]
+        },
+        {
+          "timestamp": 760.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "B-v1",
+              "passed": true,
+              "runtime_ms": 3.44,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-v2",
+              "passed": true,
+              "runtime_ms": 3.16,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h1",
+              "passed": true,
+              "runtime_ms": 3.03,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h2",
+              "passed": true,
+              "runtime_ms": 3.49,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h3",
+              "passed": true,
+              "runtime_ms": 3.12,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h4",
+              "passed": true,
+              "runtime_ms": 3.6,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h5",
+              "passed": true,
+              "runtime_ms": 3.49,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 756.0
+    }
+  },
+  "DC-09": {
+    "MT-A": {
+      "snapshots": [
+        {
+          "timestamp": 120.0,
+          "code": "def top_n_words(text, n):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 312.0,
+          "code": "def top_n_words(text, n):\n    counts = {}\n    for w in text.split():\n        counts[w] = counts.get(w, 0) + 1\n    ordered = sorted(counts, key=lambda w: counts[w], reverse=True)\n    return ordered[:n]\n",
+          "trigger": "run"
+        },
+        {
+          "timestamp": 504.0,
+          "code": "import re\nfrom collections import Counter\n\n\ndef top_n_words(text, n):\n    words = re.findall(r\"[a-z']+\", text.lower())\n    counts = Counter(words)\n    ordered = sorted(counts.items(), key=lambda item: (-item[1], item[0]))\n    return [word for word, _ in ordered[:n]]\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 316.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.58,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.78,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": false,
+              "runtime_ms": 4.69,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.36,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": false,
+              "runtime_ms": 4.29,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.13,
+              "timed_out": false
+            }
+          ]
+        },
+        {
+          "timestamp": 508.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.58,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.78,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": true,
+              "runtime_ms": 4.69,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.36,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": true,
+              "runtime_ms": 4.29,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.13,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 504.0
+    },
+    "MT-B": {
+      "snapshots": [
+        {
+          "timestamp": 180.0,
+          "code": "def merge_intervals(intervals):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 468.0,
+          "code": "def merge_intervals(intervals):\n    merged = []\n    for start, end in intervals:\n        if merged and start <= merged[-1][1]:\n            merged[-1][1] = end\n        else:\n            merged.append([start, end])\n    return merged\n",
+          "trigger": "run"
+        },
+        {
+          "timestamp": 756.0,
+          "code": "def merge_intervals(intervals):\n    merged = []\n    for start, end in sorted(intervals):\n        if merged and start <= merged[-1][1]:\n            merged[-1][1] = max(merged[-1][1], end)\n        else:\n            merged.append([start, end])\n    return merged\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 472.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "B-v1",
+              "passed": true,
+              "runtime_ms": 3.47,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-v2",
+              "passed": true,
+              "runtime_ms": 3.09,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h1",
+              "passed": true,
+              "runtime_ms": 3.29,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h2",
+              "passed": false,
+              "runtime_ms": 3.48,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h3",
+              "passed": false,
+              "runtime_ms": 3.13,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h4",
+              "passed": true,
+              "runtime_ms": 3.31,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h5",
+              "passed": false,
+              "runtime_ms": 3.3,
+              "timed_out": false
+            }
+          ]
+        },
+        {
+          "timestamp": 760.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "B-v1",
+              "passed": true,
+              "runtime_ms": 3.47,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-v2",
+              "passed": true,
+              "runtime_ms": 3.09,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h1",
+              "passed": true,
+              "runtime_ms": 3.29,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h2",
+              "passed": true,
+              "runtime_ms": 3.48,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h3",
+              "passed": true,
+              "runtime_ms": 3.13,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h4",
+              "passed": true,
+              "runtime_ms": 3.31,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h5",
+              "passed": true,
+              "runtime_ms": 3.3,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 756.0
+    }
+  },
+  "DC-10": {
+    "MT-A": {
+      "snapshots": [
+        {
+          "timestamp": 120.0,
+          "code": "def top_n_words(text, n):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 312.0,
+          "code": "def top_n_words(text, n):\n    counts = {}\n    for w in text.split():\n        counts[w] = counts.get(w, 0) + 1\n    ordered = sorted(counts, key=lambda w: counts[w], reverse=True)\n    return ordered[:n]\n",
+          "trigger": "run"
+        },
+        {
+          "timestamp": 504.0,
+          "code": "import re\nfrom collections import Counter\n\n\ndef top_n_words(text, n):\n    words = re.findall(r\"[a-z']+\", text.lower())\n    counts = Counter(words)\n    ordered = sorted(counts.items(), key=lambda item: (-item[1], item[0]))\n    return [word for word, _ in ordered[:n]]\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 316.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.27,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.34,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": false,
+              "runtime_ms": 3.98,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.13,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": false,
+              "runtime_ms": 4.31,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.55,
+              "timed_out": false
+            }
+          ]
+        },
+        {
+          "timestamp": 508.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.27,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.34,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": true,
+              "runtime_ms": 3.98,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.13,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": true,
+              "runtime_ms": 4.31,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.55,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 504.0
+    },
+    "MT-B": {
+      "snapshots": [
+        {
+          "timestamp": 180.0,
+          "code": "def merge_intervals(intervals):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 468.0,
+          "code": "def merge_intervals(intervals):\n    merged = []\n    for start, end in intervals:\n        if merged and start <= merged[-1][1]:\n            merged[-1][1] = end\n        else:\n            merged.append([start, end])\n    return merged\n",
+          "trigger": "run"
+        },
+        {
+          "timestamp": 756.0,
+          "code": "def merge_intervals(intervals):\n    merged = []\n    for start, end in sorted(intervals):\n        if merged and start <= merged[-1][1]:\n            merged[-1][1] = max(merged[-1][1], end)\n        else:\n            merged.append([start, end])\n    return merged\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 472.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "B-v1",
+              "passed": true,
+              "runtime_ms": 3.51,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-v2",
+              "passed": true,
+              "runtime_ms": 3.09,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h1",
+              "passed": true,
+              "runtime_ms": 3.0,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h2",
+              "passed": false,
+              "runtime_ms": 3.01,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h3",
+              "passed": false,
+              "runtime_ms": 3.48,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h4",
+              "passed": true,
+              "runtime_ms": 3.48,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h5",
+              "passed": false,
+              "runtime_ms": 3.05,
+              "timed_out": false
+            }
+          ]
+        },
+        {
+          "timestamp": 760.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "B-v1",
+              "passed": true,
+              "runtime_ms": 3.51,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-v2",
+              "passed": true,
+              "runtime_ms": 3.09,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h1",
+              "passed": true,
+              "runtime_ms": 3.0,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h2",
+              "passed": true,
+              "runtime_ms": 3.01,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h3",
+              "passed": true,
+              "runtime_ms": 3.48,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h4",
+              "passed": true,
+              "runtime_ms": 3.48,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h5",
+              "passed": true,
+              "runtime_ms": 3.05,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 756.0
+    }
+  },
+  "DC-11": {
+    "MT-A": {
+      "snapshots": [
+        {
+          "timestamp": 120.0,
+          "code": "def top_n_words(text, n):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 1020.0,
+          "code": "def top_n_words(text, n):\n    counts = {}\n    for w in text.split():\n        counts[w] = counts.get(w, 0) + 1\n    ordered = sorted(counts, key=lambda w: counts[w], reverse=True)\n    return ordered[:n]\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 1024.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.94,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.91,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": false,
+              "runtime_ms": 4.74,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.55,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": false,
+              "runtime_ms": 5.03,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.83,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 1020.0
+    },
+    "MT-B": {
+      "snapshots": [
+        {
+          "timestamp": 180.0,
+          "code": "def merge_intervals(intervals):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 1782.0,
+          "code": "def merge_intervals(intervals):\n    result = []\n    for i in intervals\n        result.append(i)\n    return result\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 1786.0,
+          "compile_error": true,
+          "stdout_tail": "",
+          "stderr_tail": "SyntaxError: expected ':' (solution.py, line 3)",
+          "results": []
+        }
+      ],
+      "submitted_at": 1782.0
+    }
+  },
+  "DC-12": {
+    "MT-A": {
+      "snapshots": [
+        {
+          "timestamp": 120.0,
+          "code": "def top_n_words(text, n):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 312.0,
+          "code": "def top_n_words(text, n):\n    counts = {}\n    for w in text.split():\n        counts[w] = counts.get(w, 0) + 1\n    ordered = sorted(counts, key=lambda w: counts[w], reverse=True)\n    return ordered[:n]\n",
+          "trigger": "run"
+        },
+        {
+          "timestamp": 504.0,
+          "code": "import re\nfrom collections import Counter\n\n\ndef top_n_words(text, n):\n    words = re.findall(r\"[a-z']+\", text.lower())\n    counts = Counter(words)\n    ordered = sorted(counts.items(), key=lambda item: (-item[1], item[0]))\n    return [word for word, _ in ordered[:n]]\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 316.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.14,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.15,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": false,
+              "runtime_ms": 4.8,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.07,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": false,
+              "runtime_ms": 4.74,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.31,
+              "timed_out": false
+            }
+          ]
+        },
+        {
+          "timestamp": 508.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.14,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.15,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": true,
+              "runtime_ms": 4.8,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.07,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": true,
+              "runtime_ms": 4.74,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.31,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 504.0
+    },
+    "MT-B": {
+      "snapshots": [
+        {
+          "timestamp": 180.0,
+          "code": "def merge_intervals(intervals):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 1530.0,
+          "code": "def merge_intervals(intervals):\n    merged = []\n    for start, end in intervals:\n        if merged and start <= merged[-1][1]:\n            merged[-1][1] = end\n        else:\n            merged.append([start, end])\n    return merged\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 1534.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "B-v1",
+              "passed": true,
+              "runtime_ms": 3.44,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-v2",
+              "passed": true,
+              "runtime_ms": 3.7,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h1",
+              "passed": true,
+              "runtime_ms": 3.88,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h2",
+              "passed": false,
+              "runtime_ms": 3.83,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h3",
+              "passed": false,
+              "runtime_ms": 3.87,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h4",
+              "passed": true,
+              "runtime_ms": 3.28,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h5",
+              "passed": false,
+              "runtime_ms": 3.62,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 1530.0
+    }
+  },
+  "DC-13": {
+    "MT-A": {
+      "snapshots": [
+        {
+          "timestamp": 120.0,
+          "code": "def top_n_words(text, n):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 312.0,
+          "code": "def top_n_words(text, n):\n    counts = {}\n    for w in text.split():\n        counts[w] = counts.get(w, 0) + 1\n    ordered = sorted(counts, key=lambda w: counts[w], reverse=True)\n    return ordered[:n]\n",
+          "trigger": "run"
+        },
+        {
+          "timestamp": 504.0,
+          "code": "import re\nfrom collections import Counter\n\n\ndef top_n_words(text, n):\n    words = re.findall(r\"[a-z']+\", text.lower())\n    counts = Counter(words)\n    ordered = sorted(counts.items(), key=lambda item: (-item[1], item[0]))\n    return [word for word, _ in ordered[:n]]\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 316.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.79,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.78,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": false,
+              "runtime_ms": 4.77,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.63,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": false,
+              "runtime_ms": 4.31,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.4,
+              "timed_out": false
+            }
+          ]
+        },
+        {
+          "timestamp": 508.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.79,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.78,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": true,
+              "runtime_ms": 4.77,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.63,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": true,
+              "runtime_ms": 4.31,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.4,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 504.0
+    },
+    "MT-B": {
+      "snapshots": [
+        {
+          "timestamp": 180.0,
+          "code": "def merge_intervals(intervals):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 1530.0,
+          "code": "def merge_intervals(intervals):\n    merged = []\n    for start, end in intervals:\n        if merged and start <= merged[-1][1]:\n            merged[-1][1] = end\n        else:\n            merged.append([start, end])\n    return merged\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 1534.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "B-v1",
+              "passed": true,
+              "runtime_ms": 3.84,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-v2",
+              "passed": true,
+              "runtime_ms": 3.62,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h1",
+              "passed": true,
+              "runtime_ms": 3.31,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h2",
+              "passed": false,
+              "runtime_ms": 3.3,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h3",
+              "passed": false,
+              "runtime_ms": 3.41,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h4",
+              "passed": true,
+              "runtime_ms": 3.94,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h5",
+              "passed": false,
+              "runtime_ms": 3.92,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 1530.0
+    }
+  },
+  "DC-14": {
+    "MT-A": {
+      "snapshots": [
+        {
+          "timestamp": 120.0,
+          "code": "def top_n_words(text, n):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 312.0,
+          "code": "def top_n_words(text, n):\n    counts = {}\n    for w in text.split():\n        counts[w] = counts.get(w, 0) + 1\n    ordered = sorted(counts, key=lambda w: counts[w], reverse=True)\n    return ordered[:n]\n",
+          "trigger": "run"
+        },
+        {
+          "timestamp": 504.0,
+          "code": "import re\nfrom collections import Counter\n\n\ndef top_n_words(text, n):\n    words = re.findall(r\"[a-z']+\", text.lower())\n    counts = Counter(words)\n    ordered = sorted(counts.items(), key=lambda item: (-item[1], item[0]))\n    return [word for word, _ in ordered[:n]]\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 316.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.38,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.27,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": false,
+              "runtime_ms": 4.72,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.37,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": false,
+              "runtime_ms": 4.02,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.53,
+              "timed_out": false
+            }
+          ]
+        },
+        {
+          "timestamp": 508.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.38,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.27,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": true,
+              "runtime_ms": 4.72,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.37,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": true,
+              "runtime_ms": 4.02,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.53,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 504.0
+    },
+    "MT-B": {
+      "snapshots": [
+        {
+          "timestamp": 180.0,
+          "code": "def merge_intervals(intervals):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 468.0,
+          "code": "def merge_intervals(intervals):\n    merged = []\n    for start, end in intervals:\n        if merged and start <= merged[-1][1]:\n            merged[-1][1] = end\n        else:\n            merged.append([start, end])\n    return merged\n",
+          "trigger": "run"
+        },
+        {
+          "timestamp": 756.0,
+          "code": "def merge_intervals(intervals):\n    merged = []\n    for start, end in sorted(intervals):\n        if merged and start <= merged[-1][1]:\n            merged[-1][1] = max(merged[-1][1], end)\n        else:\n            merged.append([start, end])\n    return merged\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 472.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "B-v1",
+              "passed": true,
+              "runtime_ms": 3.57,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-v2",
+              "passed": true,
+              "runtime_ms": 3.01,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h1",
+              "passed": true,
+              "runtime_ms": 3.48,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h2",
+              "passed": false,
+              "runtime_ms": 3.12,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h3",
+              "passed": false,
+              "runtime_ms": 3.38,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h4",
+              "passed": true,
+              "runtime_ms": 3.51,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h5",
+              "passed": false,
+              "runtime_ms": 3.36,
+              "timed_out": false
+            }
+          ]
+        },
+        {
+          "timestamp": 760.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "B-v1",
+              "passed": true,
+              "runtime_ms": 3.57,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-v2",
+              "passed": true,
+              "runtime_ms": 3.01,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h1",
+              "passed": true,
+              "runtime_ms": 3.48,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h2",
+              "passed": true,
+              "runtime_ms": 3.12,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h3",
+              "passed": true,
+              "runtime_ms": 3.38,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h4",
+              "passed": true,
+              "runtime_ms": 3.51,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h5",
+              "passed": true,
+              "runtime_ms": 3.36,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 756.0
+    }
+  },
+  "DC-15": {
+    "MT-A": {
+      "snapshots": [
+        {
+          "timestamp": 120.0,
+          "code": "def top_n_words(text, n):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 312.0,
+          "code": "def top_n_words(text, n):\n    counts = {}\n    for w in text.split():\n        counts[w] = counts.get(w, 0) + 1\n    ordered = sorted(counts, key=lambda w: counts[w], reverse=True)\n    return ordered[:n]\n",
+          "trigger": "run"
+        },
+        {
+          "timestamp": 504.0,
+          "code": "import re\nfrom collections import Counter\n\n\ndef top_n_words(text, n):\n    words = re.findall(r\"[a-z']+\", text.lower())\n    counts = Counter(words)\n    ordered = sorted(counts.items(), key=lambda item: (-item[1], item[0]))\n    return [word for word, _ in ordered[:n]]\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 316.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.25,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.36,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": false,
+              "runtime_ms": 4.28,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.64,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": false,
+              "runtime_ms": 4.69,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.09,
+              "timed_out": false
+            }
+          ]
+        },
+        {
+          "timestamp": 508.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.25,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.36,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": true,
+              "runtime_ms": 4.28,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 4.64,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": true,
+              "runtime_ms": 4.69,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.09,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 504.0
+    },
+    "MT-B": {
+      "snapshots": [
+        {
+          "timestamp": 180.0,
+          "code": "def merge_intervals(intervals):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 1530.0,
+          "code": "def merge_intervals(intervals):\n    merged = []\n    for start, end in intervals:\n        if merged and start <= merged[-1][1]:\n            merged[-1][1] = end\n        else:\n            merged.append([start, end])\n    return merged\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 1534.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "B-v1",
+              "passed": true,
+              "runtime_ms": 3.34,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-v2",
+              "passed": true,
+              "runtime_ms": 3.92,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h1",
+              "passed": true,
+              "runtime_ms": 3.42,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h2",
+              "passed": false,
+              "runtime_ms": 3.85,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h3",
+              "passed": false,
+              "runtime_ms": 3.48,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h4",
+              "passed": true,
+              "runtime_ms": 3.74,
+              "timed_out": false
+            },
+            {
+              "case_id": "B-h5",
+              "passed": false,
+              "runtime_ms": 3.54,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 1530.0
+    }
+  },
+  "DC-16": {
+    "MT-A": {
+      "snapshots": [
+        {
+          "timestamp": 120.0,
+          "code": "def top_n_words(text, n):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 1020.0,
+          "code": "def top_n_words(text, n):\n    counts = {}\n    for w in text.split():\n        counts[w] = counts.get(w, 0) + 1\n    ordered = sorted(counts, key=lambda w: counts[w], reverse=True)\n    return ordered[:n]\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 1024.0,
+          "compile_error": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "results": [
+            {
+              "case_id": "A-v1",
+              "passed": true,
+              "runtime_ms": 4.73,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-v2",
+              "passed": true,
+              "runtime_ms": 4.77,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h1",
+              "passed": false,
+              "runtime_ms": 5.19,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h2",
+              "passed": true,
+              "runtime_ms": 5.01,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h3",
+              "passed": false,
+              "runtime_ms": 5.04,
+              "timed_out": false
+            },
+            {
+              "case_id": "A-h4",
+              "passed": true,
+              "runtime_ms": 4.77,
+              "timed_out": false
+            }
+          ]
+        }
+      ],
+      "submitted_at": 1020.0
+    },
+    "MT-B": {
+      "snapshots": [
+        {
+          "timestamp": 180.0,
+          "code": "def merge_intervals(intervals):\n    pass\n",
+          "trigger": "interval"
+        },
+        {
+          "timestamp": 1782.0,
+          "code": "def merge_intervals(intervals):\n    result = []\n    for i in intervals\n        result.append(i)\n    return result\n",
+          "trigger": "submit"
+        }
+      ],
+      "runs": [
+        {
+          "timestamp": 1786.0,
+          "compile_error": true,
+          "stdout_tail": "",
+          "stderr_tail": "SyntaxError: expected ':' (solution.py, line 3)",
+          "results": []
+        }
+      ],
+      "submitted_at": 1782.0
+    }
+  }
+}

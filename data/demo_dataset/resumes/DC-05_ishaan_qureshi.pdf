@@ -1,0 +1,58 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [4 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 1117 >>
+stream
+BT /F1 10 Tf 14 TL 40 800 Td
+(Name: Ishaan Qureshi) Tj T*
+(Designation: Software Developer \(ex-QA\)) Tj T*
+(Location: Delhi NCR, India) Tj T*
+(Email: ishaan.qureshi@example.com) Tj T*
+(Phone: +91-90000-02005) Tj T*
+() Tj T*
+(Summary:) Tj T*
+(4 years in manual and automation testing, now 2 years as a developer working in React and) Tj T*
+(  Node.js.) Tj T*
+() Tj T*
+(Skills: React.js, Node.js, JavaScript, MongoDB, Git, Jira, Selenium, REST APIs) Tj T*
+() Tj T*
+(Experience:) Tj T*
+(- Software Developer, Craftwave Technologies \(Dec 2024 - Present\)) Tj T*
+(  Moved from QA to development; built React screens and Node.js endpoints for an HR product.) Tj T*
+(- QA Automation Engineer, Craftwave Technologies \(Nov 2022 - Nov 2024\)) Tj T*
+(  Wrote Selenium suites and Postman collections for REST APIs.) Tj T*
+(- Manual Tester, Testlane Services \(Oct 2020 - Oct 2022\)) Tj T*
+(  Executed regression cycles and raised defects in Jira.) Tj T*
+() Tj T*
+(Education:) Tj T*
+(- B.Tech in Electronics, Delhi Technological College, 2020) Tj T*
+() Tj T*
+(Certifications:) Tj T*
+(- ISTQB Foundation Level \(2021\)) Tj T*
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000000311 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1480
+%%EOF

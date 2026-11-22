@@ -1,0 +1,17 @@
+Name: Amit Chawla
+Designation: HR Executive
+Location: Delhi NCR, India
+Email: amit.chawla@example.com
+Phone: +91-90000-02027
+
+Summary:
+1.5 years in recruitment and HR operations.
+
+Skills: Recruitment, Onboarding, Excel
+
+Experience:
+- HR Executive, Maxcare Services (May 2025 - Present)
+  Recruitment, interview scheduling and onboarding for a small team.
+
+Education:
+- BBA, Guru Gobind Singh University, 2024

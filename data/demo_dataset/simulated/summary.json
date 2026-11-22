@@ -1,0 +1,118 @@
+{
+  "candidates": 30,
+  "outcomes": {
+    "hold_review": 25,
+    "rejected": 2,
+    "selected": 3
+  },
+  "ats_zones": {
+    "shortlist": 17,
+    "review": 10,
+    "reject": 3
+  },
+  "expected_outcome_met": 24,
+  "expected_outcome_missed": [
+    "DC-01",
+    "DC-10",
+    "DC-14",
+    "DC-21",
+    "DC-22",
+    "DC-26"
+  ],
+  "by_job": {
+    "Full Stack Developer (MERN)": {
+      "candidates": 9,
+      "met": 8
+    },
+    "Java Backend Developer": {
+      "candidates": 4,
+      "met": 3
+    },
+    "DevOps Engineer": {
+      "candidates": 3,
+      "met": 2
+    },
+    "Sales Executive (B2B SaaS)": {
+      "candidates": 5,
+      "met": 4
+    },
+    "UI/UX Designer": {
+      "candidates": 4,
+      "met": 3
+    },
+    "HR Recruiter (Talent Acquisition)": {
+      "candidates": 5,
+      "met": 4
+    }
+  },
+  "provisional": 0,
+  "with_errors": [],
+  "automated_rejections": 0,
+  "miss_explanations": {
+    "DC-01": {
+      "outcome": "hold_review",
+      "expected": [
+        "selected"
+      ],
+      "flags": [
+        "ROUND_DISAGREEMENT"
+      ],
+      "reason": "The score (86.39%) would select this candidate, but selection is held for review because the aggregate score raised review flags: Rounds disagree strongly (machine_test 97 vs ats 62); an average hides that."
+    },
+    "DC-10": {
+      "outcome": "hold_review",
+      "expected": [
+        "selected"
+      ],
+      "flags": [
+        "ROUND_DISAGREEMENT"
+      ],
+      "reason": "The score (85.97%) would select this candidate, but selection is held for review because the aggregate score raised review flags: Rounds disagree strongly (machine_test 97 vs ats 61.9); an average hides that."
+    },
+    "DC-14": {
+      "outcome": "hold_review",
+      "expected": [
+        "selected"
+      ],
+      "flags": [
+        "ROUND_DISAGREEMENT"
+      ],
+      "reason": "The score (81.07%) would select this candidate, but selection is held for review because the aggregate score raised review flags: Rounds disagree strongly (machine_test 97 vs technical_interview 56); an average hides that."
+    },
+    "DC-21": {
+      "outcome": "selected",
+      "expected": [
+        "hold_review"
+      ],
+      "flags": [],
+      "reason": "Hiring Fit 83.61% clears the selection threshold (70) with no rule blocking it."
+    },
+    "DC-22": {
+      "outcome": "hold_review",
+      "expected": [
+        "selected"
+      ],
+      "flags": [
+        "ROUND_DISAGREEMENT"
+      ],
+      "reason": "The score (83.88%) would select this candidate, but selection is held for review because the aggregate score raised review flags: Rounds disagree strongly (hr_interview 92.8 vs ats 57.8); an average hides that."
+    },
+    "DC-26": {
+      "outcome": "hold_review",
+      "expected": [
+        "selected"
+      ],
+      "flags": [
+        "ROUND_DISAGREEMENT"
+      ],
+      "reason": "The score (83.57%) would select this candidate, but selection is held for review because the aggregate score raised review flags: Rounds disagree strongly (hr_interview 92.8 vs ats 56.3); an average hides that."
+    }
+  },
+  "integrity_tags": {
+    "clear": 15,
+    "low": 0,
+    "medium": 1,
+    "high": 0
+  },
+  "total_ms": 4392.0
+}

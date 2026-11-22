@@ -1,0 +1,60 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [4 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 1232 >>
+stream
+BT /F1 10 Tf 14 TL 40 800 Td
+(Name: Arjun Verma) Tj T*
+(Designation: Lead Full Stack Engineer) Tj T*
+(Location: Hyderabad, India) Tj T*
+(Email: arjun.verma@example.com) Tj T*
+(Phone: +91-90000-02002) Tj T*
+() Tj T*
+(Summary:) Tj T*
+(8 years in product engineering; led teams of up to 6 building multi-tenant SaaS on the MERN) Tj T*
+(  stack.) Tj T*
+() Tj T*
+(Skills: React.js, Node.js, Express.js, MongoDB, TypeScript, AWS, Docker, Kubernetes, REST) Tj T*
+(  APIs, GraphQL, CI/CD, Git) Tj T*
+() Tj T*
+(Experience:) Tj T*
+(- Lead Full Stack Engineer, Stackbridge Systems \(Apr 2023 - Present\)) Tj T*
+(  Led a six-person team; designed the event-driven order service handling 2M requests a day;) Tj T*
+(  introduced code review standards.) Tj T*
+(- Senior Software Engineer, Quantra Technologies \(Oct 2020 - Mar 2023\)) Tj T*
+(  Built the React admin platform and Node.js APIs; mentored four junior developers.) Tj T*
+(- Software Engineer, Ledgerline \(Sep 2018 - Sep 2020\)) Tj T*
+(  Developed Express APIs on MongoDB for an invoicing product.) Tj T*
+() Tj T*
+(Education:) Tj T*
+(- B.E. in Information Technology, Anna University, 2016) Tj T*
+() Tj T*
+(Certifications:) Tj T*
+(- AWS Certified Developer Associate \(2022\)) Tj T*
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000000311 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1595
+%%EOF

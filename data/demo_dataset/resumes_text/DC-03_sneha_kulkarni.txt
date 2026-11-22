@@ -1,0 +1,17 @@
+Name: Sneha Kulkarni
+Designation: MERN Stack Developer (Fresher)
+Location: Pune, India
+Email: sneha.kulkarni@example.com
+Phone: +91-90000-02003
+
+Summary:
+Recent graduate with a 6-month internship and three full-stack projects using MongoDB, Express, React and Node.js.
+
+Skills: React.js, Node.js, Express.js, MongoDB, JavaScript, Git, HTML, CSS
+
+Experience:
+- Software Engineering Intern, Pixelforge (Jan 2026 - Jul 2026)
+  Built a customer feedback page in React and a small Express API; fixed 15 bugs from the team backlog.
+
+Education:
+- B.Tech in Computer Science, College of Engineering Pune, 2026

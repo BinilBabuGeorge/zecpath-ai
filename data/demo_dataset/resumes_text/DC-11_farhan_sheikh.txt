@@ -1,0 +1,19 @@
+Name: Farhan Sheikh
+Designation: Java Developer
+Location: Mumbai, India
+Email: farhan.sheikh@example.com
+Phone: +91-90000-02011
+
+Summary:
+3 years of experience in Java and Spring Boot application development.
+
+Skills: Java, Spring Boot, MySQL, REST APIs, Git, Docker
+
+Experience:
+- Java Developer, Bytewise Solutions (Jan 2025 - Present)
+  Worked on Spring Boot modules and bug fixes for a retail application.
+- Associate Developer, Bytewise Solutions (Oct 2023 - Dec 2024)
+  Supported Java services and wrote simple SQL queries.
+
+Education:
+- B.Sc in Computer Science, University of Mumbai, 2022

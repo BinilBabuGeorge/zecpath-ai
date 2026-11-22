@@ -1,0 +1,26 @@
+Name: Harish Bhandari
+Gender: Male
+Date of Birth: 3 March 2001
+Marital Status: Single
+Religion: Hindu
+Nationality: Indian
+Father's Name: Mahesh Bhandari
+Photo: attached
+Designation: HR Recruiter
+Location: Delhi NCR, India
+Email: harish.bhandari@example.com
+Phone: +91-90000-02028
+
+Summary:
+2.5 years of recruitment experience in the retail sector.
+
+Skills: Recruitment, Candidate Sourcing, Onboarding, Excel, Interview Coordination
+
+Experience:
+- HR Recruiter, Shoplane Retail (Sep 2025 - Present)
+  Hired store staff and managers across six cities; maintained the hiring tracker in Excel.
+- HR Intern, Shoplane Retail (Oct 2024 - Aug 2025)
+  Screened resumes and scheduled interviews.
+
+Education:
+- BBA, IP University, 2024

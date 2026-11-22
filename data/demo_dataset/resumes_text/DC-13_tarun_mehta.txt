@@ -1,0 +1,14 @@
+Name: Tarun Mehta
+Designation: Java Developer
+Location: Pune, India
+Email: tarun.mehta@example.com
+Phone: +91-90000-02013
+
+3.5 years in Java and Spring Boot development.
+
+Technologies I work with: Java, Spring Boot, MySQL, REST APIs, Git, Docker, Redis.
+
+Java Developer at Sapphire Systems from Oct 2024 to now. Built Spring Boot services for an inventory system and tuned MySQL queries.
+Junior Java Developer at Sapphire Systems from Apr 2023 to Sep 2024. Fixed defects and wrote unit tests.
+
+Studied B.E. in Computer Science at Walchand College of Engineering (2022).

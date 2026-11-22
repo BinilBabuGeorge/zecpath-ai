@@ -1,0 +1,18 @@
+Name: Riya Sharma
+Designation: MBA Graduate (Marketing)
+Location: Delhi NCR, India
+Email: riya.sharma@example.com
+Phone: +91-90000-02019
+
+Summary:
+Recent MBA graduate with a two-month summer internship in sales.
+
+Skills: Lead Generation, Cold Calling, Negotiation, Excel
+
+Experience:
+- Sales Intern, Brandspire (Apr 2026 - Jun 2026)
+  Made 40 outreach calls a day and generated 25 qualified leads in eight weeks.
+
+Education:
+- MBA in Marketing, Symbiosis Institute of Business Management, 2026
+- BBA, Delhi University, 2024

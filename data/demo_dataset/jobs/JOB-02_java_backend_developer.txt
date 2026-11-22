@@ -1,0 +1,30 @@
+Job Title: Java Backend Developer
+Department: Platform Engineering
+Location: Pune (On-site)
+Experience Required: 3-5 years
+Employment Type: Full-time
+
+About the Role:
+Northgate Insurance is modernising its policy-administration platform. You will build and maintain Java services that handle policy data for several million customers.
+
+Required Skills:
+- Strong core Java and Spring Boot
+- Solid SQL with PostgreSQL or MySQL
+- Experience building REST APIs
+- Git and Docker
+
+Good to Have:
+- AWS
+- Redis
+- CI/CD with Jenkins
+
+Education:
+- B.Tech/B.E. in Computer Science, IT or a related field
+
+Responsibilities:
+- Develop and maintain Spring Boot microservices
+- Write efficient SQL and tune slow queries
+- Write unit and integration tests
+- Investigate production incidents with the support team
+
+Salary Range: Rs 9,00,000 - Rs 16,00,000 per annum

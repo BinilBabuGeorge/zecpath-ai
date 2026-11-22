@@ -1,0 +1,21 @@
+Name: Rahul Desai
+Designation: Full Stack Developer
+Location: Mumbai, India
+Email: rahul.desai@example.com
+Phone: +91-90000-02004
+
+Summary:
+Passionate full stack developer expert in all modern technologies.
+
+Skills: React.js, Node.js, Express.js, MongoDB, TypeScript, Angular, Vue.js, Next.js, Python, Django, Flask, Java, Spring Boot, PHP, MySQL, PostgreSQL, Redis, GraphQL, Docker, Kubernetes, AWS, Azure, GCP, Terraform, Jenkins, CI/CD, Linux, Git, GitHub, jQuery, REST APIs, HTML, CSS, Agile, Scrum, Jira, TensorFlow, PyTorch
+Technologies: React.js, Node.js, Express.js, MongoDB, TypeScript, Angular, Vue.js, Next.js, Python, Django, Flask, Java, Spring Boot, PHP, MySQL, PostgreSQL, Redis, GraphQL, Docker, Kubernetes, AWS, Azure, GCP, Terraform, Jenkins, CI/CD, Linux, Git, GitHub, jQuery, REST APIs, HTML, CSS, Agile, Scrum, Jira, TensorFlow, PyTorch
+Keywords: React.js, Node.js, Express.js, MongoDB, TypeScript, Angular, Vue.js, Next.js, Python, Django, Flask, Java, Spring Boot, PHP, MySQL, PostgreSQL, Redis, GraphQL, Docker, Kubernetes, AWS, Azure, GCP, Terraform, Jenkins, CI/CD, Linux, Git, GitHub, jQuery, REST APIs, HTML, CSS, Agile, Scrum, Jira, TensorFlow, PyTorch
+
+Experience:
+- Web Developer, Brightbyte Solutions (Jun 2025 - Present)
+  Worked on websites.
+- Trainee, Brightbyte Solutions (Feb 2025 - May 2025)
+  Learned technologies.
+
+Education:
+- B.Sc in Information Technology, Mumbai University, 2024
