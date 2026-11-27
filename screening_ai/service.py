@@ -44,11 +44,16 @@ class ScreeningService(BaseAIService):
             conf = t.get("confidence", 0.9)
             if isinstance(conf, bool) or not isinstance(conf, (int, float)) or conf != conf or not 0 <= conf <= 1:
                 raise ServiceInputError("invalid_input", f"turns[{i}].confidence must be a number between 0 and 1.", f"turns[{i}].confidence")
-            raw_turns.append(RawSTTResult(text=t.get("text", ""), confidence=float(conf), is_silent=bool(t.get("is_silent", False))))
+            raw_turns.append(RawSTTResult(text=t.get("text", ""), confidence=float(conf), is_silent=bool(t.get("is_silent", False)) or not t.get("text", "").strip()))   # Day 65: a turn with no text is silence
 
         self.logger.info("Scoring screening call for candidate %s (%d turns)", candidate_id, len(raw_turns))
         call = run_screening_call(raw_turns, candidate_id=candidate_id or "unknown", job_role=str(payload.get("job_role", "unspecified")))
         status = "ended_early" if call.controller.call_ended_early else "completed" if call.controller.is_call_complete else "incomplete"
+        if not call.categories_answered and not call.controller.call_ended_early:         # Day 65: silence is not a low score. Nothing was answered, so nothing is scored.
+            response.update({"call_status": "not_started", "screening_score": None, "categories_answered": [], "categories_missing": list(call.categories_missing),
+                             "turns_used": len(raw_turns),
+                             "warnings": ["No turn held an answer (every turn was empty or silent), so no score was given and the call counts as not started. Ask the candidate to retry the call."]})
+            return response
         response.update({
             "call_status": status,
             "screening_score": round(call.scoring_result.total_score, 2),

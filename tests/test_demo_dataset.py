@@ -109,15 +109,21 @@ def test_the_dataset_is_synthetic_only():
 
 
 # ------------------------------------------------------------------------------------------------------------ reproducible
+
+def _lf(b: bytes) -> bytes:
+    """Day 65 (ENG-04): Windows writes CRLF, Linux LF. Same content must compare equal on both."""
+    return b.replace(b"\r\n", b"\n")
+
+
 def test_rebuilding_the_dataset_gives_the_same_inputs():
     with tempfile.TemporaryDirectory() as tmp:
         out = Path(tmp) / "demo_dataset"
         builder.build_dataset(out)
         for rel in ("candidates.json", "manifest.json", "jobs/jobs.json", "responses/screening_responses.json", "responses/hr_responses.json",
                     "responses/technical_responses.json", "machine_test/tasks.json", "machine_test/submissions.json", "integrity/browser_events.json"):
-            assert (out / rel).read_bytes() == (BASE / rel).read_bytes(), rel
+            assert _lf((out / rel).read_bytes()) == _lf((BASE / rel).read_bytes()), rel
         for f in sorted((BASE / "resumes_text").glob("*.txt")) + sorted((BASE / "jobs").glob("JOB-*.txt")):
-            assert (out / f.relative_to(BASE)).read_bytes() == f.read_bytes(), f.name
+            assert _lf((out / f.relative_to(BASE)).read_bytes()) == _lf(f.read_bytes()), f.name
         for f in (BASE / "resumes").glob("*.pdf"):
             assert (out / "resumes" / f.name).read_bytes() == f.read_bytes(), f.name
 

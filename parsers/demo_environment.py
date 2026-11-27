@@ -383,7 +383,10 @@ def probe_findings(runs: List[CandidateRun], ds: Dict[str, Any]) -> List[Dict[st
                 "evidence": {"screening": round(d30.journey.screening.total_score, 1), "outcome": d30.outcome}})
 
     months = answer_intent_engine.extract_experience_years("I have six months of internship experience")
-    out.append({"id": "F10", "title": "'Six months' is read as six years in a screening answer",
-                "statement": f"extract_experience_years('I have six months of internship experience') returns {months}. The dataset's fresher candidates therefore say '0.5 years' instead.",
+    fixed = months == 0.5
+    out.append({"id": "F10", "title": "'Six months' is read as 0.5 years (fixed on Day 65)" if fixed else "'Six months' is read as six years in a screening answer",
+                "statement": (f"extract_experience_years('I have six months of internship experience') returns {months}. Before Day 65 it returned 6.0, so a fresher with six months "
+                              "of internship looked like a candidate with six years.") if fixed else
+                             f"extract_experience_years('I have six months of internship experience') returns {months}. The dataset's fresher candidates therefore say '0.5 years' instead.",
                 "evidence": {"returned": months}})
     return out

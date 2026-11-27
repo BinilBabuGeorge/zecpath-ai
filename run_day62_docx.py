@@ -96,7 +96,7 @@ def _style_styles(doc: Document) -> None:
         styles[name].font.italic = False
 
 
-def _page_setup(doc: Document, title: str) -> None:
+def _page_setup(doc: Document, title: str, day: str = "Day 62") -> None:
     for section in doc.sections:
         section.page_width, section.page_height = Emu(PAGE_W * 635), Emu(PAGE_H * 635)
         section.left_margin = section.right_margin = section.top_margin = section.bottom_margin = Emu(MARGIN * 635)
@@ -104,7 +104,7 @@ def _page_setup(doc: Document, title: str) -> None:
         footer = section.footer
         para = footer.paragraphs[0] if footer.paragraphs else footer.add_paragraph()
         para.text = ""
-        run = para.add_run(f"{title}  |  Day 62  |  Page ")
+        run = para.add_run(f"{title}  |  {day}  |  Page ")
         run.font.size, run.font.name, run.font.color.rgb = Pt(8), FONT, GREY
         for kind, text in (("begin", None), (None, "PAGE"), ("end", None)):
             r = para.add_run()
@@ -254,12 +254,12 @@ def _space_around_tables(doc: Document) -> None:
                     ppr.insert(0, OxmlElement("w:keepNext"))
 
 
-def build(source: Path, output: Path, title: str, page_breaks: bool = True) -> Path:
+def build(source: Path, output: Path, title: str, page_breaks: bool = True, day: str = "Day 62") -> Path:
     raw = output.with_suffix(".raw.docx")
     subprocess.run(["pandoc", str(source), "-f", "gfm", "-t", "docx", "-o", str(raw), f"--resource-path={source.parent}"], check=True)
     doc = Document(str(raw))
     _style_styles(doc)
-    _page_setup(doc, title)
+    _page_setup(doc, title, day)
     _style_body(doc, page_breaks)
     _space_around_tables(doc)
     for table in doc.tables:

@@ -517,6 +517,16 @@ def _diverse_top(findings: List[Finding], n: int, strongest_first: bool) -> List
     return sorted(picked, key=key)
 
 
+# Day 65: the summary line names a concern in a few words; the full sentence stays in the risk table further down the report.
+RISK_SHORT = {"integrity": "interview integrity flag, session needs a look", "behavior": "behavioral timing signals", "evidence": "rounds missing or thin evidence",
+              "scoring": "rounds disagree or score is borderline", "machine_test": "machine test code needs a reviewer",
+              "confidence": "low confidence in the recommendation", "consistency": "answers are inconsistent across rounds"}
+
+
+def _short_risk(risk: "RiskIndicator") -> str:
+    return RISK_SHORT.get(risk.category, risk.category.replace("_", " "))
+
+
 def _executive_summary(label: str, role_title: Optional[str], decision: CandidateDecision, strengths: List[Finding],
                        weaknesses: List[Finding], risks: List[RiskIndicator], score: CrossRoundCandidateScore, steps: List[str]) -> List[str]:
     fit = "n/a" if decision.hiring_fit_percentage is None else f"{decision.hiring_fit_percentage}%"
@@ -526,11 +536,12 @@ def _executive_summary(label: str, role_title: Optional[str], decision: Candidat
     if decision.reasons:
         lines.append("Why: " + decision.reasons[0])
     top_s = _diverse_top(strengths, SUMMARY_TOP_N, strongest_first=True)
-    lines.append("Strongest areas: " + ("; ".join(f"{f.area} ({_fmt(f.score)}, {ROUND_TITLES[f.source]})" for f in top_s) if top_s
+    lines.append("Strongest areas: " + ("; ".join(f"{f.area} ({_fmt(f.score)}, {ROUND_TITLES[f.source]})" for f in top_s) + "." if top_s
                                        else f"none at or above {_fmt(STRENGTH_MIN)}."))
-    concerns = [f"{f.area} ({_fmt(f.score)}, {ROUND_TITLES[f.source]})" for f in _diverse_top(weaknesses, SUMMARY_TOP_N, strongest_first=False)]
-    concerns += [r.message.split(";")[0].rstrip(".") for r in risks if r.severity in (Severity.HIGH, Severity.MEDIUM)][:SUMMARY_TOP_N]
-    lines.append("Main concerns: " + ("; ".join(concerns[:SUMMARY_TOP_N + 2]) if concerns else "none flagged."))
+    concerns = [f"{f.area} ({_fmt(f.score)}, {ROUND_TITLES[f.source]})" for f in _diverse_top(weaknesses, SUMMARY_TOP_N - 1, strongest_first=False)]
+    concerns += [_short_risk(r) for r in risks if r.severity in (Severity.HIGH, Severity.MEDIUM)][:SUMMARY_TOP_N - 1]
+    concerns = list(dict.fromkeys(concerns))              # the same phrase twice reads as noise
+    lines.append("Main concerns: " + ("; ".join(concerns[:SUMMARY_TOP_N + 1]) + "." if concerns else "none flagged."))
     scored = sum(1 for c in score.contributions if c.status is RoundStatus.SCORED)
     applicable = sum(1 for c in score.contributions if c.status is not RoundStatus.NOT_APPLICABLE)
     lines.append(f"Evidence: {scored} of {applicable} applicable rounds scored (coverage {decision.evidence_coverage:.0%}).")

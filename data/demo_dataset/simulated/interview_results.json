@@ -43,14 +43,14 @@
   },
   {
     "id": "DC-07",
-    "hr_score": 89.1,
+    "hr_score": 89.0,
     "hr_answers_scored": 6,
     "technical_score": 28.6,
     "technical_tier": "intermediate"
   },
   {
     "id": "DC-08",
-    "hr_score": 84.3,
+    "hr_score": 84.2,
     "hr_answers_scored": 6,
     "technical_score": 77.0,
     "technical_tier": "intermediate"
@@ -85,7 +85,7 @@
   },
   {
     "id": "DC-13",
-    "hr_score": 89.1,
+    "hr_score": 89.0,
     "hr_answers_scored": 6,
     "technical_score": 33.7,
     "technical_tier": "basics"

@@ -95,7 +95,7 @@
       "flags": [
         "ROUND_DISAGREEMENT"
       ],
-      "reason": "The score (83.88%) would select this candidate, but selection is held for review because the aggregate score raised review flags: Rounds disagree strongly (hr_interview 92.8 vs ats 57.8); an average hides that."
+      "reason": "The score (83.89%) would select this candidate, but selection is held for review because the aggregate score raised review flags: Rounds disagree strongly (hr_interview 92.8 vs ats 57.8); an average hides that."
     },
     "DC-26": {
       "outcome": "hold_review",
@@ -114,5 +114,5 @@
     "medium": 1,
     "high": 0
   },
-  "total_ms": 4392.0
+  "total_ms": 2050.0
 }

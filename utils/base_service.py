@@ -102,7 +102,7 @@ class BaseAIService(ABC):
         """The stable boundary: validates, runs `process`, and ALWAYS returns a JSON-safe envelope."""
         try:
             if not isinstance(payload, dict):
-                raise ServiceInputError("invalid_payload", f"The request body must be a JSON object, got {type(payload).__name__}.")
+                raise ServiceInputError("invalid_payload", f"The request body must be a JSON object, got {type(payload).__name__}.", "request_body")
             return to_json_safe(self.process(payload))
         except ServiceInputError as exc:
             return self._error_response(exc.code, str(exc), exc.field)

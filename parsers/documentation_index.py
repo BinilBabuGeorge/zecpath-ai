@@ -132,6 +132,8 @@ MODULE_CATALOGUE: Dict[str, Tuple[str, str, str]] = {
     "parsers/demo_dataset_answers.py": ("I", "Answer templates, technical answer banks and machine-test code used to build the demo dataset.", "-"),
     "parsers/demo_dataset_builder.py": ("I", "Writes the demo dataset's input files: resumes (DOCX, PDF), answers, machine-test attempts, browser events.", "-"),
     "parsers/demo_environment.py": ("I", "End-to-end environment: runs the demo dataset through all five rounds with the real engines and computes findings.", "-"),
+    "parsers/internal_review.py": ("I", "Day 64 review probes: walkthrough, accuracy, UX, performance and engineering evidence measured on the real engines.", "-"),
+    "parsers/review_plan.py": ("I", "Day 64 improvement list, prioritisation formula, acceptance targets, scorecard and action plan.", "-"),
     "parsers/documentation_index.py": ("I", "Module catalogue, PRD coverage map and live numbers the handbook is generated from.", "-"),
 }
 

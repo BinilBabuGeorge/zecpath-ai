@@ -6,7 +6,7 @@ Zecpath: AI Job Portal | Technical handbook for the AI system | Built 2026-11-20
 
 **Who it is for.** Developers who will build, change or run the Zecpath AI layer; reviewers who need to know what exists; and the next person who inherits the project.
 
-**What it covers.** The AI layer in this repository: 80 Python files (68 in `parsers/`, 7 service files and 5 shared utilities), its schemas, tests and documents. It does **not** cover the Zecpath backend, frontend, telephony, video, email or payments: they are not in this repository (section 1.3 says exactly where the line is).
+**What it covers.** The AI layer in this repository: 82 Python files (70 in `parsers/`, 7 service files and 5 shared utilities), its schemas, tests and documents. It does **not** cover the Zecpath backend, frontend, telephony, video, email or payments: they are not in this repository (section 1.3 says exactly where the line is).
 
 **Three words are used with care.**
 
@@ -87,12 +87,12 @@ The PRD (Parts 1 to 6) describes 100 phases. This repository is the AI layer onl
 
 | Measure | Value |
 |---|---|
-| Python files in the AI layer | 80 |
-| Engines in `parsers/` | 68 |
+| Python files in the AI layer | 82 |
+| Engines in `parsers/` | 70 |
 | Services (stable API boundary) | 7 |
-| Test files / test functions | 69 / 1,643 |
+| Test files / test functions | 71 / 1,677 |
 | API version | 1.0 |
-| Documents in `docs/` | 66 |
+| Documents in `docs/` | 71 |
 
 The last full regression recorded in the repository (Day 61) reports 2,017 passed and 6 skipped; a parametrised test counts once per case, which is why that is more than the number of test functions.
 
@@ -131,7 +131,7 @@ Every service subclasses `BaseAIService` (`utils/base_service.py`) and implement
 | F | Technical interview, machine test, behaviour and integrity | 5 |
 | G | Aggregation, final recommendation and reporting | 3 |
 | H | Governance, audit and security | 6 |
-| I | Integration, operations and quality tooling | 14 |
+| I | Integration, operations and quality tooling | 16 |
 | S | Services (the stable API boundary) | 7 |
 
 **Rule: services do not import one another.** Communication between services goes through the gateway (REST, queue or webhook). Inside `tests/` direct imports are fine. The engines in `parsers/` are shared libraries and may import each other.
@@ -182,7 +182,7 @@ Every module starts with a docstring that states what it does, its input contrac
 | `ats_engine/service.py` | 101 | ATSService: scores one resume against one job description; returns score, zone and components. | 2 |
 | `interview_ai/service.py` | 97 | InterviewIntelligenceService: scores HR and technical interview answers. | 15, 16, 37-40 |
 | `scoring/service.py` | 110 | DecisionScoringService: combines round scores into a hiring-fit score and a recommendation. | 20, 45, 70, 71 |
-| `screening_ai/service.py` | 64 | ScreeningService: scores a screening-call conversation that has already happened. | 5 |
+| `screening_ai/service.py` | 69 | ScreeningService: scores a screening-call conversation that has already happened. | 5 |
 
 ### Foundation (shared code every service uses)
 
@@ -227,7 +227,7 @@ Every module starts with a docstring that states what it does, its input contrac
 
 | Module | Lines | What it does | PRD phase |
 |---|---|---|---|
-| `parsers/answer_intent_engine.py` | 495 | Understands an answer: which category it addresses, quality, extracted value (rule-based). | 5 |
+| `parsers/answer_intent_engine.py` | 511 | Understands an answer: which category it addresses, quality, extracted value (rule-based). | 5 |
 | `parsers/confidence_sentiment_engine.py` | 367 | Text signals: hesitation, sentiment and confidence cues. | 5, 16 |
 | `parsers/conversation_flow_engine.py` | 321 | State machine for the call: ask, re-ask, clarify, end; fixed message templates. | 5 |
 | `parsers/edge_case_handler.py` | 255 | Poor audio, language mismatch and crash safety for the call flow. | 5 |
@@ -270,7 +270,7 @@ Every module starts with a docstring that states what it does, its input contrac
 |---|---|---|---|
 | `parsers/cross_round_aggregation_engine.py` | 622 | Five-round Hiring Fit Score with role weights, fresher adjustment, sensitivity and flags. | 70 |
 | `parsers/final_recommendation_engine.py` | 575 | Selected / hold_review / rejected with confidence and rule trace; a rejection is never automatic. | 45, 71 |
-| `parsers/hiring_report_generator.py` | 822 | One recruiter-facing report from all round results. | 24, 47, 49 |
+| `parsers/hiring_report_generator.py` | 833 | One recruiter-facing report from all round results. | 24, 47, 49 |
 
 ### Governance, audit and security
 
@@ -291,13 +291,15 @@ Every module starts with a docstring that states what it does, its input contrac
 | `parsers/demo_dataset_answers.py` | 428 | Answer templates, technical answer banks and machine-test code used to build the demo dataset. | - |
 | `parsers/demo_dataset_builder.py` | 300 | Writes the demo dataset's input files: resumes (DOCX, PDF), answers, machine-test attempts, browser events. | - |
 | `parsers/demo_dataset_content.py` | 608 | The 6 demo job descriptions and 30 synthetic candidate personas, with the author's expected outcomes. | - |
-| `parsers/demo_environment.py` | 389 | End-to-end environment: runs the demo dataset through all five rounds with the real engines and computes findings. | - |
-| `parsers/documentation_index.py` | 252 | Module catalogue, PRD coverage map and live numbers the handbook is generated from. | - |
+| `parsers/demo_environment.py` | 392 | End-to-end environment: runs the demo dataset through all five rounds with the real engines and computes findings. | - |
+| `parsers/documentation_index.py` | 254 | Module catalogue, PRD coverage map and live numbers the handbook is generated from. | - |
 | `parsers/evaluation_harness.py` | 268 | The one tested confusion-matrix and threshold-analysis tool. | - |
 | `parsers/integration_contract.py` | 772 | API catalogue, JSON Schemas, OpenAPI, error rules, retry and idempotency logic. | - |
+| `parsers/internal_review.py` | 524 | Day 64 review probes: walkthrough, accuracy, UX, performance and engineering evidence measured on the real engines. | - |
 | `parsers/observability.py` | 469 | Structured logger with allowlist and privacy guard, metrics registry, service observer. | 9, 10 |
 | `parsers/observability_plan.py` | 660 | Metric catalogue, SLOs, alert rules and engine, dashboard definitions. | 9, 10 |
 | `parsers/pipeline_simulation.py` | 535 | Runs a candidate through the real engines from file to report. | - |
+| `parsers/review_plan.py` | 282 | Day 64 improvement list, prioritisation formula, acceptance targets, scorecard and action plan. | - |
 | `parsers/roadmap_planner.py` | 219 | Keeps the Day 58 roadmap data consistent and ordered. | - |
 | `parsers/scaling_model.py` | 167 | Queueing and capacity model used by the scalability strategy. | - |
 | `parsers/stability_checks.py` | 436 | Edge-case sweep and output sanity checks over every public engine. | - |
@@ -770,7 +772,7 @@ There is no gateway, queue, load balancer, autoscaler or cluster in this project
 
 ### 9.1 Tests
 
-1,643 test functions in 69 files under `tests/`, one file per module, plain `pytest`. The Day 61 full regression: 2,017 passed, 6 skipped. Run `pytest --cov=. --cov-report=term-missing` for coverage.
+1,677 test functions in 71 files under `tests/`, one file per module, plain `pytest`. The Day 61 full regression: 2,017 passed, 6 skipped. Run `pytest --cov=. --cov-report=term-missing` for coverage.
 
 **Python 3.11 and 3.12 differ in one place.** Python 3.12 made `sum()` on floats more exact, which moves a few HR scores by 0.1 at rounding boundaries. The Day 60 golden test therefore has two golden files and reads the one that matches the Python it runs on (`tests/golden/make_day60_golden.py` explains why). Never regenerate a golden file from optimised code: that compares the code with itself.
 
@@ -924,3 +926,8 @@ Every day's work has its own document in `docs/`.
 | `docs/day62_system_architecture.md` | Zecpath AI: System Architecture |
 | `docs/day62_zecpath_ai_technical_handbook.md` | Zecpath AI Technical Handbook |
 | `docs/day63_demo_dataset.md` | Day 63: Demo Dataset Creation |
+| `docs/day64_action_plan.md` | Day 64: Action Plan |
+| `docs/day64_improvement_list.md` | Day 64: Improvement List |
+| `docs/day64_internal_review_report.md` | Day 64: Internal Review and System Walkthrough |
+| `docs/day64_review_session_kit.md` | Day 64: Reviewer Session Kit |
+| `docs/day65_feature_enhancement_report.md` | Day 65 – Final Enhancements & Feature Polish |

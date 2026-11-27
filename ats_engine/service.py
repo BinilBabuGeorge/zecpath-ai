@@ -38,7 +38,7 @@ class ATSService(BaseAIService):
             return self._score_with_engine(resume_text, job_description)
         if requirements is not None:
             return self._keyword_coverage(resume_text, requirements)
-        raise ServiceInputError("missing_field", "Provide 'job_description' (real ATS scoring) or 'job_requirements' (deprecated keyword coverage).", "job_description")
+        raise ServiceInputError("missing_field", "'job_description' is required: send the job description text (or, deprecated, 'job_requirements' as a list of keywords).", "job_description")
 
     # -- real ATS ---------------------------------------------------------------------------------
     def _score_with_engine(self, resume_text: str, job_description: str) -> Dict[str, Any]:
@@ -59,7 +59,7 @@ class ATSService(BaseAIService):
             result = score_candidate(resume_text, job_description, matcher)
         except ValueError as exc:
             if "vocabulary" in str(exc):          # scikit-learn: the texts hold nothing but stop words / symbols
-                raise ServiceInputError("invalid_input", "The job description has no usable words to compare against.", "job_description") from exc
+                raise ServiceInputError("invalid_input", "'job_description' must contain at least one real word (not only symbols or filler words like 'the' and 'and').", "job_description") from exc
             raise
         if not any(c.name == "skill_match" and getattr(c, "available", False) for c in result.components):
             warnings.append("No skills could be compared (the job description has no recognisable requirements section, or the resume lists no skills), "

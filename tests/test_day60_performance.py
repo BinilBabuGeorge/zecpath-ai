@@ -470,7 +470,8 @@ def test_warmup_is_repeatable_validates_names_and_restores_logging():
 def test_warmup_does_not_change_later_results():
     from utils.warmup import warm_up
     warm_up(("ats", "screening"))
-    assert ATSService().run({"resume_text": RESUMES[0], "job_description": JDS[0]}) == GOLDEN["ats_pairs"][0]
+    with _pinned_today():                                 # the experience score depends on today's date (see GOLDEN_ATS_TODAY)
+        assert ATSService().run({"resume_text": RESUMES[0], "job_description": JDS[0]}) == GOLDEN["ats_pairs"][0]
 
 
 def test_warmup_makes_the_first_real_request_fast_in_a_fresh_process():

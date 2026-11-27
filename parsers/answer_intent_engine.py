@@ -246,13 +246,29 @@ def classify_intent(text: str) -> IntentClassification:
 # 2. Entity extraction -- reuses real modules; adds only what's missing
 # ---------------------------------------------------------------------------
 
+_EXP_WORDS = {"zero": 0, "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10,
+              "eleven": 11, "twelve": 12}
+_EXP_UNIT = re.compile(r"(?P<n>\d+(?:\.\d+)?|\b(?:zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)\b)"
+                       r"(?P<half>\s+and\s+a\s+half)?\s*(?:\+\s*)?(?P<u>years?|yrs?|months?|mos?)\b", re.IGNORECASE)
+
+
 def extract_experience_years(text: str) -> Optional[float]:
-    """Reuses Day 23's public normalize_answer() entry point (typed
-    "number") rather than duplicating its word-number parsing logic.
-    Only called on text that classify_intent already scored as
-    experience-relevant by the caller (understand_answer) -- a bare
-    number extracted from an off-topic sentence would be meaningless.
+    """Experience in YEARS. Day 65: 'six months' is 0.5, '18 months' is 1.5, 'one year six months' is 1.5, 'two and a half years' is 2.5.
+
+    Day 23's number reader returned the bare number, so 'six months' came back as 6.0 (six years). The unit now decides; a bare number with no
+    unit still goes through Day 23's reader, and text with no number stays None. Only called on text already judged experience-relevant.
     """
+    total, found = 0.0, False
+    for m in _EXP_UNIT.finditer(text or ""):
+        raw = m.group("n").lower()
+        n = float(raw) if raw[0].isdigit() else float(_EXP_WORDS[raw])
+        if m.group("half"):
+            n += 0.5
+        unit = m.group("u").lower()
+        total += n / 12 if unit.startswith("m") else n
+        found = True
+    if found:
+        return round(total, 2)
     result = normalize_answer(text, expected_answer_type="number", asr_confidence=1.0)
     if result.status == NormalizationStatus.OK:
         return result.value
